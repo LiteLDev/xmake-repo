@@ -2,7 +2,7 @@ package("symbolprovider")
     set_description("The symbolprovider package")
 
     add_urls("https://github.com/LiteLDev/SymbolProvider.git")
-    add_versions("v1.0.0", "7fb47a05c84c4e7e688c43fe8419cc4bd693332f")
+    add_versions("v1.0.1", "8eccdf9edd43325545db1c2ce88c812e3904ff26")
 
     on_install(function (package)
         local configs = {}

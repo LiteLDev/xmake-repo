@@ -2,7 +2,7 @@ package("detours")
     set_description("The detours package")
 
     add_urls("https://github.com/LiteLDev/DetoursXMake.git")
-    add_versions("v4.0.1-xmake.0", "76c05a37e40116d708ca33fb48e572c4e69a3498")
+    add_versions("v4.0.1-xmake.1", "a3575450d63deecaf22628e056fbf93f4f95edff")
 
     on_install(function (package)
         local configs = {}

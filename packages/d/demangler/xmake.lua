@@ -2,7 +2,7 @@ package("demangler")
     set_description("The demangler package")
 
     add_urls("https://github.com/LiteLDev/Demangler.git")
-    add_versions("v1.0.1", "f04f91dcc2cf2d6cc9e744896cb24ea03db12b13")
+    add_versions("v1.0.2", "6218c355e07abc197862fc2c8c3d9eeea8462c75")
 
     on_install(function (package)
         local configs = {}

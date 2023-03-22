@@ -2,7 +2,7 @@ package("nbt_cpp")
     set_description("The nbt_cpp package")
 
     add_urls("https://github.com/LiteLDev/nbt-cpp.git")
-    add_versions("v1.0.0", "158efbdc79cc3a72343dc5bd0830898247a26c68")
+    add_versions("v1.0.1", "386c2b0745b48f8a1d0ad8d6251e99c9d1f9a9d0")
 
     on_install(function (package)
         local configs = {}

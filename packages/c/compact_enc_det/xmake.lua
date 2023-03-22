@@ -2,7 +2,7 @@ package("compact_enc_det")
     set_description("The compact_enc_det package")
 
     add_urls("https://github.com/LiteLDev/compact_enc_det.git")
-    add_versions("v1.0.0", "c43a866de01373b67b218e45cc287d6b1b102742")
+    add_versions("v1.0.1", "232a425a69aa8ccb391f24a051723029a7d4173d")
 
     on_install(function (package)
         local configs = {}
