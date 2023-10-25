@@ -7,5 +7,5 @@ package("pfr")
     add_versions("2.1.0", "193416fd6a08569c1b888cc41700f3e9a3718b8df7005aca074e8f4247579af1")
 
     on_install(function (package)
-        os.cp("include/*", package:installdir("include", "pfr"))
+        os.cp("include/*", package:installdir("include"))
     end)
