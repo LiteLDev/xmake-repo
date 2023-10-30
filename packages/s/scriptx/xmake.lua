@@ -2,8 +2,7 @@ package("scriptx")
     add_urls("https://github.com/LiteLDev/ScriptX/releases/download/$(version)/scriptx-windows-x64.zip")
     add_versions("v0.1.0", "edc80fed5b29dcf801ef05620f486b79824628afc955cec0d86cfb6ee69282f6")
 
-    add_configs("backend", {default = "lua", values = {"lua", "nodejs", "python", "quickjs"}})
-    add_configs("python", {default = "310"})
+    add_configs("backend", {default = "lua", values = {"lua", "nodejs", "python310", "quickjs"}})
 
     on_install(function (package)
         local scriptx_info = {
@@ -15,8 +14,8 @@ package("scriptx")
                 backend = "libnode",
                 scriptx = "v8",
             },
-            ["python"] = {
-                backend = "python" .. package:config("python"),
+            ["python310"] = {
+                backend = "python310",
                 scriptx = "python",
             },
             ["quickjs"] = {
