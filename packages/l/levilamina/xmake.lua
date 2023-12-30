@@ -1,6 +1,6 @@
 package("levilamina")
-    add_urls("https://github.com/LiteLDev/LeviLamina.git")
-    add_versions("0.2.1", "ce54196e47dd47896d8d883fd87156d8c0638735")
+    add_urls("https://github.com/LiteLDev/LeviLamina/releases/download/v$(version)/levilamina-windows-x64.zip")
+    add_versions("0.2.1", "995a6979ea2e42f597c34dfa06ffe273909eab84a55943e51ffceb4ce39e82ad")
     add_versions("0.2.2", "d7f8aab16a7c7e9524b46ce48690aa51cd9d4ad3")
 
     on_load(function (package)
