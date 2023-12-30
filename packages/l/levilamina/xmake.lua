@@ -1,5 +1,5 @@
 package("levilamina")
-    add_urls("https://github.com/LiteLDev/LeviLamina/releases/download/v$(version)/levilamina-windows-x64.zip")
+    add_urls("https://github.com/LiteLDev/LeviLamina.git")
     add_versions("0.2.1", "ce54196e47dd47896d8d883fd87156d8c0638735")
     add_versions("0.2.2", "d7f8aab16a7c7e9524b46ce48690aa51cd9d4ad3")
 
