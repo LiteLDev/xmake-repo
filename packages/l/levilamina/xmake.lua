@@ -1,6 +1,7 @@
 package("levilamina")
     add_urls("https://github.com/LiteLDev/LeviLamina/releases/download/v$(version)/levilamina-windows-x64.zip")
     add_versions("0.3.0", "d735eccdc63d1fff8499c09f9243f18b2f0707618a4630d8479e1b32866f1b0d")
+    add_versions("0.4.0", "42cb92cd0205b9708e7cc900ba26f07857d005d88535483cc088e6a79d4a750b")
 
     on_load(function (package)
         import("core.base.semver")
@@ -20,7 +21,7 @@ package("levilamina")
                 "preloader 1.4.0",
                 "symbolprovider 1.1.0"
             },
-            ["0.3.*"] = {
+            ["0.3.* || 0.4.*"] = {
                 "bdslibrary 1.20.50.03"
             }
         }
