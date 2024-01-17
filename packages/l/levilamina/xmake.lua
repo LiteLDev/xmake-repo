@@ -22,7 +22,8 @@ package("levilamina")
                 "pcg_cpp 1.0.0",
                 "pfr 2.1.1",
                 "preloader 1.4.0",
-                "symbolprovider 1.1.0"
+                "symbolprovider 1.1.0",
+                "expected-lite v0.6.3"
             },
             ["0.3.* || 0.4.*"] = {
                 "bdslibrary 1.20.50.03"
