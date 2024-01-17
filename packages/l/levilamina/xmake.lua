@@ -25,7 +25,7 @@ package("levilamina")
                 "symbolprovider 1.1.0",
                 "expected-lite v0.6.3"
             },
-            ["0.3.* || 0.4.*"] = {
+            ["0.*.*"] = {
                 "bdslibrary 1.20.50.03"
             }
         }
