@@ -21,9 +21,9 @@ package("levilamina")
                 "rapidjson 1.1.0",
                 "pcg_cpp 1.0.0",
                 "pfr 2.1.1",
+                "expected-lite v0.6.3",
                 "preloader 1.4.0",
-                "symbolprovider 1.1.0",
-                "expected-lite v0.6.3"
+                "symbolprovider 1.1.0"
             },
             ["0.*.*"] = {
                 "bdslibrary 1.20.50.03"
