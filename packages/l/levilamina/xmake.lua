@@ -4,6 +4,7 @@ package("levilamina")
     add_versions("0.4.0", "42cb92cd0205b9708e7cc900ba26f07857d005d88535483cc088e6a79d4a750b")
     add_versions("0.4.1", "0568014d25dd0c25460099111210a4375e3bfadad8f08c46035c08f21cc65b9b")
     add_versions("0.4.2", "6dba097d848bdd7811e1993bae6951ec69f550655620e7e6874de1fac459038c")
+    add_versions("0.5.0", "0bf0df52fe785b05e4cec0ae4bcc4f24a783afdc56c7b7ee405410d38cb006c8")
 
     on_load(function (package)
         import("core.base.semver")
