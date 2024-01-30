@@ -9,6 +9,7 @@ package("preloader")
     add_versions("v1.3.1", "4a50d1d686ec2c9410bdfa7575f0ee9968790515")
     add_versions("v1.4.0", "4a50d1d686ec2c9410bdfa7575f0ee9968790515")
     add_versions("v1.4.2", "19ac92711210d6b57a8b007b63d028b19c150fff")
+    add_versions("v1.4.3", "e751e3804811921b71624fa130b6820adf9e846b")
 
     add_configs("shared", {description = "Build shared library.", default = true, type = "boolean", readonly = true})
 
