@@ -6,6 +6,7 @@ package("demangler")
     add_versions("v1.0.2",  "6218c355e07abc197862fc2c8c3d9eeea8462c75")
     add_versions("v2.0.0",  "88865df2816654aa5e61d1646f69e02c97cd60b0")
     add_versions("v17.0.6", "94d8cd7a51ddd432e56ca1aba0fc091a48a10dff")
+    add_versions("v17.0.7", "efd63f3c976493f42766edfbcc1642a0062d8517")
 
     on_install(function (package)
         local configs = {}
