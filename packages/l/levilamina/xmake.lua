@@ -1,6 +1,6 @@
 package("levilamina")
     add_urls("https://github.com/LiteLDev/LeviLamina/releases/download/v$(version)/levilamina-windows-x64.zip")
-    add_versions("0.6.3", "2029c4f31f1338e00baeb1ac248a33ec67c7752046a49a3992363872d5f20df1")
+    add_versions("0.7.0", "7aa6e71f1f1923fab4a1fc8e50b10689ba33652cc65bda0a01fad1c1e9ac9d1d")
 
     on_load(function (package)
         import("core.base.semver")
