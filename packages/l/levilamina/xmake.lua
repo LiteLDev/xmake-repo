@@ -18,7 +18,7 @@ package("levilamina")
                 "pcg_cpp 1.0.0",
                 "pfr 2.1.1",
                 "expected-lite v0.6.3",
-                "preloader 1.4.0",
+                "preloader 1.5.0",
                 "symbolprovider 1.1.0"
             },
             ["0.*.*"] = {
