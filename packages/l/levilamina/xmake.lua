@@ -36,6 +36,5 @@ package("levilamina")
     end)
 
     on_install(function (package)
-        os.cp("include", package:installdir())
-        os.cp("lib/*.lib", package:installdir("lib"))
+        os.cp("*", package:installdir())
     end)
