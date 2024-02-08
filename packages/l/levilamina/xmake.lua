@@ -1,12 +1,12 @@
 package("levilamina")
-    add_urls("https://github.com/LiteLDev/LeviLamina/releases/download/v$(version)/levilamina-release-windows-x64.zip")
-    add_versions("0.7.2", "6d55f63791f1be5bce57193058d7ea6cfb8bb83b5e31efff4f4a6782681d7557")
+    add_urls("https://github.com/LiteLDev/LeviLamina.git")
+    add_versions("0.7.2", "d2453d5a07bd9d40475c49fb9d1133bc1e5c2f93")
 
     on_load(function (package)
         import("core.base.semver")
 
         local dependencies = {
-            ["*"] = {
+            ["x"] = {
                 "ctre 3.8.1",
                 "entt 3.12.2",
                 "fmt 10.1.1",
@@ -21,7 +21,7 @@ package("levilamina")
                 "preloader 1.5.0",
                 "symbolprovider 1.1.0"
             },
-            ["0.*.*"] = {
+            ["0.x"] = {
                 "bdslibrary 1.20.50.03"
             }
         }
@@ -36,5 +36,5 @@ package("levilamina")
     end)
 
     on_install(function (package)
-        os.cp("*", package:installdir())
+        import("package.tools.xmake").install(package)
     end)
