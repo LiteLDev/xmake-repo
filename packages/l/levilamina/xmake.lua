@@ -6,7 +6,8 @@ package("levilamina")
         import("core.base.semver")
 
         local dependencies = {
-            ["x"] = {
+            ["0.7.x"] = {
+                "bdslibrary 1.20.50.03",
                 "ctre 3.8.1",
                 "entt 3.12.2",
                 "fmt 10.1.1",
@@ -21,8 +22,23 @@ package("levilamina")
                 "preloader 1.5.0",
                 "symbolprovider 1.1.0"
             },
-            ["0.x"] = {
-                "bdslibrary 1.20.50.03"
+            ["0.8.x"] = {
+                "bdslibrary 1.20.61.01",
+                "ctre 3.8.1",
+                "demangler v17.0.7",
+                "entt 3.12.2",
+                "expected-lite v0.6.3",
+                "fmt 10.1.1",
+                "gsl 4.0.0",
+                "leveldb 1.23",
+                "magic_enum 0.9.0",
+                "mimalloc 2.1.2",
+                "nlohmann_json 3.11.2",
+                "pcg_cpp 1.0.0",
+                "pfr 2.1.1",
+                "preloader 1.5.0",
+                "rapidjson 1.1.0",
+                "symbolprovider 1.1.0"
             }
         }
 
