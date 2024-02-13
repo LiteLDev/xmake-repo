@@ -1,6 +1,6 @@
 package("levilamina")
     add_urls("https://github.com/LiteLDev/LeviLamina.git")
-    add_versions("0.7.2", "d2453d5a07bd9d40475c49fb9d1133bc1e5c2f93")
+    add_versions("0.8.0", "3afbbec260a809c95b94f1e4e7559e5b8805fb33")
 
     on_load(function (package)
         import("core.base.semver")
