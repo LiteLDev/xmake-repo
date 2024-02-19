@@ -17,6 +17,25 @@ package("levilamina")
 
     add_defines("ENTT_PACKED_PAGE=128")
 
+    on_load(function (package)
+        import("core.base.semver")
+
+        local dependencies = {
+            ["0.8.1"] = {"bdslibrary 1.20.61.01"}
+        }
+
+        for key, value in pairs(dependencies) do
+            try{function()
+                if semver.satisfies(package:version_str(), key) then
+                    for _, dependency in ipairs(value) do
+                        package:add("deps", dependency)
+                    end
+                end
+            end}
+        end
+    end)
+
     on_install(function (package)
         import("package.tools.xmake").install(package)
     end)
+
