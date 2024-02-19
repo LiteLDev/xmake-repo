@@ -2,6 +2,10 @@ package("levilamina")
     add_urls("https://github.com/LiteLDev/LeviLamina.git")
     add_versions("0.8.1", "73715bc9118f8d899e14665bad7157febbb90783")
 
+    local dependencies = {
+        ["0.8.1"] = {"bdslibrary 1.20.61.01"}
+    }
+
     add_deps("entt")
     add_deps("expected-lite")
     add_deps("fmt")
@@ -19,11 +23,6 @@ package("levilamina")
 
     on_load(function (package)
         import("core.base.semver")
-
-        local dependencies = {
-            ["0.8.1"] = {"bdslibrary 1.20.61.01"}
-        }
-
         for key, value in pairs(dependencies) do
             try{function()
                 if semver.satisfies(package:version_str(), key) then
