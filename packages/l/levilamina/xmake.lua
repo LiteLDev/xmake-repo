@@ -2,10 +2,12 @@ package("levilamina")
     add_urls("https://github.com/LiteLDev/LeviLamina.git")
     add_versions("0.8.3", "380a9adf484127391ec47c06cb72c5f331d31bf7")
     add_versions("0.8.4", "00e0c9086d7168ba83a430fcf11c29bdaa186350")
+    add_versions("0.9.0", "dc310d1e75d652a871e97516203be8b3cee16656")
 
     local dependencies = {
         ["0.8.3"] = {"bdslibrary 1.20.61.01"},
-        ["0.8.4"] = {"bdslibrary 1.20.61.01"}
+        ["0.8.4"] = {"bdslibrary 1.20.61.01"},
+        ["0.9.0"] = {"bdslibrary 1.20.62.02"}
     }
 
     add_deps("entt")
