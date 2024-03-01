@@ -4,12 +4,14 @@ package("levilamina")
     add_versions("0.8.4", "00e0c9086d7168ba83a430fcf11c29bdaa186350")
     add_versions("0.9.0", "dc310d1e75d652a871e97516203be8b3cee16656")
     add_versions("0.9.1", "cc032aba98256aafbb925f78c2e7e5f67f1cd6f3")
+    add_versions("0.9.2", "2f58b1be95bac2b87170e6fab5a5aae9dea69225")
 
     local dependencies = {
         ["0.8.3"] = {"bdslibrary 1.20.61.01"},
         ["0.8.4"] = {"bdslibrary 1.20.61.01"},
         ["0.9.0"] = {"bdslibrary 1.20.62.02"},
-        ["0.9.1"] = {"bdslibrary 1.20.62.02"}
+        ["0.9.1"] = {"bdslibrary 1.20.62.02"},
+        ["0.9.2"] = {"bdslibrary 1.20.62.02"}
     }
 
     add_deps("entt")
