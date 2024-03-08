@@ -2,7 +2,7 @@ package("scriptx")
     add_urls("https://github.com/LiteLDev/ScriptX.git")
     add_versions("3.2.0", "1fae62097926328b7dd7e5415344e9d7fda465b4")
 
-    add_configs("backend", {default = "Lua", values = {"Lua", "QuickJs", "Python"}})
+    add_configs("backend", {default = "Lua", values = {"Lua", "QuickJs", "Python", "NodeJs"}})
     add_includedirs(
         "include/src/include/"
     )
@@ -21,6 +21,7 @@ package("scriptx")
             Lua = "lua v5.4.6",
             QuickJs = "quickjs 2022-03-07",
             Python = "python 3.10.11",
+            NodeJs = "node v16.16.0",
         }
 
         print("Using ScriptX config: backend=" .. backend)
