@@ -37,8 +37,6 @@ package("levilamina")
                     for _, dependency in ipairs(value) do
                         package:add("deps", dependency)
                     end
-                else
-                    package:add("deps", "bdslibrary 1.20.62.02")
                 end
             end}
         end
