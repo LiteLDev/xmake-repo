@@ -5,7 +5,7 @@ package("llvm-prebuilt")
     add_urls("https://github.com/LiteLDev/llvm-prebuilt/releases/download/v$(version)/clang+llvm-x86_64-windows.tar.xz")
 
     add_versions("16.0.6", "AC4B0CA88FCF156017C0115F3FB253C33672778DEBDB6513CFCA2133783E36C0")
-    add_versions("18.1.1", "5EDF16090C7AAA851B7EBAEB186910436CD730973E57A0A03B4F327552A28976")
+    add_versions("18.1.1", "84D0FFB5067D6BBB801D045939AD0C0D27EECEAEF8C8AE5A855F3460400809A9")
 
     on_install("windows", function (package)
         if not is_arch("x64") then
