@@ -2,9 +2,9 @@ package("llvm-prebuilt")
     set_homepage("https://llvm.org/")
     set_description("The LLVM Project is a collection of modular and reusable compiler and toolchain technologies.")
     set_license("Apache-2.0")
-    add_urls("https://github.com/llvm/llvm-project/releases/download/llvmorg-v$(version)/clang+llvm-$(version)-x86_64-pc-windows-msvc.tar.xz")
+    add_urls("https://github.com/LiteLDev/llvm-prebuilt/releases/download/v$(version)/clang+llvm-$(version)-x86_64-windows.tar.xz")
 
-    add_versions("18.1.1", "79ea242c0fbd66c632ed3aaebf6f821c1e4c03140497c67ea750443eb36bfc5d")
+    add_versions("18.1.1", "EF183114540CB2219A3EBC9BD2020CF7E7F207CCA3B3A07E74BF692681F51B12")
 
     on_install("windows", function (package)
         if not is_arch("x64") then
