@@ -16,7 +16,7 @@ package("levilamina")
         ["0.9.1"] = {"bdslibrary 1.20.62.02"},
         ["0.9.2"] = {"bdslibrary 1.20.62.02"},
         ["0.9.3"] = {"bdslibrary 1.20.62.02"},
-        ["0.9.4"] = {"bdslibrary 1.20.62.02"}
+        ["0.9.4"] = {"bdslibrary 1.20.62.02"},
         ["0.9.5"] = {"bdslibrary 1.20.62.02"}
     }
 
