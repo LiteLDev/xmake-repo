@@ -7,7 +7,7 @@ package("levilamina")
     add_versions("0.9.2", "2f58b1be95bac2b87170e6fab5a5aae9dea69225")
     add_versions("0.9.3", "890cb5c2b86dd9498853e6813854ad99e6f849ea")
     add_versions("0.9.4", "bc8b5dc8f1ef84dc44f58cc44c6e86cc21b788b8")
-    add_versions("0.9.5", "bc8b5dc8f1ef84dc44f58cc44c6e86cc21b788b8")
+    add_versions("0.9.5", "cf02a42f3a89edf7c9762c2cba3984ef095b4883")
 
     local dependencies = {
         ["0.8.3"] = {"bdslibrary 1.20.61.01"},
