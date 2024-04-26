@@ -2,6 +2,7 @@ package("bdslibrary")
     set_description("The bdslibrary package")
 
     add_urls("https://github.com/LiteLDev/BDSLibrary/releases/download/$(version)/bdslibrary-$(version)-windows-amd64.zip")
+    add_versions("1.21.0.23", "2669264b678e5fced924c5a0d7bf0d7902c33c620d92471dc276bd6d2c107b5c")
     add_versions("1.20.80.05", "8da6c2dbe04b156525e1e0a0c286e8cadd4efcc08c3e50d7e716397e4a4576fe")
     add_versions("1.21.0.20", "a56ec88eba78da39145a7047d1ec539b042d6848b5bb9ed5ffd9734739f072a6")
     add_versions("1.20.73.01", "7cbca44859d092b0d8358159eb47360ecba7e1acbe2c08a0185f2e9b2c70e64f")
