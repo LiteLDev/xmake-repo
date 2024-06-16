@@ -22,18 +22,18 @@ package("levilamina")
     add_versions("0.12.4", "935b0d8ee3b199fec6c6b500d22896b1ec987c81")
 
     local dependencies = {
-        ["0.8.x"] = {"bdslibrary 1.20.61.01"},
-        ["0.9.x"] = {"bdslibrary 1.20.62.02"},
-        ["0.10.x"] = {"bdslibrary 1.20.72.01"},
-        ["0.11.x"] = {"bdslibrary 1.20.72.01"},
-        ["0.12.0"] = {"bdslibrary 1.20.80.05"},
-        ["0.12.1"] = {"bdslibrary 1.20.80.05"},
-        ["0.12.2"] = {"bdslibrary 1.20.80.05"},
-        ["0.12.3"] = {"bdslibrary 1.20.81.01"},
-        ["0.12.4"] = {"bdslibrary 1.20.81.01"}
+        ["develop", "main"] = {"bdslibrary", "entt master"},
+        ["0.8.x"] = {"bdslibrary 1.20.61.01", "entt"},
+        ["0.9.x"] = {"bdslibrary 1.20.62.02", "entt"},
+        ["0.10.x"] = {"bdslibrary 1.20.72.01", "entt"},
+        ["0.11.x"] = {"bdslibrary 1.20.72.01", "entt"},
+        ["0.12.0"] = {"bdslibrary 1.20.80.05", "entt"},
+        ["0.12.1"] = {"bdslibrary 1.20.80.05", "entt"},
+        ["0.12.2"] = {"bdslibrary 1.20.80.05", "entt"},
+        ["0.12.3"] = {"bdslibrary 1.20.81.01", "entt"},
+        ["0.12.4"] = {"bdslibrary 1.20.81.01", "entt"}
     }
 
-    add_deps("entt")
     add_deps("expected-lite")
     add_deps("fmt")
     add_deps("gsl")
