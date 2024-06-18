@@ -11,6 +11,7 @@ package("levilamina")
         if sem and sem:le("0.12.4") then
             version = "old"
         end
+        version = string.gsub(version, "%.", "_")
         try{function()
             import("versions." .. version).load(package)
         end, catch {function(e)
