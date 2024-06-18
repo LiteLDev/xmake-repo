@@ -31,8 +31,7 @@ package("levilamina")
             version = "old"
         end
         try{function()
-            load = import("versions." .. version, {rootdir = package:scriptdir()})
-            load(package)
+            import("versions." .. version).load(package)
         end, catch {function(e)
             cprint(
                 "${bright yellow}warning: ${clear}Unknown version: ${bright cyan}"
