@@ -31,7 +31,7 @@ package("levilamina")
             version = "old"
         end
         try{function()
-            import("versions." .. version, {rootdir = package:scriptdir()})
+            load = import("versions." .. version, {rootdir = package:scriptdir()})
             load(package)
         end, catch {function(e)
             cprint(
