@@ -4,7 +4,7 @@ package("levilamina")
 
     add_defines("ENTT_PACKED_PAGE=128")
 
-    on_load(function (package)
+    on_load(function(package)
         import("core.base.semver")
         local version = package:version_str()
         local sem = semver.try_parse(version)
@@ -12,16 +12,16 @@ package("levilamina")
             version = "old"
         end
         version = string.gsub(version, "%.", "_")
-        try{function()
+        try { function()
             import("versions." .. version).load(package)
-        end, catch {function(e)
+        end, catch { function(e)
             cprint(
                 "${bright yellow}warning: ${clear}Unknown version: ${bright cyan}"
                 .. version .. "${clear}, please resolve dependencies manually."
             )
-        end}}
+        end } }
     end)
 
-    on_install(function (package)
+    on_install(function(package)
         import("package.tools.xmake").install(package)
     end)
