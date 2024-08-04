@@ -7,6 +7,7 @@ package("legacyparticleapi")
     add_versions("0.7.0", "f99339fcef7f99eb1a49cca4c6bdca7266340735d25f779a733b2bdebab4d023")
     add_versions("0.8.1", "65971dfecefb3ab6862a5ad485f34ad4618449ebae28aa5fb1a76ccc79ea18bd")
     add_versions("0.8.2", "410a21d7396746bd2bae3b3b4779b2c7f74a408c572507becd5d8e888e9a434d")
+    add_versions("0.8.3", "5e373f1b28e1be9dce5ce11ad2dbb744b64efd66cfddd4ca3f458c563a4fe839")
 
     on_install(function (package)
         os.cp("include", package:installdir())
