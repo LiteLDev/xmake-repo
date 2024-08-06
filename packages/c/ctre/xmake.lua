@@ -1,4 +1,5 @@
 package("ctre")
+    set_kind("library", {headeronly = true})
 
     set_homepage("https://github.com/hanickadot/compile-time-regular-expressions/")
     set_description("ctre is a Compile time PCRE (almost) compatible regular expression matcher.")

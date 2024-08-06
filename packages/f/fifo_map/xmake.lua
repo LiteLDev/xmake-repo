@@ -1,4 +1,5 @@
 package("fifo_map")
+    set_kind("library", {headeronly = true})
     set_description("a FIFO-ordered associative container for C++")
 
     add_urls("https://github.com/nlohmann/fifo_map.git")

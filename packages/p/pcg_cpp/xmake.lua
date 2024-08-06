@@ -1,4 +1,5 @@
 package("pcg_cpp")
+    set_kind("library", {headeronly = true})
     set_description("pcg_cpp")
 
     add_urls("https://github.com/imneme/pcg-cpp.git")

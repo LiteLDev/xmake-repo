@@ -1,4 +1,5 @@
 package("coffi")
+    set_kind("library", {headeronly = true})
     set_description("A header-only C++ library for accessing files in COFF binary format. (Including Windows PE/PE+ formats)")
 
     add_urls("https://github.com/serge1/COFFI.git")

@@ -1,4 +1,5 @@
 package("toml++")
+    set_kind("library", {headeronly = true})
     set_description("Header-only TOML config file parser and serializer for C++17.")
 
     add_urls("https://github.com/marzer/tomlplusplus.git")
