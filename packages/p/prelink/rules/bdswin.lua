@@ -1,4 +1,4 @@
-rule("bedrock")
+rule("bdswin")
     before_link(function (target)
         import("lib.detect.find_file")
         os.mkdir("$(buildir)/.prelink/lib")
