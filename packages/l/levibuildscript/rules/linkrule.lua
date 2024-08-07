@@ -1,4 +1,7 @@
 rule("linkrule")
+    on_config(function (target)
+        target:add("shflags", "/DELAYLOAD:bedrock_server.dll")
+    end)
     before_link(function (target)
         import("lib.detect.find_file")
         os.mkdir("$(buildir)/.prelink/lib")
