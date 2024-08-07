@@ -6,8 +6,7 @@ package("bedrockdata")
 
     add_deps("prelink")
 
-    add_bindirs("bin")
-
     on_install("windows", function (package)
         os.mv("*", package:installdir("bin"))
+        package:addenv("PATH", "bin")
     end)
