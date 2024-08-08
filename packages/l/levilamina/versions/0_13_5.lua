@@ -11,7 +11,7 @@ local deps = {
     "pcg_cpp v1.0.0",
     "pfr 2.1.1",
     "symbolprovider v1.1.0",
-    "bedrockdata 1.21.3.01"
+    "bdslibrary 1.21.3.01"
 }
 
 function load(package)
