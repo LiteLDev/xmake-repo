@@ -14,7 +14,7 @@ package("bedrockdata")
         end
         end)
 
-    add_deps("prelink")
+    add_deps("prelink 0.2.0")
 
     on_install(function (package)
         os.mv("*", package:installdir("bin"))
