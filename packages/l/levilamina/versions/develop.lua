@@ -10,8 +10,8 @@ local deps = {
     "ctre 3.8.1",
     "pcg_cpp v1.0.0",
     "pfr 2.1.1",
-    "symbolprovider v1.2.0",
-    "bedrockdata 1.21.3.01"
+    "symbolprovider v1.2.0"
+    -- "bedrockdata 1.21.3.01"
 }
 
 function load(package)
