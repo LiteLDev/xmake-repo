@@ -3,6 +3,8 @@ package("levilamina")
     add_versionfiles("versions/versions.txt")
 
     add_defines("ENTT_PACKED_PAGE=128")
+    
+    add_configs("target_type", {default = "server", values = {"server", "client"}})
 
     on_load(function(package)
         import("core.base.semver")
@@ -23,5 +25,9 @@ package("levilamina")
     end)
 
     on_install(function(package)
-        import("package.tools.xmake").install(package)
+        if package:config("target_type") == "server" then
+            import("package.tools.xmake").install(package)
+        else
+            import("package.tools.xmake").install(package, {"--target_type=client"})
+        end
     end)

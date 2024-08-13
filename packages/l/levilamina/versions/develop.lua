@@ -1,4 +1,4 @@
-local deps = {
+local deps_common = {
     "entt 41aab920b083aa424ac1d27666ce287eeaff6ceb",
     "expected-lite v0.7.0",
     "fmt 10.2.1",
@@ -13,9 +13,25 @@ local deps = {
     "symbolprovider v1.2.0"
     -- "bedrockdata 1.21.3.01"
 }
+local deps_server = {
+    "bedrockdata 1.21.3-01-server"
+}
+local deps_client = {
+    "bedrockdata 1.21.0-03-client"
+    -- "imgui v1.91.0-docking", {configs = {dx11 = true, dx12 = true}}
+}
 
 function load(package)
-    for _, dep in ipairs(deps) do
+    for _, dep in ipairs(deps_common) do
         package:add("deps", dep)
+    end
+    if package:config("target_type") == "server" then
+        for _, dep in ipairs(deps_server) do
+            package:add("deps", dep)
+        end
+    else
+        for _, dep in ipairs(deps_client) do
+            package:add("deps", dep)
+        end
     end
 end
