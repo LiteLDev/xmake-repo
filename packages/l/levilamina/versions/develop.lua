@@ -14,10 +14,10 @@ local deps_common = {
     -- "bedrockdata 1.21.3.01"
 }
 local deps_server = {
-    "bedrockdata 1.21.3-01-server"
+    "bedrockdata 1.21.3.1-server"
 }
 local deps_client = {
-    "bedrockdata 1.21.0-03-client"
+    "bedrockdata 1.21.0.3-client"
     -- "imgui v1.91.0-docking", {configs = {dx11 = true, dx12 = true}}
 }
 
