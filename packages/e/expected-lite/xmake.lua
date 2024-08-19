@@ -7,6 +7,7 @@ package("expected-lite")
     add_urls("https://github.com/martinmoene/expected-lite.git")
 
     add_versions("v0.7.0", "3634b0a6d8dffcffad4d1355253d79290c0c754c")
+    add_versions("v0.8.0", "f339d2f73730f8fee4412f5e4938717866ecef48")
 
     on_install(function (package)
         os.cp("include", package:installdir())
