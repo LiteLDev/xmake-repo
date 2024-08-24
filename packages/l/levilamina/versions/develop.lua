@@ -7,11 +7,10 @@ local deps_common = {
     "magic_enum v0.9.5",
     "nlohmann_json v3.11.3",
     "rapidjson v1.1.0",
-    "ctre 3.8.1",
     "pcg_cpp v1.0.0",
     "pfr 2.1.1",
-    "symbolprovider v1.2.0"
-    -- "bedrockdata 1.21.3.01"
+    "symbolprovider v1.2.0",
+    "parallel-hashmap v1.3.12"
 }
 local deps_server = {
     "bedrockdata 1.21.3.1-server"
