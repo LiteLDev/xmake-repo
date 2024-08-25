@@ -1,6 +1,6 @@
 local deps_common = {
     "entt 41aab920b083aa424ac1d27666ce287eeaff6ceb",
-    "expected-lite v0.7.0",
+    "expected-lite v0.8.0",
     "fmt 10.2.1",
     "gsl v4.0.0",
     "leveldb 1.23",
