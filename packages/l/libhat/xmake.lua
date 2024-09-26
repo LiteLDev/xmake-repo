@@ -3,8 +3,9 @@ package("libhat")
 
     set_urls("https://github.com/BasedInc/libhat.git")
 
-    add_versions("2024.4.16", "e71b7d4b97141faf9fb77c3507d353412cc90c34")
+    add_versions("2024.4.16", "5a7970877b297b236818ee2d71730f4f1ca1a06c") -- has been replace by 2024.9.22
     add_versions("2024.8.10", "f4755aea0987e77c0f6f496c49eb9cd08d5f5a06")
+    add_versions("2024.9.22", "5a7970877b297b236818ee2d71730f4f1ca1a06c")
 
     add_deps("cmake")
 
