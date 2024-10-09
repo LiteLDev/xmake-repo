@@ -3,6 +3,7 @@ local deps_common = {
     "expected-lite v0.8.0",
     "fmt 10.2.1",
     "gsl v4.0.0",
+    "glm 1.0.1",
     "leveldb 1.23",
     "magic_enum v0.9.5",
     "nlohmann_json v3.11.3",
