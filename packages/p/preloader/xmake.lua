@@ -2,6 +2,7 @@ package("preloader")
     set_description("The preloader package")
 
     add_urls("https://github.com/LiteLDev/PreLoader.git")
+    add_urls("https://github.com/LiteLDev/PreLoader/releases/download/$(version)/preloader-windows-x64.zip")
     add_versions("v1.0.3", "9ec6cd9c2e0590e02229037435a15036eedd925a")
     add_versions("v1.1.0", "0b54d73ade8e534c390fae5451e3e541b74c184e")
     add_versions("v1.2.0", "9fa4a932867b51bf50193838e47944e70175212c")
@@ -19,13 +20,11 @@ package("preloader")
     add_versions("v1.7.0", "2a7e2befb7ab1a7296a53e8d523728f761f6f43f")
     add_versions("v1.8.0", "da0a383e34c42b251038c3cd42418ea68dd1f6d0")
     add_versions("v1.9.0", "0b6097999e158e5fb36b246827f9bdb1e2ae133b")
-
-    add_configs("shared", {description = "Build shared library.", default = true, type = "boolean", readonly = true})
+    add_versions("v1.12.0", "20d5484c4b76396089d294d8b0373aa56d53cc3c4fdd9b3f3e7705d06b11e811")
 
     on_install(function (package)
-        local configs = {}
-        if package:config("shared") then
-            configs.kind = "shared"
-        end
+        local configs = {
+            kind="shared"
+        }
         import("package.tools.xmake").install(package, configs)
     end)
