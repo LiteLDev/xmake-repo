@@ -22,9 +22,13 @@ package("preloader")
     add_versions("v1.9.0", "0b6097999e158e5fb36b246827f9bdb1e2ae133b")
     add_versions("v1.12.0", "20d5484c4b76396089d294d8b0373aa56d53cc3c4fdd9b3f3e7705d06b11e811")
 
-    on_install(function (package)
-        local configs = {
-            kind="shared"
-        }
-        import("package.tools.xmake").install(package, configs)
+    on_install(function(package)
+        if package:version():le("1.10.0") then
+            local configs = {
+                kind = "shared"
+            }
+            import("package.tools.xmake").install(package, configs)
+        else
+            os.mv("*", package:installdir())
+        end
     end)
