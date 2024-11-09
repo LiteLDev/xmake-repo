@@ -18,7 +18,7 @@ package("libhat")
             table.insert(configs, "-DLIBHAT_STATIC_C_LIB=ON")
         end
         import("package.tools.cmake").install(package, configs)
-        os.mv("include/*", package:installdir("include"))
+        os.cp("include/*", package:installdir("include"))
     end)
 
     on_test(function (package)

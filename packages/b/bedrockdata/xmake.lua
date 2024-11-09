@@ -12,6 +12,6 @@ package("bedrockdata")
     add_deps("prelink")
 
     on_install(function (package)
-        os.mv("*", package:installdir("bin"))
+        os.cp("*", package:installdir("bin"))
         package:addenv("PATH", "bin")
     end)

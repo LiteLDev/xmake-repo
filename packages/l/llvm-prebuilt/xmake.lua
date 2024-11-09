@@ -16,5 +16,5 @@ package("llvm-prebuilt")
         if not is_arch("x64") then
             raise("only x64 supported")
         end
-        os.mv("*", package:installdir())
+        os.cp("*", package:installdir())
     end)

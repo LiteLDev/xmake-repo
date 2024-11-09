@@ -8,6 +8,6 @@ package("prelink")
     end
 
     on_install(function (package)
-        os.mv("*", package:installdir("bin"))
+        os.cp("*", package:installdir("bin"))
         package:addenv("PATH", "bin")
     end)

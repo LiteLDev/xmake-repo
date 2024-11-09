@@ -13,7 +13,7 @@ package("dyncall")
         table.insert(configs, "-DBUILD_SHARED_LIBS=" .. (package:config("shared") and "ON" or "OFF"))
         import("package.tools.cmake").install(package, configs)
         os.mkdir(path.join(package:installdir("include"), "dyncall"))
-        os.mv(path.join(package:installdir("include"), "*.h"), path.join(package:installdir("include"), "dyncall"))
+        os.cp(path.join(package:installdir("include"), "*.h"), path.join(package:installdir("include"), "dyncall"))
     end)
 
     on_test(function (package)

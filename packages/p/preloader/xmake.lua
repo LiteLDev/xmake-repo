@@ -29,6 +29,6 @@ package("preloader")
             }
             import("package.tools.xmake").install(package, configs)
         else
-            os.mv("*", package:installdir())
+            os.cp("*", package:installdir())
         end
     end)
