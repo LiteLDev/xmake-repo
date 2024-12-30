@@ -1,5 +1,5 @@
 local deps_common = {
-    "entt 41aab920b083aa424ac1d27666ce287eeaff6ceb",
+    "entt v3.14.0",
     "expected-lite v0.8.0",
     "fmt 10.2.1",
     "gsl v4.0.0",
@@ -19,8 +19,8 @@ local deps_server = {
     "bedrockdata 1.21.50.10-server"
 }
 local deps_client = {
-    "bedrockdata 1.21.50.10-client"
-    -- "imgui v1.91.0-docking", {configs = {dx11 = true, dx12 = true}}
+    "bedrockdata 1.21.50.10-client",
+    "imgui[dx11=y,dx12=y] v1.91.0-docking"
 }
 
 function load(package)
