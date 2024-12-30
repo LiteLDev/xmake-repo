@@ -8,6 +8,7 @@ local deps_common = {
     "magic_enum v0.9.5",
     "nlohmann_json v3.11.3",
     "rapidjson v1.1.0",
+    "type_safe v0.2.4",
     "pcg_cpp v1.0.0",
     "pfr 2.1.1",
     "symbolprovider v1.2.0",
