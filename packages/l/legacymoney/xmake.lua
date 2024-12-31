@@ -9,6 +9,7 @@ package("legacymoney")
     add_versions("0.8.1", "f3d0713078335b8412c04e7287ae87f565492ea47b6db44131fe56ada6ece02f")
     add_versions("0.8.2", "2dd4e2ebdcb29f0e1b62d3ef94c1a589d72cd490827d8f585115ff82938043c0")
     add_versions("0.8.3", "a9aaf232a721194cebc32558aa6f421405388ff3d9d78ead20eb339e3a4f12c1")
+    add_versions("0.9.0-rc.1", "3901c76a65f68e5d45fe6e3c09c4f6c45e1f766b284eb9a84064b44ad8b6e896")
 
     on_install(function (package)
         os.cp("include", package:installdir())
