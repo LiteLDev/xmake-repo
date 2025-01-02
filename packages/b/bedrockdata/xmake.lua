@@ -7,7 +7,7 @@ package("bedrockdata")
         add_versions("1.21.0.3-client", "c7e41b174226e7dcb7a10ff0e3cd1c48628e217133e5d02b8eee89ab045384c6")
         add_versions("1.21.3.1-server", "995cdb5f111aae059f9036410ab3cb283d0be915404662584cc87700cb383259")
         add_versions("1.21.20.3-server", "3faf191302f7109461b913c10348253c6b7c96d2232d623a81a0450f4f159ebf")
-        add_versions("1.21.50.10-server", "ea3d9eefca6f43467ddbc3ef8c4fd7e2512109e41ef39ff4751b13a1b34fc51b")
+        add_versions("1.21.50.10-server", "2f943cb33ba61ab78c5493394633a332709a4239529c20659cbe94d01247f662")
     end
 
     add_deps("prelink")
