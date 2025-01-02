@@ -19,8 +19,9 @@ package("levilamina")
         end, catch { function(e)
             cprint(
                 "${bright yellow}warning: ${clear}Unknown version: ${bright cyan}"
-                .. version .. "${clear}, please resolve dependencies manually."
+                .. version .. "${clear}, will use develop dependencies."
             )
+            import("versions.develop").load(package)
         end } }
     end)
 

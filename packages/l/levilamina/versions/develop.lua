@@ -5,7 +5,7 @@ local deps_common = {
     "gsl v4.0.0",
     "glm 1.0.1",
     "leveldb 1.23",
-    "magic_enum v0.9.5",
+    "magic_enum v0.9.7",
     "nlohmann_json v3.11.3",
     "rapidjson v1.1.0",
     "type_safe v0.2.4",
