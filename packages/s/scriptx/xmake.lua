@@ -19,7 +19,7 @@ package("scriptx")
 
         local deps = {
             Lua = "lua v5.4.7",
-            QuickJs = "quickjs 2024-02-14",
+            QuickJs = "quickjs 2024.01.13",
             Python = "python 3.10.11",
             V8 = "node v16.16.0",
         }
