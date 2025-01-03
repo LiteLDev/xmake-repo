@@ -30,7 +30,7 @@ package("scriptx")
         package:add("defines", "SCRIPTX_BACKEND_TRAIT_PREFIX=../backend/" .. backend .. "/trait/Trait")
         package:add("deps", deps[backend])
         if (backend == "QuickJs") then
-            local qjsng = package:dep("quickjs-ng")
+            local qjsng = package:dep(deps[backend])
             qjsng:config_set("libc", true)
         end
     end)
