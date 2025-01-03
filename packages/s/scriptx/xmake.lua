@@ -18,8 +18,8 @@ package("scriptx")
         local backend = package:config("backend")
 
         local deps = {
-            Lua = "lua v5.4.6",
-            QuickJs = "quickjs 2022-03-07",
+            Lua = "lua v5.4.7",
+            QuickJs = "quickjs 2024-02-14",
             Python = "python 3.10.11",
             V8 = "node v16.16.0",
         }
