@@ -2,20 +2,6 @@ package("scriptx")
     add_urls("https://github.com/LiteLDev/ScriptX.git")
     add_versions("3.2.0", "1fae62097926328b7dd7e5415344e9d7fda465b4")
 
-    if is_config("backend", "Lua") then
-    add_requires("lua v5.4.7", {configs={shared=true}})
-
-    elseif is_config("backend", "QuickJs") then
-        add_requires("quickjs-ng v0.8.0", {configs={shared=true, libc=true}})
-
-    elseif is_config("backend", "Python") then
-        add_requires("python 3.10.11", {configs={shared=true}})
-
-    elseif is_config("backend", "V8") then
-        add_requires("node v16.16.0", {configs={shared=true}})
-        
-    end
-
     add_configs("backend", {default = "Lua", values = {"Lua", "QuickJs", "Python", "V8"}})
     add_includedirs(
         "include/src/include/"
