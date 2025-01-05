@@ -1,6 +1,7 @@
 package("node")
     add_urls("https://github.com/LiteLDev/node/releases/download/$(version)/node-win-x86_64.zip")
     add_versions("v16.16.0", "9b04418f18692c296afb3d4da8bfd0ce8794bfb371a7289c2cd00536cc516bee")
+    add_versions("v22.12.0", "69b10ac7c435d14ffbb0b837d189dfd505e162044b6d772400c7f0400382a3ce")
 
     add_includedirs("include/")
     add_includedirs("include/v8/")
