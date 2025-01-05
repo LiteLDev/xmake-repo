@@ -7,6 +7,10 @@ package("libbase64")
 
     add_deps("cmake")
 
+    if not package:config("shared") then
+        add_defines("BASE64_STATIC_DEFINE")
+    end
+
     on_install(function (package)
         local configs = {}
         table.insert(configs, "-DCMAKE_BUILD_TYPE=" .. (package:debug() and "Debug" or "Release"))
