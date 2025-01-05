@@ -13,5 +13,5 @@ package("moodycamelconqueue")
     end)
 
     on_install(function (package)
-        os.cp("include/concurrentqueue", package:installdir("include"))
+        os.cp("include/concurrentqueue/moodycamel/*", package:installdir("include", "moodycamel"))
     end)
