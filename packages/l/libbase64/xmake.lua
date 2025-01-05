@@ -7,9 +7,11 @@ package("libbase64")
 
     add_deps("cmake")
 
-    if not has_config("shared") then
-        add_defines("BASE64_STATIC_DEFINE")
-    end
+    on_load(function(package)
+        if not package:config("shared") then
+            package:add("defines", "BASE64_STATIC_DEFINE")
+        end
+    end)
 
     on_install(function (package)
         local configs = {}
