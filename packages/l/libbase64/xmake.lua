@@ -7,7 +7,7 @@ package("libbase64")
 
     add_deps("cmake")
 
-    if not package:config("shared") then
+    if not has_config("shared") then
         add_defines("BASE64_STATIC_DEFINE")
     end
 
