@@ -21,7 +21,7 @@ package("scriptx")
             Lua = "lua v5.4.7",
             QuickJs = "quickjs-ng v0.8.0",
             Python = "python 3.12.8",
-            V8 = "node v16.16.0",
+            V8 = "node v22.12.0",
         }
 
         print("Using ScriptX config: backend=" .. backend)
