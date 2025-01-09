@@ -3,7 +3,8 @@ package("levilamina")
     add_versionfiles("versions/versions.txt")
 
     add_defines("ENTT_PACKED_PAGE=128")
-    
+    add_defines("ENTT_SPARSE_PAGE=2048")
+
     add_configs("target_type", {default = "server", values = {"server", "client"}})
 
     on_load(function(package)
