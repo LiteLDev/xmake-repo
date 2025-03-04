@@ -6,6 +6,11 @@ package("libhat")
     add_versions("2024.4.16", "5a7970877b297b236818ee2d71730f4f1ca1a06c") -- has been replace by 2024.9.22
     add_versions("2024.8.10", "f4755aea0987e77c0f6f496c49eb9cd08d5f5a06")
     add_versions("2024.9.22", "5a7970877b297b236818ee2d71730f4f1ca1a06c")
+    add_versions("0.4.0", "7375873e560f46e8569c6a389c6077f4c7133089")
+    add_versions("0.3.0", "a3bd74d363a20b58c8e397b078e86621bca0a151")
+    add_versions("0.2.0", "2a2c7c37e76104f0593ee4bdd70c77dd9bad47cd")
+    add_versions("0.1.1", "c1863ad08ade725de185b6ef32e1eafc09118eaf")
+    add_versions("0.1.0", "4874d1a6ee8ef99fec79428a32aadd67850c1b10")
 
     add_deps("cmake")
 
