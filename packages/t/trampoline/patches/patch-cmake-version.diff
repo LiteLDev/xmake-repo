@@ -1,10 +1,19 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index ce1682a..14ea923 100644
+index ce1682a..17017ed 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -1,4 +1,4 @@
 -cmake_minimum_required(VERSION 3.30)
 +cmake_minimum_required(VERSION 3.15)
  project(trampoline CXX ASM)
- 
+
  set(CMAKE_CXX_STANDARD 20)
+@@ -78,6 +78,8 @@ target_include_directories(trampoline PUBLIC include)
+
+ option(ENABLE_TESTS "enable tests" ON)
+
++install(TARGETS trampoline)
++
+ if (ENABLE_TESTS)
+        enable_testing()
+     add_subdirectory(test)
