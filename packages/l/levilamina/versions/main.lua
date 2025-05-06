@@ -16,10 +16,10 @@ local deps_common = {
     "concurrentqueue v1.0.4"
 }
 local deps_server = {
-    "bedrockdata 1.21.60.10-server"
+    "bedrockdata 1.21.70.04-server.1"
 }
 local deps_client = {
-    "bedrockdata 1.21.60.10-client",
+    "bedrockdata 1.21.70.04-client.1",
     "imgui[dx11=y,dx12=y] v1.91.0-docking"
 }
 
