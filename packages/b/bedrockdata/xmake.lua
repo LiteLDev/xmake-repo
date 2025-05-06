@@ -18,7 +18,7 @@ package("bedrockdata")
         ["1.21.20"] = {"prelink 0.3.0"},
         ["1.21.50"] = {"prelink 0.3.0"},
         ["1.21.60"] = {"prelink 0.3.0"},
-        ["1.21.70"] = {"prelink 0.4.0"}
+        ["1.21.70"] = {"prelink 0.4.1"}
     }
 
     on_load(function(package)
