@@ -12,6 +12,7 @@ package("bedrockdata")
         add_versions("1.21.70.04-server.1", "63fd38debdc193c7572ef89ea72f60ad2b2e76d319280e2a557cf3bf562ad119")
         add_versions("1.21.70.04-server.2", "eddde5043d955451f7bb7e1cfdf199e3b1091abf766a7780c0ee8b09b33fffc0")
         add_versions("v1.21.7004-server.3", "903e6d6d0e74f9ba956dccb591610de49d18371e304fecfddb8c84add3c1db7a")
+        add_versions("v1.21.7004-server.4", "903e6d6d0e74f9ba956dccb591610de49d18371e304fecfddb8c84add3c1db7a")
     end
 
     local deps = {
