@@ -6,6 +6,7 @@ package("preloader_android")
     add_urls("https://github.com/LiteLDev/preloader-android.git")
 
     add_versions("0.1.0", "68917bd2b699d40827a39c616ac8bda367da6c9e1e98977fc80cb4f85256506e")
+    add_versions("0.1.1", "aaecf8869083132cdf20effe6add3ca19f82b5bc6af83472b6e6b5426c3b6d5e")
 
     add_configs("shared", {description = "Build shared library.", default = true, type = "boolean"})
 
