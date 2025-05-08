@@ -25,7 +25,7 @@ package("bedrockdata")
 
     on_load(function(package)
         local version = package:version_str()
-        local major, minor, patch = version:match("(%d+)%.(%d+)%.(%d+)")
+        local major, minor, patch = version:match("v?(%d+)%.(%d+)%.(%d+)")
         if not major or not minor or not patch then
             return
         end
