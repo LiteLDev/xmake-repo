@@ -3,13 +3,14 @@ package("prelink")
 
     if is_plat("windows") and is_arch("x64") then
        set_urls("https://github.com/LiteLDev/prelink-release/releases/download/$(version)/prelink-$(version)-windows-x64.zip")
-       add_versions("0.1.0", "8edd959195a9a95cb0545acbe725c15dc5dbb4675df03486b62119f0e5b9b9e6")
-       add_versions("0.2.0", "5fee60e94a7f557bcb818842d37091e1f766aa8ffeefd5be1895b02e030b5653")
-       add_versions("0.3.0", "1a4a17b1acb56f4d1aa5098dc9457d30a02ca9fe6f15d986db10288bede2870e")
-       add_versions("0.4.1", "cca94d2c08a0111b9996197f19f92bc23b1e8e097f3a3a06f8bbfa264b93cf22")
+       add_versions("v0.1.0", "8b457519f75ccbcc0c71be11ffa439e441510d57ab7753e08e5d786b3d087948")
+       add_versions("v0.2.0", "9d5a5e156e1c6a00d840f8ccb11c4d6b8c0f19c777d154e797cf9e1ab323dcf9")
+       add_versions("v0.3.0", "661a54f74a31711925fdac09d7b1cd1e39693a523de13f518fc81b864938349a")
+       add_versions("v0.4.1", "79c313c8036a08d09d22d072bced4cedc641cff3775997472df07ea793133d68")
+       add_versions("v0.5.0", "fa50e6a1cdf617815e99ca26be8984a787495e952cda76d818990bec1831b479")
     end
 
     on_install(function (package)
-        os.cp("*", package:installdir("bin"))
+        os.cp("*", package:installdir())
         package:addenv("PATH", "bin")
     end)
