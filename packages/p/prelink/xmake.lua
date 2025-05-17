@@ -11,6 +11,8 @@ package("prelink")
     end
 
     on_install(function (package)
-        os.cp("*", package:installdir())
+        -- xmake will move the first outer folder if only one exists
+        -- so we have to handle bin folder manually
+        os.cp("*", package:installdir("bin"))
         package:addenv("PATH", "bin")
     end)
