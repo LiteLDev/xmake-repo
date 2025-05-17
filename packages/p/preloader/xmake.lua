@@ -3,6 +3,7 @@ package("preloader")
 
     add_urls("https://github.com/LiteLDev/PreLoader.git")
     add_urls("https://github.com/LiteLDev/PreLoader/releases/download/$(version)/preloader-windows-x64.zip")
+    add_urls("https://github.com/LiteLDev/PreLoader/releases/download/$(version)/preloader-$(version)-windows-x64.zip")
     add_versions("v1.0.3", "9ec6cd9c2e0590e02229037435a15036eedd925a")
     add_versions("v1.1.0", "0b54d73ade8e534c390fae5451e3e541b74c184e")
     add_versions("v1.2.0", "9fa4a932867b51bf50193838e47944e70175212c")
@@ -22,6 +23,7 @@ package("preloader")
     add_versions("v1.9.0", "0b6097999e158e5fb36b246827f9bdb1e2ae133b")
     add_versions("v1.12.0", "20d5484c4b76396089d294d8b0373aa56d53cc3c4fdd9b3f3e7705d06b11e811")
     add_versions("v1.13.0", "d3c6b8a0d1c4143405bf256ea2349d1372e1d86409fb1015f7d8b432a95ebf30")
+    add_versions("v1.14.1", "f8491d8a4e03569882b02d5f705066aa67461293f8f8cd7bb491c652c8419fb8")
 
     on_install(function(package)
         if package:version():le("1.10.0") then
