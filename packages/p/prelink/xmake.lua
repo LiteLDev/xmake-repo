@@ -1,5 +1,4 @@
 package("prelink")
-    set_kind("binary")
 
     if is_plat("windows") and is_arch("x64") then
        set_urls("https://github.com/LiteLDev/prelink-release/releases/download/$(version)/prelink-$(version)-windows-x64.zip")

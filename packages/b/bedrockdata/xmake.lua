@@ -1,5 +1,4 @@
 package("bedrockdata")
-    set_kind("binary")
 
     if is_plat("windows") and is_arch("x64") then
         add_urls("https://github.com/LiteLDev/bedrock-runtime-data/releases/download/$(version)/bedrock-runtime-data-windows-x64.zip")
