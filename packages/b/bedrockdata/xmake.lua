@@ -16,7 +16,7 @@ package("bedrockdata")
         add_versions("v1.21.7004-server.5", "e355e3336c136235741530e502dc4fff81577d2ca2e5841f1304b16966744c94")
         add_versions("v1.21.7004-server.6", "be354c7d6368abdab1fb425f9389993bfeb0d0c68328d8525147a453fb5907d2")
         add_versions("v1.21.7004-server.7", "bfbc679ee7013b78bd9f1350fe44e533005ec659c4c5257275ce054b62531420")
-        add_versions("v1.21.7004-server.8", "f830f91880cf50a078817e2ab60a19796852e83fe3b767b102c5d6fec0bc9d31")
+        add_versions("v1.21.7004-server.9", "a50afb685b57bfe8b88109bbef848024983c0604e26bb9aae5c9cac82e13bae4")
     end
 
     local deps = {
@@ -33,7 +33,7 @@ package("bedrockdata")
         ["v1.21.7004-server.5"] = {"prelink v0.4.1"},
         ["v1.21.7004-server.6"] = {"prelink v0.5.0"},
         ["v1.21.7004-server.7"] = {"prelink v0.5.0"},
-        ["v1.21.7004-server.8"] = {"prelink v0.5.0"},
+        ["v1.21.7004-server.9"] = {"prelink v0.5.0"},
     }
 
     on_load(function(package)
