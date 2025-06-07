@@ -1,7 +1,7 @@
 local deps_common = {
     "entt v3.14.0",
     "expected-lite v0.8.0",
-    "fmt 10.2.1",
+    "fmt 11.2.0",
     "gsl v4.0.0",
     "glm 1.0.1",
     "leveldb 1.23",
@@ -16,7 +16,7 @@ local deps_common = {
     "concurrentqueue v1.0.4"
 }
 local deps_server = {
-    "bedrockdata 1.21.7004-server.9"
+    "bedrockdata 1.21.803-server.1"
 }
 local deps_client = {
     "bedrockdata 1.21.70.04-client.1",
