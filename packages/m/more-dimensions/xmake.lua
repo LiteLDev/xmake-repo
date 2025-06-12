@@ -25,7 +25,7 @@ package("more-dimensions")
         ["0.5.0"] = {"levilamina 1.0.1"},
         ["0.6.x"] = {"levilamina 1.1.1"},
         ["0.7.x"] = {"levilamina 1.2.1"},
-        ["0.8.x"] = {"levilamina 1.3.0"},
+        ["0.8.x"] = {"levilamina 1.3.1"},
     }
 
     on_load(function (package)
