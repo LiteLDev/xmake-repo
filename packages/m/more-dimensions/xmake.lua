@@ -21,13 +21,13 @@ package("more-dimensions")
         ["0.2.0"] = {"levilamina 0.10.5"},
         ["0.2.1"] = {"levilamina 0.11.1"},
         ["0.3.x"] = {"levilamina 0.12.4"},
-        ["0.4.0"] = {"levilamina 0.13.3"},
+        ["0.4.0"] = {"levilamina 0.13.0"},
         ["0.4.1"] = {"levilamina 0.13.4"},
         ["0.5.0"] = {"levilamina 1.0.1"},
-        ["0.6.x"] = {"levilamina 1.1.1"},
-        ["0.7.x"] = {"levilamina 1.2.1"},
-        ["0.8.x"] = {"levilamina 1.3.4"},
-        ["0.9.x"] = {"levilamina 1.4.0"},
+        ["0.6.x"] = {"levilamina 1.1.0"},
+        ["0.7.x"] = {"levilamina 1.2.0"},
+        ["0.8.x"] = {"levilamina 1.3.1"},
+        ["0.9.x"] = {"levilamina 1.4.1"},
     }
 
     on_load(function (package)
