@@ -5,23 +5,25 @@ package("preloader_android")
     add_urls("https://github.com/LiteLDev/preloader-android/archive/refs/tags/$(version).tar.gz",
              "https://github.com/LiteLDev/preloader-android.git")
 
-    add_versions("0.1.10", "6016dfd5641edb7f1375c19898ca765eca9aea96b1260a33f5c7d86890e2c3bd")
-    add_versions("0.1.9" , "06b511542a0ea29f7e7d3f1bafbeb1c5f6d2d6059866fdca96462598bf66b41e")
+    add_versions("0.1.11", "e462fb803b41363201847d7dbbc8f2b369c8d66e02e78a5aff7eeb7ff71db62c")
     add_versions("0.1.8" , "2661091a8a7b44d11887c21efe4e75a60e474e7f086f261bbe71f302cbb419a8")
 
     add_deps("cmake")
 
     on_load(function (package)
         package:data_set("cmake.build_shared", true)
+        package:add("includedirs", "include")
     end)
 
     on_install(function (package)
-        import("package.tools.cmake").install(package, {"-DBUILD_SHARED_LIBS=ON"})
-        local instdir = package:installdir()
-        if os.isdir("include") then
-            os.cp("include/*", path.join(instdir, "include"))
-        end
-        if os.isdir("lib") then
-            os.cp("lib/*", path.join(instdir, "lib"))
-        end
-    end)
+    import("package.tools.cmake").install(package, { 
+        "-DPlugin.SymbolResolver=OFF"
+    })
+    local instdir = package:installdir()
+    if os.isdir("include") then
+        os.cp("include/*", path.join(instdir, "include"))
+    end
+    if os.isdir("lib") then
+        os.cp("lib/*", path.join(instdir, "lib"))
+    end
+end)
