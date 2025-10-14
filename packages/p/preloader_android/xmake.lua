@@ -5,8 +5,7 @@ package("preloader_android")
     add_urls("https://github.com/LiteLDev/preloader-android/archive/refs/tags/$(version).tar.gz",
              "https://github.com/LiteLDev/preloader-android.git")
 
-    add_versions("0.1.11", "e462fb803b41363201847d7dbbc8f2b369c8d66e02e78a5aff7eeb7ff71db62c")
-    add_versions("0.1.8" , "2661091a8a7b44d11887c21efe4e75a60e474e7f086f261bbe71f302cbb419a8")
+    add_versions("0.1.13", "2b22f5260b172a7b79e3b9db5c5827a9cb4646809424d9414fd36d34c14859b3")
 
     add_deps("cmake")
 
@@ -16,9 +15,7 @@ package("preloader_android")
     end)
 
     on_install(function (package)
-    import("package.tools.cmake").install(package, { 
-        "-DPlugin.SymbolResolver=OFF"
-    })
+    import("package.tools.cmake").install(package, {})
     local instdir = package:installdir()
     if os.isdir("include") then
         os.cp("include/*", path.join(instdir, "include"))
