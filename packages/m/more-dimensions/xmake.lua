@@ -17,6 +17,7 @@ package("more-dimensions")
     add_versions("0.9.0", "0f9f7a4bdbd1578e862faa6ba43a56b3d20ee85b")
     add_versions("0.10.1", "3b52b2289284a6ca333b0192a186d57fa44398ec")
     add_versions("0.11.0", "bc4c49e3c7b61d49ca195c9d04c87fbc67a609da")
+    add_versions("0.11.2", "94c339f4d11cf3ddc0a676dd19c4aaa1cb432a62")
 
     local dependencies = {
         ["0.1.x"] = {"levilamina 0.9.5"},
