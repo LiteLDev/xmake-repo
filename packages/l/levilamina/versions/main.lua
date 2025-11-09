@@ -16,7 +16,7 @@ local deps_common = {
     "concurrentqueue v1.0.4"
 }
 local deps_server = {
-    "bedrockdata v1.21.120-server.3"
+    "bedrockdata v1.21.120-server.4"
 }
 local deps_client = {
     "bedrockdata 1.21.70.04-client.1",
