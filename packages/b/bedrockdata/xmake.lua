@@ -46,6 +46,7 @@ package("bedrockdata")
         ["v1.21.120-server.4"] = {"prelink v0.7.0"},
         ["v1.21.120-server.5"] = {"prelink v0.7.0"},
         ["v1.21.120-server.6"] = {"prelink v0.7.0"},
+        ["v1.21.120-server.7"] = {"prelink v0.7.0"},
 
     }
 
