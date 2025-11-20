@@ -33,7 +33,6 @@ package("bedrockdata")
         local version = tostring(package:version_str())
         local dep
         for ver, d in pairs(deps) do
-            print(ver, version)
             if version:startswith(ver) then
                 dep = d
                 break
