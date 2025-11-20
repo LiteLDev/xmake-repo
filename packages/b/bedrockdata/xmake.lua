@@ -13,46 +13,32 @@ package("bedrockdata")
         ["1.21.20.3-server"] = {"prelink v0.3.0"},
         ["1.21.50.10-server"] = {"prelink v0.3.0"},
         ["1.21.60.10-server"] = {"prelink v0.3.0"},
-        ["1.21.70.04-server.1"] = {"prelink v0.4.1"},
-        ["1.21.70.04-server.2"] = {"prelink v0.4.1"},
+        ["1.21.70.04-server"] = {"prelink v0.4.1"},
         ["v1.21.7004-server.3"] = {"prelink v0.4.1"},
         ["v1.21.7004-server.4"] = {"prelink v0.4.1"},
         ["v1.21.7004-server.5"] = {"prelink v0.4.1"},
         ["v1.21.7004-server.6"] = {"prelink v0.5.0"},
         ["v1.21.7004-server.7"] = {"prelink v0.5.0"},
         ["v1.21.7004-server.9"] = {"prelink v0.5.0"},
-        ["v1.21.803-server.1"] = {"prelink v0.5.0"},
-        ["v1.21.80-server.2"] = {"prelink v0.5.0"},
-        ["v1.21.80-server.3"] = {"prelink v0.5.0"},
-        ["v1.21.80-server.4"] = {"prelink v0.5.0"},
-        ["v1.21.80-server.5"] = {"prelink v0.5.0"},
-        ["v1.21.80-server.6"] = {"prelink v0.5.0"},
-        ["v1.21.80-server.7"] = {"prelink v0.5.0"},
-        ["v1.21.80-server.8"] = {"prelink v0.5.0"},
-        ["v1.21.93-server.1"] = {"prelink v0.5.0"},
-        ["v1.21.93-server.2"] = {"prelink v0.5.0"},
-        ["v1.21.93-server.3"] = {"prelink v0.5.0"},
-        ["v1.21.93-server.4"] = {"prelink v0.5.0"},
-        ["v1.21.93-server.5"] = {"prelink v0.5.0"},
-        ["v1.21.93-server.6"] = {"prelink v0.5.0"},
-        ["v1.21.102-server.1"] = {"prelink v0.7.0"},
-        ["v1.21.102-server.2"] = {"prelink v0.7.0"},
-        ["v1.21.111-server.1"] = {"prelink v0.7.0"},
-        ["v1.21.111-server.2"] = {"prelink v0.7.0"},
-        ["v1.21.111-server.3"] = {"prelink v0.7.0"},
-        ["v1.21.120-server.1"] = {"prelink v0.7.0"},
-        ["v1.21.120-server.2"] = {"prelink v0.7.0"},
-        ["v1.21.120-server.3"] = {"prelink v0.7.0"},
-        ["v1.21.120-server.4"] = {"prelink v0.7.0"},
-        ["v1.21.120-server.5"] = {"prelink v0.7.0"},
-        ["v1.21.120-server.6"] = {"prelink v0.7.0"},
-        ["v1.21.120-server.7"] = {"prelink v0.7.0"},
+        ["v1.21.803-server"] = {"prelink v0.5.0"},
+        ["v1.21.80-server"] = {"prelink v0.5.0"},
+        ["v1.21.93-server"] = {"prelink v0.5.0"},
+        ["v1.21.102-server"] = {"prelink v0.7.0"},
+        ["v1.21.111-server"] = {"prelink v0.7.0"},
+        ["v1.21.120-server"] = {"prelink v0.7.0"},
 
     }
 
     on_load(function(package)
         local version = tostring(package:version_str())
-        local dep = deps[version]
+        local dep
+        for ver, d in pairs(deps) do
+            print(ver, version)
+            if version:startswith(ver) then
+                dep = d
+                break
+            end
+        end
         if dep then
             package:add("deps", dep)
         end
