@@ -19,7 +19,7 @@ local deps_server = {
     "bedrockdata 1.21.70.04-server.2"
 }
 local deps_client = {
-    "bedrockdata 1.21.70.04-client.1",
+    "bedrockdata 1.21.0.3-client",
     "imgui[dx11=y,dx12=y] v1.91.0-docking"
 }
 
