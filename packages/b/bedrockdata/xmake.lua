@@ -13,20 +13,23 @@ package("bedrockdata")
         ["1.21.20.3-server"] = {"prelink v0.3.0"},
         ["1.21.50.10-server"] = {"prelink v0.3.0"},
         ["1.21.60.10-server"] = {"prelink v0.3.0"},
-        ["1.21.70.04-server"] = {"prelink v0.4.1"},
         ["v1.21.7004-server.3"] = {"prelink v0.4.1"},
         ["v1.21.7004-server.4"] = {"prelink v0.4.1"},
         ["v1.21.7004-server.5"] = {"prelink v0.4.1"},
         ["v1.21.7004-server.6"] = {"prelink v0.5.0"},
         ["v1.21.7004-server.7"] = {"prelink v0.5.0"},
         ["v1.21.7004-server.9"] = {"prelink v0.5.0"},
+        ["v1.21.124-server.3"] = {"prelink v0.7.1"},
+    }
+
+    local deps_matching = {
+        ["1.21.70.04-server"] = {"prelink v0.4.1"},
         ["v1.21.803-server"] = {"prelink v0.5.0"},
         ["v1.21.80-server"] = {"prelink v0.5.0"},
         ["v1.21.93-server"] = {"prelink v0.5.0"},
         ["v1.21.102-server"] = {"prelink v0.7.0"},
         ["v1.21.111-server"] = {"prelink v0.7.0"},
         ["v1.21.120-server"] = {"prelink v0.7.0"},
-        ["v1.21.124-server.3"] = {"prelink v0.7.1"},
         ["v1.21.124-server"] = {"prelink v0.7.0"},
         ["v1.21.124-client"] = {"prelink v0.7.1"},
     }
@@ -34,10 +37,20 @@ package("bedrockdata")
     on_load(function(package)
         local version = tostring(package:version_str())
         local dep
+        local matched = false
         for ver, d in pairs(deps) do
-            if version:startswith(ver) then
+            if version == ver then
                 dep = d
+                matched = true
                 break
+            end
+        end
+        if not matched then
+            for ver, d in pairs(deps_matching) do
+                if version:startswith(ver) then
+                    dep = d
+                    break
+                end
             end
         end
         if dep then
