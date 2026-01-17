@@ -21,6 +21,7 @@ package("bedrockdata")
         ["v1.21.7004-server.9"] = {"prelink v0.5.0"},
         ["v1.21.124-server.3"] = {"prelink v0.7.1"},
         ["v1.21.124-server.4"] = {"prelink v0.7.1"},
+        ["v1.21.124-server.5"] = {"prelink v0.7.1"},
     }
 
     local deps_matching = {
