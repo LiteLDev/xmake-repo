@@ -16,11 +16,10 @@ local deps_common = {
     "concurrentqueue v1.0.4"
 }
 local deps_server = {
-    "bedrockdata v1.21.132-server.3"
+    "bedrockdata v1.21.132-server.4"
 }
 local deps_client = {
-    "bedrockdata v1.21.132-client.4",
-    "imgui[dx11=y,dx12=y] v1.91.0-docking"
+    "bedrockdata v1.21.132-client.5"
 }
 
 function load(package)
