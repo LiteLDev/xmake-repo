@@ -23,6 +23,11 @@ package("levilamina")
             )
             import("versions.main").load(package)
         end } }
+        if package:config("target_type") == "server" then
+            package:add("defines", "LL_PLAT_S")
+        else
+            package:add("defines", "LL_PLAT_C")
+        end
     end)
 
     on_install(function(package)
