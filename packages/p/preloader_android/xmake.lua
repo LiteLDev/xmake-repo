@@ -5,6 +5,7 @@ package("preloader_android")
     add_urls("https://github.com/LiteLDev/preloader-android/archive/refs/tags/$(version).tar.gz",
              "https://github.com/LiteLDev/preloader-android.git")
 
+    add_versions("0.1.14", "fc7efef29682657ec0be725f035b0492196278ea90c4daf337f907903d0c4324")
     add_versions("0.1.13", "2b22f5260b172a7b79e3b9db5c5827a9cb4646809424d9414fd36d34c14859b3")
 
     add_deps("cmake")
