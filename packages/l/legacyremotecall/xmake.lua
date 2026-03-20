@@ -1,4 +1,5 @@
 package("legacyremotecall")
+    add_urls("https://github.com/LiteLDev/LegacyRemoteCall/releases/download/v$(version)/LegacyRemoteCall-server-windows-x64.zip")
     add_urls("https://github.com/LiteLDev/LegacyRemoteCall/releases/download/v$(version)/LegacyRemoteCall-windows-x64.zip")
     add_versions("0.3.0", "660aa7582842add78736e7cd21980db1e4df410f8b8f657e5c8b115d46993cc0")
     add_versions("0.4.0", "93e15026a306edfae62a3e20692dc0ab979ef3d6dd1cd5614c827d8dd4b0b9b3")
@@ -10,6 +11,7 @@ package("legacyremotecall")
     add_versions("0.8.3", "53a137766321d3a27116db2942e6e1f459b38efe562fb9a46344ffdcfd508e16")
     add_versions("0.9.0-rc.1", "88c45ad770cfdda4136fe15acc6bcd25d29bfa3d964932c2ac844fb080236540")
     add_versions("0.10.0", "0db357b6e7ddcc8f2016bfaf7490d2c777a2d407b477631d66c1def884814f1b")
+    add_versions("0.17.1", "1239bdf56db60f334d6ade6bee6924d88a5e7dc101c1b8462e2d357ef86d8d5f")
     
     on_install(function (package)
         os.cp("include", package:installdir())
