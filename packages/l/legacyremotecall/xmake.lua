@@ -12,6 +12,7 @@ package("legacyremotecall")
     add_versions("0.9.0-rc.1", "88c45ad770cfdda4136fe15acc6bcd25d29bfa3d964932c2ac844fb080236540")
     add_versions("0.10.0", "0db357b6e7ddcc8f2016bfaf7490d2c777a2d407b477631d66c1def884814f1b")
     add_versions("0.17.1", "1239bdf56db60f334d6ade6bee6924d88a5e7dc101c1b8462e2d357ef86d8d5f")
+    add_versions("0.17.2", "6c2f6c03f9f1a0e029c8419c4f6f0a236ab0ff75d81eeaae20b50df67a2c341e")
     
     on_install(function (package)
         os.cp("include", package:installdir())
