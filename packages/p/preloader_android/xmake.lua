@@ -4,7 +4,8 @@ package("preloader_android")
     set_kind("library")
     add_urls("https://github.com/LiteLDev/preloader-android/archive/refs/tags/$(version).tar.gz",
              "https://github.com/LiteLDev/preloader-android.git")
-             
+
+    add_versions("0.1.19", "d09333b29412b56ebb9cf22b6640ea0bced00a36f1ba5b0058fb7611fcd006e8")       
     add_versions("0.1.18", "b93e6f042d5963c9be7a3fac52f45add65a72559052086c52d77468ca83eb700")
     add_versions("0.1.16", "87cfed2b0b5eedaa5d3fa62be61243e271fa20742419a8fd23acb7730883e692")
     add_versions("0.1.14", "fc7efef29682657ec0be725f035b0492196278ea90c4daf337f907903d0c4324")
