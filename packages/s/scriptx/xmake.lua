@@ -4,7 +4,7 @@ package("scriptx")
     add_versions("2024.5.8", "006d6de1422d62aa55daef7d50367620fc661677")
     add_versions("2025.5.22", "22184aeecdcee2c683ad99db6362837e4ec6b7fe")
     add_versions("2026.1.10", "95c7a9fb63f62444c1f884a56e912b6e1a593ca4")
-    add_versions("2026.4.1", "af82b18f543b93d90bf4cd4edfe67210c3800116")
+    add_versions("2026.4.1", "eaf8333dccc03cbb1eef0dad3566db475fe856bd")
 
     add_configs("backend", {default = "Lua", values = {"Lua", "QuickJs", "Python", "V8"}})
     add_includedirs(
@@ -22,7 +22,14 @@ package("scriptx")
         local backend = package:config("backend")
         local version = package:version_str()
         local deps = {}
-        if version == "2026.1.10" or version == "2026.4.1" then
+        if version == "2026.4.1" then
+            deps = {
+                Lua = "lua v5.5.0",
+                QuickJs = "quickjs-ng v0.13.0",
+                Python = "python 3.12.10",
+                V8 = "node v22.12.0",
+            }
+        elseif version == "2026.1.10" then
             deps = {
                 Lua = "lua v5.4.7",
                 QuickJs = "quickjs-ng v0.11.0",
