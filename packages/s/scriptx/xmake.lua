@@ -4,7 +4,7 @@ package("scriptx")
     add_versions("2024.5.8", "006d6de1422d62aa55daef7d50367620fc661677")
     add_versions("2025.5.22", "22184aeecdcee2c683ad99db6362837e4ec6b7fe")
     add_versions("2026.1.10", "95c7a9fb63f62444c1f884a56e912b6e1a593ca4")
-    add_versions("2026.4.1", "eaf8333dccc03cbb1eef0dad3566db475fe856bd")
+    add_versions("2026.4.1", "fb89ae2f528dd45e82f0c385270c140b9e1b0028")
 
     add_configs("backend", {default = "Lua", values = {"Lua", "QuickJs", "Python", "V8"}})
     add_includedirs(
