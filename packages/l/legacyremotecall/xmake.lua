@@ -16,7 +16,7 @@ package("legacyremotecall")
     add_versions("0.17.2", "6c2f6c03f9f1a0e029c8419c4f6f0a236ab0ff75d81eeaae20b50df67a2c341e")
     
     on_install(function (package)
-        if (not package:version():le("0.17.2")) then
+        if (package:version() and not package:version():le("0.17.2")) then
             os.cp("include", package:installdir())
             os.cp("lib/*.lib", package:installdir("lib"))
         else

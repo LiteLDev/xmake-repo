@@ -14,7 +14,7 @@ package("legacymoney")
     add_versions("0.10.0", "ecd0563833ca6afaece1be17e496eacda96ded42e1c40cd339039a139dd6407c")
 
     on_install(function (package)
-        if (not package:version():le("0.10.0")) then
+        if (package:version() and not package:version():le("0.10.0")) then
             os.cp("include", package:installdir())
             os.cp("lib/*.lib", package:installdir("lib"))
         else

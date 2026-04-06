@@ -13,7 +13,7 @@ package("legacyparticleapi")
     add_versions("0.10.0", "1d26e9a3dfc88fbf39a114b640c2b3eb6c32132e5b12ef9f39b924b492f4160c")
 
     on_install(function (package)
-        if (not package:version():le("0.10.0")) then
+        if (package:version() and not package:version():le("0.10.0")) then
             os.cp("include", package:installdir())
             os.cp("lib/*.lib", package:installdir("lib"))
         else
