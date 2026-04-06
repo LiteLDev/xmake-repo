@@ -13,11 +13,17 @@ package("legacymoney")
     add_versions("0.9.0-rc.1", "3901c76a65f68e5d45fe6e3c09c4f6c45e1f766b284eb9a84064b44ad8b6e896")
     add_versions("0.10.0", "ecd0563833ca6afaece1be17e496eacda96ded42e1c40cd339039a139dd6407c")
 
+    add_configs("target_type", {default = "server", values = {"server", "client"}})
+
     on_install(function (package)
         if (package:version() and not package:version():le("0.10.0")) then
             os.cp("include", package:installdir())
             os.cp("lib/*.lib", package:installdir("lib"))
         else
-            import("package.tools.xmake").install(package)
+            if package:config("target_type") == "server" then
+                import("package.tools.xmake").install(package)
+            else
+                import("package.tools.xmake").install(package, {"--target_type=client"})
+            end
         end
     end)

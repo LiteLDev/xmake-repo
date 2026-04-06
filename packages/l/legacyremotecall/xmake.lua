@@ -14,12 +14,18 @@ package("legacyremotecall")
     add_versions("0.10.0", "0db357b6e7ddcc8f2016bfaf7490d2c777a2d407b477631d66c1def884814f1b")
     add_versions("0.17.1", "1239bdf56db60f334d6ade6bee6924d88a5e7dc101c1b8462e2d357ef86d8d5f")
     add_versions("0.17.2", "6c2f6c03f9f1a0e029c8419c4f6f0a236ab0ff75d81eeaae20b50df67a2c341e")
+
+    add_configs("target_type", {default = "server", values = {"server", "client"}})
     
     on_install(function (package)
         if (package:version() and not package:version():le("0.17.2")) then
             os.cp("include", package:installdir())
             os.cp("lib/*.lib", package:installdir("lib"))
         else
-            import("package.tools.xmake").install(package)
+            if package:config("target_type") == "server" then
+                import("package.tools.xmake").install(package)
+            else
+                import("package.tools.xmake").install(package, {"--target_type=client"})
+            end
         end
     end)
