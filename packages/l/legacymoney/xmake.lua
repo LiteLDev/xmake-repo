@@ -16,7 +16,7 @@ package("legacymoney")
     add_configs("target_type", {default = "server", values = {"server", "client"}})
 
     on_install(function (package)
-        if (package:version() and not package:version():le("0.10.0")) then
+        if (package:version() and package:version():le("0.10.0")) then
             os.cp("include", package:installdir())
             os.cp("lib/*.lib", package:installdir("lib"))
         else
