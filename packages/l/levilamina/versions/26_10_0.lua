@@ -13,7 +13,8 @@ local deps_common = {
     "pfr 2.1.1",
     "symbolprovider v1.2.0",
     "parallel-hashmap v1.3.12",
-    "concurrentqueue v1.0.4"
+    "concurrentqueue v1.0.4",
+    "stb 2025.03.14"
 }
 local deps_server = {
     "bedrockdata v26.10.4-server.2"
