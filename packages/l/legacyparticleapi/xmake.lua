@@ -1,4 +1,5 @@
 package("legacyparticleapi")
+    add_urls("https://github.com/LiteLDev/LegacyParticleAPI.git")
     add_urls("https://github.com/LiteLDev/LegacyParticleAPI/releases/download/v$(version)/LegacyParticleAPI-windows-x64.zip")
     add_versions("0.3.0", "1ad52812d10e39d2606b1f6114989ad20c573e90c550725922b97445648929ff")
     add_versions("0.4.0", "88e22e46610776c9791fe83a976722b7629891776d2662535a13424c1a0bd3d8")
@@ -12,6 +13,10 @@ package("legacyparticleapi")
     add_versions("0.10.0", "1d26e9a3dfc88fbf39a114b640c2b3eb6c32132e5b12ef9f39b924b492f4160c")
 
     on_install(function (package)
-        os.cp("include", package:installdir())
-        os.cp("lib/*.lib", package:installdir("lib"))
+        if (not package:version():le("0.10.0")) then
+            os.cp("include", package:installdir())
+            os.cp("lib/*.lib", package:installdir("lib"))
+        else
+            import("package.tools.xmake").install(package)
+        end
     end)

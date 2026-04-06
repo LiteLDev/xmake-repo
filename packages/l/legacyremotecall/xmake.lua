@@ -1,4 +1,5 @@
 package("legacyremotecall")
+    add_urls("https://github.com/LiteLDev/LegacyRemoteCall.git")
     add_urls("https://github.com/LiteLDev/LegacyRemoteCall/releases/download/v$(version)/LegacyRemoteCall-server-windows-x64.zip")
     add_urls("https://github.com/LiteLDev/LegacyRemoteCall/releases/download/v$(version)/LegacyRemoteCall-windows-x64.zip")
     add_versions("0.3.0", "660aa7582842add78736e7cd21980db1e4df410f8b8f657e5c8b115d46993cc0")
@@ -15,6 +16,10 @@ package("legacyremotecall")
     add_versions("0.17.2", "6c2f6c03f9f1a0e029c8419c4f6f0a236ab0ff75d81eeaae20b50df67a2c341e")
     
     on_install(function (package)
-        os.cp("include", package:installdir())
-        os.cp("lib/*.lib", package:installdir("lib"))
+        if (not package:version():le("0.17.2")) then
+            os.cp("include", package:installdir())
+            os.cp("lib/*.lib", package:installdir("lib"))
+        else
+            import("package.tools.xmake").install(package)
+        end
     end)

@@ -1,4 +1,5 @@
 package("legacymoney")
+    add_urls("https://github.com/LiteLDev/LegacyMoney.git")
     add_urls("https://github.com/LiteLDev/LegacyMoney/releases/download/v$(version)/LegacyMoney-windows-x64.zip")
     add_versions("0.3.0", "ce08d7524668a88a17645c87ced8ea15ca140b282e4c17db9035a3e875804240")
     add_versions("0.4.0", "f1a0fd84166a80c5082375203536a099da1e5204dfb3d20b1917c66f0c6bab58")
@@ -13,6 +14,10 @@ package("legacymoney")
     add_versions("0.10.0", "ecd0563833ca6afaece1be17e496eacda96ded42e1c40cd339039a139dd6407c")
 
     on_install(function (package)
-        os.cp("include", package:installdir())
-        os.cp("lib/*.lib", package:installdir("lib"))
+        if (not package:version():le("0.10.0")) then
+            os.cp("include", package:installdir())
+            os.cp("lib/*.lib", package:installdir("lib"))
+        else
+            import("package.tools.xmake").install(package)
+        end
     end)
