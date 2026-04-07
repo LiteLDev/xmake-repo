@@ -24,22 +24,22 @@ package("more-dimensions")
     add_versions("0.13.0", "3d89965e0b5208aff1462a2bb09f97bb6034cfb0")
 
     local dependencies = {
-        ["0.1.x"] = {"levilamina 0.9.x"},
-        ["0.2.0"] = {"levilamina 0.10.x"},
-        ["0.2.1"] = {"levilamina 0.11.x"},
-        ["0.3.x"] = {"levilamina 0.12.x"},
+        ["0.1.*"] = {"levilamina 0.9.*"},
+        ["0.2.0"] = {"levilamina 0.10.*"},
+        ["0.2.1"] = {"levilamina 0.11.*"},
+        ["0.3.*"] = {"levilamina 0.12.*"},
         ["0.4.0"] = {"levilamina 0.13.0"},
         ["0.4.1"] = {"levilamina 0.13.4"},
-        ["0.5.x"] = {"levilamina 1.0.x"},
-        ["0.6.x"] = {"levilamina 1.1.x"},
-        ["0.7.x"] = {"levilamina 1.2.x"},
-        ["0.8.x"] = {"levilamina 1.3.x"},
-        ["0.9.x"] = {"levilamina 1.4.x"},
-        ["0.10.x"] = {"levilamina 1.5.x"},
-        ["0.11.x"] = {"levilamina 1.6.x"},
+        ["0.5.*"] = {"levilamina 1.0.*"},
+        ["0.6.*"] = {"levilamina 1.1.*"},
+        ["0.7.*"] = {"levilamina 1.2.*"},
+        ["0.8.*"] = {"levilamina 1.3.*"},
+        ["0.9.*"] = {"levilamina 1.4.*"},
+        ["0.10.*"] = {"levilamina 1.5.*"},
+        ["0.11.*"] = {"levilamina 1.6.*"},
         ["0.12.0"] = {"levilamina >=1.7.0 <=1.7.5"},
         [">=0.12.1 <0.13.0"] = {"levilamina >=1.7.6 <1.8.0"},
-        ["0.13.x"] = {"levilamina >=1.9.2 <1.10.0"},
+        ["0.13.*"] = {"levilamina >=1.9.2 <1.10.0"},
     }
 
     on_load(function (package)
@@ -56,5 +56,5 @@ package("more-dimensions")
     end)
 
     on_install(function (package)
-        import("package.tools.xmake").install(package)
+        import("package.tools.*make").install(package)
     end)

@@ -12,6 +12,8 @@ package("legacymoney")
     add_versions("0.8.3", "a9aaf232a721194cebc32558aa6f421405388ff3d9d78ead20eb339e3a4f12c1")
     add_versions("0.9.0-rc.1", "3901c76a65f68e5d45fe6e3c09c4f6c45e1f766b284eb9a84064b44ad8b6e896")
     add_versions("0.10.0", "ecd0563833ca6afaece1be17e496eacda96ded42e1c40cd339039a139dd6407c")
+    add_versions("0.18.0", "07c13e5329aac2c20a4d3ceed8abeb5d8c036384")
+    add_versions("0.18.1", "4b274550398b7e6ed630953273ae455f0642c257")
 
     add_configs("target_type", {default = "server", values = {"server", "client"}})
 

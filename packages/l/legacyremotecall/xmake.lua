@@ -14,6 +14,7 @@ package("legacyremotecall")
     add_versions("0.10.0", "0db357b6e7ddcc8f2016bfaf7490d2c777a2d407b477631d66c1def884814f1b")
     add_versions("0.17.1", "1239bdf56db60f334d6ade6bee6924d88a5e7dc101c1b8462e2d357ef86d8d5f")
     add_versions("0.17.2", "6c2f6c03f9f1a0e029c8419c4f6f0a236ab0ff75d81eeaae20b50df67a2c341e")
+    add_versions("0.18.0", "077467a33f4d43f29e6b9122a808e798af78030e")
 
     add_configs("target_type", {default = "server", values = {"server", "client"}})
     
