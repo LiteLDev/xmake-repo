@@ -17,10 +17,10 @@ local deps_common = {
     "stb 2025.03.14"
 }
 local deps_server = {
-    "bedrockdata v26.10.4-server.15"
+    "bedrockdata v26.10.4-server.16"
 }
 local deps_client = {
-    "bedrockdata v26.10.4-client.15"
+    "bedrockdata v26.10.4-client.16"
 }
 
 function load(package)
