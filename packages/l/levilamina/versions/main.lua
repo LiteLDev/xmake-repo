@@ -11,7 +11,7 @@ local deps_common = {
     "type_safe v0.2.4",
     "pcg_cpp v1.0.0",
     "pfr 2.1.1",
-    "symbolprovider v1.2.0",
+    "symbolprovider v1.3.0",
     "parallel-hashmap v1.3.12",
     "concurrentqueue v1.0.4",
     "stb 2025.03.14"
