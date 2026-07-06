@@ -5,6 +5,8 @@ package("preloader_android")
     add_urls("https://github.com/LiteLDev/preloader-android/archive/refs/tags/$(version).tar.gz",
              "https://github.com/LiteLDev/preloader-android.git")
 
+    add_versions("0.2.2", "b95e4ea24338e62df689893648c22295f79276d42c86cbb4f9416e700f38868e")
+
     add_versions("0.1.20", "89a8c99d7454546289527e89c6e72bb0783a393067fc040c62367840fa77ef07")
     add_versions("0.1.19", "d09333b29412b56ebb9cf22b6640ea0bced00a36f1ba5b0058fb7611fcd006e8")       
     add_versions("0.1.18", "b93e6f042d5963c9be7a3fac52f45add65a72559052086c52d77468ca83eb700")
@@ -20,12 +22,14 @@ package("preloader_android")
     end)
 
     on_install(function (package)
-    import("package.tools.cmake").install(package, {})
-    local instdir = package:installdir()
-    if os.isdir("include") then
-        os.cp("include/*", path.join(instdir, "include"))
-    end
-    if os.isdir("lib") then
-        os.cp("lib/*", path.join(instdir, "lib"))
-    end
-end)
+        import("package.tools.cmake").install(package, {})
+
+        local instdir = package:installdir()
+        os.rm(path.join(instdir, "src"))
+        if os.isdir("include") then
+            os.cp("include/*", path.join(instdir, "include"))
+        end
+        if os.isdir("lib") then
+            os.cp("lib/*", path.join(instdir, "lib"))
+        end
+    end)
