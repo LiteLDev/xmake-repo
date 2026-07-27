@@ -5,6 +5,7 @@ package("lightwebsocketclient")
     add_versions("v1.0.0", "31a1a9c430894fc43b07190fd62f06c143f81fbf")
     add_versions("v1.0.1", "d6798453c5f0d8a9ac1b261c2ea03e8b4cbaab78")
     add_versions("v1.0.2", "c04b2e02305f140a6e37ec3b39297cdfa7763296")
+    add_versions("v1.0.3", "bff2f8ff8ff9f4bef16cd0d2deeb861462358701")
 
     on_install(function (package)
         local configs = {}
