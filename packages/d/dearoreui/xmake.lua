@@ -1,0 +1,7 @@
+set_description("DearOreUI: header-only public API for OreUI client mods")
+set_license("CC0-1.0")
+add_urls("https://github.com/copper-lamp/Dear-OreUI/releases/download/$(version)/DearOreUI-headers-$(version).zip")
+add_versions("0.1.1", "22efe6fbccd4e1d6aeb8acc29bc8083a8c4267cc40665612652fd99d96836a7d")
+on_install(function(package)
+    os.vcp("dearoreui/*", package:installdir("include"))
+end)
