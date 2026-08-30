@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -22,7 +23,6 @@ def manifest() -> dict:
         "architecture": materializer.EXPECTED_ARCHITECTURE,
         "api_level": materializer.EXPECTED_API_LEVEL,
         "ndk_revision": materializer.EXPECTED_NDK_REVISION,
-        "lock_hash": materializer.EXPECTED_LOCK_HASH,
         "compile_definitions": [],
         "dependencies": [
             {
@@ -81,7 +81,8 @@ class MaterializerTests(unittest.TestCase):
         second = materializer.materialize(self.manifest, self.ndk, self.output, self.runtime_lock, runner)
         self.assertEqual(first, second)
         self.assertEqual(first_bytes, self.runtime_lock.read_bytes())
-        self.assertEqual(first["lock_hash"], materializer.EXPECTED_LOCK_HASH)
+        self.assertNotIn("lock_hash", first)
+        self.assertEqual(first["manifest_sha256"], hashlib.sha256(self.manifest.read_bytes()).hexdigest().upper())
 
     def test_rejects_non_exact_commit_and_path_escape(self) -> None:
         value = manifest()

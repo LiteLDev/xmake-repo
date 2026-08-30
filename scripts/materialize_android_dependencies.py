@@ -22,7 +22,6 @@ EXPECTED_TARGET = "aarch64-linux-android21"
 EXPECTED_ARCHITECTURE = "arm64-v8a"
 EXPECTED_API_LEVEL = 21
 EXPECTED_NDK_REVISION = "28.2.13676358"
-EXPECTED_LOCK_HASH = "D24CD9990677805CE0F0244408CF50F2B5825DD2D240D5F969E5924CE1E36EA9"
 HTTPS_GIT_REPOSITORY = re.compile(r"https://github\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+\.git\Z")
 FULL_COMMIT = re.compile(r"[0-9a-f]{40}\Z")
 SAFE_NAME = re.compile(r"[A-Za-z0-9_.-]+\Z")
@@ -59,7 +58,6 @@ def validate_manifest(manifest: dict[str, Any]) -> list[dict[str, Any]]:
         "architecture": EXPECTED_ARCHITECTURE,
         "api_level": EXPECTED_API_LEVEL,
         "ndk_revision": EXPECTED_NDK_REVISION,
-        "lock_hash": EXPECTED_LOCK_HASH,
     }
     for key, value in expected.items():
         if manifest.get(key) != value:
@@ -276,7 +274,6 @@ def materialize(
         "api_level": EXPECTED_API_LEVEL,
         "ndk_revision": revision,
         "ndk_root": str(ndk),
-        "lock_hash": EXPECTED_LOCK_HASH,
         "manifest_sha256": hashlib.sha256(manifest_bytes).hexdigest().upper(),
         "include_roots": [str(path) for path in include_roots],
         "required_headers": [str(path) for path in required_headers],

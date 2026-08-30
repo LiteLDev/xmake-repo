@@ -44,8 +44,7 @@
     "target": "aarch64-linux-android21",
     "architecture": "arm64-v8a",
     "api_level": 21,
-    "dependency_lock_hash": "D24CD9990677805CE0F0244408CF50F2B5825DD2D240D5F969E5924CE1E36EA9",
-    "dependency_manifest_sha256": "2C8537CE31C9D24EE8022C30A261A483BEAEA099C93AD8A954ED6C0C18EDEB92"
+    "dependency_manifest_sha256": "66DDEF1DB1B89D872EDAC888F3B07C0C19F052C325D43D1B8FB97CF3A6855262"
   },
   "validation": {
     "formal_repetitions_byte_identical": true,

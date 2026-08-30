@@ -85,7 +85,7 @@ local function add_autogen_include(target)
     target:add("includedirs", target:autogendir())
 end
 
-local function load_android_dependency_lock(json)
+local function load_android_dependency_lock(json, expected_manifest_sha256)
     local lock_path = get_config("android_dependency_lock")
     if not lock_path or #lock_path == 0 then
         return nil, "Android builds require --android_dependency_lock=<generated-runtime-lock.json>"
@@ -101,8 +101,8 @@ local function load_android_dependency_lock(json)
     if lock.architecture ~= "arm64-v8a" then return nil, "Android dependency lock architecture mismatch" end
     if lock.api_level ~= 21 then return nil, "Android dependency lock API level mismatch" end
     if lock.ndk_revision ~= "28.2.13676358" then return nil, "Android dependency lock NDK revision mismatch" end
-    if lock.lock_hash ~= "D24CD9990677805CE0F0244408CF50F2B5825DD2D240D5F969E5924CE1E36EA9" then
-        return nil, "Android dependency lock identity mismatch"
+    if lock.manifest_sha256 ~= expected_manifest_sha256 then
+        return nil, "Android dependency runtime lock was generated from a different manifest"
     end
     if get_config("arch") ~= "arm64-v8a" then return nil, "header_android requires -a arm64-v8a" end
 
@@ -150,7 +150,9 @@ target("header_android")
     on_load(function (target)
         add_autogen_include(target)
         import("core.base.json")
-        local dependency_lock, lock_error = load_android_dependency_lock(json)
+        local manifest_path = path.join(os.projectdir(), "android-dependencies.lock.json")
+        local manifest_sha256 = hash.sha256(manifest_path):upper()
+        local dependency_lock, lock_error = load_android_dependency_lock(json, manifest_sha256)
         assert(dependency_lock, lock_error)
         for _, include_root in ipairs(dependency_lock.include_roots) do
             target:add("sysincludedirs", include_root)
