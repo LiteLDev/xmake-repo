@@ -1,0 +1,45 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/core/utility/EnableNonOwnerReferences.h"
+#include "mc/network/TransportLayer.h"
+
+class NetworkSessionOwner : public ::Bedrock::EnableNonOwnerReferences {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::UntypedStorage<8, 8> mUnka4b08c;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    NetworkSessionOwner& operator=(NetworkSessionOwner const&);
+    NetworkSessionOwner(NetworkSessionOwner const&);
+    NetworkSessionOwner();
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~NetworkSessionOwner() /*override*/;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI void createNetworkSession(::TransportLayer transportLayer);
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+    // NOLINTEND
+};

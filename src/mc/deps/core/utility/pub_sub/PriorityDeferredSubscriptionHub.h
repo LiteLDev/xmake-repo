@@ -1,0 +1,112 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/core/threading/MPSCQueue.h"
+#include "mc/deps/core/utility/pub_sub/ConnectPosition.h"
+#include "mc/deps/core/utility/pub_sub/DeferredSubscriptionHub.h"
+#include "mc/deps/core/utility/pub_sub/DeferredSubscriptionHubBase.h"
+#include "mc/platform/brstd/move_only_function.h"
+
+namespace Bedrock::PubSub {
+
+class PriorityDeferredSubscriptionHub : public ::Bedrock::PubSub::DeferredSubscriptionHubBase {
+public:
+    // PriorityDeferredSubscriptionHub inner types declare
+    // clang-format off
+    struct DequeuedEntry;
+    struct QueueEntry;
+    // clang-format on
+
+    // PriorityDeferredSubscriptionHub inner types define
+    struct DequeuedEntry {
+    public:
+        // member variables
+        // NOLINTBEGIN
+        ::ll::UntypedStorage<8, 64> mUnk97b459;
+        ::ll::UntypedStorage<4, 4>  mUnkec5839;
+        // NOLINTEND
+
+    public:
+        // prevent constructor by default
+        DequeuedEntry& operator=(DequeuedEntry const&);
+        DequeuedEntry(DequeuedEntry const&);
+        DequeuedEntry();
+    };
+
+    struct QueueEntry {
+    public:
+        // member variables
+        // NOLINTBEGIN
+        ::ll::UntypedStorage<8, 64> mUnka2ed86;
+        ::ll::UntypedStorage<4, 8>  mUnk20c6e2;
+        ::ll::UntypedStorage<4, 4>  mUnka8f19d;
+        // NOLINTEND
+
+    public:
+        // prevent constructor by default
+        QueueEntry& operator=(QueueEntry const&);
+        QueueEntry(QueueEntry const&);
+        QueueEntry();
+    };
+
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::UntypedStorage<8, 560> mUnk31088e;
+    ::ll::UntypedStorage<8, 40>  mUnkd75b90;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    PriorityDeferredSubscriptionHub& operator=(PriorityDeferredSubscriptionHub const&);
+    PriorityDeferredSubscriptionHub(PriorityDeferredSubscriptionHub const&);
+    PriorityDeferredSubscriptionHub();
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual void flushPendingEvents() /*override*/;
+
+    virtual ::Bedrock::PubSub::DeferredSubscriptionHub::HubType getHubType() const /*override*/;
+
+    virtual bool _runOneEvent() /*override*/;
+
+    virtual void _enqueue(
+        ::brstd::move_only_function<void()> fn,
+        ::Bedrock::PubSub::ConnectPosition  at,
+        ::std::optional<int>                group
+    ) /*override*/;
+
+    virtual void _runDequeuedEntry(::Bedrock::PubSub::PriorityDeferredSubscriptionHub::DequeuedEntry&& entry);
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCNAPI void $flushPendingEvents();
+
+    MCNAPI ::Bedrock::PubSub::DeferredSubscriptionHub::HubType $getHubType() const;
+
+    MCNAPI bool $_runOneEvent();
+
+    MCNAPI void $_enqueue(
+        ::brstd::move_only_function<void()> fn,
+        ::Bedrock::PubSub::ConnectPosition  at,
+        ::std::optional<int>                group
+    );
+
+    MCNAPI void $_runDequeuedEntry(::Bedrock::PubSub::PriorityDeferredSubscriptionHub::DequeuedEntry&& entry);
+
+
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+    // NOLINTEND
+};
+
+} // namespace Bedrock::PubSub

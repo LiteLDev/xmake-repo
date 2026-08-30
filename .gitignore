@@ -1,0 +1,16 @@
+.vscode
+.xmake
+.cache
+build
+builder
+src/mc1
+/vsxmake2022
+/.idea
+/bin/
+/cmake-build-*/
+/src-test/
+*.txt
+/vsxmake2026
+/.vs
+/test/include_all_c.h
+/test/include_all_s.h

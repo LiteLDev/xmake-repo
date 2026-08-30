@@ -1,0 +1,47 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/world/level/BlockSourceListener.h"
+
+// auto generated forward declare list
+// clang-format off
+class BlockSource;
+// clang-format on
+
+class BlockSourceHandle : public ::BlockSourceListener {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 8, ::BlockSource*> mSource;
+    // NOLINTEND
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~BlockSourceHandle() /*override*/;
+
+    virtual void onSourceDestroyed(::BlockSource& source) /*override*/;
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCFOLD void $dtor();
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCAPI void $onSourceDestroyed(::BlockSource& source);
+
+
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+    // NOLINTEND
+};

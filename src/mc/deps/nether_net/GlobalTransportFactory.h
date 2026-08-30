@@ -1,0 +1,36 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/external/webrtc/RefCountInterface.h"
+
+namespace NetherNet {
+
+struct GlobalTransportFactory : public ::webrtc::RefCountInterface {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::UntypedStorage<8, 8> mUnk5c37c0;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    GlobalTransportFactory& operator=(GlobalTransportFactory const&);
+    GlobalTransportFactory(GlobalTransportFactory const&);
+    GlobalTransportFactory();
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~GlobalTransportFactory() /*override*/;
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+};
+
+} // namespace NetherNet

@@ -1,0 +1,68 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/input/TouchControl.h"
+#include "mc/deps/input/enums/ButtonState.h"
+
+// auto generated forward declare list
+// clang-format off
+class InputEventQueue;
+class RectangleArea;
+class TouchPointResults;
+// clang-format on
+
+class TouchGuiConditionalPassthroughControl : public ::TouchControl {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<4, 4, uint const>               mButtonId;
+    ::ll::TypedStorage<1, 1, ::ButtonState>            mButtonState;
+    ::ll::TypedStorage<8, 64, ::std::function<bool()>> mCondition;
+    ::ll::TypedStorage<1, 1, bool>                     mConsumeInput;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    TouchGuiConditionalPassthroughControl();
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~TouchGuiConditionalPassthroughControl() /*override*/;
+
+    virtual void
+    tick(::InputEventQueue& eventQueue, ::TouchPointResults& touchPointResults, int yAxisInversionFactor) /*override*/;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCAPI TouchGuiConditionalPassthroughControl(
+        ::std::function<::RectangleArea()> area,
+        uint                               buttonId,
+        ::std::function<bool()>            condition,
+        bool                               consumeInput
+    );
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCAPI void*
+    $ctor(::std::function<::RectangleArea()> area, uint buttonId, ::std::function<bool()> condition, bool consumeInput);
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCAPI void $tick(::InputEventQueue& eventQueue, ::TouchPointResults& touchPointResults, int yAxisInversionFactor);
+    // NOLINTEND
+};

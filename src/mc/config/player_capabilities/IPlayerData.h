@@ -1,0 +1,24 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/world/actor/player/AbilitiesIndex.h"
+
+namespace PlayerCapabilities {
+
+struct IPlayerData {
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~IPlayerData();
+
+    virtual bool isAbilityEnabled(::AbilitiesIndex ability) const = 0;
+
+    virtual bool isTeacher() const = 0;
+
+    virtual bool isOperator() const = 0;
+    // NOLINTEND
+};
+
+} // namespace PlayerCapabilities

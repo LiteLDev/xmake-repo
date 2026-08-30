@@ -1,0 +1,107 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+class WaterConfig {
+public:
+    // WaterConfig inner types declare
+    // clang-format off
+    struct WaterConfigSettingsV0;
+    struct WaterConfigSettingsV1;
+    struct WaterConfigSettingsV2;
+    struct WaterConfigSettingsV3;
+    struct WaterConfigSettingsV4;
+    struct CausticsTexture;
+    // clang-format on
+
+    // WaterConfig inner types define
+    struct WaterConfigSettingsV0 {
+    public:
+        // WaterConfigSettingsV0 inner types declare
+        // clang-format off
+        struct WaterSettings;
+        // clang-format on
+
+        // WaterConfigSettingsV0 inner types define
+        struct WaterSettings {
+        public:
+            // WaterSettings inner types declare
+            // clang-format off
+            struct WaterDescription;
+            struct PSY;
+            struct Waves;
+            // clang-format on
+
+            // WaterSettings inner types define
+            struct WaterDescription {};
+
+            struct PSY {};
+
+            struct Waves {};
+        };
+    };
+
+    struct WaterConfigSettingsV1 {
+    public:
+        // WaterConfigSettingsV1 inner types declare
+        // clang-format off
+        struct WaterSurfaceParametersBase;
+        struct WaterSurfaceParameters;
+        struct WaterSettings;
+        // clang-format on
+
+        // WaterConfigSettingsV1 inner types define
+        struct WaterSurfaceParametersBase {};
+
+        struct WaterSurfaceParameters {};
+
+        struct WaterSettings {
+        public:
+            // WaterSettings inner types declare
+            // clang-format off
+            struct CausticsParameters;
+            // clang-format on
+
+            // WaterSettings inner types define
+            struct CausticsParameters {};
+        };
+    };
+
+    struct WaterConfigSettingsV2 {
+    public:
+        // WaterConfigSettingsV2 inner types declare
+        // clang-format off
+        struct WaterSurfaceParameters;
+        struct WaterSettings;
+        // clang-format on
+
+        // WaterConfigSettingsV2 inner types define
+        struct WaterSurfaceParameters {};
+
+        struct WaterSettings {};
+    };
+
+    struct WaterConfigSettingsV3 {
+    public:
+        // WaterConfigSettingsV3 inner types declare
+        // clang-format off
+        struct WaterSettings;
+        // clang-format on
+
+        // WaterConfigSettingsV3 inner types define
+        struct WaterSettings {};
+    };
+
+    struct WaterConfigSettingsV4 {
+    public:
+        // WaterConfigSettingsV4 inner types declare
+        // clang-format off
+        struct WaterSettings;
+        // clang-format on
+
+        // WaterConfigSettingsV4 inner types define
+        struct WaterSettings {};
+    };
+
+    struct CausticsTexture {};
+};

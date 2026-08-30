@@ -1,0 +1,32 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+namespace Common {
+
+struct BuildInfo {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 32, ::std::string> mGameVersion;
+    ::ll::TypedStorage<8, 32, ::std::string> mBuildId;
+    ::ll::TypedStorage<8, 32, ::std::string> mCommitId;
+    ::ll::TypedStorage<8, 32, ::std::string> mBranchId;
+    ::ll::TypedStorage<8, 32, ::std::string> mFlavor;
+    ::ll::TypedStorage<8, 32, ::std::string> mMergeBaseSha;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCAPI ~BuildInfo();
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCFOLD void $dtor();
+    // NOLINTEND
+};
+
+} // namespace Common

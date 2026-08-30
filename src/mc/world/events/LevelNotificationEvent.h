@@ -1,0 +1,30 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/world/events/EventVariantImpl.h"
+
+// auto generated forward declare list
+// clang-format off
+struct LevelAddedActorEvent;
+struct LevelBroadcastEvent;
+struct LevelDayCycleEvent;
+struct LevelGameRuleChangeEvent;
+struct LevelSoundBroadcastEvent;
+struct LevelStartLeaveGameEvent;
+struct LevelTickingAreaFinishedLoadingEvent;
+struct LevelWeatherChangedEvent;
+struct ScriptingWorldInitializeEvent;
+// clang-format on
+
+struct LevelNotificationEvent : public ::EventVariantImpl<
+                                    ::LevelTickingAreaFinishedLoadingEvent const,
+                                    ::LevelAddedActorEvent const,
+                                    ::LevelBroadcastEvent const,
+                                    ::LevelSoundBroadcastEvent const,
+                                    ::LevelDayCycleEvent const,
+                                    ::LevelStartLeaveGameEvent const,
+                                    ::LevelGameRuleChangeEvent const,
+                                    ::ScriptingWorldInitializeEvent const,
+                                    ::LevelWeatherChangedEvent const> {};

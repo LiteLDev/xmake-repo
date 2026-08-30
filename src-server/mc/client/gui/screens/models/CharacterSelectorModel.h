@@ -1,0 +1,16 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+class CharacterSelectorModel {
+public:
+    // CharacterSelectorModel inner types declare
+    // clang-format off
+    class CharacterSelectorFTUEModel;
+    // clang-format on
+
+    // CharacterSelectorModel inner types define
+    enum class AppearanceCreationType : int {};
+
+    class CharacterSelectorFTUEModel {};
+};

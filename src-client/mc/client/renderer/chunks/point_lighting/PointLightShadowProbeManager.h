@@ -1,0 +1,117 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/client/renderer/chunks/point_lighting/ILightLODResourceProvider.h"
+#include "mc/deps/minecraft_renderer/resources/ClientTexture.h"
+#include "mc/world/level/BlockPos.h"
+
+// auto generated forward declare list
+// clang-format off
+class AABB;
+class Block;
+class BlockSource;
+namespace PointLighting { class PointLightShadowProbe; }
+namespace PointLighting { struct AnalyticLightResources; }
+namespace dragon::atlas { class IAtlasHandle; }
+namespace dragon::atlas { class IAtlasUserOperations; }
+namespace dragon::atlas { struct AtlasTileHandle; }
+namespace mce { struct PointLightParameters; }
+namespace mce { struct TextureResourceService; }
+namespace mce::framebuilder { struct PointLightShadowParameters; }
+namespace mce::framebuilder { struct ShadowAtlasFrameDescription; }
+namespace mce::framebuilder { struct ShadowProbeDescription; }
+// clang-format on
+
+namespace PointLighting {
+
+class PointLightShadowProbeManager
+: public ::PointLighting::ILightLODResourceProvider<::PointLighting::AnalyticLightResources> {
+public:
+    // PointLightShadowProbeManager inner types define
+    using ShadowProbeIndex = int;
+
+    using ProbeMap = ::std::unordered_map<::BlockPos, ::PointLighting::PointLightShadowProbe>;
+
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 16, ::std::weak_ptr<::dragon::atlas::IAtlasUserOperations>>                   mAtlasOps;
+    ::ll::TypedStorage<8, 64, ::std::unordered_map<::BlockPos, ::PointLighting::PointLightShadowProbe>> mActiveProbes;
+    ::ll::TypedStorage<
+        8,
+        8,
+        ::std::_List_iterator<::std::_List_val<
+            ::std::_List_simple_types<::std::pair<::BlockPos const, ::PointLighting::PointLightShadowProbe>>>>>
+                                                                                mNextToQueue;
+    ::ll::TypedStorage<8, 24, ::std::vector<int>>                               mFreeShadowTextureIndices;
+    ::ll::TypedStorage<2, 2, ushort>                                            mPointLightShadowTextureDimension;
+    ::ll::TypedStorage<2, 2, ushort>                                            mPointLightShadowTextureArraySize;
+    ::ll::TypedStorage<8, 32, ::std::optional<::mce::ClientTexture>>            mPointLightShadowTextureArray;
+    ::ll::TypedStorage<4, 4, uint>                                              mCachedFrameCount;
+    ::ll::TypedStorage<1, 1, bool>                                              mGeneratingProbeJobs;
+    ::ll::TypedStorage<8, 64, ::std::unordered_map<::BlockPos, uint>>           mPartialProbeUpdates;
+    ::ll::TypedStorage<8, 24, ::std::vector<::AABB>>                            mBlockRegionChanges;
+    ::ll::TypedStorage<8, 16, ::std::shared_ptr<::dragon::atlas::IAtlasHandle>> mShadowAtlas;
+    ::ll::TypedStorage<4, 4, uint>                                              mShadowAtlasWidth;
+    ::ll::TypedStorage<4, 4, uint>                                              mShadowAtlasHeight;
+    // NOLINTEND
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~PointLightShadowProbeManager() /*override*/;
+
+    virtual bool atCapacity() const /*override*/;
+
+    virtual bool canReserve(::BlockPos const&) const /*override*/;
+
+    virtual bool acquired(::BlockPos const&) const /*override*/;
+
+    virtual void reserve(
+        ::BlockPos const&,
+        ::mce::PointLightParameters const&,
+        float const,
+        ::PointLighting::AnalyticLightResources&
+    ) /*override*/;
+
+    virtual void release(::BlockPos const&, ::PointLighting::AnalyticLightResources&) /*override*/;
+
+    virtual void advance(::BlockPos const&, ::PointLighting::AnalyticLightResources&, float) /*override*/;
+
+    virtual void finalize(::BlockPos const&, ::PointLighting::AnalyticLightResources&) /*override*/;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCAPI ::std::optional<::dragon::atlas::AtlasTileHandle>
+    _invalidateProbeFaceTile(::PointLighting::PointLightShadowProbe& probe, int faceIdx);
+
+    MCAPI ::std::pair<
+        ::std::optional<::mce::framebuilder::ShadowProbeDescription>,
+        ::mce::framebuilder::ShadowAtlasFrameDescription>
+    getShadowFrameData(
+        ::mce::framebuilder::PointLightShadowParameters const& shadowParameters,
+        ::glm::vec3                                            worldOrigin
+    );
+
+    MCAPI void onBlockChanged(
+        ::BlockSource&                                         source,
+        ::BlockPos const&                                      blockPos,
+        ::Block const&                                         block,
+        ::Block const&                                         oldBlock,
+        ::mce::framebuilder::PointLightShadowParameters const& shadowParameters
+    );
+
+    MCAPI void update(
+        bool                                                   pointLightShadowsEnabled,
+        ::mce::framebuilder::PointLightShadowParameters const& shadowParameters,
+        ::mce::TextureResourceService&                         textureResourceService,
+        ::glm::vec3 const&                                     worldOrigin
+    );
+    // NOLINTEND
+};
+
+} // namespace PointLighting

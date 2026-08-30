@@ -1,0 +1,61 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/world/level/storage/loot/functions/LootItemFunction.h"
+
+// auto generated forward declare list
+// clang-format off
+class CompoundTag;
+class ItemInstance;
+class ItemStack;
+class LootTableContext;
+class Random;
+// clang-format on
+
+class SetBookContentsFunction : public ::LootItemFunction {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 32, ::std::string>                mTitle;
+    ::ll::TypedStorage<8, 32, ::std::string>                mAuthor;
+    ::ll::TypedStorage<8, 24, ::std::vector<::std::string>> mPages;
+    // NOLINTEND
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~SetBookContentsFunction() /*override*/;
+
+    virtual void apply(::ItemStack& item, ::Random&, ::LootTableContext&) /*override*/;
+
+    virtual void apply(::ItemInstance& itemInstance, ::Random&, ::LootTableContext&) /*override*/;
+
+    virtual ::LootItemFunction::FunctionType getFunctionType() const /*override*/;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCAPI void _fillUserData(::CompoundTag& tag);
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCAPI void $apply(::ItemStack& item, ::Random&, ::LootTableContext&);
+
+    MCAPI void $apply(::ItemInstance& itemInstance, ::Random&, ::LootTableContext&);
+
+    MCFOLD ::LootItemFunction::FunctionType $getFunctionType() const;
+
+
+    // NOLINTEND
+};

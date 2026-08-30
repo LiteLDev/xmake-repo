@@ -1,0 +1,54 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+struct LevelArguments {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::UntypedStorage<8, 24> mUnkacc5e1;
+    ::ll::UntypedStorage<8, 16> mUnk78cef3;
+    ::ll::UntypedStorage<8, 8>  mUnka8a415;
+    ::ll::UntypedStorage<8, 24> mUnk44136b;
+    ::ll::UntypedStorage<8, 8>  mUnk5a6165;
+    ::ll::UntypedStorage<8, 8>  mUnk5dc921;
+    ::ll::UntypedStorage<8, 24> mUnk5ba95d;
+    ::ll::UntypedStorage<1, 1>  mUnka43f1c;
+    ::ll::UntypedStorage<1, 1>  mUnk21972c;
+    ::ll::UntypedStorage<8, 24> mUnkbd53fa;
+    ::ll::UntypedStorage<8, 16> mUnkaf5b49;
+    ::ll::UntypedStorage<8, 8>  mUnk6f97b5;
+    ::ll::UntypedStorage<8, 16> mUnkcebfdd;
+    ::ll::UntypedStorage<8, 16> mUnke1a36b;
+    ::ll::UntypedStorage<8, 16> mUnkcdb41e;
+    ::ll::UntypedStorage<8, 16> mUnka8e47c;
+    ::ll::UntypedStorage<1, 1>  mUnk523fac;
+    ::ll::UntypedStorage<8, 24> mUnk272999;
+    ::ll::UntypedStorage<8, 24> mUnk4076cd;
+    ::ll::UntypedStorage<1, 1>  mUnk2539ea;
+    ::ll::UntypedStorage<8, 8>  mUnk87ac3d;
+    ::ll::UntypedStorage<8, 8>  mUnk580582;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    LevelArguments& operator=(LevelArguments const&);
+    LevelArguments(LevelArguments const&);
+    LevelArguments();
+
+public:
+    // member functions
+    // NOLINTBEGIN
+#ifdef LL_PLAT_C
+    MCNAPI ~LevelArguments();
+#endif
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+#ifdef LL_PLAT_C
+    MCNAPI void $dtor();
+#endif
+    // NOLINTEND
+};

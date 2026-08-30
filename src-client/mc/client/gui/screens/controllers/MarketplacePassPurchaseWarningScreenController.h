@@ -1,0 +1,49 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/client/gui/screens/controllers/MainMenuScreenController.h"
+
+// auto generated forward declare list
+// clang-format off
+class MainMenuScreenModel;
+// clang-format on
+
+class MarketplacePassPurchaseWarningScreenController : public ::MainMenuScreenController {
+public:
+    // prevent constructor by default
+    MarketplacePassPurchaseWarningScreenController();
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~MarketplacePassPurchaseWarningScreenController() /*override*/;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCAPI explicit MarketplacePassPurchaseWarningScreenController(::std::shared_ptr<::MainMenuScreenModel> model);
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCAPI void* $ctor(::std::shared_ptr<::MainMenuScreenModel> model);
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCFOLD void $dtor();
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftableForScreenController();
+
+    MCNAPI static void** $vftableForEnableNonOwnerReferences();
+    // NOLINTEND
+};
