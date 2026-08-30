@@ -63,6 +63,8 @@ public:
 
     virtual void
     _createAvailablePackContentItems(::PackManagerContentSourceData& packData, ::std::vector<::PackModel>& available);
+
+    virtual ~PackManagerContentSource() /*override*/;
     // NOLINTEND
 
 public:
@@ -87,6 +89,12 @@ public:
         ::std::optional<::std::string>                     worldId,
         ::std::optional<::Core::PathBuffer<::std::string>> worldPath
     );
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCAPI void $dtor();
     // NOLINTEND
 
 public:

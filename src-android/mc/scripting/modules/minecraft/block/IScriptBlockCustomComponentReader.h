@@ -1,0 +1,44 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/script_core/lifetime_registry/scripting/StrongTypedObjectHandle.h"
+
+// auto generated forward declare list
+// clang-format off
+class Block;
+namespace ScriptModuleMinecraft { class ScriptBlockPermutation; }
+namespace ScriptModuleMinecraft { struct ScriptCustomComponentParameters; }
+namespace Scripting { class WeakLifetimeScope; }
+// clang-format on
+
+namespace ScriptModuleMinecraft {
+
+class IScriptBlockCustomComponentReader {
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    // clang-format off
+    virtual ~IScriptBlockCustomComponentReader();
+
+    virtual std::vector<std::string_view> getValidComponentsForBlock(::Scripting::StrongTypedObjectHandle<ScriptModuleMinecraft::ScriptBlockPermutation> const&) const = 0;
+
+    virtual ::Scripting::StrongTypedObjectHandle<ScriptModuleMinecraft::ScriptCustomComponentParameters> const& tryGetCustomComponentParametersForBlock(::Block const&, std::string_view, ::Scripting::WeakLifetimeScope const&) const = 0;
+    // clang-format on
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+    // NOLINTEND
+};
+
+} // namespace ScriptModuleMinecraft

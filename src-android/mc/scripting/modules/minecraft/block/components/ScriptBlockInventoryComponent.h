@@ -1,0 +1,61 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/script_core/lifetime_registry/scripting/StrongObjectHandle.h"
+#include "mc/deps/script_core/lifetime_registry/scripting/StrongTypedObjectHandle.h"
+#include "mc/deps/script_core/runtime/scripting/Result_deprecated.h"
+#include "mc/scripting/modules/minecraft/block/components/BaseScriptBlockActorComponent.h"
+
+// auto generated forward declare list
+// clang-format off
+class BlockActor;
+class BlockPos;
+class BlockSource;
+namespace ScriptModuleMinecraft { class ScriptBlockInventoryComponentContainerV010; }
+namespace ScriptModuleMinecraft { class ScriptContainerWrapper; }
+namespace Scripting { class WeakLifetimeScope; }
+namespace Scripting { struct ClassBinding; }
+// clang-format on
+
+namespace ScriptModuleMinecraft {
+
+class ScriptBlockInventoryComponent : public ::ScriptModuleMinecraft::BaseScriptBlockActorComponent {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 40, std::optional<Scripting::StrongObjectHandle>> mScriptContainer;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    ScriptBlockInventoryComponent& operator=(ScriptBlockInventoryComponent const&);
+    ScriptBlockInventoryComponent();
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~ScriptBlockInventoryComponent();
+    // NOLINTEND
+
+public:
+    // static variables
+    // NOLINTBEGIN
+    MCNAPI static char const*& ComponentId();
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+    // NOLINTEND
+};
+
+} // namespace ScriptModuleMinecraft

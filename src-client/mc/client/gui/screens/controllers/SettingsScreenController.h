@@ -52,7 +52,7 @@ public:
     ::ll::TypedStorage<8, 32, ::std::string>                                       mInitialPack;
     ::ll::TypedStorage<4, 4, ::SettingsScreenMode>                                 mSettingsMode;
     ::ll::TypedStorage<1, 1, bool>                                                 mShowRealmsSettings;
-    ::ll::TypedStorage<8, 656, ::Realms::World>                                    mWorld;
+    ::ll::TypedStorage<8, 720, ::Realms::World>                                    mWorld;
     ::ll::TypedStorage<1, 1, bool>                                                 mNavigateToMenuOnExit;
     ::ll::TypedStorage<1, 1, bool>                                                 mIsGlobalSettingsScreen;
     ::ll::TypedStorage<1, 1, bool>                                                 mReloadTexturePacksOnExit;
@@ -81,7 +81,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~SettingsScreenController() /*override*/;
+    virtual ~SettingsScreenController() /*override*/ = default;
 
     virtual void onOpen() /*override*/;
 

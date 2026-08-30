@@ -1,0 +1,18 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/entity/definitions/OffspringDefinition.h"
+
+struct PropertyGeneticDataSchema {
+public:
+    // PropertyGeneticDataSchema inner types define
+    using Object = ::OffspringDefinition::PropertyGeneticData;
+
+public:
+    // static variables
+    // NOLINTBEGIN
+    MCNAPI static std::string_view const& NAME();
+    // NOLINTEND
+};

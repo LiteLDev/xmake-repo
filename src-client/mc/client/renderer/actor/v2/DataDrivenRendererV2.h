@@ -3,47 +3,45 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
+#include "mc/client/renderer/ActorShaderManager.h"
 #include "mc/deps/minecraft_renderer/game/ShadowContext.h"
 
 // auto generated forward declare list
 // clang-format off
 class Actor;
 class ActorRenderer;
+class DataDrivenRendererRegistry;
 struct GameplayRelatedRenderData;
+struct RequestedDataDrivenRender;
 // clang-format on
 
 class DataDrivenRendererV2 {
 public:
     // member variables
     // NOLINTBEGIN
-    ::ll::UntypedStorage<8, 8>  mUnka39496;
-    ::ll::UntypedStorage<1, 1>  mUnkfd63fe;
-    ::ll::UntypedStorage<1, 1>  mUnk148bd0;
-    ::ll::UntypedStorage<8, 24> mUnkdc6c83;
-    ::ll::UntypedStorage<8, 24> mUnkad1326;
-    ::ll::UntypedStorage<8, 24> mUnk8db07d;
+    ::ll::TypedStorage<8, 8, ::DataDrivenRendererRegistry const*>         mV2BakedRenderers;
+    ::ll::TypedStorage<1, 1, bool>                                        mRenderActorsWithAttachables;
+    ::ll::TypedStorage<1, 1, bool>                                        mVersionLessThanOrEqualToVersion_1_16_210;
+    ::ll::TypedStorage<8, 24, ::std::vector<::RequestedDataDrivenRender>> mRequestedActors;
+    ::ll::TypedStorage<8, 24, ::std::vector<::Actor*>>                    mOnFireActors;
+    ::ll::TypedStorage<8, 24, ::std::vector<::Actor*>>                    mLeashedActors;
+    ::ll::TypedStorage<8, 56, ::ActorShaderManager>                       mActorShaderManager;
     // NOLINTEND
-
-public:
-    // prevent constructor by default
-    DataDrivenRendererV2& operator=(DataDrivenRendererV2 const&);
-    DataDrivenRendererV2(DataDrivenRendererV2 const&);
-    DataDrivenRendererV2();
 
 public:
     // member functions
     // NOLINTBEGIN
-    MCNAPI uint generateFrame(::GameplayRelatedRenderData const& renderData);
+    MCAPI uint generateFrame(::GameplayRelatedRenderData const& renderData);
 
-    MCNAPI bool
+    MCAPI bool
     tryAddActor(::Actor& actor, ::std::shared_ptr<::ActorRenderer> const& renderer, ::ShadowContext shadowContext);
 
-    MCNAPI ~DataDrivenRendererV2();
+    MCAPI ~DataDrivenRendererV2();
     // NOLINTEND
 
 public:
     // destructor thunk
     // NOLINTBEGIN
-    MCNAPI void $dtor();
+    MCAPI void $dtor();
     // NOLINTEND
 };

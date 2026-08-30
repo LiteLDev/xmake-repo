@@ -1,0 +1,61 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/util/Bounds.h"
+#include "mc/world/level/chunk/ChunkSource.h"
+
+// auto generated forward declare list
+// clang-format off
+class ChunkPos;
+class LevelChunk;
+// clang-format on
+
+class WorldLimitChunkSource : public ::ChunkSource {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<4, 48, ::Bounds> mLimitArea;
+    // NOLINTEND
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~WorldLimitChunkSource() /*override*/;
+
+    virtual ::std::shared_ptr<::LevelChunk>
+    createNewChunk(::ChunkPos const& cp, ::ChunkSource::LoadMode lm, bool readOnly) /*override*/;
+
+    virtual ::std::shared_ptr<::LevelChunk> getExistingChunk(::ChunkPos const& cp) /*override*/;
+
+    virtual bool isWithinWorldLimit(::ChunkPos const& cp) const /*override*/;
+
+    virtual bool canCreateViews() const /*override*/;
+
+    virtual ::std::unordered_map<::ChunkPos, ::std::weak_ptr<::LevelChunk>> const* getChunkMap() /*override*/;
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCAPI ::std::shared_ptr<::LevelChunk>
+    $createNewChunk(::ChunkPos const& cp, ::ChunkSource::LoadMode lm, bool readOnly);
+
+    MCAPI ::std::shared_ptr<::LevelChunk> $getExistingChunk(::ChunkPos const& cp);
+
+    MCAPI bool $isWithinWorldLimit(::ChunkPos const& cp) const;
+
+    MCFOLD bool $canCreateViews() const;
+
+    MCAPI ::std::unordered_map<::ChunkPos, ::std::weak_ptr<::LevelChunk>> const* $getChunkMap();
+
+
+    // NOLINTEND
+};

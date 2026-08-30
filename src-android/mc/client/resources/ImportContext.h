@@ -1,0 +1,84 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/ImportMode.h"
+#include "mc/client/resources/ImportContextType.h"
+#include "mc/client/resources/ImportFailure.h"
+#include "mc/client/resources/ImportSuccess.h"
+#include "mc/deps/core/file/PathBuffer.h"
+#include "mc/resources/core/zip_utils/ZipProgressList.h"
+
+// auto generated forward declare list
+// clang-format off
+class PackManifest;
+class PackReport;
+class ResourcePack;
+namespace Core { class Path; }
+// clang-format on
+
+class ImportContext {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 64, ::Core::ZipUtils::ZipProgressList> mZipProgressList;
+    ::ll::TypedStorage<8, 24, std::string>                       mSerializedGlobalStackPreUpdate;
+    ::ll::TypedStorage<1, 1, bool>                               mSuppressImportStartedToast;
+    ::ll::TypedStorage<1, 1, bool>                               mSuppressImportFinishedToast;
+    ::ll::TypedStorage<1, 1, bool>                               mSuppressSelfToasts;
+    ::ll::TypedStorage<1, 1, bool>                               mSuppressImportProgressScreen;
+    // NOLINTEND
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    // clang-format off
+    virtual ~ImportContext();
+
+    virtual ::Core::PathBuffer<std::string> generatePackFolderName(::PackManifest const&) = 0;
+
+    virtual ::Core::PathBuffer<std::string> getBehaviorPacksPath() const = 0;
+
+    virtual ::Core::PathBuffer<std::string> getResourcePacksPath() const = 0;
+
+    virtual ::Core::PathBuffer<std::string> getWorldTemplatePath() const = 0;
+
+    virtual ::Core::PathBuffer<std::string> getSkinPacksPath() const = 0;
+
+    virtual ::Core::PathBuffer<std::string> getPersonaPath() const = 0;
+
+    virtual ::ImportMode getImportMode() const = 0;
+
+    virtual bool shouldUnzipToDestination(::PackManifest const&) const = 0;
+
+    virtual bool importAsFlatFile(::PackManifest const&) const = 0;
+
+    virtual ::ImportContextType getImportContextType() const = 0;
+
+    virtual void notifyEarlyImportStarted(bool) = 0;
+
+    virtual void notifyImportStarted(::PackManifest const&) = 0;
+
+    virtual void notifyMultiImportStarted(int) = 0;
+
+    virtual void notifyImportSucceeded(::ResourcePack const*, ::ImportSuccess, ::PackManifest const&, ::PackReport const&, ::Core::Path const&) = 0;
+
+    virtual void notifyImportFailed(::ImportFailure, ::PackManifest const*, ::PackReport*, ::Core::Path const&) = 0;
+
+    virtual bool modifyManifest(::PackManifest&) = 0;
+    // clang-format on
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+    // NOLINTEND
+};

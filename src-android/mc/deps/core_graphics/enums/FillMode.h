@@ -1,0 +1,12 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+namespace mce {
+
+enum class FillMode : uchar {
+    FillSolid     = 0,
+    FillWireframe = 1,
+};
+
+}

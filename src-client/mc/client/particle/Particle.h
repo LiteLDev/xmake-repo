@@ -28,7 +28,7 @@ public:
     // NOLINTBEGIN
     ::ll::TypedStorage<4, 4, float>                     mCameraOffset;
     ::ll::TypedStorage<4, 4, int>                       mLifetime;
-    ::ll::TypedStorage<8, 88, ::TextureUVCoordinateSet> mTex;
+    ::ll::TypedStorage<8, 96, ::TextureUVCoordinateSet> mTex;
     ::ll::TypedStorage<4, 4, float>                     mU0;
     ::ll::TypedStorage<4, 4, float>                     mV0;
     ::ll::TypedStorage<4, 4, int>                       mAge;
@@ -61,7 +61,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~Particle();
+    virtual ~Particle() = default;
 
     virtual void init(::Vec3 const& pos, ::Vec3 const& dir, int scale, ::ParticleEngine& engine) = 0;
 

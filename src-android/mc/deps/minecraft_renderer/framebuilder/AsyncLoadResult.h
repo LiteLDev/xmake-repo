@@ -1,0 +1,12 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+namespace mce::framebuilder {
+
+enum class AsyncLoadResult : int {
+    Pending   = 0,
+    Completed = 1,
+};
+
+}

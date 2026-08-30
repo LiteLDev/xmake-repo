@@ -1,0 +1,56 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/world/level/BlockPos.h"
+
+// auto generated forward declare list
+// clang-format off
+class Block;
+class CompoundTag;
+// clang-format on
+
+namespace br::worldgen {
+
+struct StructureBlockInfo {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<4, 12, ::BlockPos>                   mPos;
+    ::ll::TypedStorage<8, 8, ::Block const*>                mBlock;
+    ::ll::TypedStorage<8, 8, ::Block const*>                mExtraBlock;
+    ::ll::TypedStorage<8, 16, std::shared_ptr<CompoundTag>> mTag;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    StructureBlockInfo();
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI ::br::worldgen::StructureBlockInfo clone() const;
+
+    MCNAPI bool operator!=(::br::worldgen::StructureBlockInfo const&) const;
+
+    MCNAPI ~StructureBlockInfo();
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCNAPI static ::br::worldgen::StructureBlockInfo from(::BlockPos, ::Block const&, ::Block const*);
+
+    MCNAPI static ::br::worldgen::StructureBlockInfo
+    from(::BlockPos, ::Block const&, ::Block const*, std::unique_ptr<CompoundTag>&&);
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+};
+
+} // namespace br::worldgen

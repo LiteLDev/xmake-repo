@@ -36,6 +36,7 @@ class TextureTessellator;
 struct Brightness;
 namespace dragon { struct RenderMetadata; }
 namespace mce { class TextureGroup; }
+namespace mce::framebuilder { struct FrameLightingModelCapabilities; }
 // clang-format on
 
 class ItemInHandRenderer : public ::ActorShaderManager {
@@ -256,7 +257,12 @@ public:
         float                               frameAlpha
     ) const;
 
-    MCAPI void _tessellateBlockItem(::Tessellator& tessellator, ::BlockTessellator& t, ::Block const& block);
+    MCAPI void _tessellateBlockItem(
+        ::Tessellator&                                             tessellator,
+        ::BlockTessellator&                                        t,
+        ::Block const&                                             block,
+        ::mce::framebuilder::FrameLightingModelCapabilities const& lightingModelCaps
+    );
 
     MCAPI void _tessellateTextureItem(
         ::BaseActorRenderContext& renderContext,
@@ -316,6 +322,8 @@ public:
 
     MCAPI void
     tessellateAtFrame(::BaseActorRenderContext& renderContext, ::Mob* mob, ::ItemStack const& item, int frame);
+
+    MCAPI void tick();
     // NOLINTEND
 
 public:

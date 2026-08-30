@@ -1,0 +1,147 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/LeanDynamicProperty__String.h"
+#include "mc/deps/core/math/Vec3.h"
+#include "mc/platform/brstd/flat_map.h"
+#include "mc/world/level/block/actor/BlockActorVersion.h"
+#include "mc/world/level/block/actor/component/IBlockActorComponent.h"
+
+// auto generated forward declare list
+// clang-format off
+class CompoundTag;
+namespace Bedrock::Threading { class Mutex; }
+// clang-format on
+
+class DynamicPropertiesBlockActorComponent : public ::IBlockActorComponent {
+public:
+    // DynamicPropertiesBlockActorComponent inner types define
+    enum class SetResult : int {
+        Success              = 0,
+        StorageLimitExceeded = 1,
+        StorageNotFound      = 2,
+    };
+
+    using SetCallbackFn = ::std::function<void(
+        ::std::string const&,
+        uint,
+        ::std::string const&,
+        uint,
+        ::std::variant<double, float, bool, ::LeanDynamicProperty::String, ::Vec3> const*
+    )>;
+
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<
+        8,
+        48,
+        ::brstd::flat_map<
+            uint,
+            ::brstd::flat_map<
+                uint,
+                ::std::variant<double, float, bool, ::LeanDynamicProperty::String, ::Vec3>,
+                ::std::less<uint>,
+                ::std::vector<uint>,
+                ::std::vector<::std::variant<double, float, bool, ::LeanDynamicProperty::String, ::Vec3>>>,
+            ::std::less<uint>,
+            ::std::vector<uint>,
+            ::std::vector<::brstd::flat_map<
+                uint,
+                ::std::variant<double, float, bool, ::LeanDynamicProperty::String, ::Vec3>,
+                ::std::less<uint>,
+                ::std::vector<uint>,
+                ::std::vector<::std::variant<double, float, bool, ::LeanDynamicProperty::String, ::Vec3>>>>>>
+        mDataMap;
+    ::ll::TypedStorage<
+        8,
+        48,
+        ::brstd::flat_map<uint, uint64, ::std::less<uint>, ::std::vector<uint>, ::std::vector<uint64>>>
+        mStorageBytes;
+    // NOLINTEND
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual void save(::CompoundTag& parentTag) const /*override*/;
+
+    virtual void load(::CompoundTag const& parentTag, ::BlockActorVersion version) /*override*/;
+
+    virtual ~DynamicPropertiesBlockActorComponent() /*override*/;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI void _loadInception(::CompoundTag const& parentTag);
+
+    MCNAPI ::std::optional<::std::variant<double, float, bool, ::LeanDynamicProperty::String, ::Vec3>>
+    get(::std::string const& bucket, ::std::string const& key) const;
+
+    MCNAPI uint64 getByteCount(::std::string const& bucket) const;
+
+    MCNAPI ::DynamicPropertiesBlockActorComponent::SetResult remove(
+        ::std::string const& bucket,
+        ::std::string const& key,
+        ::std::function<void(
+            ::std::string const&,
+            uint,
+            ::std::string const&,
+            uint,
+            ::std::variant<double, float, bool, ::LeanDynamicProperty::String, ::Vec3> const*
+        )>                   callback
+    );
+
+    MCNAPI ::DynamicPropertiesBlockActorComponent::SetResult
+    set(::std::string const&                                                              bucket,
+        ::std::string const&                                                              key,
+        ::std::variant<double, float, bool, ::LeanDynamicProperty::String, ::Vec3> const& value,
+        ::std::function<void(
+            ::std::string const&,
+            uint,
+            ::std::string const&,
+            uint,
+            ::std::variant<double, float, bool, ::LeanDynamicProperty::String, ::Vec3> const*
+        )>                                                                                callback);
+    // NOLINTEND
+
+public:
+    // static variables
+    // NOLINTBEGIN
+    MCNAPI static ::std::add_lvalue_reference_t<char const[]> DYNAMIC_PROPERTIES_TAG();
+
+    MCNAPI static ::brstd::
+        flat_map<uint, ::std::string, ::std::less<uint>, ::std::vector<uint>, ::std::vector<::std::string>>&
+        mBucketDictionary();
+
+    MCNAPI static ::Bedrock::Threading::Mutex& mDictionaryMutex();
+
+    MCNAPI static ::brstd::
+        flat_map<uint, ::std::string, ::std::less<uint>, ::std::vector<uint>, ::std::vector<::std::string>>&
+        mVariableDictionary();
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCNAPI void $save(::CompoundTag& parentTag) const;
+
+    MCNAPI void $load(::CompoundTag const& parentTag, ::BlockActorVersion version);
+
+
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+    // NOLINTEND
+};

@@ -35,7 +35,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~GameModuleClient() /*override*/;
+    virtual ~GameModuleClient() /*override*/ = default;
 
     virtual void init(::IClientInstance& client, ::Bedrock::NotNullNonOwnerPtr<::Level> const& level) = 0;
 
@@ -59,7 +59,7 @@ public:
 
     virtual void configureDocumentation(::GameModuleDocumentation&, ::ItemRegistryRef const) = 0;
 
-    virtual void tick() = 0;
+    virtual void tick(::IClientInstance const& client) = 0;
 
     virtual void setupStandardCommands(::CommandRegistry& commandRegistry) = 0;
 

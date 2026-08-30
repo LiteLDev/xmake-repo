@@ -57,7 +57,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~FacetRegistry() /*override*/;
+    virtual ~FacetRegistry() /*override*/ = default;
 
     virtual void registerFacet(
         ::std::string const&                                         name,
@@ -108,7 +108,7 @@ public:
 
     MCAPI void $suspendAllFacets();
 
-    MCAPI void $disableFacetActivation();
+    MCFOLD void $disableFacetActivation();
 
     MCAPI void $bind(::OreUI::FacetBinder& binder);
 

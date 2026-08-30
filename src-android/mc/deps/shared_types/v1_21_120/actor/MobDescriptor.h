@@ -1,0 +1,54 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/shared_types/v1_21_20/filter_groups/FilterGroupData.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace cereal { struct ReflectionCtx; }
+// clang-format on
+
+namespace SharedTypes::v1_21_120 {
+
+struct MobDescriptor {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 192, ::SharedTypes::v1_21_20::FilterGroupData> mTargetFilter;
+    ::ll::TypedStorage<4, 4, float>                                      mMaxDistance;
+    ::ll::TypedStorage<4, 4, float>                                      mMaxHeight;
+    ::ll::TypedStorage<4, 4, float>                                      mMaxFlee;
+    ::ll::TypedStorage<4, 4, float>                                      mWalkSpeedModifier;
+    ::ll::TypedStorage<4, 4, float>                                      mSprintSpeedModifier;
+    ::ll::TypedStorage<1, 1, bool>                                       mCheckIfOutnumbered;
+    ::ll::TypedStorage<1, 1, bool>                                       mReevaluateDescription;
+    ::ll::TypedStorage<4, 4, int>                                        mPriority;
+    ::ll::TypedStorage<4, 4, int>                                        mCooldownInSeconds;
+    ::ll::TypedStorage<1, 2, std::optional<bool>>                        mMustSee;
+    ::ll::TypedStorage<4, 4, int>                                        mMustSeeForgetSeconds;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI bool operator==(::SharedTypes::v1_21_120::MobDescriptor const&) const;
+
+    MCNAPI ~MobDescriptor();
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCNAPI static void bindType(::cereal::ReflectionCtx&);
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+};
+
+} // namespace SharedTypes::v1_21_120

@@ -67,5 +67,7 @@ public:
         ::mce::TimeStep const&                                                      timeStep,
         ::std::vector<::ScreenEvent>&                                               screenEvents
     );
+
+    MCAPI void clearAnimationLists();
     // NOLINTEND
 };

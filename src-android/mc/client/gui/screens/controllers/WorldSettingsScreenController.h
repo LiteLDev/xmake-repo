@@ -1,0 +1,279 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/client/gui/DirtyFlag.h"
+#include "mc/client/gui/ViewRequest.h"
+#include "mc/client/gui/screens/controllers/ModalScreenButtonId.h"
+#include "mc/client/gui/screens/controllers/SettingsScreenControllerBase.h"
+#include "mc/client/gui/screens/controllers/SettingsScreenMode.h"
+#include "mc/client/gui/screens/controllers/WorldMultiplayerLockState.h"
+#include "mc/client/gui/screens/interfaces/IWorldSettingsStorage.h"
+#include "mc/client/gui/screens/rules/WorldSettingsRules.h"
+#include "mc/client/network/realms/World.h"
+#include "mc/client/world/PostCreateWorldAction.h"
+#include "mc/deps/cereal/schema/dynamic/NullType.h"
+#include "mc/deps/core/file/PathBuffer.h"
+#include "mc/deps/core/threading/Async.h"
+#include "mc/deps/core/utility/NonOwnerPointer.h"
+#include "mc/platform/Result.h"
+#include "mc/server/commands/PlayerPermissionLevel.h"
+#include "mc/world/level/FileArchiver.h"
+#include "mc/world/level/LevelListCacheObserver.h"
+#include "mc/world/level/NetherWorldType.h"
+#include "mc/world/level/SpawnSettings.h"
+#include "mc/world/level/storage/ExperimentStorage.h"
+#include "mc/world/level/storage/LevelDataWrapper.h"
+#include "mc/world/level/storage/LevelSummary.h"
+#include "mc/world/level/storage/edu_cloud/WorldSyncState.h"
+
+// auto generated forward declare list
+// clang-format off
+class DlcUIWrapper;
+class Experiments;
+class GameRule;
+class GameRules;
+class IContentManager;
+class IContentManagerContext;
+class LevelData;
+class MainMenuScreenModel;
+class PlatformMultiplayerRestrictions;
+class PropertyBag;
+class WorldSettingsScreenControllerProxy;
+struct GameRuleId;
+struct PackManagerContentSource;
+namespace Core { class FileStorageArea; }
+namespace EduCloud { struct IEduCloudSaveSystem; }
+namespace Json { class Value; }
+namespace MSGraph::Models { struct DriveItem; }
+namespace MSGraph::Models { struct GraphError; }
+// clang-format on
+
+class WorldSettingsScreenController : public ::SettingsScreenControllerBase,
+                                      public ::IWorldSettingsStorage,
+                                      public ::LevelListCacheObserver {
+public:
+    // WorldSettingsScreenController inner types define
+    using GameRuleValueMappingList =
+        std::vector<std::tuple<std::string, std::variant<cereal::NullType, bool, int, float>>>;
+
+public:
+    // member variables
+    // NOLINTBEGIN
+    // clang-format off
+    ::ll::TypedStorage<4, 4, ::SettingsScreenMode> mSettingsMode;
+    ::ll::TypedStorage<8, 24, std::string> mSeedString;
+    ::ll::TypedStorage<8, 24, std::string> mRandomTickSpeedString;
+    ::ll::TypedStorage<8, 24, std::string> mRespawnRadiusString;
+    ::ll::UntypedStorage<8, 24> mWorldImagePath;
+    ::ll::UntypedStorage<8, 696> mEditedLevel;
+    ::ll::UntypedStorage<8, 1496> mLevelData;
+    ::ll::TypedStorage<8, 56, ::ExperimentStorage> mOriginalExperiments;
+    ::ll::TypedStorage<4, 4, ::EduCloud::WorldSyncState const> mEditedLevelSyncState;
+    ::ll::TypedStorage<1, 1, bool> mEditedLevelDeleted;
+    ::ll::TypedStorage<8, 112, ::WorldSettingsRules> mWorldSettingsRules;
+    ::ll::TypedStorage<8, 8, ::IContentManager&> mContentManager;
+    ::ll::TypedStorage<8, 8, std::unique_ptr<DlcUIWrapper>> mDlcUIWrapper;
+    ::ll::TypedStorage<8, 16, ::WorldMultiplayerLockState> mMultiplayerState;
+    ::ll::TypedStorage<8, 8, std::unique_ptr<PlatformMultiplayerRestrictions>> mPlatformMultiplayerRestrictions;
+    ::ll::TypedStorage<8, 8, ::PackManagerContentSource*> mWorldContentSource;
+    ::ll::UntypedStorage<8, 24> mEduCloudSaveSystem;
+    ::ll::TypedStorage<1, 1, bool> mLocalCheatsAllowed;
+    ::ll::TypedStorage<4, 4, int> mLocalGameType;
+    ::ll::TypedStorage<4, 4, int> mGameDifficulty;
+    ::ll::TypedStorage<1, 1, ::NetherWorldType> mNetherType;
+    ::ll::TypedStorage<8, 40, ::SpawnSettings> mSpawnSettings;
+    ::ll::TypedStorage<1, 1, bool> mGameVersionOverrideEnabled;
+    ::ll::TypedStorage<8, 24, std::string> mGameVersionOverride;
+    ::ll::TypedStorage<8, 24, std::string> mInitialPackId;
+    ::ll::TypedStorage<1, 1, bool> mRefreshLevelData;
+    ::ll::TypedStorage<1, 1, bool> mAttemptedToCreateNewWorld;
+    ::ll::TypedStorage<1, 1, bool> mHackStatusVariableToTrackWorldCreationUntilWeFixInputBufferingOnUIStack;
+    ::ll::TypedStorage<8, 608, ::Realms::World> mRealmWorld;
+    ::ll::TypedStorage<8, 24, std::vector<int>> mServerSimDistanceOptionValues;
+    ::ll::TypedStorage<8, 24, std::vector<int>> mSleepPercentOptionValues;
+    ::ll::TypedStorage<1, 1, bool> mHasRealms;
+    ::ll::TypedStorage<1, 1, bool> mSleepEnabled;
+    ::ll::TypedStorage<8, 24, std::vector<std::tuple<std::string, std::variant<cereal::NullType, bool, int, float>>>> mOriginalGameRuleValueCache;
+    ::ll::TypedStorage<8, 8, std::unique_ptr<IContentManagerContext>> mContentManagerContext;
+    ::ll::UntypedStorage<8, 16> mProxy;
+    ::ll::UntypedStorage<8, 48> mOnOpenCallback;
+    ::ll::UntypedStorage<8, 16> mGetCloudItemByIdHandle;
+    ::ll::TypedStorage<8, 24, std::string> mCloudFileName;
+    ::ll::TypedStorage<8, 24, std::string> mCloudLastChanged;
+    ::ll::TypedStorage<1, 1, bool> mCanEditGameModeInEdu;
+    ::ll::UntypedStorage<1, 15> mUnhideServerSettings;
+    // clang-format on
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    WorldSettingsScreenController& operator=(WorldSettingsScreenController const&);
+    WorldSettingsScreenController(WorldSettingsScreenController const&);
+    WorldSettingsScreenController();
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~WorldSettingsScreenController();
+
+    virtual ::ui::DirtyFlag tick();
+
+    virtual void onOpen();
+
+    virtual void onTerminate();
+
+    virtual void onCreation();
+
+    virtual void addStaticScreenVars(::Json::Value&);
+
+    virtual void _displayLockedWorldPopup();
+
+    virtual void onLevelDeleted(std::string const&);
+
+    virtual void onStorageChanged();
+
+    virtual bool hasAvailableSpaceForLevel(std::shared_ptr<Core::FileStorageArea>);
+
+    virtual void saveWorld();
+
+    virtual ::LevelSummary& getLevelSummary();
+
+    virtual ::LevelData& getLevelData();
+
+    virtual void _registerControllerCallbacks();
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI WorldSettingsScreenController(std::shared_ptr<MainMenuScreenModel>, bool, bool);
+
+    MCNAPI WorldSettingsScreenController(
+        std::shared_ptr<MainMenuScreenModel>,
+        ::LevelSummary const&,
+        bool,
+        std::function<void()>,
+        std::string const,
+        bool
+    );
+
+    MCNAPI bool _canChangeWorldOption() const;
+
+    MCNAPI bool _canEditDifficulty();
+
+    MCNAPI void _copyAndSetDataHelper(std::function<void(LevelData&)>);
+
+    MCNAPI ::ui::ViewRequest _copyWorld(std::function<void(LevelData&)>, bool);
+
+    MCNAPI ::ui::ViewRequest _createWorld(::PostCreateWorldAction);
+
+    MCNAPI ::ui::ViewRequest _deleteWorld();
+
+    MCNAPI int _getDifficulty();
+
+    MCNAPI bool _getMultiplayerEnabled() const;
+
+    MCNAPI std::string _getPlatformMultiplayerWarningText() const;
+
+    MCNAPI std::string _getWorldName();
+
+    MCNAPI std::string _getXBLMultiplayerWarningText() const;
+
+    MCNAPI void _init();
+
+    MCNAPI bool _isGameRuleEnabled() const;
+
+    MCNAPI bool _passedLockedContentCheck();
+
+    MCNAPI void _selectRealm(std::function<void(Realms::World)>);
+
+    MCNAPI void _setAllowCheatsHelper(bool);
+
+    MCNAPI void _setDefaultPermissionLevelHelper(::PlayerPermissionLevel);
+
+    MCNAPI void _setGameRule(bool, ::GameRuleId, bool);
+
+    MCNAPI void _setGameRule(int, ::GameRuleId, bool);
+
+    MCNAPI void _setLevelEditorWorldFlag();
+
+    MCNAPI void _setMultiplayerEnabled(bool);
+
+    MCNAPI void _setWorldGameModeHelper(int);
+
+    MCNAPI void _setWorldName(std::string);
+
+    MCNAPI void _setWorldTypeHelper(int);
+
+    MCNAPI ::ui::ViewRequest _startEducationWorld(bool);
+
+    MCNAPI void confirmationExperimentalGameplayDialog(std::string const&, std::function<void(ModalScreenButtonId)>);
+
+    MCNAPI ::WorldSettingsScreenControllerProxy* getWorldSettingsScreenControllerProxy();
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCNAPI static void addStaticScreenVars(::Json::Value&, bool, bool);
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor(std::shared_ptr<MainMenuScreenModel>, bool, bool);
+
+    MCNAPI void* $ctor(
+        std::shared_ptr<MainMenuScreenModel>,
+        ::LevelSummary const&,
+        bool,
+        std::function<void()>,
+        std::string const,
+        bool
+    );
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCNAPI ::ui::DirtyFlag $tick();
+
+    MCNAPI void $onOpen();
+
+    MCNAPI void $onTerminate();
+
+    MCNAPI void $onCreation();
+
+    MCNAPI void $addStaticScreenVars(::Json::Value&);
+
+    MCNAPI void $_displayLockedWorldPopup();
+
+    MCNAPI void $onLevelDeleted(std::string const&);
+
+    MCNAPI void $onStorageChanged();
+
+    MCNAPI bool $hasAvailableSpaceForLevel(std::shared_ptr<Core::FileStorageArea>);
+
+    MCNAPI void $saveWorld();
+
+    MCNAPI ::LevelSummary& $getLevelSummary();
+
+    MCNAPI ::LevelData& $getLevelData();
+
+    MCNAPI void $_registerControllerCallbacks();
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+    // NOLINTEND
+};

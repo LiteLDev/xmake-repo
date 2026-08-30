@@ -42,6 +42,7 @@ public:
     ::ll::TypedStorage<8, 16, ::Bedrock::PubSub::Subscription> mPartyInviteUpdateSubscription;
     ::ll::TypedStorage<8, 16, ::Bedrock::PubSub::Subscription> mPartyEventSubscription;
     ::ll::TypedStorage<8, 16, ::Bedrock::PubSub::Subscription> mPartyTravelSubscription;
+    ::ll::TypedStorage<8, 16, ::Bedrock::PubSub::Subscription> mPartyInvalidDestinationSubscription;
     ::ll::TypedStorage<8, 16, ::Bedrock::PubSub::Subscription> mPartyDestinationCookieUpdatedSubscription;
     ::ll::TypedStorage<8, 336, ::TaskGroup>                    mTaskGroup;
     ::ll::TypedStorage<8, 24, ::Bedrock::NotNullNonOwnerPtr<::Parties::PartySystem>> mPartySystem;
@@ -61,7 +62,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~PartySystemSubController() /*override*/;
+    virtual ~PartySystemSubController() /*override*/ = default;
 
     virtual void
     handleToastEvent(::IToastEventListener::ToastEventType const eventType, ::ToastMessage const msg) /*override*/;

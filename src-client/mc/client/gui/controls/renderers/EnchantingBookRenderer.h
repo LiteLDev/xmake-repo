@@ -32,7 +32,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~EnchantingBookRenderer() /*override*/;
+    virtual ~EnchantingBookRenderer() /*override*/ = default;
 
     virtual ::std::shared_ptr<::UICustomRenderer> clone() const /*override*/;
 
@@ -46,13 +46,5 @@ public:
     MCAPI ::std::shared_ptr<::UICustomRenderer> $clone() const;
 
     MCAPI void $render(::MinecraftUIRenderContext& renderContext, ::IClientInstance& client, ::UIControl& owner, int);
-    // NOLINTEND
-
-public:
-    // vftables
-    // NOLINTBEGIN
-    MCNAPI static void** $vftableForActorShaderManager();
-
-    MCNAPI static void** $vftableForMinecraftUICustomRenderer();
     // NOLINTEND
 };

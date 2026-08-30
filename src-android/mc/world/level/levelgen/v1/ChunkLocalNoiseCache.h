@@ -1,0 +1,60 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/world/level/DividedPos2d.h"
+
+class ChunkLocalNoiseCache {
+public:
+    // ChunkLocalNoiseCache inner types declare
+    // clang-format off
+    struct CacheEntry;
+    // clang-format on
+
+    // ChunkLocalNoiseCache inner types define
+    struct CacheEntry {
+    public:
+        // member variables
+        // NOLINTBEGIN
+        ::ll::TypedStorage<4, 4, float> shiftedX;
+        ::ll::TypedStorage<4, 4, float> shiftedZ;
+        ::ll::TypedStorage<4, 4, float> continentalness;
+        ::ll::TypedStorage<4, 4, float> weirdness;
+        ::ll::TypedStorage<4, 4, float> erosion;
+        ::ll::TypedStorage<4, 4, float> offset;
+        ::ll::TypedStorage<4, 4, float> factor;
+        ::ll::TypedStorage<4, 4, float> jag;
+        ::ll::TypedStorage<4, 4, float> temperature;
+        ::ll::TypedStorage<4, 4, float> humidity;
+        // NOLINTEND
+    };
+
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::UntypedStorage<4, 8>                                               mFirstQuartPos;
+    ::ll::TypedStorage<4, 4, int const>                                      mCellCountXZ;
+    ::ll::TypedStorage<8, 24, std::vector<ChunkLocalNoiseCache::CacheEntry>> mNoiseCacheEntries;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI ChunkLocalNoiseCache();
+
+    MCNAPI ChunkLocalNoiseCache(::DividedPos2d<4>, int);
+
+    MCNAPI ::ChunkLocalNoiseCache::CacheEntry const& getCacheEntry(::DividedPos2d<4> const&) const;
+
+    MCNAPI void setCacheEntry(::DividedPos2d<4> const&, ::ChunkLocalNoiseCache::CacheEntry const&);
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor();
+
+    MCNAPI void* $ctor(::DividedPos2d<4>, int);
+    // NOLINTEND
+};

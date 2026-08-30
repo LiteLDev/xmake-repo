@@ -404,7 +404,7 @@ public:
 
     MCAPI ::Matrix const& $getTransform() const;
 
-    MCFOLD ::Vec3 const& $getWorldPosition() const;
+    MCAPI ::Vec3 const& $getWorldPosition() const;
 
     MCFOLD ::Vec3 const& $getWorldVelocity() const;
 

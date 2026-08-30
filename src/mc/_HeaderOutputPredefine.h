@@ -2,18 +2,30 @@
 
 // clang-format off
 
+#if defined(_MSC_VER)
 #pragma warning(disable : 4099) // for MOJANG : type name first seen using 'class' now seen using 'struct'
 #pragma warning(disable : 4201) // for MOJANG : nonstandard extension used : nameless struct/union
+#endif
 
+#if defined(LL_PLAT_A)
+#define MCAPI
+#define MCTAPI template<>
+#define MCFOLD
+#else
 #define MCAPI  __declspec(dllimport)
 #define MCTAPI template<> MCAPI
 #define MCFOLD MCAPI /*Identical COMDAT Folding*/
+#endif
 #define MCNAPI [[deprecated("This API is not available. Open an issue if you need it. "\
                             "https://github.com/LiteLDev/mcapi-requests/issues/new")]] MCAPI
 
 #ifndef LL_CC_V
+#if !defined(LL_PLAT_A)
 #if defined(_MSC_VER) || defined(__clang__)
 #define LL_CC_V __vectorcall
+#else
+#define LL_CC_V
+#endif
 #else
 #define LL_CC_V
 #endif
@@ -43,11 +55,280 @@
 #endif
 #endif
 
+#if defined(LL_PLAT_A)
+using _Bool = bool;
+
+struct PDFError;
+class OptionRegistry;
+class TaskGroup;
+class ExprToken;
+class ModelPart;
+class _ProfilerLiteTimer;
+struct CommandParameterData;
+namespace Core {
+template <class Observer, class Lock>
+class Subject;
+class FileStorageArea;
+class SingleThreadedLock;
+namespace Internal {
+class FileData;
+}
+}
+namespace Bedrock::PubSub::Detail {
+class SubscriptionBodyBase;
+}
+namespace Bedrock::StorageMigration {
+class StorageMigrationService;
+}
+namespace Webview {
+class Extension;
+}
+namespace ParticleSystem {
+struct ParticleEffectLoaderTraits {};
+}
+class Store {};
+namespace Editor {
+class IEditorManager;
+class IEditorPlayer;
+}
+namespace OreUI {
+class UIBlockThumbnailAtlasManager;
+class IResourceHandler {};
+namespace Debug {
+class ISceneDataProvider;
+}
+}
+namespace AppExtensions {
+class IDevConsoleScreenExtension;
+class ITestExtensions;
+}
+struct BiomeTagIDType;
+struct BiomeTagSetIDType;
+struct CactusBlockFlag;
+struct EndPortalBlockFlag;
+struct HoneyBlockFlag;
+struct PowderSnowBlockFlag;
+struct SweetBerryBushBlockFlag;
+struct WaterlilyBlockFlag;
+class EntitlementChangeListener {};
+class ImguiClientInstance;
+struct LevelTagIDType;
+struct LevelTagSetIDType;
+struct MDString;
+struct NamedImGuiModule;
+struct SystemCategory;
+template <typename T>
+class BlockDataFetchResult;
+template <typename T>
+class InsideBlockWithPosAndBlockComponent {};
+template <typename T>
+class InsideBlockWithPosComponent {};
+template <typename... T>
+class AddRemove {};
+template <typename... T>
+class EntityFactoryT {};
+template <typename... T>
+class GlobalRead {};
+template <typename... T>
+class GlobalWrite {};
+template <typename... T>
+class Read {};
+template <typename... T>
+class Write {};
+namespace dragon::texturestreaming {
+class DenseTextureStreamingManagerContext;
+}
+namespace dragon::mesh::details {
+struct IndexBufferHandleTypeKey;
+struct VertexBufferHandleTypeKey;
+}
+namespace dragon::mesh {
+struct IndexBufferType {};
+struct IndexSpanType;
+struct VertexBufferType {};
+struct VertexSpanType;
+template <typename T>
+class SpanRegistry {};
+}
+namespace dragon::materials {
+struct MaterialOutputNameContext;
+struct MaterialUniformAliasContext;
+struct MaterialUniformNameContext;
+}
+namespace dragon::rendering {
+struct TextureResourceType {};
+namespace details {
+struct TextureHandleTypeKey;
+}
+}
+namespace webrtc {
+class AudioDecoderFactory;
+class AudioEncoderFactory;
+class AudioFrameProcessor;
+class AudioMixer;
+class AudioProcessingBuilderInterface;
+class AudioState;
+template <typename T>
+class AudioTrackProxyWithInternal;
+class FecController;
+class FrameDecryptorInterface;
+class FrameTransformerInterface;
+class InterArrival;
+class LocalNetworkAccessPermissionInterface;
+class MediaFactory;
+class MediaReceiveChannelInterface;
+class NetworkStateEstimator;
+class NetworkStateEstimatorFactory;
+struct PayloadTypeTag;
+struct PriorityValueTag;
+class RecordableEncodedFrame;
+class RtcEventLogFactoryInterface;
+template <typename T>
+class RtpReceiverProxyWithInternal;
+template <typename T>
+class RtpSenderProxyWithInternal;
+template <typename T>
+class RtpTransceiverProxyWithInternal;
+class SetSessionDescriptionObserver;
+class VideoBitrateAllocatorFactory;
+union VideoCodecUnion;
+class VideoDecoderFactory;
+class VideoEngineInterface;
+template <typename T>
+class VideoTrackProxyWithInternal;
+template <typename T>
+class VideoTrackSourceProxyWithInternal;
+class VoiceEngineInterface;
+}
+namespace absl::time_internal {
+struct second_tag;
+}
+namespace bx {
+class AllocatorI;
+}
+namespace bgfx {
+extern ::bx::AllocatorI* g_allocator;
+}
+namespace dcsctp {
+struct AbortChunkConfig;
+struct CookieAckChunkConfig;
+struct CookieEchoChunkConfig;
+struct CookieReceivedWhileShuttingDownCauseConfig;
+struct DataChunkConfig;
+struct DurationMsTag;
+struct ErrorChunkConfig;
+struct ForwardTsnChunkConfig;
+struct ForwardTsnSupportedParameterConfig;
+struct FSNTag;
+struct HandoverReadinessStatusTag;
+struct HeartbeatAckChunkConfig;
+struct HeartbeatInfoParameterConfig;
+struct HeartbeatRequestChunkConfig;
+struct IDataChunkConfig;
+struct IForwardTsnChunkConfig;
+struct ImmediateAckFlagTag;
+struct IncomingSSNResetRequestParameterConfig;
+struct InitAckChunkConfig;
+struct InitChunkConfig;
+struct InvalidMandatoryParameterCauseConfig;
+struct InvalidStreamIdentifierCauseConfig;
+struct InverseWeightTag;
+struct IsBeginningTag;
+struct IsEndTag;
+struct LifecycleIdTag;
+struct MaxRetransmitsTag;
+struct MissingMandatoryParameterCauseConfig;
+struct NoUserDataCauseConfig;
+struct OutgoingSSNResetRequestParameterConfig;
+struct OutOfResourceParameterConfig;
+struct ProtocolViolationCauseConfig;
+struct ReConfigChunkConfig;
+struct ReconfigRequestSNTag;
+struct ReconfigurationResponseParameterConfig;
+struct RestartOfAnAssociationWithNewAddressesCauseConfig;
+struct SackChunkConfig;
+struct ShutdownAckChunkConfig;
+struct ShutdownChunkConfig;
+struct ShutdownCompleteChunkConfig;
+struct StaleCookieParameterConfig;
+struct StateCookieParameterConfig;
+struct StreamIDTag;
+struct SupportedExtensionsParameterConfig;
+struct TimeMsTag;
+struct TSNTag;
+struct UnrecognizedChunkTypeCauseConfig;
+struct UnrecognizedParametersCauseConfig;
+struct UnresolvableAddressCauseConfig;
+struct UserInitiatedAbortCauseConfig;
+struct VirtualTimeTag;
+struct ZeroChecksumAcceptableChunkParameterConfig;
+struct ZeroChecksumAlternateErrorDetectionMethodTag;
+}
+namespace PackCommand {
+class IResourceRepositories;
+struct MoveReplacePack;
+template <typename T>
+struct PackCommand;
+struct PackCommandResult;
+struct RemoveCommand;
+struct RemovePack;
+struct UpgradeLegacyDependencies;
+struct UpgradeLegacyDependenciesCommand;
+}
+namespace Safety {
+class TextFilterResult;
+enum class TextFilteringEvent : int;
+}
+template <typename... T>
+class NotificationEventVariant {};
+class UIEventListener;
+namespace EAS {
+class BoolModifier;
+class ColorModifier;
+class FloatModifier;
+}
+namespace ItemLoaderTraits {
+struct MergedTraits;
+}
+namespace TradeTableLoadSystem {
+struct LegacyTraits;
+}
+namespace mce::framebuilder::bgfxbridge {
+template <typename... Args>
+class GameBase {
+public:
+    class Renderer {};
+};
+}
+namespace mce {
+class IImageWatcher {};
+class IDeferredDebugUpdate;
+class ShaderGroup;
+class TextureImpl {};
+template <typename T>
+class ResourceReferenceTraits {
+public:
+    class ClientResourceType {};
+    class ServerResourceType {};
+};
+}
+namespace edu::auth {
+struct CredsAuthComplete {};
+struct CredsExpired {};
+struct CredsLost {};
+struct GraphCredsRefreshFailed {};
+struct SignInCredsRefreshFailed {};
+}
+#endif
+
 namespace ll {
 class type_id_ref;
 }
 
+struct jsmntok_t;
+
 namespace Bedrock {
+struct ImplCtor;
 template <typename Category, typename Type>
 ::ll::type_id_ref typeid_storage_impl();
 }
@@ -69,6 +350,11 @@ template <typename Category, typename Type>
 #include <clocale>       // C localization library
 #include <cmath>         // Common mathematics functions
 #include <complex>       // Complex number type
+#include <condition_variable> // STL condition variables
+#include <source_location> // C++20 source location
+#if defined(LL_PLAT_A)
+#include <netinet/in.h>
+#endif
 #include <cstddef>       // Standard size and pointer difference types
 #include <cstdio>        // C Standard Input/Output library
 #include <cstdlib>       // C Standard General Utilities Library
@@ -113,6 +399,46 @@ template <typename Category, typename Type>
 #include <regex>         // Regular expression library
 #include <any>           // STL any type
 
+#if defined(LL_PLAT_A)
+#include <aaudio/AAudio.h>
+#include <android/asset_manager.h>
+#include <android/bitmap.h>
+#include <android/configuration.h>
+#include <android/hardware_buffer.h>
+#include <android/input.h>
+#include <android/looper.h>
+#include <android/native_activity.h>
+#include <android/native_window.h>
+#include <android/sensor.h>
+#include <android/surface_control.h>
+#include <asm/sigcontext.h>
+#include <dirent.h>
+#include <jni.h>
+#include <linux/elf.h>
+#include <netdb.h>
+#include <pthread.h>
+#include <signal.h>
+#include <sys/epoll.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <sys/user.h>
+#include <ucontext.h>
+#include <vulkan/vulkan.h>
+#if __has_include(<android_native_app_glue.h>)
+#include <android_native_app_glue.h>
+#endif
+#if __has_include(<game-activity/GameActivity.h>)
+#include <game-activity/GameActivity.h>
+#else
+struct GameActivity;
+struct GameActivityKeyEvent;
+struct GameActivityMotionEvent;
+struct GameActivityPointerAxes;
+#endif
+#endif
+
+#if !defined(LL_PLAT_A)
 #include "entt/entt.hpp" // Entity Component System Library
 #include "entt/fwd.hpp"  // Entity Component Forward Declarations
 #include "glm/glm.hpp"   // OpenGL Mathematics Library
@@ -157,13 +483,76 @@ template <typename Category, typename Type>
 
 // fmt C++ Library
 #include "fmt/format.h"
+#if defined(FMT_VERSION) && FMT_VERSION >= 120000
+namespace fmt::v11 {
+template <typename... T>
+using fstring = ::fmt::fstring<T...>;
+}
+#endif
 
 // moodycamel::ConcurrentQueue C++ Library
 #include "concurrentqueue.h" 
 
 // stb C++ Library
 #include "stb_truetype.h"
+#endif
+#if defined(LL_PLAT_A)
+#include <concurrentqueue.h>
+#include <entt/entt.hpp>
+#include <entt/fwd.hpp>
+#include <fmt/format.h>
+#include <glm/ext.hpp>
+#include <glm/glm.hpp>
+#include <gsl/gsl>
+#include <leveldb/c.h>
+#include <leveldb/cache.h>
+#include <leveldb/comparator.h>
+#include <leveldb/db.h>
+#include <leveldb/dumpfile.h>
+#include <leveldb/env.h>
+#include <leveldb/filter_policy.h>
+#include <leveldb/iterator.h>
+#include <leveldb/options.h>
+#include <leveldb/slice.h>
+#include <leveldb/status.h>
+#include <leveldb/table.h>
+#include <leveldb/table_builder.h>
+#include <leveldb/write_batch.h>
+#include <nonstd/expected.hpp>
+#include <rapidjson/document.h>
+#include <rapidjson/encodings.h>
+#include <rapidjson/error/en.h>
+#include <rapidjson/filereadstream.h>
+#include <rapidjson/filewritestream.h>
+#include <rapidjson/pointer.h>
+#include <rapidjson/prettywriter.h>
+#include <rapidjson/rapidjson.h>
+#include <rapidjson/reader.h>
+#include <rapidjson/schema.h>
+#include <rapidjson/stringbuffer.h>
+#include <rapidjson/writer.h>
+#include <stb_truetype.h>
+#include <type_safe/strong_typedef.hpp>
+#include <zlib.h>
+#include <zstd.h>
+#endif
 
+// Android syntax-only forward declarations for unavailable canonical dependencies.
+// These declarations do not provide or validate dependency layouts.
+#if defined(LL_PLAT_A)
+#if !__has_include(<glm/glm.hpp>)
+namespace glm { enum qualifier : unsigned int; }
+#endif
+#if !__has_include(<gsl/gsl>)
+namespace gsl { template <class T> class not_null; }
+#endif
+namespace SharedTypes::v1_21_130::DataDrivenUI {
+extern char const ContainerTextFieldName[];
+extern char const FormImageName[];
+}
+#endif
+
+#if !defined(LL_PLAT_A)
 struct HWND__;
 struct HKEY__;
 struct HICON__;
@@ -237,6 +626,7 @@ struct D3D12_FEATURE_DATA_D3D12_OPTIONS {};
 // Nvidia SDK definitions
 typedef enum NVSDK_NGX_Logging_Level;
 typedef enum NVSDK_NGX_Feature;
+#endif
 
 // OpenSSL definitions
 struct ssl_ctx_st;
@@ -331,10 +721,18 @@ using ItemStackLegacyRequestId = TypedClientNetId<ItemStackLegacyRequestIdTag, i
 
 class BlockType;
 template <typename T0>
+#if defined(LL_PLAT_A)
+class ActorBlockBase {};
+#else
 class ActorBlockBase;
+#endif
 using ActorBlock = ActorBlockBase<BlockType>;
 
+#if defined(LL_PLAT_A)
+template<bool>
+#else
 template<int>
+#endif
 class ParityImprovedNoiseImpl;
 
 template<typename T>
@@ -466,6 +864,7 @@ struct TypedStorageImpl {
     using type = T;
 };
 
+#if !defined(LL_PLAT_A)
 template <size_t Align, size_t Size>
 struct TypedStorageImpl<Align, Size, ::sockaddr_storage> {
     using type = ::ll::UntypedStorage<Align, Size>;
@@ -510,6 +909,7 @@ template <size_t Align, size_t Size, class C, class R, class... Args>
 struct TypedStorageImpl<Align, Size, R (C::*)(Args...) const> {
     using type = ::ll::UntypedStorage<Align, Size>;
 };
+#endif
 
 template <size_t Align, size_t Size, class T>
 using TypedStorage = typename TypedStorageImpl<Align, Size, T>::type;

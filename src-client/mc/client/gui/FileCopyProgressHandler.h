@@ -39,8 +39,6 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~FileCopyProgressHandler() /*override*/;
-
     virtual void onStart(::MinecraftScreenModel& minecraftScreenModel) /*override*/;
 
     virtual void tick(::MinecraftScreenModel& minecraftScreenModel) /*override*/;
@@ -84,12 +82,6 @@ public:
         ::std::vector<::std::string> const& excludeDirs,
         ::std::function<void(bool)>         callback
     );
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

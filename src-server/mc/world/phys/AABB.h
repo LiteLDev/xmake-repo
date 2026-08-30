@@ -1,0 +1,88 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/core/math/Vec3.h"
+
+// auto generated forward declare list
+// clang-format off
+class Matrix;
+struct AABBHitResult;
+struct ClipCollideResult;
+// clang-format on
+
+class AABB {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<4, 12, ::Vec3> min;
+    ::ll::TypedStorage<4, 12, ::Vec3> max;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    AABB();
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCAPI AABB(::Vec3 const& min, ::Vec3 const& max);
+
+    MCAPI ::AABBHitResult clip(::Vec3 const& a, ::Vec3 const& b) const;
+
+    MCAPI ::AABB cloneAndFloor(float offsetMin, float offsetMax) const;
+
+    MCAPI ::AABB cloneAndGrow(::Vec3 const& distance) const;
+
+    MCAPI ::AABB cloneAndGrow(float radius) const;
+
+    MCAPI ::AABB cloneAndShrink(::Vec3 const& offset) const;
+
+    MCAPI ::AABB cloneAndTransformByMatrix(::Matrix const& transform) const;
+
+    MCAPI ::AABB cloneAndTranslate(::Vec3 const& offset) const;
+
+    MCAPI bool contains(::Vec3 const& p) const;
+
+    MCAPI float distanceTo(::AABB const& aabb) const;
+
+    MCAPI bool intersectSegment(
+        ::Vec3 const& segmentBegin,
+        ::Vec3 const& segmentEnd,
+        ::Vec3&       intersectPoint,
+        ::Vec3&       intersectNorm
+    ) const;
+
+    MCAPI bool intersects(::AABB const& c) const;
+
+    MCAPI bool intersects(::Vec3 const& segmentBegin, ::Vec3 const& segmentEnd) const;
+
+#ifdef LL_PLAT_C
+    MCAPI bool operator!=(::AABB const& rhs) const;
+#endif
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCAPI static ::AABB aroundRadius(::Vec3 const& point, float radius);
+
+    MCAPI static ::ClipCollideResult
+    clipCollide(::AABB const& stationary, ::AABB const& moving, ::Vec3 const& velocity);
+    // NOLINTEND
+
+public:
+    // static variables
+    // NOLINTBEGIN
+    MCAPI static ::AABB const& BLOCK_SHAPE();
+
+    MCAPI static ::AABB const& BOX_AT_ORIGIN_WITH_NO_VOLUME();
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCAPI void* $ctor(::Vec3 const& min, ::Vec3 const& max);
+    // NOLINTEND
+};

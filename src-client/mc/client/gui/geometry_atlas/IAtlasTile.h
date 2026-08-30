@@ -13,11 +13,13 @@ class IAtlasTile {
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~IAtlasTile();
+    virtual ~IAtlasTile() = default;
 
     virtual uint getUserID() const = 0;
 
     virtual ::dragon::atlas::AtlasTileHandle getBackendID() const = 0;
+
+    virtual bool isInitialized() const = 0;
     // NOLINTEND
 };
 

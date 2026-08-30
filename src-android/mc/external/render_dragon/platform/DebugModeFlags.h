@@ -1,0 +1,12 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+namespace dragon::platform {
+
+enum class DebugModeFlags : uint {
+    None         = 0,
+    ViewProfiler = 1,
+};
+
+}

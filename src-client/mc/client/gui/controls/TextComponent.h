@@ -98,6 +98,8 @@ public:
 
     MCAPI void setFontType(::std::string const& fontType);
 
+    MCAPI void setText(::std::string const& label);
+
     MCAPI void setTextTTS(::std::string const& label);
     // NOLINTEND
 
@@ -124,6 +126,6 @@ public:
 
     MCAPI void $updateUI(::UIMeasureStrategy const& uiMeasureStrategy);
 
-    MCFOLD ::std::string const& $getTextToSpeechComponentValue() const;
+    MCAPI ::std::string const& $getTextToSpeechComponentValue() const;
     // NOLINTEND
 };

@@ -1,0 +1,24 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/platform/brstd/flat_map.h"
+#include "mc/world/level/dimension/DimensionType.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace Poi { class Manager; }
+namespace Poi { class TagProvider; }
+namespace Poi { struct Registry; }
+// clang-format on
+
+struct PoiManagerComponent {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 8, std::unique_ptr<Poi::TagProvider>> mTagProvider;
+    ::ll::TypedStorage<8, 8, std::unique_ptr<Poi::Registry>>    mRegistry;
+    ::ll::UntypedStorage<8, 48>                                 mManagers;
+    // NOLINTEND
+};

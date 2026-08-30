@@ -3,6 +3,7 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
+#include "mc/InboxIconFlightingState.h"
 #include "mc/certificates/identity/edu/CredentialsObserver.h"
 #include "mc/certificates/identity/edu/GenericCredentialsEvent.h"
 #include "mc/client/gui/DirtyFlag.h"
@@ -93,6 +94,7 @@ public:
     ::ll::TypedStorage<4, 4, int>                                             mUnreadInvites;
     ::ll::TypedStorage<1, 1, bool>                                            mInitialInboxAnimationPlayed;
     ::ll::TypedStorage<1, 1, bool>                                            mShowingNewPlayerFlowButtons;
+    ::ll::TypedStorage<4, 4, ::InboxIconFlightingState>                       mInboxIconState;
     ::ll::TypedStorage<1, 1, bool>                                            mNeedToPlayMainButtonsShowAnimation;
     ::ll::TypedStorage<8, 248, ::std::optional<::ExperiencePromotion>>        mActivePromotion;
     ::ll::TypedStorage<1, 1, bool>                                            mOwnsRealmsSubscription;
@@ -101,6 +103,7 @@ public:
     ::ll::TypedStorage<8, 16, ::Bedrock::PubSub::Subscription>                mPendingInviteCountSubscriber;
     ::ll::TypedStorage<8, 16, ::Bedrock::PubSub::Subscription>                mPrimaryUserSignInSubscription;
     ::ll::TypedStorage<8, 16, ::Bedrock::PubSub::Subscription>                mTrialModeUpdateSubscription;
+    ::ll::TypedStorage<8, 16, ::Bedrock::PubSub::Subscription>                mInboxIconStateSubscription;
     ::ll::TypedStorage<1, 1, bool>                                            mIsTrialModeEnabled;
     // NOLINTEND
 
@@ -111,7 +114,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~StartMenuScreenController() /*override*/;
+    virtual ~StartMenuScreenController() /*override*/ = default;
 
     virtual void handleLicenseChanged() /*override*/;
 
@@ -157,8 +160,6 @@ public:
     MCAPI bool _YHelperVisible() const;
 
     MCAPI void _fetchUserOrientedContent(bool const signInFailed);
-
-    MCAPI bool _isNxAdHocEnabled() const;
 
     MCAPI bool _isProfileButtonAEnabled() const;
 

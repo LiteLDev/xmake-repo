@@ -6,7 +6,6 @@
 // clang-format off
 class AABB;
 class Block;
-class BlockGraphics;
 class BlockPos;
 class BlockTessellatorCache;
 // clang-format on
@@ -28,8 +27,6 @@ public:
 public:
     // member functions
     // NOLINTBEGIN
-    MCAPI bool _isHalfCubeOpaque(::Block const& block, ::BlockGraphics const& blockGraphics) const;
-
     MCAPI bool
     _shouldRenderFace(::BlockPos const& neighborPos, uchar face, ::AABB const& shape, ::BlockPos const& pos) const;
 

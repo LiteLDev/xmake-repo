@@ -1,0 +1,12 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+enum class AttributeModifierOperation : int {
+    OPERATION_ADDITION       = 0,
+    OPERATION_MULTIPLY_BASE  = 1,
+    OPERATION_MULTIPLY_TOTAL = 2,
+    OPERATION_CAP            = 3,
+    TOTAL_OPERATIONS         = 4,
+    OPERATION_INVALID        = 4,
+};

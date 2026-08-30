@@ -4,21 +4,15 @@
 
 // auto generated inclusion list
 #include "mc/client/persona/TextureTint.h"
-#include "mc/deps/core/threading/Async.h"
 #include "mc/deps/core/utility/NonOwnerPointer.h"
 
 // auto generated forward declare list
 // clang-format off
 class IAdvancedGraphicsOptions;
 class IPersonaImageProvider;
-class IPersonaPieceProvider;
 class Pack;
-class PersonaPiece;
 class ResourceLoadManager;
 class ResourcePackManager;
-class TaskGroup;
-class TintMapColor;
-struct PersonaCharacter;
 struct PersonaTextureResources;
 struct TextureHotReloader;
 namespace Json { class Value; }
@@ -54,14 +48,6 @@ public:
         ::Bedrock::NonOwnerPointer<::TextureHotReloader>          textureHotReloader
     );
 
-    MCNAPI ::Bedrock::Threading::Async<bool>
-    parseTextures(::std::string const& characterName, ::TaskGroup& taskGroup, ::IPersonaPieceProvider& pieceProvider);
-
-    MCNAPI void registerTexturesForHotReload(
-        ::PersonaCharacter&                        character,
-        ::std::function<void(::PersonaCharacter&)> onTextureReloaded
-    );
-
     MCNAPI ~PersonaTextureBuilder();
     // NOLINTEND
 
@@ -94,16 +80,6 @@ public:
         ::persona::TextureTint const&    texture,
         ::persona::TextureTint::PathType pathType,
         bool                             validateFileExists
-    );
-
-    MCNAPI static void _readTexturesFromJsonIntoMap(
-        ::PersonaTextureResources& textureResources,
-        ::PersonaPiece const&      personaPiece,
-        ::std::string const&       sourceObjectKey,
-        ::TintMapColor&            pieceTintBaseColor,
-        ::TintMapColor&            pieceTintColor,
-        bool                       useTint,
-        bool                       useIndexedIds
     );
     // NOLINTEND
 

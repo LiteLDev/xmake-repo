@@ -57,7 +57,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~CodeScreenController() /*override*/;
+    virtual ~CodeScreenController() /*override*/ = default;
 
     virtual void onInit() /*override*/;
 
@@ -121,6 +121,6 @@ public:
 
     MCAPI void $onError(::WebviewError const& error);
 
-    MCFOLD void $onWebviewChanged();
+    MCAPI void $onWebviewChanged();
     // NOLINTEND
 };

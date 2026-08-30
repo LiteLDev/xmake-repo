@@ -1,0 +1,111 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/core/math/Matrix.h"
+#include "mc/deps/core/math/Vec3.h"
+#include "mc/deps/core/string/HashedString.h"
+#include "mc/molang/MolangVersion.h"
+#include "mc/util/molang/ExpressionNode.h"
+#include "mc/world/actor/SkeletalHierarchyIndex.h"
+#include "mc/world/actor/animation/BoneAnimationRelativeMode.h"
+#include "mc/world/actor/animation/BoneBindingMethod.h"
+#include "mc/world/actor/animation/BoneOrientationTransform.h"
+#include "mc/world/actor/animation/BoneTransformType.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace DirectX { struct XMMATRIX; }
+// clang-format on
+
+class BoneOrientation {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<4, 4, int>                         mParentBoneIndex;
+    ::ll::TypedStorage<4, 4, ::SkeletalHierarchyIndex>    mParentSkeletalHierarchyIndex;
+    ::ll::TypedStorage<8, 40, ::HashedString>             mName;
+    ::ll::TypedStorage<4, 64, ::Matrix>                   mMatrix;
+    ::ll::TypedStorage<4, 36, ::BoneOrientationTransform> mTransform;
+    ::ll::TypedStorage<4, 36, ::BoneOrientationTransform> mDefaultTransform;
+    ::ll::TypedStorage<8, 8, std::unique_ptr<Matrix>>     mLocalPreTransformMatrix;
+    ::ll::TypedStorage<8, 16, ::ExpressionNode>           mBoneBindingExpression;
+    ::ll::TypedStorage<4, 12, ::Vec3>                     mPivot;
+    ::ll::TypedStorage<1, 1, ::BoneBindingMethod>         mBoneBindingMethod;
+    ::ll::TypedStorage<1, 1, ::BoneAnimationRelativeMode> mRotationRelativeMode;
+    ::ll::TypedStorage<1, 1, bool>                        mOverrideStackMatrix;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI BoneOrientation();
+
+    MCNAPI explicit BoneOrientation(::HashedString const&);
+
+    MCNAPI BoneOrientation(::BoneOrientation const&);
+
+    MCNAPI ::ExpressionNode const* getBoneBindingExpression() const;
+
+    MCNAPI ::BoneBindingMethod getBoneBindingMethod() const;
+
+    MCNAPI ::BoneOrientationTransform& getDefaultTransform();
+
+    MCNAPI ::Matrix const& getMatrix() const;
+
+    MCNAPI ::HashedString const& getName() const;
+
+    MCNAPI ::Vec3 const& getPivot() const;
+
+    MCNAPI ::Vec3& getPivot();
+
+    MCNAPI ::BoneAnimationRelativeMode getRotationRelativeMode() const;
+
+    MCNAPI ::BoneOrientationTransform const& getTransform() const;
+
+    MCNAPI ::BoneOrientation& operator=(::BoneOrientation const&);
+
+    MCNAPI void setBoneBindingExpression(std::string const&, ::MolangVersion const);
+
+    MCNAPI void setBoneBindingMethod(::BoneBindingMethod);
+
+    MCNAPI void setDefaultPose();
+
+    MCNAPI void setDefaultTransform(::BoneOrientationTransform const&);
+
+    MCNAPI void setMatrix(::Matrix const&);
+
+    MCNAPI void setOverrideStackMatrix(bool);
+
+    MCNAPI void setPivot(::Vec3 const&);
+
+    MCNAPI void setTransform(::BoneOrientationTransform const&);
+
+    MCNAPI void updateBoneTransform(::Vec3 const*, ::DirectX::XMMATRIX&);
+
+    MCNAPI ~BoneOrientation();
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCNAPI static ::BoneOrientation& getIdentityBoneOrientation();
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor();
+
+    MCNAPI void* $ctor(::HashedString const&);
+
+    MCNAPI void* $ctor(::BoneOrientation const&);
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+};

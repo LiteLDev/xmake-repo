@@ -3,6 +3,7 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
+#include "mc/LevelRendererCameraType.h"
 #include "mc/client/renderer/game/DirectionalLightRenderData.h"
 #include "mc/client/renderer/game/LevelRendererCameraListeners.h"
 #include "mc/client/renderer/game/PlayerRenderingParameters.h"
@@ -216,7 +217,9 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~LevelRendererPlayer() /*override*/;
+    virtual ~LevelRendererPlayer() /*override*/ = default;
+
+    virtual ::LevelRendererCameraType getCameraType() const /*override*/;
 
     virtual void initResources() /*override*/;
 
@@ -460,6 +463,8 @@ public:
 public:
     // virtual function thunks
     // NOLINTBEGIN
+    MCFOLD ::LevelRendererCameraType $getCameraType() const;
+
     MCAPI void $initResources();
 
     MCAPI void $frameUpdate(::ClientFrameUpdateContext& clientFrameUpdateContext);

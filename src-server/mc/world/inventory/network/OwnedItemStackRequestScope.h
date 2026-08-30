@@ -1,0 +1,35 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+class ItemStackNetManagerClient;
+class ItemStackRequestData;
+// clang-format on
+
+struct OwnedItemStackRequestScope {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 8, ::ItemStackNetManagerClient*>               mItemStackNetManagerClient;
+    ::ll::TypedStorage<1, 1, bool>                                       mBeganRequest;
+    ::ll::TypedStorage<8, 16, ::std::shared_ptr<::ItemStackRequestData>> mResult;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+#ifdef LL_PLAT_C
+    MCNAPI ~OwnedItemStackRequestScope();
+#endif
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+#ifdef LL_PLAT_C
+    MCNAPI void $dtor();
+#endif
+    // NOLINTEND
+};

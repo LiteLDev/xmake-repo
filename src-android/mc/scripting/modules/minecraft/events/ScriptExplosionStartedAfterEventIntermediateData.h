@@ -1,0 +1,47 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/scripting/modules/minecraft/actor/ScriptActorData.h"
+#include "mc/world/level/BlockPos.h"
+
+// auto generated forward declare list
+// clang-format off
+class Actor;
+class Dimension;
+struct ExplosionStartedEvent;
+// clang-format on
+
+namespace ScriptModuleMinecraft {
+
+struct ScriptExplosionStartedAfterEventIntermediateData {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 8, ::Dimension&>                                           mDimension;
+    ::ll::TypedStorage<8, 24, std::vector<BlockPos>>                                 mBlocks;
+    ::ll::TypedStorage<8, 96, std::optional<ScriptModuleMinecraft::ScriptActorData>> mSource;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    ScriptExplosionStartedAfterEventIntermediateData&
+    operator=(ScriptExplosionStartedAfterEventIntermediateData const&);
+    ScriptExplosionStartedAfterEventIntermediateData(ScriptExplosionStartedAfterEventIntermediateData const&);
+    ScriptExplosionStartedAfterEventIntermediateData();
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI ScriptExplosionStartedAfterEventIntermediateData(::ExplosionStartedEvent const&, ::Actor const*);
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor(::ExplosionStartedEvent const&, ::Actor const*);
+    // NOLINTEND
+};
+
+} // namespace ScriptModuleMinecraft

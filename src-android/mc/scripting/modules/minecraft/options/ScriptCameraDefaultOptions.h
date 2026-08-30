@@ -1,0 +1,35 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/scripting/modules/minecraft/options/ScriptEaseOptions.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace Scripting { struct InterfaceBinding; }
+// clang-format on
+
+namespace ScriptModuleMinecraft {
+
+struct ScriptCameraDefaultOptions {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<4, 16, ::ScriptModuleMinecraft::ScriptEaseOptions> mEaseOptions;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI bool operator==(::ScriptModuleMinecraft::ScriptCameraDefaultOptions const&) const;
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCNAPI static ::Scripting::InterfaceBinding bind();
+    // NOLINTEND
+};
+
+} // namespace ScriptModuleMinecraft

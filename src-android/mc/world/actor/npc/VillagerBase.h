@@ -1,0 +1,109 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/comprehensive/ParticleType.h"
+#include "mc/world/actor/ActorEvent.h"
+#include "mc/world/actor/Mob.h"
+
+// auto generated forward declare list
+// clang-format off
+class ActorDefinitionGroup;
+class CompoundTag;
+class DataLoadHelper;
+class EntityContext;
+struct ActorDefinitionIdentifier;
+// clang-format on
+
+class VillagerBase : public ::Mob {
+public:
+    // VillagerBase inner types define
+    enum class BiomeType : int {
+        Plains   = 0,
+        Desert   = 1,
+        Jungle   = 2,
+        Savannah = 3,
+        Snow     = 4,
+        Swamp    = 5,
+        Taiga    = 6,
+        Count    = 7,
+    };
+
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<1, 1, bool> mChasing;
+    ::ll::TypedStorage<1, 1, bool> mWillingToBreed;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    VillagerBase();
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~VillagerBase();
+
+    virtual void onLightningHit();
+
+    virtual void handleEntityEvent(::ActorEvent, int);
+
+    virtual void readAdditionalSaveData(::CompoundTag const&, ::DataLoadHelper&);
+
+    virtual void addAdditionalSaveData(::CompoundTag&) const;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI VillagerBase(::ActorDefinitionGroup*, ::ActorDefinitionIdentifier const&, ::EntityContext&);
+
+    MCNAPI void _addParticlesAroundSelf(::ParticleType);
+
+    MCNAPI void consumeLoveFood();
+
+    MCNAPI int getBreedingStackIndex() const;
+
+    MCNAPI bool isChasing() const;
+
+    MCNAPI bool isWillingToBreed(bool);
+
+    MCNAPI void setChasing(bool);
+
+    MCNAPI void setWillingToBreed(bool);
+
+    MCNAPI void stopGoals();
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor(::ActorDefinitionGroup*, ::ActorDefinitionIdentifier const&, ::EntityContext&);
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCNAPI void $onLightningHit();
+
+    MCNAPI void $handleEntityEvent(::ActorEvent, int);
+
+    MCNAPI void $readAdditionalSaveData(::CompoundTag const&, ::DataLoadHelper&);
+
+    MCNAPI void $addAdditionalSaveData(::CompoundTag&) const;
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+    // NOLINTEND
+};

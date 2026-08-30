@@ -1,0 +1,49 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/cereal/ReflectionCtx.h"
+#include "mc/deps/puv/Loader.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace SharedTypes::v1_20_80 { struct ParticleEffectData; }
+namespace SharedTypes::v1_21_100 { struct CameraDocument; }
+namespace SharedTypes::v1_21_110 { struct VoxelShapeDocument; }
+namespace SharedTypes::v1_21_30 { struct TradeTableData; }
+namespace SharedTypes::v1_26_0 { struct CameraSplineFile; }
+namespace SharedTypes::v1_26_30 { struct ItemDocument; }
+// clang-format on
+
+namespace Bedrock::Resources {
+
+class LoaderRegistry {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 112, ::cereal::ReflectionCtx> mCerealCtx;
+    // NOLINTEND
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    // clang-format off
+    virtual ~LoaderRegistry() = default;
+
+    virtual ::Puv::Loader<SharedTypes::v1_20_80::ParticleEffectData, SharedTypes::v1_20_80::ParticleEffectData> const& getParticleLoader() const = 0;
+
+    virtual ::Puv::Loader<SharedTypes::v1_21_100::CameraDocument, SharedTypes::v1_21_100::CameraDocument> const& getCameraLoader() const = 0;
+
+    virtual ::Puv::Loader<SharedTypes::v1_21_110::VoxelShapeDocument, SharedTypes::v1_21_110::VoxelShapeDocument> const& getVoxelShapeLoader() const = 0;
+
+    virtual ::Puv::Loader<SharedTypes::v1_21_30::TradeTableData, SharedTypes::v1_21_30::TradeTableData> const& getTradeTableLoader() const = 0;
+
+    virtual ::Puv::Loader<SharedTypes::v1_26_0::CameraSplineFile, SharedTypes::v1_26_0::CameraSplineFile> const& getCameraSplineLoader() const = 0;
+
+    virtual ::Puv::Loader<SharedTypes::v1_26_30::ItemDocument, SharedTypes::v1_26_30::ItemDocument> const& getItemLoader() const = 0;
+    // clang-format on
+    // NOLINTEND
+};
+
+} // namespace Bedrock::Resources

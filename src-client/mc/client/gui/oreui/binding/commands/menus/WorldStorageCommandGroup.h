@@ -17,7 +17,7 @@ class WorldStorageCommandGroup : public ::OreUI::CommandGroupBase<::OreUI::World
 public:
     // member variables
     // NOLINTBEGIN
-    ::ll::TypedStorage<8, 136, ::OreUI::Detail::CallableImpl<void, ::std::string>> mDeleteWorld;
+    ::ll::TypedStorage<8, 168, ::OreUI::Detail::CallableImpl<void, ::std::string>> mDeleteWorld;
     // NOLINTEND
 
 public:
@@ -45,13 +45,7 @@ public:
 public:
     // destructor thunk
     // NOLINTBEGIN
-    MCFOLD void $dtor();
-    // NOLINTEND
-
-public:
-    // vftables
-    // NOLINTBEGIN
-    MCNAPI static void** $vftable();
+    MCAPI void $dtor();
     // NOLINTEND
 };
 

@@ -84,7 +84,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~InventoryItemRenderer() /*override*/;
+    virtual ~InventoryItemRenderer() /*override*/ = default;
 
     virtual ::std::shared_ptr<::UICustomRenderer> clone() const /*override*/;
 
@@ -129,8 +129,6 @@ public:
 public:
     // static functions
     // NOLINTBEGIN
-    MCAPI static ::UIItemRenderInfo getItemRenderInfo(::ItemStack const& item);
-
     MCAPI static ::ItemRenderChunkType getRenderTypeFromItem(::ItemStack const& item);
     // NOLINTEND
 

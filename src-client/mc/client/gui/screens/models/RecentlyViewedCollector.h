@@ -24,30 +24,13 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~RecentlyViewedCollector() /*override*/;
+    virtual ~RecentlyViewedCollector() /*override*/ = default;
 
     virtual void collect(
-        ::Bedrock::NotNullNonOwnerPtr<::IEntitlementManager> entMgr,
-        ::PersonaClient&                                     skinRepo,
-        ::std::vector<::std::shared_ptr<::SkinPackModel>>&   skinPacks,
-        ::std::unordered_set<::mce::UUID>&                   handledPackSet
+        ::Bedrock::NotNullNonOwnerPtr<::IEntitlementManager>,
+        ::PersonaClient&,
+        ::std::vector<::std::shared_ptr<::SkinPackModel>>&,
+        ::std::unordered_set<::mce::UUID>&
     ) /*override*/;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
-    // NOLINTEND
-
-public:
-    // virtual function thunks
-    // NOLINTBEGIN
-    MCAPI void $collect(
-        ::Bedrock::NotNullNonOwnerPtr<::IEntitlementManager> entMgr,
-        ::PersonaClient&                                     skinRepo,
-        ::std::vector<::std::shared_ptr<::SkinPackModel>>&   skinPacks,
-        ::std::unordered_set<::mce::UUID>&                   handledPackSet
-    );
     // NOLINTEND
 };

@@ -16,7 +16,7 @@ public:
     // NOLINTBEGIN
     virtual ~GenericPlatformUpsellDialog() /*override*/;
 
-    virtual void show(::std::shared_ptr<::Social::User> const user, ::std::function<void(bool)> callback) /*override*/;
+    virtual void show(::std::shared_ptr<::Social::User> const, ::std::function<void(bool)>) /*override*/;
     // NOLINTEND
 
 public:
@@ -28,7 +28,7 @@ public:
 public:
     // virtual function thunks
     // NOLINTBEGIN
-    MCAPI void $show(::std::shared_ptr<::Social::User> const user, ::std::function<void(bool)> callback);
+    MCAPI void $show(::std::shared_ptr<::Social::User> const, ::std::function<void(bool)>);
     // NOLINTEND
 
 public:

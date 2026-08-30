@@ -1,0 +1,12 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/util/NewType.h"
+
+struct RawGameServerToken : public ::NewType<std::string> {
+public:
+    // prevent constructor by default
+    RawGameServerToken& operator=(RawGameServerToken const&);
+};

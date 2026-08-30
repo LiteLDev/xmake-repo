@@ -1,0 +1,28 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/entity/components/TagsComponent.h"
+#include "mc/util/IDType.h"
+#include "mc/world/level/biome/components/BiomeComponentBase.h"
+
+struct BiomeTagComponent : public ::BiomeComponentBase, public ::TagsComponent<IDType<BiomeTagSetIDType>> {
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~BiomeTagComponent();
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+    // NOLINTEND
+};

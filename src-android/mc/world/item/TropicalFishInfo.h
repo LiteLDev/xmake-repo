@@ -1,0 +1,20 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+struct TropicalFishInfo {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<4, 4, int>          mColor;
+    ::ll::TypedStorage<4, 4, int>          mColor2;
+    ::ll::TypedStorage<4, 4, int>          mVariant;
+    ::ll::TypedStorage<4, 4, int>          mMarkVariant;
+    ::ll::TypedStorage<8, 24, std::string> mName;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    TropicalFishInfo& operator=(TropicalFishInfo const&);
+    TropicalFishInfo();
+};

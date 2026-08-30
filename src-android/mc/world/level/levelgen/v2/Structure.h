@@ -1,0 +1,78 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/core/string/HashedString.h"
+#include "mc/world/actor/spawn_category/Type.h"
+#include "mc/world/level/biome/BiomeIdType.h"
+#include "mc/world/level/levelgen/v2/StructureSpawnOverride.h"
+#include "mc/world/level/levelgen/v2/generation_step/Type.h"
+#include "mc/world/level/levelgen/v2/terrain_adjustment/Type.h"
+
+// auto generated forward declare list
+// clang-format off
+class BlockPos;
+class PoolAliasBinding;
+namespace br::worldgen { class GenerationStub; }
+namespace br::worldgen { class StructureInstance; }
+namespace br::worldgen { struct GenerationContext; }
+// clang-format on
+
+namespace br::worldgen {
+
+struct Structure {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<1, 1, ::br::worldgen::TerrainAdjustment::Type> mAdjustment;
+    ::ll::TypedStorage<8, 24, std::vector<BiomeIdType>>               mBiomes;
+    ::ll::TypedStorage<8, 24, std::string>                            mKey;
+    ::ll::TypedStorage<8, 40, std::unordered_map<SpawnCategory::Type, br::worldgen::StructureSpawnOverride>> mMobs;
+    ::ll::TypedStorage<1, 1, ::br::worldgen::GenerationStep::Type>                                           mStep;
+    ::ll::TypedStorage<8, 40, ::HashedString>                                                                mType;
+    ::ll::TypedStorage<8, 24, std::vector<std::shared_ptr<PoolAliasBinding>>> mPoolAliases;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    Structure& operator=(Structure const&);
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    // clang-format off
+    virtual ~Structure();
+
+    virtual std::optional<br::worldgen::GenerationStub> findValidGenerationPoint(::br::worldgen::GenerationContext&) const = 0;
+    // clang-format on
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI Structure(::br::worldgen::Structure const&);
+
+    MCNAPI std::shared_ptr<br::worldgen::StructureInstance> generate(::br::worldgen::GenerationContext&) const;
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor(::br::worldgen::Structure const&);
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+    // NOLINTEND
+};
+
+} // namespace br::worldgen

@@ -4,6 +4,7 @@
 
 // auto generated forward declare list
 // clang-format off
+class BitmapFont;
 class MSDFFont;
 class TrueTypeFont;
 class TrueTypeMsdfFont;
@@ -14,6 +15,9 @@ namespace mce { class TextureGroup; }
 namespace FontLoadingUtils {
 // functions
 // NOLINTBEGIN
+MCNAPI ::std::shared_ptr<::BitmapFont>
+loadBitmapFont(::Json::Value const& fontMetaData, ::std::shared_ptr<::mce::TextureGroup> textureGroup);
+
 MCNAPI ::std::shared_ptr<::MSDFFont>
 loadMsdfFont(::Json::Value const& fontMetaData, ::std::shared_ptr<::mce::TextureGroup> textureGroup);
 

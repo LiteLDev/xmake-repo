@@ -1,0 +1,94 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/util/IntRange.h"
+#include "mc/world/level/block/BlockDescriptor.h"
+#include "mc/world/level/levelgen/feature/IFeature.h"
+
+// auto generated forward declare list
+// clang-format off
+class BlockPos;
+// clang-format on
+
+class GrowingPlantFeature : public ::IFeature {
+public:
+    // GrowingPlantFeature inner types declare
+    // clang-format off
+    struct WeightedRandomNumberReference;
+    struct WeightedBlockReference;
+    // clang-format on
+
+    // GrowingPlantFeature inner types define
+    struct WeightedRandomNumberReference {
+    public:
+        // member variables
+        // NOLINTBEGIN
+        ::ll::TypedStorage<4, 8, ::IntRange> mRandomNumber;
+        ::ll::TypedStorage<4, 4, float>      mWeight;
+        // NOLINTEND
+    };
+
+    struct WeightedBlockReference {
+    public:
+        // member variables
+        // NOLINTBEGIN
+        ::ll::TypedStorage<8, 168, ::BlockDescriptor> mBlockDescriptor;
+        ::ll::TypedStorage<4, 4, float>               mWeight;
+        // NOLINTEND
+
+    public:
+        // prevent constructor by default
+        WeightedBlockReference& operator=(WeightedBlockReference const&);
+    };
+
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 24, std::vector<GrowingPlantFeature::WeightedRandomNumberReference>> mHeightDistribution;
+    ::ll::TypedStorage<1, 1, uchar>                                                            mGrowthDirection;
+    ::ll::TypedStorage<4, 8, ::IntRange>                                                       mAge;
+    ::ll::TypedStorage<8, 24, std::vector<GrowingPlantFeature::WeightedBlockReference>>        mBodyBlocks;
+    ::ll::TypedStorage<8, 24, std::vector<GrowingPlantFeature::WeightedBlockReference>>        mHeadBlocks;
+    ::ll::TypedStorage<1, 1, bool>                                                             mAllowWater;
+    // NOLINTEND
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~GrowingPlantFeature();
+
+    virtual std::optional<BlockPos> place(::IFeature::PlacementContext const&) const;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI GrowingPlantFeature();
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor();
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCNAPI std::optional<BlockPos> $place(::IFeature::PlacementContext const&) const;
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+    // NOLINTEND
+};

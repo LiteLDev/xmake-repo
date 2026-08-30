@@ -1,0 +1,50 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/common/SharedPtr.h"
+#include "mc/platform/threading/Mutex.h"
+#include "mc/world/level/block/registry/IUnknownBlockTypeRegistry.h"
+
+// auto generated forward declare list
+// clang-format off
+class Block;
+class BlockType;
+class CompoundTag;
+// clang-format on
+
+class UnknownBlockTypeRegistry : public ::IUnknownBlockTypeRegistry {
+public:
+    // UnknownBlockTypeRegistry inner types define
+    using UnknownBlockLookupMap = ::std::map<uint64, ::SharedPtr<::BlockType>>;
+
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 80, ::Bedrock::Threading::Mutex>                  mMutex;
+    ::ll::TypedStorage<8, 16, ::std::map<uint64, ::SharedPtr<::BlockType>>> mUnknownBlockLookupMap;
+    // NOLINTEND
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~UnknownBlockTypeRegistry() /*override*/;
+
+    virtual ::Block const& getUnknownBlock(::CompoundTag const& serId) /*override*/;
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCAPI ::Block const& $getUnknownBlock(::CompoundTag const& serId);
+
+
+    // NOLINTEND
+};

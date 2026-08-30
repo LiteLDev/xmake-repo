@@ -7,13 +7,10 @@
 #include "mc/client/gui/oreui/binding/properties/PropertyObject.h"
 #include "mc/client/gui/oreui/binding/queries/menus/ContentItemType.h"
 #include "mc/client/world/SyncState.h"
-#include "mc/deps/core/utility/NonOwnerPointer.h"
 
 // auto generated forward declare list
 // clang-format off
-struct ContentItem;
-namespace OreUI { class IResourceAllowList; }
-namespace World { class IWorldCloudSyncer; }
+namespace OreUI { struct StorageContentItemData; }
 // clang-format on
 
 namespace OreUI {
@@ -44,23 +41,13 @@ public:
 public:
     // member functions
     // NOLINTBEGIN
-    MCAPI StorageContentItem(
-        ::Bedrock::NotNullNonOwnerPtr<::OreUI::IResourceAllowList> const& resourceAllowList,
-        ::World::IWorldCloudSyncer const&                                 worldCloudSyncer,
-        ::std::shared_ptr<::ContentItem const> const&                     contentItem,
-        bool                                                              isSelected
-    );
+    MCAPI explicit StorageContentItem(::OreUI::StorageContentItemData data);
     // NOLINTEND
 
 public:
     // constructor thunks
     // NOLINTBEGIN
-    MCAPI void* $ctor(
-        ::Bedrock::NotNullNonOwnerPtr<::OreUI::IResourceAllowList> const& resourceAllowList,
-        ::World::IWorldCloudSyncer const&                                 worldCloudSyncer,
-        ::std::shared_ptr<::ContentItem const> const&                     contentItem,
-        bool                                                              isSelected
-    );
+    MCAPI void* $ctor(::OreUI::StorageContentItemData data);
     // NOLINTEND
 };
 

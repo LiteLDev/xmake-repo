@@ -1,0 +1,132 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/client/particle/ParticleLayer.h"
+#include "mc/comprehensive/ParticleType.h"
+#include "mc/deps/core/container/slot_map_handle.h"
+#include "mc/deps/core/string/HashedString.h"
+#include "mc/deps/core/utility/EnableNonOwnerReferences.h"
+#include "mc/deps/core/utility/NonOwnerPointer.h"
+#include "mc/deps/minecraft_renderer/renderer/MaterialPtr.h"
+#include "mc/util/Random.h"
+
+// auto generated forward declare list
+// clang-format off
+class BaseActorRenderContext;
+class CompoundTag;
+class CustomParticle;
+class Level;
+class LightTexture;
+class Particle;
+class ParticleSystemEngine;
+class ScreenContext;
+class SeasonsRenderer;
+class Vec3;
+struct ParticleLayerRenderObject;
+struct ParticleRenderContext;
+struct ParticleRenderObjectCollection;
+namespace ParticleSystem { class ParticleEmitter; }
+// clang-format on
+
+class ParticleEngine : public ::Bedrock::EnableNonOwnerReferences {
+public:
+    // ParticleEngine inner types define
+    using ParticleBin = std::vector<std::unique_ptr<Particle>>;
+
+    using ParticleTextureMap = std::unordered_map<ParticleType, std::vector<std::unique_ptr<Particle>>>;
+
+public:
+    // member variables
+    // NOLINTBEGIN
+    // clang-format off
+    ::ll::TypedStorage<8, 2520, std::vector<std::unique_ptr<Particle>>[105]> mInactiveParticlesPool;
+    ::ll::TypedStorage<8, 8, ::Level&> mLevel;
+    ::ll::TypedStorage<8, 4200, std::unordered_map<ParticleType, std::vector<std::unique_ptr<Particle>>>[105]> mActiveParticles;
+    ::ll::TypedStorage<8, 24, std::vector<std::unique_ptr<CustomParticle>>> customParticles;
+    ::ll::TypedStorage<8, 24, std::vector<std::unique_ptr<Particle>>> mNewParticles;
+    ::ll::UntypedStorage<8, 24> mSeasons;
+    ::ll::TypedStorage<8, 8, ::LightTexture&> mLightTexture;
+    ::ll::TypedStorage<8, 2544, ::Random> random;
+    ::ll::TypedStorage<8, 16, ::mce::MaterialPtr> opaqueMat;
+    ::ll::TypedStorage<8, 16, ::mce::MaterialPtr> alphaTestMat;
+    ::ll::TypedStorage<8, 16, ::mce::MaterialPtr> blendMat;
+    ::ll::TypedStorage<4, 420, uint[105]> maxParticleCount;
+    ::ll::TypedStorage<4, 420, uint[105]> particleCount;
+    ::ll::TypedStorage<1, 1, bool> mTemporaryCameraActive;
+    ::ll::TypedStorage<8, 40, std::unordered_map<ParticleType, HashedString>> mNewParticleSystemJsonLookup;
+    ::ll::UntypedStorage<8, 40> mNewParticleSystemMap;
+    // clang-format on
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    ParticleEngine& operator=(ParticleEngine const&);
+    ParticleEngine(ParticleEngine const&);
+    ParticleEngine();
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~ParticleEngine();
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI ParticleEngine(::Level&, ::gsl::not_null<Bedrock::NonOwnerPointer<SeasonsRenderer>>, ::LightTexture&);
+
+    MCNAPI void _emitParticleNew(::ParticleSystemEngine&, ::ParticleType, ::Vec3 const&, ::Vec3 const&, int);
+
+    MCNAPI ::ParticleLayerRenderObject _extractParticleLayer(
+        ::ScreenContext&,
+        ::ParticleRenderContext const&,
+        ::ParticleLayer,
+        ::mce::MaterialPtr const&
+    ) const;
+
+    MCNAPI void addCustomParticle(std::unique_ptr<CustomParticle>);
+
+    MCNAPI void clear();
+
+    MCNAPI ::ParticleRenderObjectCollection extract(::ScreenContext&, ::Vec3 const&, ::Vec3 const&, float) const;
+
+    MCNAPI ::ParticleRenderObjectCollection extractEmptyCollection(::ScreenContext&) const;
+
+    MCNAPI ::gsl::final_action<std::function<void()>> forceTessellationForTemporaryCamera();
+
+    MCNAPI ::Particle*
+    instance(::ParticleType, ::Vec3 const&, ::Vec3 const&, int, ::ParticleSystemEngine*, ::CompoundTag const*);
+
+    MCNAPI void onDimensionChanged();
+
+    MCNAPI void renderCustomParticles(::BaseActorRenderContext&, ::Vec3 const&, float);
+
+    MCNAPI void tick();
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCNAPI static void render(::ScreenContext&, ::ParticleLayerRenderObject const&);
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor(::Level&, ::gsl::not_null<Bedrock::NonOwnerPointer<SeasonsRenderer>>, ::LightTexture&);
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+    // NOLINTEND
+};

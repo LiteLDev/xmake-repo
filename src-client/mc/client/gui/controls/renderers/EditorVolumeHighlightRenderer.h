@@ -102,7 +102,7 @@ public:
 public:
     // destructor thunk
     // NOLINTBEGIN
-    MCFOLD void $dtor();
+    MCAPI void $dtor();
     // NOLINTEND
 
 public:
@@ -125,15 +125,5 @@ public:
         ::BlockChangedEventTarget      eventTarget,
         ::Actor*                       blockChangeSource
     );
-    // NOLINTEND
-
-public:
-    // vftables
-    // NOLINTBEGIN
-    MCNAPI static void** $vftableForAppPlatformListener();
-
-    MCNAPI static void** $vftableForBlockSourceListener();
-
-    MCNAPI static void** $vftableForMinecraftUICustomRenderer();
     // NOLINTEND
 };

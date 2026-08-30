@@ -1,0 +1,20 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+class ScriptStat;
+// clang-format on
+
+class IScriptStatPublisher {
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~IScriptStatPublisher() = default;
+
+    virtual bool isStatPublisherEnabled() const = 0;
+
+    virtual void publishStats(ulong, std::vector<ScriptStat> const&) = 0;
+    // NOLINTEND
+};

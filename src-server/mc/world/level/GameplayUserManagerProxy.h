@@ -1,0 +1,43 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+class Actor;
+class GameplayUserManager;
+// clang-format on
+
+class GameplayUserManagerProxy {
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~GameplayUserManagerProxy();
+
+    virtual ::std::optional<::std::string>
+    validatePlayerName(::std::string const& playerName, ::GameplayUserManager const& gameplayUserManager) const;
+
+    virtual bool shouldGeneratePlayerIndex() const;
+
+    virtual void reloadActor(::Actor& actor) const;
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCNAPI ::std::optional<::std::string>
+    $validatePlayerName(::std::string const& playerName, ::GameplayUserManager const& gameplayUserManager) const;
+
+    MCNAPI bool $shouldGeneratePlayerIndex() const;
+
+    MCNAPI void $reloadActor(::Actor& actor) const;
+
+
+    // NOLINTEND
+};

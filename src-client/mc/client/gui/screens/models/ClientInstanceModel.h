@@ -91,7 +91,7 @@ public:
 public:
     // destructor thunk
     // NOLINTBEGIN
-    MCFOLD void $dtor();
+    MCAPI void $dtor();
     // NOLINTEND
 
 public:
@@ -152,11 +152,5 @@ public:
     MCAPI ::FontHandle $getFontHandle() const;
 
     MCAPI void $notifyForLeaveGame();
-    // NOLINTEND
-
-public:
-    // vftables
-    // NOLINTBEGIN
-    MCNAPI static void** $vftable();
     // NOLINTEND
 };

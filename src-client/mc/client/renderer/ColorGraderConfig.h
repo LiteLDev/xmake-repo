@@ -306,7 +306,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~ColorGraderConfig() /*override*/;
+    virtual ~ColorGraderConfig() /*override*/ = default;
 
     virtual void loadDataSync(
         ::cereal::ReflectionCtx const&                     ctx,
@@ -345,8 +345,8 @@ public:
     // static functions
     // NOLINTBEGIN
     MCNAPI static void _fillDefaultTemperatureParameters(
-        ::ColorGraderConfig::ColorGradingParametersSrcV0 const& src,
-        ::ColorGraderConfig::ColorGradingParametersSrcV1&       dst
+        ::ColorGraderConfig::ColorGradingParametersSrcV0 const&,
+        ::ColorGraderConfig::ColorGradingParametersSrcV1& dst
     );
 
     MCNAPI static void bindColorGradingParameters(::cereal::ReflectionCtx& ctx);

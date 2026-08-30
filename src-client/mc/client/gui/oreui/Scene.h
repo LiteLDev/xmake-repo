@@ -65,7 +65,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~Scene() /*override*/;
+    virtual ~Scene() /*override*/ = default;
 
     virtual void onCreation() /*override*/;
 
@@ -403,7 +403,7 @@ public:
 
     MCFOLD bool $isGamepadDeflectionModeEnabled() const;
 
-    MCFOLD ::glm::vec2 const& $getGamepadCursorPosition() const;
+    MCAPI ::glm::vec2 const& $getGamepadCursorPosition() const;
 
     MCFOLD void $cleanInputComponents();
 

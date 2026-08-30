@@ -1,0 +1,98 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+class Player;
+struct DimensionType;
+struct GoalId;
+// clang-format on
+
+class BaseGoal {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 24, std::string> mName;
+    ::ll::TypedStorage<4, 4, int>          mRequiredControlFlags;
+    ::ll::TypedStorage<2, 2, ushort>       mTypeId;
+    // NOLINTEND
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~BaseGoal();
+
+    virtual bool canUse() = 0;
+
+    virtual bool canContinueToUse();
+
+    virtual bool canBeInterrupted();
+
+    virtual void start();
+
+    virtual void stop();
+
+    virtual void tick();
+
+    virtual void appendDebugInfo(std::string&) const = 0;
+
+    virtual bool isTargetGoal() const;
+
+    virtual void onPlayerDimensionChanged(::Player*, ::DimensionType, ::DimensionType);
+
+    virtual void setInfo(std::string, ::GoalId const&);
+
+    virtual ::GoalId getGoalId() const;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI BaseGoal();
+
+    MCNAPI int getRequiredControlFlags() const;
+
+    MCNAPI void setRequiredControlFlags(int);
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor();
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCNAPI bool $canContinueToUse();
+
+    MCNAPI bool $canBeInterrupted();
+
+    MCNAPI void $start();
+
+    MCNAPI void $stop();
+
+    MCNAPI void $tick();
+
+    MCNAPI bool $isTargetGoal() const;
+
+    MCNAPI void $onPlayerDimensionChanged(::Player*, ::DimensionType, ::DimensionType);
+
+    MCNAPI void $setInfo(std::string, ::GoalId const&);
+
+    MCNAPI ::GoalId $getGoalId() const;
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+    // NOLINTEND
+};

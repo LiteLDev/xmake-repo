@@ -1,0 +1,160 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/core/threading/InstancedThreadLocal.h"
+#include "mc/util/MultidimensionalArray.h"
+#include "mc/util/Random.h"
+#include "mc/world/level/block/Block.h"
+#include "mc/world/level/levelgen/WorldGenerator.h"
+#include "mc/world/level/levelgen/feature/CanyonFeature.h"
+#include "mc/world/level/levelgen/feature/MonsterRoomFeature.h"
+#include "mc/world/level/levelgen/feature/UnderwaterCanyonFeature.h"
+
+// auto generated forward declare list
+// clang-format off
+class Aquifer;
+class Biome;
+class BiomeArea;
+class BlockPos;
+class BlockSource;
+class BlockTickingQueue;
+class BlockVolume;
+class BlockVolumeTarget;
+class BoundingBox;
+class ChunkLocalNoiseCache;
+class ChunkPos;
+class ChunkViewSource;
+class Dimension;
+class LevelChunk;
+class PerlinSimplexNoise;
+class SurfaceLevelCache;
+class XoroshiroPositionalRandomFactory;
+// clang-format on
+
+class OverworldGenerator : public ::WorldGenerator {
+public:
+    // OverworldGenerator inner types declare
+    // clang-format off
+    struct ThreadData;
+    // clang-format on
+
+    // OverworldGenerator inner types define
+    struct ThreadData {
+    public:
+        // member variables
+        // NOLINTBEGIN
+        ::ll::TypedStorage<4, 4096, std::array<float, 1024>>           buffer;
+        ::ll::TypedStorage<4, 1024, std::array<float, 256>>            depthBuffer;
+        ::ll::TypedStorage<4, 1024, std::array<float, 256>>            dataBuffer;
+        ::ll::TypedStorage<8, 655360, std::array<const Block*, 81920>> blockBuffer;
+        ::ll::TypedStorage<8, 8, float*>                               fi;
+        ::ll::TypedStorage<8, 8, float*>                               fis;
+        ::ll::TypedStorage<8, 2544, ::Random>                          random;
+        // NOLINTEND
+    };
+
+    using NoiseBuffer = ::Util::MultidimensionalArray<float, 5, 5, 41>;
+
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<4, 36, float[9]>                  mBiomeBlendKernel;
+    ::ll::UntypedStorage<1, 16>                          mIsLegacyWorld;
+    ::ll::UntypedStorage<8, 112>                         generatorHelpersPool;
+    ::ll::TypedStorage<8, 32, ::MonsterRoomFeature>      monsterRoomFeature;
+    ::ll::TypedStorage<8, 16, ::CanyonFeature>           canyonFeature;
+    ::ll::TypedStorage<8, 16, ::UnderwaterCanyonFeature> underwaterCanyonFeature;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    OverworldGenerator();
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    // clang-format off
+    virtual ~OverworldGenerator();
+
+    virtual bool structurePostProcessChunk(::ChunkViewSource&);
+
+    virtual bool decorationPostProcessChunk(::ChunkViewSource&);
+
+    virtual void loadChunk(::LevelChunk&, bool);
+
+    virtual void prepareHeights(::BlockVolume&, ::ChunkPos const&, std::vector<short>*, bool);
+
+    virtual ::BiomeArea getBiomeArea(::BoundingBox const&, uint) const;
+
+    virtual ::WorldGenerator::BlockVolumeDimensions getBlockVolumeDimensions() const;
+
+    virtual void decorateWorldGenLoadChunk(::Biome const&, ::LevelChunk&, ::BlockVolumeTarget&, ::Random&, ::ChunkPos const&) const;
+
+    virtual ::Util::MultidimensionalArray<float, 5, 5, 41> generateDensityCellsForChunk(::ChunkPos const&) const = 0;
+
+    virtual int getLevelGenHeight() const = 0;
+
+    virtual std::optional<XoroshiroPositionalRandomFactory> getXoroshiroPositionalRandomFactory() const = 0;
+
+    virtual std::unique_ptr<Aquifer> tryMakeAquifer(::ChunkPos const&, ::SurfaceLevelCache const&, short, short, short) const;
+
+    virtual ::ChunkLocalNoiseCache createNoiseCache(::ChunkPos) const;
+
+    virtual ::PerlinSimplexNoise const& getSurfaceNoise() = 0;
+
+    virtual std::unique_ptr<PerlinSimplexNoise> const& getMaterialAdjNoise() const = 0;
+
+    virtual void _prepareHeights(::BlockVolume&, ::ChunkPos const&, ::ChunkLocalNoiseCache const&, ::Aquifer*, std::function<void (const BlockPos&, const Block&, int)>&&, bool, std::vector<short>*) = 0;
+    // clang-format on
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI OverworldGenerator(::Dimension&, bool);
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor(::Dimension&, bool);
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCNAPI bool $structurePostProcessChunk(::ChunkViewSource&);
+
+    MCNAPI bool $decorationPostProcessChunk(::ChunkViewSource&);
+
+    MCNAPI void $loadChunk(::LevelChunk&, bool);
+
+    MCNAPI void $prepareHeights(::BlockVolume&, ::ChunkPos const&, std::vector<short>*, bool);
+
+    MCNAPI ::BiomeArea $getBiomeArea(::BoundingBox const&, uint) const;
+
+    MCNAPI ::WorldGenerator::BlockVolumeDimensions $getBlockVolumeDimensions() const;
+
+    MCNAPI void
+    $decorateWorldGenLoadChunk(::Biome const&, ::LevelChunk&, ::BlockVolumeTarget&, ::Random&, ::ChunkPos const&) const;
+
+    MCNAPI std::unique_ptr<Aquifer>
+           $tryMakeAquifer(::ChunkPos const&, ::SurfaceLevelCache const&, short, short, short) const;
+
+    MCNAPI ::ChunkLocalNoiseCache $createNoiseCache(::ChunkPos) const;
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+    // NOLINTEND
+};

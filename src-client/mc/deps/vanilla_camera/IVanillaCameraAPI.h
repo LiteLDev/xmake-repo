@@ -30,6 +30,7 @@ public:
         // NOLINTBEGIN
         ::ll::TypedStorage<4, 4, float> mTime;
         ::ll::TypedStorage<4, 4, float> mRotation;
+        ::ll::TypedStorage<4, 4, float> mIntensity;
         // NOLINTEND
     };
 
@@ -78,7 +79,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~IVanillaCameraAPI();
+    virtual ~IVanillaCameraAPI() = default;
 
     virtual ::std::optional<::IVanillaCameraAPI::DamageBobParameters>
     tryGetDamageBobParameters(::WeakRef<::EntityContext> const actorRef, float frameInterpolation) const = 0;

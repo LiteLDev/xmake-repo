@@ -32,10 +32,6 @@ public:
     // NOLINTEND
 
 public:
-    // prevent constructor by default
-    ContentView();
-
-public:
     // virtual functions
     // NOLINTBEGIN
     virtual ~ContentView() /*override*/;
@@ -44,8 +40,6 @@ public:
 public:
     // member functions
     // NOLINTBEGIN
-    MCAPI explicit ContentView(::std::weak_ptr<::IContentManager> contentManager);
-
     MCFOLD void onReload(::std::function<void()> callback);
 
     MCAPI void reload();
@@ -56,20 +50,8 @@ public:
     // NOLINTEND
 
 public:
-    // constructor thunks
-    // NOLINTBEGIN
-    MCAPI void* $ctor(::std::weak_ptr<::IContentManager> contentManager);
-    // NOLINTEND
-
-public:
     // destructor thunk
     // NOLINTBEGIN
-    MCFOLD void $dtor();
-    // NOLINTEND
-
-public:
-    // vftables
-    // NOLINTBEGIN
-    MCNAPI static void** $vftable();
+    MCAPI void $dtor();
     // NOLINTEND
 };

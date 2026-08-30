@@ -1,0 +1,110 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/client/gui/oreui/routing/IEntryPoint.h"
+#include "mc/client/gui/oreui/routing/RouteFlags.h"
+#include "mc/client/gui/screens/models/PlayScreenDefaultTab.h"
+#include "mc/deps/core/utility/NonOwnerPointer.h"
+
+// auto generated forward declare list
+// clang-format off
+class ISceneStack;
+class SceneFactory;
+namespace OreUI { class RouteMatcher; }
+namespace OreUI { class RouterLocation; }
+namespace ui { class ScreenTechStackSelector; }
+// clang-format on
+
+namespace OreUI::EntryPoints {
+
+class PlayScreen : public ::OreUI::IEntryPoint {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 8, ::ui::ScreenTechStackSelector const&> mScreenTechStackSelector;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    PlayScreen& operator=(PlayScreen const&);
+    PlayScreen(PlayScreen const&);
+    PlayScreen();
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    // clang-format off
+    virtual ~PlayScreen();
+
+    virtual bool shouldAddToConfiguration() const;
+
+    virtual void addToMatcher(::OreUI::RouteMatcher&, ::SceneFactory&, ::gsl::not_null<Bedrock::NonOwnerPointer<ISceneStack>> const&) const;
+    // clang-format on
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI explicit PlayScreen(::ui::ScreenTechStackSelector const&);
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCNAPI static std::string composeRoute(::PlayScreenDefaultTab, bool const, std::string const&);
+
+    MCNAPI static std::optional<std::string> getEditorPlayScreenRouteIfEnabled(bool, ::PlayScreenDefaultTab);
+
+    MCNAPI static std::string getLastPlayScreenTab(std::vector<OreUI::RouterLocation> const&, bool const);
+
+    MCNAPI static ::PlayScreenDefaultTab resolveEditorTabFromRoute(std::string const&);
+    // NOLINTEND
+
+public:
+    // static variables
+    // NOLINTBEGIN
+    MCNAPI static ::std::add_lvalue_reference_t<char const[12]> BASE_SCREEN_ID();
+
+    MCNAPI static ::std::add_lvalue_reference_t<char const[18]> EDITOR_ROUTE();
+
+    MCNAPI static ::OreUI::EntryPoints::RouteFlags const& FLAGS();
+
+    MCNAPI static ::std::add_lvalue_reference_t<char const[13]> LEGACY_ROUTE();
+
+    MCNAPI static ::std::add_lvalue_reference_t<char const[6]> ROUTE();
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor(::ui::ScreenTechStackSelector const&);
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCNAPI bool $shouldAddToConfiguration() const;
+
+    MCNAPI void $addToMatcher(
+        ::OreUI::RouteMatcher&,
+        ::SceneFactory&,
+        ::gsl::not_null<Bedrock::NonOwnerPointer<ISceneStack>> const&
+    ) const;
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+    // NOLINTEND
+};
+
+} // namespace OreUI::EntryPoints

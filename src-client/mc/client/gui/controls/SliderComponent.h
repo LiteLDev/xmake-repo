@@ -100,7 +100,7 @@ public:
 public:
     // destructor thunk
     // NOLINTBEGIN
-    MCAPI void $dtor();
+    MCFOLD void $dtor();
     // NOLINTEND
 
 public:
@@ -120,5 +120,11 @@ public:
     MCAPI ::ComponentReceiveActionType $receive(::ScreenEvent const& screenEvent);
 
     MCFOLD ::std::string const& $getTextToSpeechComponentValue() const;
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
     // NOLINTEND
 };

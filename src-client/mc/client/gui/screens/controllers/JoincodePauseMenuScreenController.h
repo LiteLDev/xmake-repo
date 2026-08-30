@@ -36,7 +36,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~JoincodePauseMenuScreenController() /*override*/;
+    virtual ~JoincodePauseMenuScreenController() /*override*/ = default;
 
     virtual void addStaticScreenVars(::Json::Value& globalVars) /*override*/;
 
@@ -57,7 +57,9 @@ public:
         ::std::vector<::ActorUniqueID> const& clientIds
     );
 
-    MCAPI ::std::string _joincodeUri();
+    MCAPI ::std::string _getJoincodeUri();
+
+    MCAPI ::std::string _getNetworkId();
 
     MCAPI void _launchShareUri(::std::string const& uri, ::std::string const& toastMsg, ::std::string const& eventName);
     // NOLINTEND

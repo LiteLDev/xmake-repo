@@ -1,0 +1,91 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/core/math/Vec2.h"
+#include "mc/deps/shared_types/actor/BaseGoalDefinition.h"
+#include "mc/deps/shared_types/legacy/BlockDescriptor.h"
+#include "mc/deps/shared_types/legacy/item/ItemDescriptor.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace cereal { struct ReflectionCtx; }
+// clang-format on
+
+namespace SharedTypes::v1_21_100 {
+
+struct TransportItemsGoalDefinition : public ::SharedTypes::BaseGoalDefinition {
+public:
+    // TransportItemsGoalDefinition inner types define
+    enum class SearchStrategy : int {
+        Nearest = 0,
+        Random  = 1,
+    };
+
+    enum class PlaceStrategy : int {
+        Any                 = 0,
+        WithMatching        = 1,
+        WithMatchingOrEmpty = 2,
+    };
+
+    using BlockDescriptorVec = std::vector<SharedTypes::Legacy::BlockDescriptor>;
+
+    using ItemDescriptorVec = std::vector<SharedTypes::Legacy::ItemDescriptor>;
+
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 24, std::vector<SharedTypes::Legacy::BlockDescriptor>> mSourceContainerTypes;
+    ::ll::TypedStorage<8, 24, std::vector<SharedTypes::Legacy::BlockDescriptor>> mDestinationContainerTypes;
+    ::ll::TypedStorage<4, 4, uint>                                               mMaxStackSize;
+    ::ll::TypedStorage<4, 4, float>                                              mInteractionTime;
+    ::ll::TypedStorage<1, 1, bool>                                               mAllowSimultaneousInteraction;
+    ::ll::TypedStorage<4, 4, ::SharedTypes::v1_21_100::TransportItemsGoalDefinition::SearchStrategy> mSearchStrategy;
+    ::ll::TypedStorage<4, 8, ::Vec2>                                                                 mSearchDistance;
+    ::ll::TypedStorage<4, 4, uint> mMaxVisitedContainers;
+    ::ll::TypedStorage<4, 4, uint> mInitialCooldown;
+    ::ll::TypedStorage<4, 4, uint> mIdleCooldown;
+    ::ll::TypedStorage<4, 4, ::SharedTypes::v1_21_100::TransportItemsGoalDefinition::PlaceStrategy> mPlaceStrategy;
+    ::ll::TypedStorage<8, 24, std::vector<SharedTypes::Legacy::ItemDescriptor>>                     mAllowedItems;
+    ::ll::TypedStorage<8, 24, std::vector<SharedTypes::Legacy::ItemDescriptor>>                     mDisallowedItems;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    TransportItemsGoalDefinition& operator=(TransportItemsGoalDefinition const&);
+    TransportItemsGoalDefinition(TransportItemsGoalDefinition const&);
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI ::SharedTypes::v1_21_100::TransportItemsGoalDefinition&
+    operator=(::SharedTypes::v1_21_100::TransportItemsGoalDefinition&&);
+
+    MCNAPI bool operator==(::SharedTypes::v1_21_100::TransportItemsGoalDefinition const&) const;
+
+    MCNAPI ~TransportItemsGoalDefinition();
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCNAPI static void bindType(::cereal::ReflectionCtx&);
+    // NOLINTEND
+
+public:
+    // static variables
+    // NOLINTBEGIN
+    MCNAPI static std::string_view const& NAME();
+
+    MCNAPI static ::Vec2 const& SEARCH_DISTANCE();
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+};
+
+} // namespace SharedTypes::v1_21_100

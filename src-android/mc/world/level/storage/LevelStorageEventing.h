@@ -1,0 +1,68 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/core/utility/EnableNonOwnerReferences.h"
+#include "mc/world/level/storage/DBStorageFolderWatcherSnapshotKind.h"
+#include "mc/world/level/storage/LevelStorageEventingContext.h"
+
+// auto generated forward declare list
+// clang-format off
+class DBStorageFolderWatcher;
+class LevelData;
+struct DBStoragePerformanceTelemetryData;
+// clang-format on
+
+class LevelStorageEventing : public ::Bedrock::EnableNonOwnerReferences {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 88, ::LevelStorageEventingContext> mContext;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    LevelStorageEventing();
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~LevelStorageEventing();
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI LevelStorageEventing(std::string const&, ::LevelData const&, std::string const&);
+
+    MCNAPI void fireDBStorageError(char const*) const;
+
+    MCNAPI void fireEventDBReadFail(std::string const&) const;
+
+    MCNAPI void
+    fireEventDBStorageSizeSnapshot(::DBStorageFolderWatcher const&, ::DBStorageFolderWatcherSnapshotKind) const;
+
+    MCNAPI void fireEventLevelDBPerformanceData(::DBStoragePerformanceTelemetryData const&) const;
+
+    MCNAPI void fireEventWorldCorruptionCausedWorldShutdown(std::string const&, std::optional<bool>) const;
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor(std::string const&, ::LevelData const&, std::string const&);
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+    // NOLINTEND
+};

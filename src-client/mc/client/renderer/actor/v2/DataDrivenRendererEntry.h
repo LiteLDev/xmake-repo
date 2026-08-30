@@ -2,17 +2,19 @@
 
 #include "mc/_HeaderOutputPredefine.h"
 
+// auto generated inclusion list
+#include "mc/ddrv2__PoolItemHandle.h"
+
+// auto generated forward declare list
+// clang-format off
+struct DataDrivenRendererPool;
+// clang-format on
+
 struct DataDrivenRendererEntry {
 public:
     // member variables
     // NOLINTBEGIN
-    ::ll::UntypedStorage<4, 4> mUnkca4365;
-    ::ll::UntypedStorage<4, 4> mUnk8e153e;
+    ::ll::TypedStorage<8, 8, ::ddrv2::PoolItemHandle<::DataDrivenRendererPool>> mHandle;
+    ::ll::TypedStorage<4, 4, uint>                                              mCount;
     // NOLINTEND
-
-public:
-    // prevent constructor by default
-    DataDrivenRendererEntry& operator=(DataDrivenRendererEntry const&);
-    DataDrivenRendererEntry(DataDrivenRendererEntry const&);
-    DataDrivenRendererEntry();
 };

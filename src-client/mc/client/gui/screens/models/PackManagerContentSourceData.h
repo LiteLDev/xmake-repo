@@ -41,7 +41,7 @@ public:
     // NOLINTBEGIN
     MCAPI PackManagerContentSourceData(
         ::Core::Path const&                                        path,
-        ::ContentType                                              contentType,
+        ::ContentType const                                        contentType,
         ::std::unique_ptr<::CompositePackSource>                   packSource,
         ::std::vector<::std::shared_ptr<::PackContentItem>> const& packContent
     );
@@ -54,7 +54,7 @@ public:
     // NOLINTBEGIN
     MCAPI void* $ctor(
         ::Core::Path const&                                        path,
-        ::ContentType                                              contentType,
+        ::ContentType const                                        contentType,
         ::std::unique_ptr<::CompositePackSource>                   packSource,
         ::std::vector<::std::shared_ptr<::PackContentItem>> const& packContent
     );

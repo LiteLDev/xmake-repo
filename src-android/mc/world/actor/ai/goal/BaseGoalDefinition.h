@@ -1,0 +1,35 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+class BaseGoal;
+class EntityContext;
+class Mob;
+// clang-format on
+
+class BaseGoalDefinition {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<4, 4, int> mPriority;
+    ::ll::TypedStorage<4, 4, int> mControlFlags;
+    // NOLINTEND
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~BaseGoalDefinition() = default;
+
+    virtual bool validateMobType(::Mob&) const;
+
+    virtual bool validate(::Mob&) const;
+    // NOLINTEND
+
+public:
+    // static variables
+    // NOLINTBEGIN
+    MCNAPI static std::unordered_map<std::string, int> const& mControlFlagMap();
+    // NOLINTEND
+};

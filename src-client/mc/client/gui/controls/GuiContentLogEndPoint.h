@@ -6,12 +6,12 @@
 #include "mc/deps/core/debug/log/ContentLogEndPoint.h"
 #include "mc/deps/core/debug/log/LogArea.h"
 #include "mc/deps/core/debug/log/LogLevel.h"
+#include "mc/deps/core/memory/MoodyCamelBedrockMemoryTraits.h"
 #include "mc/deps/core/utility/NonOwnerPointer.h"
 
 // auto generated forward declare list
 // clang-format off
 class GuiData;
-namespace Bedrock::Memory { struct MoodyCamelBedrockMemoryTraits; }
 // clang-format on
 
 class GuiContentLogEndPoint : public ::ContentLogEndPoint {

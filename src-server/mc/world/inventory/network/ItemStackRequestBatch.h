@@ -1,0 +1,26 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+class ItemStackRequestData;
+// clang-format on
+
+class ItemStackRequestBatch {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 24, ::std::vector<::std::unique_ptr<::ItemStackRequestData>>> mRequests;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+#ifdef LL_PLAT_C
+    MCNAPI void addDeserializedRequest(::std::unique_ptr<::ItemStackRequestData> request);
+
+    MCNAPI void addRequest(::std::unique_ptr<::ItemStackRequestData> request);
+#endif
+    // NOLINTEND
+};

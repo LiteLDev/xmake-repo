@@ -11,8 +11,8 @@ class PlatformUpsellDialog {
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~PlatformUpsellDialog();
+    virtual ~PlatformUpsellDialog() = default;
 
-    virtual void show(::std::shared_ptr<::Social::User> const user, ::std::function<void(bool)> callback) = 0;
+    virtual void show(::std::shared_ptr<::Social::User> const, ::std::function<void(bool)>) = 0;
     // NOLINTEND
 };

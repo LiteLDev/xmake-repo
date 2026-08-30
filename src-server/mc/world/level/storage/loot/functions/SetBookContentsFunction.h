@@ -1,0 +1,72 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/world/level/storage/loot/functions/LootItemFunction.h"
+
+// auto generated forward declare list
+// clang-format off
+class CompoundTag;
+class ItemInstance;
+class ItemStack;
+class LootItemCondition;
+class LootTableContext;
+class Random;
+namespace Json { class Value; }
+// clang-format on
+
+class SetBookContentsFunction : public ::LootItemFunction {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 32, ::std::string>                mTitle;
+    ::ll::TypedStorage<8, 32, ::std::string>                mAuthor;
+    ::ll::TypedStorage<8, 24, ::std::vector<::std::string>> mPages;
+    // NOLINTEND
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~SetBookContentsFunction() /*override*/;
+
+    virtual void apply(::ItemStack& item, ::Random&, ::LootTableContext&) /*override*/;
+
+    virtual void apply(::ItemInstance& itemInstance, ::Random&, ::LootTableContext&) /*override*/;
+
+    virtual ::LootItemFunction::FunctionType getFunctionType() const /*override*/;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCAPI void _fillUserData(::CompoundTag& tag);
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+#ifdef LL_PLAT_S
+    MCAPI static ::std::unique_ptr<::LootItemFunction>
+    deserialize(::Json::Value object, ::std::vector<::std::unique_ptr<::LootItemCondition>>& predicates);
+#endif
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCAPI void $apply(::ItemStack& item, ::Random&, ::LootTableContext&);
+
+    MCAPI void $apply(::ItemInstance& itemInstance, ::Random&, ::LootTableContext&);
+
+    MCFOLD ::LootItemFunction::FunctionType $getFunctionType() const;
+
+
+    // NOLINTEND
+};
