@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "release_lane": "1.26.40.5",
+  "target": "aarch64-linux-android21",
+  "architecture": "arm64-v8a",
+  "api_level": 21,
+  "ndk_revision": "28.2.13676358",
+  "lock_hash": "D24CD9990677805CE0F0244408CF50F2B5825DD2D240D5F969E5924CE1E36EA9",
+  "compile_definitions": [],
+  "dependencies": [
+    {
+      "name": "concurrentqueue",
+      "repository": "https://github.com/cameron314/concurrentqueue.git",
+      "commit": "6dd38b8a1dbaa7863aa907045f32308a56a6ff5d",
+      "include_roots": ["."],
+      "required_headers": ["concurrentqueue.h"]
+    },
+    {
+      "name": "expected-lite",
+      "repository": "https://github.com/martinmoene/expected-lite.git",
+      "commit": "c8ffab649ba56e43c731b7017a69ddaebe2e1893",
+      "include_roots": ["include"],
+      "required_headers": ["nonstd/expected.hpp"]
+    },
+    {
+      "name": "GSL",
+      "repository": "https://github.com/microsoft/GSL.git",
+      "commit": "2828399820ef4928cc89b65605dca5dc68efca6e",
+      "include_roots": ["include"],
+      "required_headers": ["gsl/gsl"]
+    },
+    {
+      "name": "zlib",
+      "repository": "https://github.com/madler/zlib.git",
+      "commit": "51b7f2abdade71cd9bb0e7a373ef2610ec6f9daf",
+      "include_roots": ["."],
+      "required_headers": ["zlib.h"]
+    },
+    {
+      "name": "zstd",
+      "repository": "https://github.com/facebook/zstd.git",
+      "commit": "f8745da6ff1ad1e7bab384bd1f9d742439278e99",
+      "include_roots": ["lib"],
+      "required_headers": ["zstd.h"]
+    },
+    {
+      "name": "EnTT",
+      "repository": "https://github.com/skypjack/entt.git",
+      "commit": "1333fa53129e7cfded5a9640c4336a254049917b",
+      "include_roots": ["single_include", "src"],
+      "required_headers": ["entt/entt.hpp", "entt/fwd.hpp"]
+    },
+    {
+      "name": "GLM",
+      "repository": "https://github.com/g-truc/glm.git",
+      "commit": "bf71a834948186f4097caa076cd2663c69a10e1e",
+      "include_roots": ["."],
+      "required_headers": ["glm/glm.hpp", "glm/ext.hpp"]
+    },
+    {
+      "name": "LevelDB",
+      "repository": "https://github.com/google/leveldb.git",
+      "commit": "3791effb6692e0c83da782210aa336a3dd436f30",
+      "include_roots": ["include"],
+      "required_headers": ["leveldb/db.h", "leveldb/slice.h"]
+    },
+    {
+      "name": "RapidJSON",
+      "repository": "https://github.com/Tencent/rapidjson.git",
+      "commit": "232389d4f1012dddec4ef84861face2d2ba85709",
+      "include_roots": ["include"],
+      "required_headers": ["rapidjson/document.h", "rapidjson/writer.h"]
+    },
+    {
+      "name": "stb",
+      "repository": "https://github.com/nothings/stb.git",
+      "commit": "f75e8d1cad7d90d72ef7a4661f1b994ef78b4e31",
+      "include_roots": ["."],
+      "required_headers": ["stb_truetype.h"]
+    },
+    {
+      "name": "fmt",
+      "repository": "https://github.com/fmtlib/fmt.git",
+      "commit": "123913715afeb8a437e6388b4473fcc4753e1c9a",
+      "include_roots": ["include"],
+      "required_headers": ["fmt/format.h"]
+    },
+    {
+      "name": "type_safe",
+      "repository": "https://github.com/foonathan/type_safe.git",
+      "commit": "6ae2495bd9eafaa6d93b497a09f43a3d80141755",
+      "include_roots": ["include"],
+      "required_headers": ["type_safe/strong_typedef.hpp"]
+    }
+  ],
+  "unavailable": [
+    "bx",
+    "cgltf",
+    "game-activity",
+    "json",
+    "quickjs",
+    "webrtc"
+  ]
+}

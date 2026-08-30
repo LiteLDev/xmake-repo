@@ -3,19 +3,34 @@ on:
     paths:
       - .github/workflows/build.yml
       - src/**
-      - src-server/**
       - src-client/**
+      - src-server/**
+      - src-android/**
+      - header-release.json
+      - android-dependencies.lock.json
+      - scripts/**
+      - test/**
+      - xmake.lua
+  pull_request:
+    paths:
+      - .github/workflows/build.yml
+      - src/**
+      - src-client/**
+      - src-server/**
+      - src-android/**
+      - header-release.json
+      - android-dependencies.lock.json
+      - scripts/**
+      - test/**
       - xmake.lua
   workflow_dispatch:
 
 jobs:
-  build:
+  windows:
     strategy:
       fail-fast: false
       matrix:
-        mode:
-          - debug
-          - release
+        mode: [debug, release]
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v6
@@ -23,24 +38,74 @@ jobs:
           fetch-depth: 0
 
       - uses: xmake-io/github-action-setup-xmake@v1
-        # with:
-        #   xmake-version: branch@master
 
       - uses: actions/cache@v5
         with:
-          path: |
-            ~/AppData/Local/.xmake
-          key: xmake-${{ hashFiles('xmake.lua') }}
-          restore-keys: |
-            xmake-
+          path: ~/AppData/Local/.xmake
+          key: windows-xmake-${{ hashFiles('xmake.lua') }}
+          restore-keys: windows-xmake-
 
       - uses: microsoft/setup-msbuild@v2
 
-      - run: |
-          xmake repo -u
+      - name: Validate release and Python tooling
+        shell: pwsh
+        run: |
+          python -m unittest discover -s test/python -v
+          python scripts/validate_header_release.py
 
-      - run: |
-          xmake f -a x64 -m ${{ matrix.mode }} -p windows -v -y
+      - name: Configure Windows headers
+        shell: pwsh
+        run: xmake f -c -a x64 -m ${{ matrix.mode }} -p windows -v -y
 
-      - run: |
-          xmake -v -y
+      - name: Build Client Header
+        shell: pwsh
+        run: xmake build -v header_client
+
+      - name: Build Server Header
+        shell: pwsh
+        run: xmake build -v header_server
+
+  android:
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [debug, release]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: xmake-io/github-action-setup-xmake@v1
+
+      - name: Install NDK r28c
+        shell: bash
+        run: yes | "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" "ndk;28.2.13676358"
+
+      - uses: actions/cache@v5
+        with:
+          path: build/android-deps
+          key: android-deps-r28c-${{ hashFiles('android-dependencies.lock.json') }}
+
+      - name: Test and materialize exact dependencies
+        shell: bash
+        run: |
+          python -m unittest discover -s test/python -v
+          python scripts/materialize_android_dependencies.py \
+            --ndk "$ANDROID_SDK_ROOT/ndk/28.2.13676358" \
+            --output build/android-deps \
+            --runtime-lock build/android-dependencies.runtime.json
+          python scripts/validate_header_release.py
+
+      - name: Configure Android headers
+        shell: bash
+        run: |
+          xmake f -c -p android -a arm64-v8a -m "${{ matrix.mode }}" \
+            --ndk="$ANDROID_SDK_ROOT/ndk/28.2.13676358" \
+            --ndk_sdkver=21 \
+            --android_dependency_lock="$PWD/build/android-dependencies.runtime.json" \
+            -v -y
+
+      - name: Build Android Header
+        shell: bash
+        run: xmake build -vD header_android
