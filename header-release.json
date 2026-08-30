@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "release": "1.26.40.5",
+  "inputs": {
+    "windows_client": {
+      "version": "1.26.40.5",
+      "sha256": "0D3991E8A1DB02BD3221BF5B21F8EBB1490AE83CC7734878ED971F01EFCD66B6"
+    },
+    "windows_server": {
+      "version": "1.26.40.8",
+      "sha256": "B3B541BB0B4A3F1C802E8F72912A27C3C01C76223F636BE90393D35D8F5C3A6D"
+    },
+    "android": {
+      "version": "1.26.40.5",
+      "sha256": "1CCBC128196E1A522B0000E81CBDCCF6CA3E7025F2D99E1640877D35B860665F",
+      "build_id": "5893edc8d56c93cbdb50e0f9436320236b78c89d"
+    }
+  },
+  "tools": {
+    "header_generator_code": "fef0570d37515fec48d92574252ce601aafbf255",
+    "header_generator_summary": "75b3cb1bd5b0b403a505b560c51d70c551c86673",
+    "bedrock_analyzer_code": "0e8a0dd98776d510bbf9c5cf9a7e268eda199d89",
+    "bedrock_analyzer_summary": "cf44b94232975641f5eeb758ce122d798dda7941"
+  },
+  "layers": {
+    "src": 1922,
+    "src-client": 18751,
+    "src-server": 18678,
+    "src-android": 15453
+  },
+  "manifest": {
+    "algorithm": "sha256(path-utf8 + NUL + raw-bytes + NUL), ordinal path order",
+    "scope": "four Header layers",
+    "rows": 54804,
+    "sha256": "10E951E1788A415795158DC62388164F0D8BC70AE636F960455493616A7C61EC"
+  },
+  "generator_predecessor_manifest": {
+    "scope": "four Header layers and nine non-published validation lists",
+    "rows": 54785,
+    "sha256": "E0AA244DF9A8A4062231B17BC954A296269D94AA4D926551CCC9EE0BD4299AF8"
+  },
+  "android_toolchain": {
+    "ndk_revision": "28.2.13676358",
+    "target": "aarch64-linux-android21",
+    "architecture": "arm64-v8a",
+    "api_level": 21,
+    "dependency_lock_hash": "D24CD9990677805CE0F0244408CF50F2B5825DD2D240D5F969E5924CE1E36EA9",
+    "dependency_manifest_sha256": "2C8537CE31C9D24EE8022C30A261A483BEAEA099C93AD8A954ED6C0C18EDEB92"
+  },
+  "validation": {
+    "formal_repetitions_byte_identical": true,
+    "windows_effective_oracle": true,
+    "windows_effective_client_headers": 20673,
+    "windows_effective_server_headers": 20600,
+    "android_effective_headers": 17367,
+    "all_open_header_count": 10526,
+    "all_open_header_failures": 0,
+    "all_open_typed": 48441,
+    "all_open_untyped": 7818,
+    "all_open_layout_failures": 0,
+    "header_verifier_issues": 0,
+    "header_verifier_json_sha256": "5B30B939DE2696C4B3B06DCA466B12FBDD4818BF73E23488C5B7918F5570AF4D",
+    "header_verifier_markdown_sha256": "CD97D76131D4E2830133479E7DE96C3E102C8C69C30A97FF5E4E031FB9CA6D50"
+  }
+}
