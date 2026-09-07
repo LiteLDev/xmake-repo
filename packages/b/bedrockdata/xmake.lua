@@ -36,9 +36,9 @@ package("bedrockdata")
         ["v1.21.124-client"] = {"prelink v0.7.1"},
         ["v1.21.132"] = {"prelink v0.7.1"},
         ["v26.10.4"] = {"prelink v0.7.1"},
-        ["v26.20.4"] = {"prelink v0.7.1"},
-        ["v26.20.5"] = {"prelink v0.7.1"},
+        ["v26.20"] = {"prelink v0.7.1"},
         ["v26.32.2"] = {"prelink v0.8.4"},
+        ["v26.40"] = {"prelink v0.8.5"},
     }
 
     on_load(function(package)
