@@ -16,6 +16,7 @@ package("legacymoney")
     add_versions("git:0.18.1", "4b274550398b7e6ed630953273ae455f0642c257")
     add_versions("git:0.19.0", "6269976c70d121b579f798c16391ac42a211405c")
     add_versions("git:0.20.0", "50c043ef9940937a99e5d86a48f12ac470d793e7")
+    add_versions("git:0.21.0", "375030e13fc037d56757ee23f063ebc78c169da2")
 
     add_configs("target_type", {default = "server", values = {"server", "client"}})
 
