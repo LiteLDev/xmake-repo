@@ -3,7 +3,7 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/SoundPauseSource.h"
+#include "mc/deps/audio/SoundPauseSource.h"
 #include "mc/deps/audio/SoundPlayerInterface.h"
 #include "mc/deps/core/file/PathBuffer.h"
 

@@ -28,15 +28,9 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~PerformanceHandler() /*override*/;
+    virtual ~PerformanceHandler() /*override*/ = default;
 
     virtual void WriteLog(char const* message, uint64 length) /*override*/;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

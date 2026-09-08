@@ -12,7 +12,7 @@ class Allocator : public ::cohtml::IAllocator {
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~Allocator() /*override*/;
+    virtual ~Allocator() /*override*/ = default;
 
     virtual void* Allocate(uint size, ::cohtml::MemTags::MemTagsType tag) /*override*/;
 
@@ -27,12 +27,6 @@ public:
     virtual void* VirtualAllocate(void*, uint, int, int, ::cohtml::MemTags::MemTagsType) /*override*/;
 
     virtual bool VirtualFree(void*, uint, int, ::cohtml::MemTags::MemTagsType) /*override*/;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

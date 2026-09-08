@@ -37,7 +37,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~ScriptPrefabTemplateInstanceStructure();
+    virtual ~ScriptPrefabTemplateInstanceStructure() = default;
     // NOLINTEND
 
 public:
@@ -48,12 +48,6 @@ public:
 
     MCNAPI ::Scripting::Result<::Rotation, ::Editor::ScriptModule::ScriptPrefabErrorInvalidInstance>
     _getInstanceRotation() const;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 };
 

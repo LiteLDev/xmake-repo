@@ -32,7 +32,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~SetItemNameFunction() /*override*/;
+    virtual ~SetItemNameFunction() /*override*/ = default;
 
     virtual void apply(::ItemStack& item, ::Random&, ::LootTableContext&) /*override*/;
 
@@ -65,12 +65,6 @@ public:
 #ifdef LL_PLAT_S
     MCAPI void* $ctor(::std::vector<::std::unique_ptr<::LootItemCondition>>& predicates, ::std::string const& name);
 #endif
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCFOLD void $dtor();
     // NOLINTEND
 
 public:

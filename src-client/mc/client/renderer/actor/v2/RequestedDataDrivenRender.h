@@ -3,7 +3,7 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/ddrv2__PoolItemHandle.h"
+#include "mc/client/renderer/actor/v2/ddrv2/PoolItemHandle.h"
 #include "mc/deps/minecraft_renderer/game/ShadowContext.h"
 
 // auto generated forward declare list

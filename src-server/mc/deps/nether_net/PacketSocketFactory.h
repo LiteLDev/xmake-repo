@@ -34,7 +34,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~PacketSocketFactory() /*override*/;
+    virtual ~PacketSocketFactory() /*override*/ = default;
 
     virtual ::std::unique_ptr<::webrtc::AsyncPacketSocket>
     CreateUdpSocket(::webrtc::SocketAddress const& address, ushort min_port, ushort max_port) /*override*/;
@@ -55,12 +55,6 @@ public:
     // constructor thunks
     // NOLINTBEGIN
     MCNAPI void* $ctor(::webrtc::SocketFactory* socketFactory, ::webrtc::TaskQueueBase* workerThread);
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

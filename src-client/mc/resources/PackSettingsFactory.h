@@ -95,7 +95,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~PackSettingsFactory();
+    virtual ~PackSettingsFactory() = default;
 
     virtual uint64 getAccessTimestamp() const;
     // NOLINTEND
@@ -147,12 +147,6 @@ public:
 
     MCAPI static ::brstd::basic_cstring_view<char, ::std::char_traits<char>> const&
     WORLD_BEHAVIOR_PACK_SETTINGS_FILENAME();
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

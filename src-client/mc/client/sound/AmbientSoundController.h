@@ -53,7 +53,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~AmbientSoundController() /*override*/;
+    virtual ~AmbientSoundController() /*override*/ = default;
 
     virtual void onWillChangeDimension(::Player& player) /*override*/;
 
@@ -91,12 +91,6 @@ public:
     // constructor thunks
     // NOLINTBEGIN
     MCAPI void* $ctor(::WeakEntityRef localUser, ::SoundMapping const& soundMap);
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

@@ -49,7 +49,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~PackContentItem() /*override*/;
+    virtual ~PackContentItem() /*override*/ = default;
     // NOLINTEND
 
 public:
@@ -64,11 +64,5 @@ public:
     // constructor thunks
     // NOLINTBEGIN
     MCAPI void* $ctor(::ContentSource* src);
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 };

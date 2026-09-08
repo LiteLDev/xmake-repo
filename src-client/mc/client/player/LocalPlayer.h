@@ -224,7 +224,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~LocalPlayer() /*override*/;
+    virtual ~LocalPlayer() /*override*/ = default;
 
     virtual void reloadHardcodedClient(::ActorInitializationMethod method) /*override*/;
 
@@ -512,12 +512,6 @@ public:
         ::PlayerAuthenticationInfo const& authInfo,
         ::EntityContext&                  entityContext
     );
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

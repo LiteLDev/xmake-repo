@@ -45,8 +45,6 @@ public:
         ::std::unique_ptr<::CompositePackSource>                   packSource,
         ::std::vector<::std::shared_ptr<::PackContentItem>> const& packContent
     );
-
-    MCAPI ~PackManagerContentSourceData();
     // NOLINTEND
 
 public:
@@ -58,11 +56,5 @@ public:
         ::std::unique_ptr<::CompositePackSource>                   packSource,
         ::std::vector<::std::shared_ptr<::PackContentItem>> const& packContent
     );
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 };

@@ -39,7 +39,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~FilteredContainerModel() /*override*/;
+    virtual ~FilteredContainerModel() /*override*/ = default;
 
     virtual void containerContentChanged(int slot) /*override*/;
 
@@ -92,12 +92,6 @@ public:
         bool                                                         filter,
         ::std::function<::FilterResult(::ItemInstance const&, bool)> rule
     );
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

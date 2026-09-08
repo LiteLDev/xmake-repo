@@ -47,7 +47,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~RedstoneTorchCapacitor() /*override*/;
+    virtual ~RedstoneTorchCapacitor() /*override*/ = default;
 
     virtual uchar getPoweroutDirection() const /*override*/;
 
@@ -76,12 +76,6 @@ public:
     virtual ::RedstoneLogicExecutionFlags getLogicExecutionFlags() const /*override*/;
 
     virtual void updateDependencies(::CircuitSceneGraph& system, ::BlockPos const& pos) /*override*/;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCFOLD void $dtor();
     // NOLINTEND
 
 public:

@@ -8,10 +8,16 @@
 
 #if defined(LL_PLAT_A)
 #include "levilamina_header_include_all_android.h"
-#elif defined(LL_PLAT_S)
+#else
+// Upstream H forward-declares these types before instantiating value storage.
+// Use their actual upstream definitions while preserving the published blobs.
+#include "mc/deps/core/memory/MoodyCamelBedrockMemoryTraits.h"
+#include "mc/external/bx/StringT.h"
+#if defined(LL_PLAT_S)
 #include "levilamina_header_include_all_server.h"
 #else
 #include "levilamina_header_include_all_client.h"
+#endif
 #endif
 
 int main() { return 0; }

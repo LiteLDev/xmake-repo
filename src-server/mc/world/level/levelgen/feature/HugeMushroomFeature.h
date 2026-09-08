@@ -29,9 +29,13 @@ public:
 public:
     // member functions
     // NOLINTBEGIN
-    MCAPI bool _canSurvive(::Block const& belowBlock) const;
-
     MCAPI bool placeFixed(::BlockSource& region, ::BlockPos const& pos, int mushroomType, int height) const;
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCAPI static bool _canSurvive(::Block const& belowBlock);
     // NOLINTEND
 
 public:

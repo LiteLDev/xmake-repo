@@ -35,7 +35,11 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
+#ifdef LL_PLAT_S
     virtual ~PackManifestFactory() /*override*/;
+#else // LL_PLAT_C
+    virtual ~PackManifestFactory() /*override*/ = default;
+#endif
 
     virtual ::std::unique_ptr<::PackManifest> create(
         ::PackAccessStrategy&     accessStrategy,
@@ -70,7 +74,9 @@ public:
 public:
     // destructor thunk
     // NOLINTBEGIN
+#ifdef LL_PLAT_S
     MCNAPI void $dtor();
+#endif
     // NOLINTEND
 
 public:

@@ -3,8 +3,8 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/deps/shared_types/ArmSizeType.h"
-#include "mc/deps/shared_types/BodySizeType.h"
+#include "mc/deps/shared_types/persona/ArmSizeType.h"
+#include "mc/deps/shared_types/persona/BodySizeType.h"
 
 namespace persona {
 
@@ -34,13 +34,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~SizeSectionModel();
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCFOLD void $dtor();
+    virtual ~SizeSectionModel() = default;
     // NOLINTEND
 };
 

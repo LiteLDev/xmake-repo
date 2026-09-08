@@ -99,7 +99,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~WorldResourcePackHandler() /*override*/;
+    virtual ~WorldResourcePackHandler() /*override*/ = default;
 
     virtual ::World::WorldPacks& loadPackContentForWorld(::LevelSummary const& levelSummary) /*override*/;
 
@@ -268,12 +268,6 @@ public:
         ::std::unique_ptr<::World::IWorldResourcePackDownloader>   worldResourcePackDownloader,
         ::IMinecraftEventing&                                      eventing
     );
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

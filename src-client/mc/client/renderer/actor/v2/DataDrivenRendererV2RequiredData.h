@@ -4,7 +4,7 @@
 
 // auto generated inclusion list
 #include "mc/client/renderer/actor/v2/DataDrivenV2ResetPoint.h"
-#include "mc/ddrv2__PoolHandle.h"
+#include "mc/client/renderer/actor/v2/ddrv2/PoolHandle.h"
 #include "mc/deps/core/string/HashedString.h"
 
 // auto generated forward declare list

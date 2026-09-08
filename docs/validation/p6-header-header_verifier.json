@@ -1,0 +1,41 @@
+{
+  "attempt_logs": [
+    {
+      "name": "header-verifier.log",
+      "sha256": "DCBB45259DB73219A025F3FB73FD93B8F3F6DE4E09174FEF8FD9071CE6ECB7A3"
+    },
+    {
+      "name": "header-verifier-run2.log",
+      "sha256": "3D301C8CE99908ADCDD73DA1A75E2BCA14211E9A2BD2427245CBB0624BE5CCC0"
+    },
+    {
+      "name": "header-verifier-run2.stderr.log",
+      "sha256": "485231804DE569F561B32E726B519A5F2BBD7576D7C2AA6E7BCE5E54C5A42423"
+    },
+    {
+      "name": "header-verifier-analysis.log",
+      "sha256": "751AE60A2B416D249290E8776765BF239A68384D6470E31AA5C1EC36A54E2E0B"
+    },
+    {
+      "name": "header-verifier-recovered.log",
+      "sha256": "DCBB45259DB73219A025F3FB73FD93B8F3F6DE4E09174FEF8FD9071CE6ECB7A3"
+    }
+  ],
+  "gate": "header_verifier",
+  "issue_count": null,
+  "manifest_sha256": "9E749942E6F664F56E73C266DB46F73CC45A329463DF576F7C7B83DC0A51DB58",
+  "reason": "Verifier allocation failures under insufficient system commit headroom; waiting for external memory load to be released.",
+  "rebuilt_executable_sha256": "3AE75C77A45F72EE36A11DC35BFEC8D7E61B069303EF869E144BF4DD2E82614A",
+  "recovered_executable_sha256": "A84E59FC2D47D66C7B30F28605A5C67F773024FCF5857CBADD3CC4DDA7446DE5",
+  "recovered_source_identity": {
+    "matching_project_files": 18,
+    "pdb_age": 15,
+    "pdb_guid": "B34353A1-AB1C-462D-81A3-4D702BCD9AD6",
+    "project_source_checksums_match_frozen_commit": true
+  },
+  "required_headroom_estimate_gib": 36,
+  "schema_version": 1,
+  "source_commit": "cf44b94232975641f5eeb758ce122d798dda7941",
+  "status": "blocked",
+  "target_sha256": "1CCBC128196E1A522B0000E81CBDCCF6CA3E7025F2D99E1640877D35B860665F"
+}

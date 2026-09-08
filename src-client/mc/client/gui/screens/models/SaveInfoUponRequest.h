@@ -4,7 +4,7 @@
 
 // auto generated inclusion list
 #include "mc/client/services/persona/PieceOfferWrapper.h"
-#include "mc/deps/shared_types/PieceSide.h"
+#include "mc/deps/shared_types/persona/PieceSide.h"
 #include "mc/world/actor/player/persona/PersonaCharacterHandle.h"
 
 struct SaveInfoUponRequest {

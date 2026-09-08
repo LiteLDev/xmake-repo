@@ -3,7 +3,6 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/FeedbackType.h"
 #include "mc/client/gui/StoreNavigationOrigin.h"
 #include "mc/client/gui/screens/controllers/MarketplacePassTabIndex.h"
 #include "mc/client/gui/screens/controllers/SlotSelectedAction.h"
@@ -21,6 +20,7 @@
 #include "mc/deps/core/utility/NonOwnerPointer.h"
 #include "mc/identity/IdentityType.h"
 #include "mc/network/EditorConnectionJoinIntent.h"
+#include "mc/options/FeedbackType.h"
 #include "mc/platform/brstd/move_only_function.h"
 #include "mc/util/DownloadError.h"
 #include "mc/util/UploadState.h"

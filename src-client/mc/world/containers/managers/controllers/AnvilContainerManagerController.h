@@ -53,11 +53,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-#ifdef LL_PLAT_S
     virtual ~AnvilContainerManagerController() /*override*/ = default;
-#else // LL_PLAT_C
-    virtual ~AnvilContainerManagerController() /*override*/;
-#endif
 
     virtual void postInit(::std::weak_ptr<::ContainerManagerController> self) /*override*/;
 
@@ -130,12 +126,6 @@ public:
 #ifdef LL_PLAT_C
     MCNAPI void* $ctor(::std::weak_ptr<::AnvilContainerManagerModel> containerManagerModel);
 #endif
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

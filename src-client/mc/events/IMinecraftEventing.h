@@ -3,7 +3,6 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/Connection__ReconnectionType.h"
 #include "mc/certificates/identity/ActiveDirectoryAction.h"
 #include "mc/certificates/identity/LastClickedSource.h"
 #include "mc/certificates/identity/edu/Role.h"
@@ -53,6 +52,7 @@
 #include "mc/network/PacketViolationResponse.h"
 #include "mc/network/TransportLayer.h"
 #include "mc/network/connection/DisconnectFailReason.h"
+#include "mc/network/connection/ReconnectionType.h"
 #include "mc/network/services/signaling/SignalServiceConnectStage.h"
 #include "mc/platform/brstd/function_ref.h"
 #include "mc/server/commands/CommandPermissionLevel.h"
@@ -457,7 +457,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~IMinecraftEventing() /*override*/;
+    virtual ~IMinecraftEventing() /*override*/ = default;
 
     virtual void init(::Bedrock::NonOwnerPointer<::AppPlatform> const& appPlatform) = 0;
 
@@ -2115,12 +2115,6 @@ public:
         ::std::string const&                 destinationPage,
         ::Social::Events::PageDisplayRecord& data
     ) = 0;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

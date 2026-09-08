@@ -38,7 +38,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~ScriptPrefabTemplateStructure();
+    virtual ~ScriptPrefabTemplateStructure() = default;
     // NOLINTEND
 
 public:
@@ -64,12 +64,6 @@ public:
 
     MCNAPI ::Scripting::Result<::Vec3, ::Editor::ScriptModule::ScriptPrefabErrorInvalidTemplateStructure>
     _getStructureSize() const;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 };
 

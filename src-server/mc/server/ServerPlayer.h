@@ -4,8 +4,8 @@
 
 // auto generated inclusion list
 #include "mc/certificates/identity/PlayerAuthenticationType.h"
+#include "mc/client/gui/oreui/binding/queries/core/PlatformType.h"
 #include "mc/common/SubClientId.h"
-#include "mc/deps/core/platform/PlatformType.h"
 #include "mc/deps/core/string/HashedString.h"
 #include "mc/deps/core/utility/CrashDumpLogStringID.h"
 #include "mc/deps/core/utility/NonOwnerPointer.h"

@@ -48,9 +48,9 @@ public:
     MCAPI void setBoneBindingExpression(::std::string const& bindingExpression, ::MolangVersion molangVersion);
 
     MCAPI void LL_CC_V updateBoneTransform(::Vec3 const* offset, ::DirectX::XMMATRIX& boneToEntitySpaceMatrix);
-#endif
 
     MCAPI ~BoneOrientation();
+#endif
     // NOLINTEND
 
 public:
@@ -78,6 +78,8 @@ public:
 public:
     // destructor thunk
     // NOLINTBEGIN
+#ifdef LL_PLAT_C
     MCAPI void $dtor();
+#endif
     // NOLINTEND
 };

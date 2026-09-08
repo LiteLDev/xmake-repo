@@ -3,7 +3,7 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/deps/shared_types/ArmSizeType.h"
+#include "mc/deps/shared_types/persona/ArmSizeType.h"
 
 // auto generated forward declare list
 // clang-format off

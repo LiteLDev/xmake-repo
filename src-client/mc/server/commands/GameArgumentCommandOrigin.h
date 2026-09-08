@@ -28,11 +28,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-#ifdef LL_PLAT_S
     virtual ~GameArgumentCommandOrigin() /*override*/ = default;
-#else // LL_PLAT_C
-    virtual ~GameArgumentCommandOrigin() /*override*/;
-#endif
 
     virtual ::std::string const& getRequestId() const /*override*/;
 
@@ -63,12 +59,6 @@ public:
     virtual ::CompoundTag serialize() const /*override*/;
 
     virtual bool isValid() const /*override*/;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCFOLD void $dtor();
     // NOLINTEND
 
 public:

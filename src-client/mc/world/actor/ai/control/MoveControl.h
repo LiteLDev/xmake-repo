@@ -17,7 +17,7 @@ class MoveControl : public ::Control {
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~MoveControl() /*override*/;
+    virtual ~MoveControl() /*override*/ = default;
 
     virtual void initializeInternal(::Mob& mob, ::MoveControlDescription const* description);
 
@@ -27,29 +27,24 @@ public:
     // NOLINTEND
 
 public:
-    // member functions
+    // static functions
     // NOLINTBEGIN
-    MCAPI float calculateMoveSpeed(
+    MCAPI static float calculateMoveSpeed(
         ::MoveControlComponent const& parent,
         ::Mob&                        mob,
         ::Vec3 const&                 endPosition,
         float const                   maxMoveSpeed
     );
 
-    MCAPI float calculateYRotation(
+    MCAPI static float calculateYRotation(
         ::MoveControlComponent const& parent,
         ::Mob const&                  mob,
         ::Vec3 const&                 positionDifference,
         float const                   maxMoveSpeed
     );
 
-    MCAPI bool shouldSlowSpeed(::MoveControlComponent const& parent, ::Mob const& mob, float const endDistanceSqr);
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCFOLD void $dtor();
+    MCAPI static bool
+    shouldSlowSpeed(::MoveControlComponent const& parent, ::Mob const& mob, float const endDistanceSqr);
     // NOLINTEND
 
 public:

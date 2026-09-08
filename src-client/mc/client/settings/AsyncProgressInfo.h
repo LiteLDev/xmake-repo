@@ -3,7 +3,7 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/Settings__AsyncProgressCancelInfo.h"
+#include "mc/client/settings/AsyncProgressCancelInfo.h"
 
 namespace Settings {
 

@@ -25,15 +25,9 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~TouchTextButtonControl() /*override*/;
+    virtual ~TouchTextButtonControl() /*override*/ = default;
 
     virtual void render(::InputRenderContext& context) const /*override*/;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

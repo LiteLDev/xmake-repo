@@ -82,7 +82,16 @@ public:
         ::std::set<::HashedString, ::Util::HashStringHashGreater>& animationControllerNameStack
     );
 
-    MCAPI void blendViaShortestPath(
+#ifdef LL_PLAT_C
+    MCAPI ::std::shared_ptr<::ActorAnimationControllerStatePlayer>
+    getStatePlayer(::HashedString const& stateName, ::AnimationComponent& animationComponent, bool createIfMissing);
+#endif
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCAPI static void blendViaShortestPath(
         ::std::unordered_map<::SkeletalHierarchyIndex, ::std::vector<::BoneOrientation>>& destBoneOrientationsMap,
         ::std::unordered_map<::SkeletalHierarchyIndex, ::std::vector<::BoneOrientation>> const&
             blendOutBoneOrientationsMap,
@@ -91,11 +100,6 @@ public:
         float blendInWeight,
         float blendWeight
     );
-
-#ifdef LL_PLAT_C
-    MCAPI ::std::shared_ptr<::ActorAnimationControllerStatePlayer>
-    getStatePlayer(::HashedString const& stateName, ::AnimationComponent& animationComponent, bool createIfMissing);
-#endif
     // NOLINTEND
 
 public:

@@ -47,7 +47,7 @@ class IScriptWorldBeforeEvents {
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~IScriptWorldBeforeEvents();
+    virtual ~IScriptWorldBeforeEvents() = default;
 
     virtual ::std::optional<::Scripting::StrongTypedObjectHandle<::ScriptModuleMinecraft::ScriptChatSendBeforeEvent>>
     onBeforeChat(::ChatEvent const& chatEvent, ::Player const& player);
@@ -116,12 +116,6 @@ public:
 
     virtual ::std::optional<::Scripting::StrongTypedObjectHandle<::ScriptModuleMinecraft::ScriptItemUseOnBeforeEvent>>
     onBeforeItemUseOn(::Player const& player, ::ItemUseOnEvent const& itemEvent);
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCFOLD void $dtor();
     // NOLINTEND
 
 public:

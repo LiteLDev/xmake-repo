@@ -28,7 +28,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~BaseScriptGameTestFunction() /*override*/;
+    virtual ~BaseScriptGameTestFunction() /*override*/ = default;
 
     virtual ::std::unique_ptr<::gametest::IGameTestFunctionContext>
     createContext(::gametest::BaseGameTestHelper& helper) const /*override*/;
@@ -44,12 +44,6 @@ public:
     // constructor thunks
     // NOLINTBEGIN
     MCAPI void* $ctor(::Scripting::WeakLifetimeScope scope, ::std::string const& testName);
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

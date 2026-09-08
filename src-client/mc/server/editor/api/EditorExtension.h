@@ -36,19 +36,13 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~EditorExtension() /*override*/;
+    virtual ~EditorExtension() /*override*/ = default;
     // NOLINTEND
 
 public:
     // static functions
     // NOLINTBEGIN
     MCNAPI static ::Scripting::ClassBinding bindScript();
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 };
 

@@ -3,11 +3,11 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/MovePlayerTeleportData.h"
 #include "mc/deps/core/math/Vec2.h"
 #include "mc/deps/core/math/Vec3.h"
 #include "mc/entity/components/PlayerPositionModeComponent.h"
 #include "mc/legacy/ActorRuntimeID.h"
+#include "mc/network/packet/MovePlayerTeleportData.h"
 #include "mc/network/packet/PlayerInputTick.h"
 
 // auto generated forward declare list

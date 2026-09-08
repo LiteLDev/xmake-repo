@@ -34,7 +34,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~ContentView() /*override*/;
+    virtual ~ContentView() /*override*/ = default;
     // NOLINTEND
 
 public:
@@ -47,11 +47,5 @@ public:
     MCAPI void setSortFunc(
         ::std::function<bool(::std::shared_ptr<::ContentItem> const&, ::std::shared_ptr<::ContentItem> const&)> sortFunc
     );
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 };

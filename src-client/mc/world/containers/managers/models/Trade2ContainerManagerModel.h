@@ -41,7 +41,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~Trade2ContainerManagerModel() /*override*/;
+    virtual ~Trade2ContainerManagerModel() /*override*/ = default;
 
     virtual ::std::vector<::ItemStack> getItemCopies() const /*override*/;
 
@@ -102,12 +102,6 @@ public:
     // constructor thunks
     // NOLINTBEGIN
     MCAPI void* $ctor(::ContainerID containerId, ::Player& player, ::ActorUniqueID const& uniqueId);
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCFOLD void $dtor();
     // NOLINTEND
 
 public:

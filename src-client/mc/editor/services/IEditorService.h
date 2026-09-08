@@ -35,7 +35,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~IEditorService() /*override*/;
+    virtual ~IEditorService() /*override*/ = default;
 
     virtual ::Scripting::Result_deprecated<void> init() = 0;
 
@@ -54,12 +54,6 @@ public:
     virtual bool isServiceReady() const;
 
     virtual bool isServiceStarted() const;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

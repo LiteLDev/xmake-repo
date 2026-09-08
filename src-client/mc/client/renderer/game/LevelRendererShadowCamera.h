@@ -3,8 +3,8 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/LevelRendererCameraType.h"
 #include "mc/client/renderer/game/LevelRendererCameraListeners.h"
+#include "mc/client/renderer/game/LevelRendererCameraType.h"
 #include "mc/deps/minecraft_renderer/game/LevelCullerType.h"
 
 // auto generated forward declare list

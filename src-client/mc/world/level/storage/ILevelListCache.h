@@ -28,7 +28,7 @@ class ILevelListCache : public ::Bedrock::EnableNonOwnerReferences {
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~ILevelListCache() /*override*/;
+    virtual ~ILevelListCache() /*override*/ = default;
 
     virtual void addLevel(::std::string const& levelId, ::LevelData&& levelData) = 0;
 
@@ -117,11 +117,5 @@ public:
     virtual ::Core::PathBuffer<::std::string> const getBasePath() const = 0;
 
     virtual ::Core::PathBuffer<::std::string> const getPathToLevel(::std::string const& levelId) const = 0;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 };

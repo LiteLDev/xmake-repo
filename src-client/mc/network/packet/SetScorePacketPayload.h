@@ -3,10 +3,10 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/ChangeEntityScore.h"
-#include "mc/ChangeFakePlayerScore.h"
-#include "mc/ChangePlayerScore.h"
-#include "mc/RemoveScore.h"
+#include "mc/network/packet/ChangeEntityScore.h"
+#include "mc/network/packet/ChangeFakePlayerScore.h"
+#include "mc/network/packet/ChangePlayerScore.h"
+#include "mc/network/packet/RemoveScore.h"
 
 // auto generated forward declare list
 // clang-format off

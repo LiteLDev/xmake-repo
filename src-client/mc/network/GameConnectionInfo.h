@@ -4,11 +4,11 @@
 
 // auto generated inclusion list
 #include "mc/certificates/identity/ServerSupportedAuthenticationTypes.h"
-#include "mc/client/social/ResolvedExperienceInfo.h"
 #include "mc/deps/nether_net/NetworkID.h"
 #include "mc/deps/raknet/RakNetGUID.h"
 #include "mc/network/ConnectionType.h"
 #include "mc/network/Nonce.h"
+#include "mc/network/ResolvedExperienceInfo.h"
 #include "mc/network/ThirdPartyInfo.h"
 #include "mc/network/services/signaling/player_messaging/NetworkID.h"
 

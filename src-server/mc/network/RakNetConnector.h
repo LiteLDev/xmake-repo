@@ -41,7 +41,7 @@ public:
     public:
         // virtual functions
         // NOLINTBEGIN
-        virtual ~ConnectionCallbacks() /*override*/;
+        virtual ~ConnectionCallbacks() /*override*/ = default;
 
         virtual void
         onAllConnectionsClosed(::Connection::DisconnectFailReason discoReason, bool skipDisconnectMessage) = 0;
@@ -56,12 +56,6 @@ public:
             ::std::string const&    payload,
             ::std::function<void()> errorCallback
         ) = 0;
-        // NOLINTEND
-
-    public:
-        // destructor thunk
-        // NOLINTBEGIN
-        MCAPI void $dtor();
         // NOLINTEND
     };
 

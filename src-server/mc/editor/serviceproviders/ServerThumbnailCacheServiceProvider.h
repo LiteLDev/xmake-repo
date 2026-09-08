@@ -13,15 +13,9 @@ class ServerThumbnailCacheServiceProvider {
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~ServerThumbnailCacheServiceProvider();
+    virtual ~ServerThumbnailCacheServiceProvider() = default;
 
     virtual bool remove(::mce::UUID id, ::std::optional<uint> hash) = 0;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 };
 

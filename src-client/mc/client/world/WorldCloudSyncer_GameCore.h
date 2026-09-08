@@ -38,7 +38,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~WorldCloudSyncer_GameCore() /*override*/;
+    virtual ~WorldCloudSyncer_GameCore() /*override*/ = default;
 
     virtual void syncWorld(
         ::World::WorldID const&                                     id,
@@ -66,12 +66,6 @@ public:
     // member functions
     // NOLINTBEGIN
     MCAPI bool _isSharedFolderWorld(::World::WorldID const& id) const;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

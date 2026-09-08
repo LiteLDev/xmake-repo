@@ -47,8 +47,6 @@ public:
         ::Editor::ServiceProviderCollection&  playerServices,
         ::Scripting::WeakLifetimeScope const& scope
     );
-
-    MCNAPI ~ScriptInternalPlayerServiceContext();
     // NOLINTEND
 
 public:
@@ -62,12 +60,6 @@ public:
     // NOLINTBEGIN
     MCNAPI void*
     $ctor(::Editor::ServiceProviderCollection& playerServices, ::Scripting::WeakLifetimeScope const& scope);
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 };
 

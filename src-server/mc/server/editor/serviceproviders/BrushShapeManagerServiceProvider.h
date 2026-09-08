@@ -25,7 +25,7 @@ class BrushShapeManagerServiceProvider {
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~BrushShapeManagerServiceProvider();
+    virtual ~BrushShapeManagerServiceProvider() = default;
 
     virtual ::Editor::RelativeVolumeListBlockVolume const& getCurrentBrushVolume() const = 0;
 
@@ -95,12 +95,6 @@ public:
     virtual void clearBlockStateOverrides() = 0;
 
     virtual void setBlockFacePlacementBasedOnCamera(bool const enable) = 0;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 };
 

@@ -70,7 +70,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~ScriptWidget();
+    virtual ~ScriptWidget() = default;
 
     virtual ::AABB const& _getWorldBounds() const /*override*/;
 
@@ -169,12 +169,6 @@ public:
     // static functions
     // NOLINTBEGIN
     MCNAPI static ::Scripting::ClassBinding bindScript();
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

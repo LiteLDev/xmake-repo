@@ -35,7 +35,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~Packet();
+    virtual ~Packet() = default;
 
     virtual ::MinecraftPacketIds getId() const = 0;
 
@@ -84,12 +84,6 @@ public:
         ::cereal::ReflectionCtx const& reflectionCtx,
         ::SubClientId const&           subid
     );
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCFOLD void $dtor();
     // NOLINTEND
 
 public:

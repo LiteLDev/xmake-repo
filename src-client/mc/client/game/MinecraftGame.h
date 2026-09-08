@@ -5,6 +5,7 @@
 // auto generated inclusion list
 #include "mc/certificates/identity/edu/CredentialsObserver.h"
 #include "mc/certificates/identity/edu/GenericCredentialsEvent.h"
+#include "mc/client/events/OnlineSafetyDialogVisibility.h"
 #include "mc/client/game/DeferredTaskCategory.h"
 #include "mc/client/game/IMinecraftGame.h"
 #include "mc/client/game/IMultiPlayerServices.h"
@@ -12,7 +13,6 @@
 #include "mc/client/game/StartIntent.h"
 #include "mc/client/game/local_server_launcher/ILocalServerLauncherImpl.h"
 #include "mc/client/gui/GameEventNotification.h"
-#include "mc/client/gui/screens/OnlineSafetyDialogVisibility.h"
 #include "mc/client/options/OptionsObserver.h"
 #include "mc/client/renderer/texture/TextureAtlasStatus.h"
 #include "mc/client/social/JoinGameStatus.h"

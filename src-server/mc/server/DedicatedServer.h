@@ -3,7 +3,6 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/ServerExitCode.h"
 #include "mc/common/IMinecraftApp.h"
 #include "mc/common/SubClientId.h"
 #include "mc/deps/core/utility/NonOwnerPointer.h"
@@ -11,6 +10,7 @@
 #include "mc/deps/core/utility/ServiceRegistrationToken.h"
 #include "mc/deps/core/utility/UniqueOwnerPointer.h"
 #include "mc/network/PacketGroupDefinition.h"
+#include "mc/server/ServerExitCode.h"
 
 // auto generated forward declare list
 // clang-format off

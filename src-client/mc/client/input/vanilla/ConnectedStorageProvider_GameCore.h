@@ -70,7 +70,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~ConnectedStorageProvider_GameCore() /*override*/;
+    virtual ~ConnectedStorageProvider_GameCore() /*override*/ = default;
 
     virtual void shutdown() /*override*/;
 
@@ -176,12 +176,6 @@ public:
     // constructor thunks
     // NOLINTBEGIN
     MCAPI void* $ctor(::Core::RemoteProviderInitializer&& initializer);
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

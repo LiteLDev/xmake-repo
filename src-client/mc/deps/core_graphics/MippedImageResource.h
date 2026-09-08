@@ -23,11 +23,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-#ifdef LL_PLAT_S
     virtual ~MippedImageResource() /*override*/ = default;
-#else // LL_PLAT_C
-    virtual ~MippedImageResource() /*override*/;
-#endif
 
     virtual bool isEmpty() const /*override*/;
 
@@ -45,12 +41,6 @@ public:
     unwrapImageData() /*override*/;
 
     virtual ::cg::ImageDescription getImageDescription(uchar mipLevel) const /*override*/;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

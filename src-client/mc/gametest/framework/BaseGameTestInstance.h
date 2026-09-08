@@ -62,7 +62,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~BaseGameTestInstance();
+    virtual ~BaseGameTestInstance() = default;
 
     virtual void initialize();
 
@@ -121,12 +121,6 @@ public:
         ::gametest::BaseGameTestFunction const&                testFunction,
         ::std::unique_ptr<::gametest::IGameTestHelperProvider> helper
     );
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

@@ -25,7 +25,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~ItemStackRequestAction();
+    virtual ~ItemStackRequestAction() = default;
 
     virtual ::ItemStackRequestActionCraftBase const* getCraftAction() const;
 
@@ -50,12 +50,6 @@ public:
     // static variables
     // NOLINTBEGIN
     MCAPI static ::BidirectionalUnorderedMap<::ItemStackRequestActionType, ::std::string> const& actionTypeMap();
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCFOLD void $dtor();
     // NOLINTEND
 
 public:

@@ -39,11 +39,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-#ifdef LL_PLAT_S
     virtual ~SignalingServiceSignInJob() /*override*/ = default;
-#else // LL_PLAT_C
-    virtual ~SignalingServiceSignInJob() /*override*/;
-#endif
 
     virtual void OnLanEvent(::NetherNet::LanEvents::MessageSent const& event) /*override*/;
 
@@ -79,12 +75,6 @@ public:
         ::Bedrock::Threading::Async<::std::optional<::PlayerMessaging::NetworkID>>&& playerMessagingId
     );
 #endif
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

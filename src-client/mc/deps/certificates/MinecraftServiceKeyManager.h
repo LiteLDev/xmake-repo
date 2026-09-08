@@ -70,7 +70,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~MinecraftServiceKeyManager() /*override*/;
+    virtual ~MinecraftServiceKeyManager() /*override*/ = default;
     // NOLINTEND
 
 public:
@@ -128,11 +128,5 @@ public:
             ::std::optional<::std::unordered_map<::std::string, ::WebKey>>>(::TaskGroup&, ::std::string const&, bool)>
             keysFn
     );
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 };

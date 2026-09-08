@@ -562,14 +562,6 @@ public:
 public:
     // member functions
     // NOLINTBEGIN
-    MCAPI void _handleUnlockedRecipesByTag(
-        ::UnlockedRecipesClientComponent const&                                                   component,
-        ::std::map<::HashedString, ::std::map<::std::string, ::std::shared_ptr<::Recipe>>> const& allRecipes,
-        ::std::string const&                                                                      recipeId,
-        ::HashedString const&                                                                     tag,
-        ::std::vector<::ToastIconData>&                                                           newRecipeToastDataRef
-    );
-
     MCAPI void queueHandleWorldChangePacket(
         ::NetworkIdentifier const&              source,
         ::BlockPos const&                       requiredPos,
@@ -580,6 +572,14 @@ public:
 public:
     // static functions
     // NOLINTBEGIN
+    MCAPI static void _handleUnlockedRecipesByTag(
+        ::UnlockedRecipesClientComponent const&                                                   component,
+        ::std::map<::HashedString, ::std::map<::std::string, ::std::shared_ptr<::Recipe>>> const& allRecipes,
+        ::std::string const&                                                                      recipeId,
+        ::HashedString const&                                                                     tag,
+        ::std::vector<::ToastIconData>&                                                           newRecipeToastDataRef
+    );
+
     MCAPI static ::ClientNetworkHandler::SubscribedHostPacks
     createHostPacks(::PackDownloadManager& downloadMaager, ::IContentManager& contentManager);
     // NOLINTEND

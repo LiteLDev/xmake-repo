@@ -3,8 +3,8 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/deps/shared_types/SummonActorGoalDefinition.h"
 #include "mc/deps/shared_types/legacy/LevelSoundEvent.h"
+#include "mc/deps/shared_types/v1_26_40/actor/SummonActorGoalDefinition.h"
 #include "mc/world/actor/ActorDefinitionIdentifier.h"
 
 struct SummonSpellStage {

@@ -29,7 +29,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~HudContainerModel() /*override*/;
+    virtual ~HudContainerModel() /*override*/ = default;
 
     virtual void containerContentChanged(int slot) /*override*/;
 
@@ -56,12 +56,6 @@ public:
 #ifdef LL_PLAT_S
     MCAPI void* $ctor(::ContainerEnumName containerName, ::Player& player);
 #endif
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCFOLD void $dtor();
     // NOLINTEND
 
 public:

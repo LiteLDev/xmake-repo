@@ -72,11 +72,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-#ifdef LL_PLAT_S
     virtual ~HttpAudioFetcher() /*override*/ = default;
-#else // LL_PLAT_C
-    virtual ~HttpAudioFetcher() /*override*/;
-#endif
 
     virtual void start() /*override*/;
 
@@ -121,12 +117,6 @@ public:
         ::Audio::OnlineStreamConfig const&
     )> createFetcherFactory(::Bedrock::NotNullNonOwnerPtr<::TaskGroup> const& taskGroup);
 #endif
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

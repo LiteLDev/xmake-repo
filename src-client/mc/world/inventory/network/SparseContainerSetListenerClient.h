@@ -28,21 +28,11 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-#ifdef LL_PLAT_S
     virtual ~SparseContainerSetListenerClient() /*override*/ = default;
-#else // LL_PLAT_C
-    virtual ~SparseContainerSetListenerClient() /*override*/;
-#endif
 
     virtual void preSetItem(::Container* container, int slot, bool isEmptyItem, ::ItemStack* item) /*override*/;
 
     virtual bool postSetItem(::Container* container, ::ItemStack& item) /*override*/;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

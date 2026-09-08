@@ -3,11 +3,11 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/MobEffectIds.h"
 #include "mc/deps/core/container/DenseEnumMap.h"
 #include "mc/deps/core/math/Color.h"
 #include "mc/deps/core/string/HashedString.h"
 #include "mc/deps/shared_types/legacy/LevelSoundEvent.h"
+#include "mc/world/effect/MobEffectIds.h"
 
 // auto generated forward declare list
 // clang-format off

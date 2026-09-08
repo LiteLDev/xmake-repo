@@ -22,7 +22,7 @@ class IScriptItemCustomComponentWriter {
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~IScriptItemCustomComponentWriter();
+    virtual ~IScriptItemCustomComponentWriter() = default;
 
     virtual ::Scripting::Result<
         void,
@@ -47,12 +47,6 @@ public:
         ::HashedString const&                                         componentName,
         ::ScriptModuleMinecraft::ScriptItemCustomComponentInterface&& closures
     ) = 0;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 };
 

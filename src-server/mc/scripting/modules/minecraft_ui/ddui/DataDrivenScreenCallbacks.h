@@ -33,7 +33,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~DataDrivenScreenCallbacks();
+    virtual ~DataDrivenScreenCallbacks() = default;
 
     virtual void resolve(::DataDrivenScreenClosedReason resolution) /*override*/;
 
@@ -58,12 +58,6 @@ public:
         ::std::function<void(::DataDrivenScreenRejectReason)> rejectCallback,
         ::Scripting::StrongObjectHandle                       keepAliveHandle
     );
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

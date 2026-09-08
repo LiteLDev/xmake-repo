@@ -3,7 +3,6 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/Connection__ReconnectionType.h"
 #include "mc/certificates/identity/ActiveDirectoryAction.h"
 #include "mc/certificates/identity/LastClickedSource.h"
 #include "mc/certificates/identity/edu/Role.h"
@@ -54,6 +53,7 @@
 #include "mc/network/PacketViolationResponse.h"
 #include "mc/network/TransportLayer.h"
 #include "mc/network/connection/DisconnectFailReason.h"
+#include "mc/network/connection/ReconnectionType.h"
 #include "mc/network/services/signaling/SignalServiceConnectStage.h"
 #include "mc/platform/brstd/function_ref.h"
 #include "mc/platform/brstd/move_only_function.h"

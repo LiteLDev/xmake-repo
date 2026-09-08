@@ -3,7 +3,7 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/deps/shared_types/PushMode.h"
+#include "mc/deps/shared_types/actor/PushMode.h"
 #include "mc/deps/shared_types/v1_21_20/filter_groups/FilterGroupData.h"
 
 // auto generated forward declare list

@@ -1,0 +1,74 @@
+{
+  "exit_code": 0,
+  "gate": "windows_server_release",
+  "log": {
+    "bytes": 4093,
+    "name": "windows_server_release.log",
+    "sha256": "4D3341B89233FCCCBB1C324EE6DFFAF20353B6A259D8AF31F90E7E188E30E4B8"
+  },
+  "manifest_sha256": "9E749942E6F664F56E73C266DB46F73CC45A329463DF576F7C7B83DC0A51DB58",
+  "provenance": {
+    "android_dependency_manifest_sha256": "66DDEF1DB1B89D872EDAC888F3B07C0C19F052C325D43D1B8FB97CF3A6855262",
+    "base_release_commit": "a1e1f0d7be65959a4c68822cb861b3365ae43755",
+    "content_algorithm": "sha256(path-utf8 + NUL + Git-LF-bytes + NUL), ordinal path order",
+    "effective_views": {
+      "android": {
+        "headers": 17367,
+        "sha256": "4C68F48A202CBF892C316EA86B5FAE33FA77444A5033A2A34A52382BB31B45F2"
+      },
+      "client": {
+        "headers": 20864,
+        "sha256": "8F293880B6415DC8F177954F2B37DAD73C103956C7CDB966534F0A9E870E0CB1"
+      },
+      "server": {
+        "headers": 20791,
+        "sha256": "1F4258F098C67F43B1F3A0F8B997D5E8BCCF1FBC4763E858758890D21E9236DA"
+      }
+    },
+    "infrastructure_adjustments": [
+      {
+        "kind": "concurrentqueue-include-trailing-space",
+        "path": "mc/_HeaderOutputPredefine.h",
+        "platform": "client",
+        "published_sha256": "084A05B212FF2D961ED7267049762648AB01681B6FDE9CAFDB944ACC90F5E332",
+        "source_sha256": "0FFC73FBE94646B93E04D0062AA024913B8AE69C2EF987669BE8A0E1A21D39F5"
+      },
+      {
+        "kind": "concurrentqueue-include-trailing-space",
+        "path": "mc/_HeaderOutputPredefine.h",
+        "platform": "server",
+        "published_sha256": "084A05B212FF2D961ED7267049762648AB01681B6FDE9CAFDB944ACC90F5E332",
+        "source_sha256": "0FFC73FBE94646B93E04D0062AA024913B8AE69C2EF987669BE8A0E1A21D39F5"
+      }
+    ],
+    "kind": "upstream-header-sync",
+    "source_effective_views": {
+      "android": {
+        "headers": 17367,
+        "sha256": "4C68F48A202CBF892C316EA86B5FAE33FA77444A5033A2A34A52382BB31B45F2"
+      },
+      "client": {
+        "headers": 20864,
+        "sha256": "CBBDAF6AD54AAC5F0E49D5947A10E0B1B1F6D2CE13B59A4EE1E3D3C0821FBF1E"
+      },
+      "server": {
+        "headers": 20791,
+        "sha256": "8969459684645CBFB180F5FA3C92D883EC9F6145CB684F9457999A6848215D68"
+      }
+    },
+    "upstream_header_commit": "48f5fbfc2cbd539c08316d855555ce084478a678",
+    "upstream_include_precedence": "common-before-platform (upstream xmake Header harness)"
+  },
+  "schema_version": 1,
+  "source_algorithm": "sha256 of LF-normalized source text",
+  "source_files": {
+    "test/main.cpp": "4B4D5BBE945868658C61128AA1270E79EB8AA020CBE9A189AF89AAE778CFD1A2",
+    "xmake.lua": "16C52BE57419547B88869F9457203DC844FE323C6726B0D76F338CF3BF43E8C6"
+  },
+  "status": "passed",
+  "summary": {
+    "header_input_identity_evidence": "The pre-build release-validator log certifies this exact four-layer manifest.",
+    "source_hash_recording": "post-build recheck of the preserved inputs",
+    "source_identity_evidence": "The runner checked candidate/build-copy equality before compilation. The preserved isolated harness was rechecked after compilation; no harness content changed."
+  }
+}

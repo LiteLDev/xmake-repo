@@ -86,14 +86,6 @@ public:
     // member functions
     // NOLINTBEGIN
     MCNAPI void registerTask(uint64 id, ::std::string const& name, ::brstd::source_location const& location);
-
-    MCNAPI ~EditorCoroutineWatchdog();
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 };
 

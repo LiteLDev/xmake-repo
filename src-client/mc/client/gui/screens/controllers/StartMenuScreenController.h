@@ -3,7 +3,6 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/InboxIconFlightingState.h"
 #include "mc/certificates/identity/edu/CredentialsObserver.h"
 #include "mc/certificates/identity/edu/GenericCredentialsEvent.h"
 #include "mc/client/gui/DirtyFlag.h"
@@ -20,6 +19,7 @@
 #include "mc/deps/core/utility/NonOwnerPointer.h"
 #include "mc/deps/core/utility/pub_sub/Subscription.h"
 #include "mc/network/ExperiencePromotion.h"
+#include "mc/services/flighting/InboxIconFlightingState.h"
 
 // auto generated forward declare list
 // clang-format off

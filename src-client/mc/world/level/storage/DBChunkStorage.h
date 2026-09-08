@@ -90,7 +90,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~DBChunkStorage() /*override*/;
+    virtual ~DBChunkStorage() /*override*/ = default;
 
     virtual void shutdown() /*override*/;
 
@@ -195,9 +195,6 @@ public:
 
     MCAPI ::std::string _upgradeActorStorage(::ChunkKey chunkKey, ::std::string_view& legacyActorData);
 
-    MCAPI void
-    _writeActorDigest(::LevelStorageWriteBatch& batch, ::ChunkKey const& chunkKey, ::std::string const& digestBuffer);
-
     MCAPI void _writeDiscardChunksBatch();
     // NOLINTEND
 
@@ -206,17 +203,14 @@ public:
     // NOLINTBEGIN
     MCAPI static ::std::vector<::std::string> _deserializeChunkActorStorageKeys(::IDataInput& digestStream);
 
+    MCAPI static void
+    _writeActorDigest(::LevelStorageWriteBatch& batch, ::ChunkKey const& chunkKey, ::std::string const& digestBuffer);
+
     MCAPI static ::std::string deserializeActorStorageToString(
         bool                                                      hasActorDigestVersionTag,
         ::std::string const&                                      storageKeyDigestBuffer,
         ::std::function<bool(::std::string_view, ::std::string&)> loadDataCallback
     );
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

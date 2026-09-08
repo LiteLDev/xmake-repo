@@ -51,11 +51,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-#ifdef LL_PLAT_S
     virtual ~LocalNetworkPeer() /*override*/ = default;
-#else // LL_PLAT_C
-    virtual ~LocalNetworkPeer() /*override*/;
-#endif
 
     virtual void sendPacket(::std::string const& data, ::NetworkPeer::Reliability, ::Compressibility) /*override*/;
 
@@ -85,12 +81,6 @@ public:
 #ifdef LL_PLAT_C
     MCNAPI void* $ctor(::LocalConnector& connector);
 #endif
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

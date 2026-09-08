@@ -28,7 +28,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~RealmsPurchaseCommandsFacet() /*override*/;
+    virtual ~RealmsPurchaseCommandsFacet() /*override*/ = default;
 
     virtual bool update() /*override*/;
     // NOLINTEND
@@ -67,12 +67,6 @@ public:
         ::std::shared_ptr<::Realms::LegacyRealmsPurchase>           realmsPurchase,
         ::std::shared_ptr<::Realms::LegacyRealmsPurchaseReconciler> realmsPurchaseReconciler
     );
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCFOLD void $dtor();
     // NOLINTEND
 
 public:

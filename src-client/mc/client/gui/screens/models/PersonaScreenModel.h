@@ -10,7 +10,7 @@
 #include "mc/client/persona/SkinHandle.h"
 #include "mc/client/services/persona/DownloadImportManager.h"
 #include "mc/deps/core/utility/EnableNonOwnerReferences.h"
-#include "mc/deps/shared_types/PieceSide.h"
+#include "mc/deps/shared_types/persona/PieceSide.h"
 #include "mc/world/actor/player/persona/ProfileType.h"
 
 // auto generated forward declare list

@@ -22,7 +22,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~WorldLimitChunkSource() /*override*/;
+    virtual ~WorldLimitChunkSource() /*override*/ = default;
 
     virtual ::std::shared_ptr<::LevelChunk>
     createNewChunk(::ChunkPos const& cp, ::ChunkSource::LoadMode lm, bool readOnly) /*override*/;
@@ -34,12 +34,6 @@ public:
     virtual bool canCreateViews() const /*override*/;
 
     virtual ::std::unordered_map<::ChunkPos, ::std::weak_ptr<::LevelChunk>> const* getChunkMap() /*override*/;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

@@ -29,17 +29,11 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~BehaviorNode();
+    virtual ~BehaviorNode() = default;
 
     virtual ::BehaviorStatus tick(::Actor& owner) = 0;
 
     virtual void initializeFromDefinition(::Actor& owner);
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCFOLD void $dtor();
     // NOLINTEND
 
 public:

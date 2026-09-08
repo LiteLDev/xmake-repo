@@ -27,7 +27,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~SliderManagerComponent() /*override*/;
+    virtual ~SliderManagerComponent() /*override*/ = default;
 
     virtual ::std::unique_ptr<::UIComponent> clone(::UIControl& cloneOwner) const /*override*/;
 
@@ -45,12 +45,6 @@ public:
     // member functions
     // NOLINTBEGIN
     MCAPI void setGroupNames(::std::vector<uint> collectionName);
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCFOLD void $dtor();
     // NOLINTEND
 
 public:

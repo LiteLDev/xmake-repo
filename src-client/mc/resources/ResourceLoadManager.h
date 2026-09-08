@@ -75,16 +75,6 @@ public:
 
         MCNAPI ::Bedrock::Threading::Async<void>
         queueSync(::brstd::move_only_function<::TaskResult()> callback, uint taskPriority);
-
-        MCNAPI ~ResourceLoadTaskGroup();
-#endif
-        // NOLINTEND
-
-    public:
-        // destructor thunk
-        // NOLINTBEGIN
-#ifdef LL_PLAT_C
-        MCNAPI void $dtor();
 #endif
         // NOLINTEND
     };
@@ -110,12 +100,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-#ifdef LL_PLAT_S
     virtual ~ResourceLoadManager() /*override*/ = default;
-#else // LL_PLAT_C
-    virtual ~ResourceLoadManager() /*override*/;
-#endif
-
     // NOLINTEND
 
 public:
@@ -191,11 +176,5 @@ public:
 #ifdef LL_PLAT_C
     MCNAPI void* $ctor(::ResourceLoadManagerOptions&& ops);
 #endif
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 };

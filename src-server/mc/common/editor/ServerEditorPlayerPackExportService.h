@@ -28,7 +28,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~ServerEditorPlayerPackExportService() /*override*/;
+    virtual ~ServerEditorPlayerPackExportService() /*override*/ = default;
 
     virtual ::Scripting::Result_deprecated<void> init() /*override*/;
 
@@ -62,12 +62,6 @@ public:
     // constructor thunks
     // NOLINTBEGIN
     MCNAPI void* $ctor(::Editor::ServiceProviderCollection& providers);
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

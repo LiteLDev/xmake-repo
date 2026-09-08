@@ -16,11 +16,7 @@ class WorldClockRegistryClient : public ::WorldClockRegistry {
 public:
     // virtual functions
     // NOLINTBEGIN
-#ifdef LL_PLAT_S
     virtual ~WorldClockRegistryClient() /*override*/ = default;
-#else // LL_PLAT_C
-    virtual ~WorldClockRegistryClient() /*override*/;
-#endif
 
     virtual void tick(::PacketSender&, ::LevelData const& levelData) /*override*/;
     // NOLINTEND
@@ -37,12 +33,6 @@ public:
 
     MCAPI void _syncWorldClocksState(::SyncWorldClocksPacketPayload::SyncStateData const& data);
 #endif
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

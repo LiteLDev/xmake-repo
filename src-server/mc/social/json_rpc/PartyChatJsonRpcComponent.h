@@ -41,11 +41,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-#ifdef LL_PLAT_S
     virtual ~PartyChatJsonRpcComponent() /*override*/ = default;
-#else // LL_PLAT_C
-    virtual ~PartyChatJsonRpcComponent() /*override*/;
-#endif
 
     virtual void initialize(::std::shared_ptr<::JsonRpc::JsonRpcProvider> provider) /*override*/;
     // NOLINTEND
@@ -71,12 +67,6 @@ public:
 #ifdef LL_PLAT_C
     MCNAPI void* $ctor();
 #endif
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

@@ -75,7 +75,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~NetherNetServerLocator() /*override*/;
+    virtual ~NetherNetServerLocator() /*override*/ = default;
 
     virtual void startAnnouncingServer(
         ::std::string const&                 playerName,
@@ -129,12 +129,6 @@ public:
         ::Bedrock::NonOwnerPointer<::AppPlatform> const&      appPlatform,
         ::Bedrock::NonOwnerPointer<::SignalingService>        signalingService
     );
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

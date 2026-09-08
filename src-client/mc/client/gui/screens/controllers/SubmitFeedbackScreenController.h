@@ -3,9 +3,9 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/FeedbackType.h"
 #include "mc/client/gui/DirtyFlag.h"
 #include "mc/client/gui/screens/controllers/MainMenuScreenController.h"
+#include "mc/options/FeedbackType.h"
 
 // auto generated forward declare list
 // clang-format off

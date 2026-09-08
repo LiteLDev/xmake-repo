@@ -25,7 +25,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~InvalidResourceSource() /*override*/;
+    virtual ~InvalidResourceSource() /*override*/ = default;
 
     virtual void load() /*override*/;
 
@@ -38,12 +38,6 @@ public:
     // member functions
     // NOLINTBEGIN
     MCAPI bool invalidPacksChanged();
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

@@ -33,7 +33,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~TouchTurnInteractControl() /*override*/;
+    virtual ~TouchTurnInteractControl() /*override*/ = default;
 
     virtual void
     tick(::InputEventQueue& eventQueue, ::TouchPointResults& touchPointResults, int yAxisInversionFactor) /*override*/;
@@ -43,12 +43,6 @@ public:
     // member functions
     // NOLINTBEGIN
     MCAPI void switchState(::InputEventQueue& eventQueue, ::TouchTurnState newState);
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

@@ -24,7 +24,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~ScriptLootPoolEntry();
+    virtual ~ScriptLootPoolEntry() = default;
 
     virtual ::LootPoolEntry const& _getEntry() const = 0;
     // NOLINTEND
@@ -40,12 +40,6 @@ public:
     // static functions
     // NOLINTBEGIN
     MCAPI static ::Scripting::ClassBinding bind();
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 };
 

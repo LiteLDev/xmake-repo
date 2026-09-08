@@ -3,7 +3,7 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/Category.h"
+#include "mc/client/sound/Category.h"
 #include "mc/client/sound/CustomMusic.h"
 #include "mc/client/sound/Music.h"
 #include "mc/deps/core/threading/CountTracker.h"

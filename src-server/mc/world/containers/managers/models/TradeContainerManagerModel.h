@@ -22,7 +22,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~TradeContainerManagerModel() /*override*/;
+    virtual ~TradeContainerManagerModel() /*override*/ = default;
 
     virtual ::std::vector<::ItemStack> getItemCopies() const /*override*/;
 
@@ -49,12 +49,6 @@ public:
 
     MCAPI void recipeChanged();
 #endif
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCFOLD void $dtor();
     // NOLINTEND
 
 public:

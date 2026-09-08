@@ -12,13 +12,7 @@ class ServerStartServicesHandshakeRequestPayload
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~ServerStartServicesHandshakeRequestPayload() /*override*/;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
+    virtual ~ServerStartServicesHandshakeRequestPayload() /*override*/ = default;
     // NOLINTEND
 
 public:

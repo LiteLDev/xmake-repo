@@ -4,7 +4,7 @@
 
 // auto generated inclusion list
 #include "mc/client/gui/DirtyFlag.h"
-#include "mc/deps/shared_types/PieceType.h"
+#include "mc/deps/shared_types/persona/PieceType.h"
 #include "mc/world/actor/player/persona/ReactAnimationType.h"
 
 // auto generated forward declare list

@@ -3,7 +3,7 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/GameServerTokenValidationResult.h"
+#include "mc/certificates/identity/GameServerTokenValidationResult.h"
 #include "mc/deps/certificates/WebToken.h"
 
 // auto generated forward declare list

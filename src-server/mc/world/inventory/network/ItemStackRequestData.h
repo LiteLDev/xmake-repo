@@ -35,25 +35,25 @@ public:
     // member functions
     // NOLINTBEGIN
 #ifdef LL_PLAT_C
-    MCNAPI ItemStackRequestData(::ItemStackRequestData&&);
+    MCAPI ItemStackRequestData(::ItemStackRequestData&&);
 
-    MCNAPI ::ItemStackRequestData& operator=(::ItemStackRequestData&&);
+    MCAPI ::ItemStackRequestData& operator=(::ItemStackRequestData&&);
 #endif
 
-    MCNAPI ~ItemStackRequestData();
+    MCAPI ~ItemStackRequestData();
     // NOLINTEND
 
 public:
     // constructor thunks
     // NOLINTBEGIN
 #ifdef LL_PLAT_C
-    MCNAPI void* $ctor(::ItemStackRequestData&&);
+    MCAPI void* $ctor(::ItemStackRequestData&&);
 #endif
     // NOLINTEND
 
 public:
     // destructor thunk
     // NOLINTBEGIN
-    MCNAPI void $dtor();
+    MCAPI void $dtor();
     // NOLINTEND
 };

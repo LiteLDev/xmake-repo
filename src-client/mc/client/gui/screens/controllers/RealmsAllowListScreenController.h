@@ -144,9 +144,6 @@ public:
 
     MCAPI ::RealmPlayer* _getRealmPlayerFromXuid(::std::string const& xuid);
 
-    MCAPI ::RealmsAllowListScreenController::RealmPlayerList const
-    _getRealmPlayerListFromCollection(::UIPropertyBag const* bag) const;
-
     MCAPI void _handleDoesNotHavePermission(::std::function<void()> newWorldCallback);
 
     MCAPI void _handlePlayerInvite(::RealmPlayer& player);
@@ -183,6 +180,13 @@ public:
     );
 
     MCAPI void updateWorld(::Realms::World const& world, ::std::function<void()> callback);
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCAPI static ::RealmsAllowListScreenController::RealmPlayerList const
+    _getRealmPlayerListFromCollection(::UIPropertyBag const* bag);
     // NOLINTEND
 
 public:

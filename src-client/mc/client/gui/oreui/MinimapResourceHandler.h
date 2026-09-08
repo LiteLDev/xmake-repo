@@ -50,7 +50,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~MinimapResourceHandler() /*override*/;
+    virtual ~MinimapResourceHandler() /*override*/ = default;
 
     virtual void update() /*override*/;
 
@@ -73,12 +73,6 @@ public:
     // constructor thunks
     // NOLINTBEGIN
     MCAPI void* $ctor(::std::shared_ptr<::OreUI::IMinimapResourceProvider> minimapResourceProvider);
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCFOLD void $dtor();
     // NOLINTEND
 
 public:

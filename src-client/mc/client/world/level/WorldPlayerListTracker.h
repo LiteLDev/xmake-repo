@@ -39,7 +39,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~WorldPlayerListTracker();
+    virtual ~WorldPlayerListTracker() = default;
 
     virtual ::std::vector<::mce::UUID> const& getPlayerList();
 
@@ -56,12 +56,6 @@ public:
     MCAPI bool _updatePlayerList();
 
     MCAPI ::std::vector<::PlayerListEntry const*> getLobbyPlayerList();
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

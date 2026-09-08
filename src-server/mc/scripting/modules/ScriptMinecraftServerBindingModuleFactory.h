@@ -38,7 +38,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~ScriptMinecraftServerBindingModuleFactory() /*override*/;
+    virtual ~ScriptMinecraftServerBindingModuleFactory() /*override*/ = default;
     // NOLINTEND
 
 public:
@@ -80,11 +80,5 @@ public:
         ::WeakRef<::ScriptModuleMinecraft::ScriptBlockCustomComponentsRegistry const> blockCustomComponentRegistry,
         bool                                                                          importRestricted
     );
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 };

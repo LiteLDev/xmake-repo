@@ -73,7 +73,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~NetworkSession() /*override*/;
+    virtual ~NetworkSession() /*override*/ = default;
     // NOLINTEND
 
 public:
@@ -95,12 +95,6 @@ public:
     MCNAPI void _onStatsDelivered(::webrtc::RTCStatsReport const& report);
 
     MCNAPI void onIceConnectionChange(::webrtc::PeerConnectionInterface::IceConnectionState newState);
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 };
 

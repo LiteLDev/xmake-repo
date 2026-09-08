@@ -7,6 +7,7 @@
 #include "mc/deps/core/threading/Async.h"
 #include "mc/deps/core/threading/IBackgroundTaskOwner.h"
 #include "mc/deps/core/threading/SharedAsync.h"
+#include "mc/deps/core/threading/TaskGroupState.h"
 #include "mc/deps/core/utility/NonOwnerPointer.h"
 #include "mc/deps/nether_net/ESessionError.h"
 #include "mc/editor/services/playtest/SessionResult.h"
@@ -18,7 +19,6 @@
 #include "mc/platform/brstd/promise.h"
 #include "mc/platform/threading/Mutex.h"
 #include "mc/platform/threading/UniqueLock.h"
-#include "mc/resources/TaskGroupState.h"
 #include "mc/server/commands/edu/make_code_fileio/MakeCodeFileResult.h"
 #include "mc/world/level/FileArchiver.h"
 

@@ -18,7 +18,7 @@ class PathNavigation {
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~PathNavigation();
+    virtual ~PathNavigation() = default;
 
     virtual void initializeInternal(::Mob& mob, ::NavigationDescription const* description);
 
@@ -50,25 +50,19 @@ public:
     // NOLINTBEGIN
 #ifdef LL_PLAT_S
     MCAPI float _getHighestBlockHeight(::BlockSource& region, ::Mob& mob, ::Vec3 const& pos, ::Vec2 const& aabb) const;
-#endif
 
-#ifdef LL_PLAT_C
-    MCAPI float _getHighestBlockHeight(::BlockSource& region, ::Mob& mob, ::Vec3 const& pos, ::Vec2 const& aabb) const;
-#endif
-
-#ifdef LL_PLAT_S
-    MCAPI bool _isPositionOnlyInAir(::BlockSource const& region, ::Vec3 const& pos, ::Vec2 const& aabb) const;
-#endif
-
-#ifdef LL_PLAT_C
     MCAPI bool _isPositionOnlyInAir(::BlockSource const& region, ::Vec3 const& pos, ::Vec2 const& aabb) const;
 #endif
     // NOLINTEND
 
 public:
-    // destructor thunk
+    // static functions
     // NOLINTBEGIN
-    MCFOLD void $dtor();
+#ifdef LL_PLAT_C
+    MCAPI static float _getHighestBlockHeight(::BlockSource& region, ::Mob& mob, ::Vec3 const& pos, ::Vec2 const& aabb);
+
+    MCAPI static bool _isPositionOnlyInAir(::BlockSource const& region, ::Vec3 const& pos, ::Vec2 const& aabb);
+#endif
     // NOLINTEND
 
 public:

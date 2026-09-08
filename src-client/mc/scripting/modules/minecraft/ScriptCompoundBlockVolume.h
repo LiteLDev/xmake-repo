@@ -29,7 +29,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~ScriptCompoundBlockVolume() /*override*/;
+    virtual ~ScriptCompoundBlockVolume() /*override*/ = default;
     // NOLINTEND
 
 public:
@@ -40,12 +40,6 @@ public:
     MCAPI static ::Scripting::ClassBinding bindClass();
 
     MCAPI static ::Scripting::EnumBinding bindRelativeEnums();
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 };
 

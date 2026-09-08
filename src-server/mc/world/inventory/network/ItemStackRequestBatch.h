@@ -18,9 +18,9 @@ public:
     // member functions
     // NOLINTBEGIN
 #ifdef LL_PLAT_C
-    MCNAPI void addDeserializedRequest(::std::unique_ptr<::ItemStackRequestData> request);
+    MCAPI void addDeserializedRequest(::std::unique_ptr<::ItemStackRequestData> request);
 
-    MCNAPI void addRequest(::std::unique_ptr<::ItemStackRequestData> request);
+    MCAPI void addRequest(::std::unique_ptr<::ItemStackRequestData> request);
 #endif
     // NOLINTEND
 };

@@ -80,12 +80,12 @@ public:
     public:
         // virtual function thunks
         // NOLINTBEGIN
-        MCNAPI ::std::shared_ptr<::RepositoryLoading::AllRefreshTaskData>
+        MCAPI ::std::shared_ptr<::RepositoryLoading::AllRefreshTaskData>
         $buildTaskData(::RepositoryLoading::BuildTaskDataOptions const& ops);
 
-        MCNAPI void $applyTaskResults(::RepositoryLoading::AllRefreshTaskData&& taskData);
+        MCAPI void $applyTaskResults(::RepositoryLoading::AllRefreshTaskData&& taskData);
 
-        MCNAPI ::std::shared_ptr<::RepositoryPacks const> $getPacks() const;
+        MCAPI ::std::shared_ptr<::RepositoryPacks const> $getPacks() const;
 
 
         // NOLINTEND
@@ -292,7 +292,9 @@ public:
 public:
     // destructor thunk
     // NOLINTBEGIN
+#ifdef LL_PLAT_S
     MCAPI void $dtor();
+#endif
     // NOLINTEND
 
 public:

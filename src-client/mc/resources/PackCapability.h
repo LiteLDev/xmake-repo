@@ -3,7 +3,7 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/PackCapabilityTrustLevel.h"
+#include "mc/resources/PackCapabilityTrustLevel.h"
 
 class PackCapability {
 public:

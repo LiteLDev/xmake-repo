@@ -87,7 +87,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~ItemRenderer() /*override*/;
+    virtual ~ItemRenderer() /*override*/ = default;
 
     virtual void render(::BaseActorRenderContext& renderContext, ::ActorRenderData& entityRenderData) /*override*/;
     // NOLINTEND
@@ -96,8 +96,6 @@ public:
     // member functions
     // NOLINTBEGIN
     MCAPI ItemRenderer(::std::shared_ptr<::mce::TextureGroup> textureGroup, bool supportsNewVertexFormat);
-
-    MCAPI void _getGuiItemColors(::ItemStack const& item, int& color, int& secondaryColor) const;
 
     MCAPI void _renderBannerItem(
         ::BaseActorRenderContext& renderContext,
@@ -167,13 +165,6 @@ public:
         bool const                useMatrixAsIs
     ) const;
 
-    MCAPI void _renderShieldItem(
-        ::BaseActorRenderContext& renderContext,
-        ::ItemStack const&        item,
-        ::ItemActor&              itemEntity,
-        float                     actorFrameAlpha
-    );
-
     MCAPI void forceGraphicsLoad();
 
     MCAPI ::ItemGraphics& getGraphics(::ItemStack const& item);
@@ -229,6 +220,15 @@ public:
 public:
     // static functions
     // NOLINTBEGIN
+    MCAPI static void _getGuiItemColors(::ItemStack const& item, int& color, int& secondaryColor);
+
+    MCAPI static void _renderShieldItem(
+        ::BaseActorRenderContext& renderContext,
+        ::ItemStack const&        item,
+        ::ItemActor&              itemEntity,
+        float                     actorFrameAlpha
+    );
+
     MCAPI static float getRenderYOffset(::ItemActor const& itemEntity, ::BlockType const* block, float ageInSeconds);
     // NOLINTEND
 
@@ -236,12 +236,6 @@ public:
     // constructor thunks
     // NOLINTBEGIN
     MCAPI void* $ctor(::std::shared_ptr<::mce::TextureGroup> textureGroup, bool supportsNewVertexFormat);
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

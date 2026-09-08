@@ -39,17 +39,11 @@ public:
 
     virtual uint64 doMinInputLength() const;
 
-    virtual ~Constraint();
+    virtual ~Constraint() = default;
 
     virtual ::cereal::Constraint const* subConstraint(uint64 index) const;
 
     virtual ::entt::type_info const& info() const = 0;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

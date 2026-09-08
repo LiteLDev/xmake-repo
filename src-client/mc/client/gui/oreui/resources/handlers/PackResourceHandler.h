@@ -36,7 +36,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~PackResourceHandler() /*override*/;
+    virtual ~PackResourceHandler() /*override*/ = default;
 
     virtual ::Gameface::ResourceHandlerStatus
     onResourceRequest(::Gameface::ResourceRequest const& request, ::Gameface::ResourceResponse& response) /*override*/;
@@ -56,12 +56,6 @@ public:
         ::Gameface::ResourceRequest const&  request,
         ::std::optional<::mce::UUID> const& packId
     ) const;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCFOLD void $dtor();
     // NOLINTEND
 
 public:

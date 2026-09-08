@@ -48,7 +48,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~FogManager() /*override*/;
+    virtual ~FogManager() /*override*/ = default;
     // NOLINTEND
 
 public:
@@ -67,12 +67,6 @@ public:
         ::std::vector<::std::string> const&                          fogStack,
         ::Bedrock::NotNullNonOwnerPtr<::FogDefinitionRegistry const> fogRegistry
     );
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCFOLD void $dtor();
     // NOLINTEND
 
 public:

@@ -3,8 +3,8 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/deps/shared_types/ArmSizeType.h"
-#include "mc/deps/shared_types/PieceType.h"
+#include "mc/deps/shared_types/persona/ArmSizeType.h"
+#include "mc/deps/shared_types/persona/PieceType.h"
 #include "mc/util/ThreadOwner.h"
 
 // auto generated forward declare list

@@ -27,7 +27,7 @@ class ServerBlockPaletteService : public ::Editor::Services::EditorBlockPaletteS
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~ServerBlockPaletteService() /*override*/;
+    virtual ~ServerBlockPaletteService() /*override*/ = default;
 
     virtual ::Scripting::Result_deprecated<void> init() /*override*/;
 
@@ -83,12 +83,6 @@ public:
         int                                                                                            index,
         ::std::variant<::Editor::SimpleBlockPaletteItem, ::Editor::ProbabilityBlockPaletteItem> const& item
     );
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

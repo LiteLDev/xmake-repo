@@ -3,7 +3,7 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/ddrv2__PoolItemHandle.h"
+#include "mc/client/renderer/actor/v2/ddrv2/PoolItemHandle.h"
 
 // auto generated forward declare list
 // clang-format off

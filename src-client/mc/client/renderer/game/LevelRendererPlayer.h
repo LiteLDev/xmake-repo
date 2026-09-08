@@ -3,9 +3,9 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/LevelRendererCameraType.h"
 #include "mc/client/renderer/game/DirectionalLightRenderData.h"
 #include "mc/client/renderer/game/LevelRendererCameraListeners.h"
+#include "mc/client/renderer/game/LevelRendererCameraType.h"
 #include "mc/client/renderer/game/PlayerRenderingParameters.h"
 #include "mc/client/renderer/scripting/ServerGraphicsOverrideManager.h"
 #include "mc/client/renderer/texture/TextureAtlasItem.h"

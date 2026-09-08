@@ -3,10 +3,10 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/SixteenWay.h"
 #include "mc/deps/shared_types/v1_26_20/block/MultiBlockPart.h"
 #include "mc/world/Direction.h"
 #include "mc/world/level/block/CornerShape.h"
+#include "mc/world/level/block/SixteenWay.h"
 #include "mc/world/level/block/VerticalHalfEnum.h"
 #include "mc/world/level/block/states/BuiltInBlockStateVariant.h"
 

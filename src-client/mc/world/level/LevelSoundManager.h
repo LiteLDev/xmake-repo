@@ -3,7 +3,6 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/ServerSoundDefinitionRegistry.h"
 #include "mc/deps/core/utility/NonOwnerPointer.h"
 #include "mc/deps/core/utility/pub_sub/Connector.h"
 #include "mc/deps/core/utility/pub_sub/Publisher.h"
@@ -11,6 +10,7 @@
 #include "mc/network/NetworkIdentifierWithSubId.h"
 #include "mc/network/packet/LevelSoundEventPacket.h"
 #include "mc/world/level/ILevelSoundManagerConnector.h"
+#include "mc/world/level/ServerSoundDefinitionRegistry.h"
 #include "mc/world/level/ServerSoundInstanceManager.h"
 
 // auto generated forward declare list

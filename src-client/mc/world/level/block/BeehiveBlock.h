@@ -42,18 +42,6 @@ public:
 public:
     // member functions
     // NOLINTBEGIN
-#ifdef LL_PLAT_C
-    MCAPI void _fillHoneyBottle(
-        ::Player&         player,
-        ::ItemStack&      emptyBottle,
-        ::ItemStack&      honeyBottle,
-        ::BlockSource&    region,
-        ::BlockPos const& pos
-    ) const;
-
-    MCAPI void _playShearSound(::BlockSource& region, ::BlockPos const& pos) const;
-#endif
-
     MCAPI void emitHoneyComb(::BlockSource& region, ::BlockPos const& pos) const;
 
     MCAPI void onEvent(::BlockEvents::ActorInternalEvent& event) const;
@@ -64,6 +52,18 @@ public:
 public:
     // static functions
     // NOLINTBEGIN
+#ifdef LL_PLAT_C
+    MCAPI static void _fillHoneyBottle(
+        ::Player&         player,
+        ::ItemStack&      emptyBottle,
+        ::ItemStack&      honeyBottle,
+        ::BlockSource&    region,
+        ::BlockPos const& pos
+    );
+
+    MCAPI static void _playShearSound(::BlockSource& region, ::BlockPos const& pos);
+#endif
+
     MCAPI static void deliverNectar(::BlockSource& region, ::Block const& block, ::BlockPos const& pos);
 
     MCAPI static ::ItemStack

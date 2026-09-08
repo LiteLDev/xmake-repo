@@ -3,7 +3,7 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/client/gui/screens/OnlineSafetyDialogVisibility.h"
+#include "mc/client/events/OnlineSafetyDialogVisibility.h"
 #include "mc/deps/core/threading/Async.h"
 #include "mc/deps/core/utility/NonOwnerPointer.h"
 #include "mc/events/IMinecraftEventing.h"

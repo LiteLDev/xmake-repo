@@ -6,9 +6,9 @@
 #include "mc/common/editor/WidgetComponentType.h"
 #include "mc/deps/script_core/runtime/scripting/Result.h"
 #include "mc/deps/script_core/runtime/scripting/Result_deprecated.h"
-#include "mc/deps/scripting/WidgetGizmoScaleMode.h"
 #include "mc/editor/script/ScriptWidgetComponentBase.h"
 #include "mc/scripting/Axis.h"
+#include "mc/scripting/WidgetGizmoScaleMode.h"
 
 // auto generated forward declare list
 // clang-format off
@@ -45,7 +45,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~ScriptWidgetComponentGizmo() /*override*/;
+    virtual ~ScriptWidgetComponentGizmo() /*override*/ = default;
 
     virtual ::Editor::Widgets::WidgetComponentType const getComponentType() const /*override*/;
 
@@ -85,12 +85,6 @@ public:
     // static functions
     // NOLINTBEGIN
     MCNAPI static ::Scripting::ClassBinding bindScript();
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

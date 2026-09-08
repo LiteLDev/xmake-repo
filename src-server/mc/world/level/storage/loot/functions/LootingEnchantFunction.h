@@ -26,7 +26,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~LootingEnchantFunction() /*override*/;
+    virtual ~LootingEnchantFunction() /*override*/ = default;
 
     virtual void apply(::ItemStack& item, ::Random& random, ::LootTableContext& context) /*override*/;
 
@@ -36,24 +36,14 @@ public:
     // NOLINTEND
 
 public:
-    // member functions
-    // NOLINTBEGIN
-    MCAPI int _getLootingEnchantLevel(::LootTableContext& context) const;
-    // NOLINTEND
-
-public:
     // static functions
     // NOLINTBEGIN
+    MCAPI static int _getLootingEnchantLevel(::LootTableContext& context);
+
 #ifdef LL_PLAT_S
     MCAPI static ::std::unique_ptr<::LootItemFunction>
     deserialize(::Json::Value object, ::std::vector<::std::unique_ptr<::LootItemCondition>>& predicates);
 #endif
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCFOLD void $dtor();
     // NOLINTEND
 
 public:

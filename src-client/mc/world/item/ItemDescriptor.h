@@ -126,7 +126,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~ItemDescriptor();
+    virtual ~ItemDescriptor() = default;
 
     virtual void serialize(::Json::Value& val) const;
 
@@ -207,12 +207,6 @@ public:
     MCAPI void* $ctor(::Item const& item, int auxValue);
 
     MCAPI void* $ctor(::Json::Value const& val, ::MolangVersion molangVersion);
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCFOLD void $dtor();
     // NOLINTEND
 
 public:

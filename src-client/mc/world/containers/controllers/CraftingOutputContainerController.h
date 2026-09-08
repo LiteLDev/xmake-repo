@@ -30,11 +30,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-#ifdef LL_PLAT_S
     virtual ~CraftingOutputContainerController() /*override*/ = default;
-#else // LL_PLAT_C
-    virtual ~CraftingOutputContainerController() /*override*/;
-#endif
 
     virtual int getBackgroundStyle(int slot, bool inventoryContainsItem) const /*override*/;
 
@@ -66,12 +62,6 @@ public:
 #ifdef LL_PLAT_C
     MCNAPI void* $ctor(::std::shared_ptr<::ContainerModel> containerModel);
 #endif
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

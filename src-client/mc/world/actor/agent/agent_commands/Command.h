@@ -35,7 +35,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~Command();
+    virtual ~Command() = default;
 
     virtual void execute();
 
@@ -52,12 +52,6 @@ public:
 #ifdef LL_PLAT_S
     MCAPI ::Vec3 _getNextPosFromDirection(::AgentComponents::Direction dir);
 #endif
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

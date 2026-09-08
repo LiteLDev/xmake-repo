@@ -40,38 +40,32 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~ItemStackRequestActionCraftHandler();
+    virtual ~ItemStackRequestActionCraftHandler() = default;
     // NOLINTEND
 
 public:
     // member functions
     // NOLINTBEGIN
-    MCNAPI ::ItemStackNetResult _initCraftResults(::std::vector<::ItemInstance> const& results, uchar numCrafts);
+    MCAPI ::ItemStackNetResult _initCraftResults(::std::vector<::ItemInstance> const& results, uchar numCrafts);
 
-    MCNAPI ::ItemInstance* _initSingleCraftResult(::ItemInstance const& itemInstance);
+    MCAPI ::ItemInstance* _initSingleCraftResult(::ItemInstance const& itemInstance);
 
-    MCNAPI ::ItemStackNetResult _setCreatedItemOutputSlot(uchar resultsIndex);
+    MCAPI ::ItemStackNetResult _setCreatedItemOutputSlot(uchar resultsIndex);
 
-    MCNAPI ::ItemStackNetResult endRequest(::ItemStackNetResult currentResult);
+    MCAPI ::ItemStackNetResult endRequest(::ItemStackNetResult currentResult);
 
-    MCNAPI ::ItemStackNetResult handleConsume(::ItemStackRequestActionConsume const& requestAction);
+    MCAPI ::ItemStackNetResult handleConsume(::ItemStackRequestActionConsume const& requestAction);
 
-    MCNAPI ::ItemStackNetResult handleCraftAction(::ItemStackRequestActionCraftBase const& requestAction);
+    MCAPI ::ItemStackNetResult handleCraftAction(::ItemStackRequestActionCraftBase const& requestAction);
 
-    MCNAPI ::ItemStackNetResult
+    MCAPI ::ItemStackNetResult
     handleCraftResults(::ItemStackRequestActionCraftResults_DEPRECATEDASKTYLAING const& requestAction);
 
-    MCNAPI bool isCraftRequest() const;
+    MCAPI bool isCraftRequest() const;
 
-    MCNAPI void onContainerScreenOpen(::ContainerScreenContext const& screenContext);
+    MCAPI void onContainerScreenOpen(::ContainerScreenContext const& screenContext);
 
-    MCNAPI ::ItemStackNetResult preHandleAction(::ItemStackRequestActionType requestActionType);
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
+    MCAPI ::ItemStackNetResult preHandleAction(::ItemStackRequestActionType requestActionType);
     // NOLINTEND
 
 public:

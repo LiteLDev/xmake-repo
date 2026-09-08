@@ -38,7 +38,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~BitmapFont() /*override*/;
+    virtual ~BitmapFont() /*override*/ = default;
 
     virtual float _getCharWidth(int uniChar, bool forceUnicode) /*override*/;
 
@@ -109,12 +109,6 @@ public:
         ::std::shared_ptr<::mce::TextureGroup> textureGroup,
         bool                                   uploadOnConstruction
     );
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

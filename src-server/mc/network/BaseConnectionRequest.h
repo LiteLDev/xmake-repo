@@ -5,12 +5,12 @@
 // auto generated inclusion list
 #include "mc/certificates/identity/PlayerAuthenticationType.h"
 #include "mc/certificates/identity/RawGameServerToken.h"
+#include "mc/client/gui/oreui/binding/queries/core/PlatformType.h"
 #include "mc/deps/certificates/WebToken.h"
 #include "mc/deps/core/platform/BuildPlatform.h"
-#include "mc/deps/core/platform/PlatformType.h"
 #include "mc/deps/input/InputMode.h"
 #include "mc/deps/json/Value.h"
-#include "mc/deps/shared_types/PieceType.h"
+#include "mc/deps/shared_types/persona/PieceType.h"
 
 // auto generated forward declare list
 // clang-format off

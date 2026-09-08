@@ -15,20 +15,4 @@ public:
     AtomicClientEntityDefinitionDescriptor& operator=(AtomicClientEntityDefinitionDescriptor const&);
     AtomicClientEntityDefinitionDescriptor(AtomicClientEntityDefinitionDescriptor const&);
     AtomicClientEntityDefinitionDescriptor();
-
-public:
-    // member functions
-    // NOLINTBEGIN
-#ifdef LL_PLAT_C
-    MCNAPI ~AtomicClientEntityDefinitionDescriptor();
-#endif
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-#ifdef LL_PLAT_C
-    MCNAPI void $dtor();
-#endif
-    // NOLINTEND
 };

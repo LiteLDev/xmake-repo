@@ -27,7 +27,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~IPropertySetter();
+    virtual ~IPropertySetter() = default;
 
     virtual ::Scripting::ResultAny set(::entt::meta_handle, ::entt::meta_any) = 0;
 
@@ -36,12 +36,6 @@ public:
     virtual ::std::optional<::entt::meta_type> ownerType() const = 0;
 
     virtual bool isMemberFunction() const;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

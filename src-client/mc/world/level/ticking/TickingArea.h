@@ -55,7 +55,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~TickingArea() /*override*/;
+    virtual ~TickingArea() /*override*/ = default;
 
     virtual ::mce::UUID const& getId() const /*override*/;
 
@@ -185,12 +185,6 @@ public:
         ::TickingAreaLoadMode loadMode
     );
 #endif
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

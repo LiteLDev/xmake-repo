@@ -42,7 +42,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~WorkerPool() /*override*/;
+    virtual ~WorkerPool() /*override*/ = default;
     // NOLINTEND
 
 public:
@@ -70,11 +70,5 @@ public:
     sAllPools();
 
     MCNAPI static ::Bedrock::Threading::Mutex& sAllPoolsMutex();
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 };

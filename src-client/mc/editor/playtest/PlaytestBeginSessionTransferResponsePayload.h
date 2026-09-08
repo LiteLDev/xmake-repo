@@ -30,24 +30,13 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-#ifdef LL_PLAT_S
-    virtual ~PlaytestBeginSessionTransferResponsePayload() /*override*/;
-#else // LL_PLAT_C
     virtual ~PlaytestBeginSessionTransferResponsePayload() /*override*/ = default;
-#endif
-
     // NOLINTEND
 
 public:
     // static functions
     // NOLINTBEGIN
     MCNAPI static void bindType(::cereal::ReflectionCtx& ctx);
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

@@ -22,7 +22,7 @@ class ServerBlockUtilityService : public ::Editor::BlockUtils::CommonBlockUtilit
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~ServerBlockUtilityService() /*override*/;
+    virtual ~ServerBlockUtilityService() /*override*/ = default;
 
     virtual ::Editor::BlockUtils::CommonBlockUtilityServiceProvider& getCommonInterface() /*override*/;
 
@@ -36,12 +36,6 @@ public:
     virtual ::Scripting::Result_deprecated<void> _implReady() /*override*/;
 
     virtual ::Scripting::Result_deprecated<void> _implQuit() /*override*/;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

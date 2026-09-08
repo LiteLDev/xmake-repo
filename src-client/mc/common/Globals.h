@@ -4,9 +4,6 @@
 
 // auto generated inclusion list
 #include "mc/certificates/identity/edu/Role.h"
-#include "mc/cgltf_component_type.h"
-#include "mc/cgltf_result.h"
-#include "mc/cgltf_type.h"
 #include "mc/client/gui/DirtyFlag.h"
 #include "mc/client/gui/HowToPlayTopicIndex.h"
 #include "mc/client/gui/UIDefType.h"
@@ -42,6 +39,9 @@
 #include "mc/deps/shared_types/legacy/FilterSubject.h"
 #include "mc/deps/shared_types/legacy/item/UseAnimation.h"
 #include "mc/events/TextProcessingEventOrigin.h"
+#include "mc/external/cgltf/cgltf_component_type.h"
+#include "mc/external/cgltf/cgltf_result.h"
+#include "mc/external/cgltf/cgltf_type.h"
 #include "mc/external/lib_http_client/http_stl_allocator.h"
 #include "mc/external/libsrtp/srtp_err_status_t.h"
 #include "mc/molang/MolangVersion.h"

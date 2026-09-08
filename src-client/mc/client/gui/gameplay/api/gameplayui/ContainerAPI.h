@@ -3,11 +3,11 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/GameplayUI__ContainerInteractionsHandler.h"
 #include "mc/client/gui/gameplay/api/gameplayui/AnvilInfo.h"
-#include "mc/client/gui/gameplay/api/gameplayui/ContainerItemType.h"
 #include "mc/client/gui/gameplay/data/gameplayui/ChestType.h"
 #include "mc/client/gui/gameplay/data/gameplayui/ContainerColorMode.h"
+#include "mc/client/gui/gameplay/data/gameplayui/ContainerInteractionsHandler.h"
+#include "mc/client/gui/gameplay/data/gameplayui/ContainerItemType.h"
 #include "mc/deps/shared_types/legacy/ContainerType.h"
 #include "mc/deps/shared_types/legacy/LevelSoundEvent.h"
 #include "mc/legacy/ActorUniqueID.h"

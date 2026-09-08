@@ -3,7 +3,7 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/BlockDefinitionValidate__ValidateContext.h"
+#include "mc/world/level/block/definition/validate/block_definition_validate/ValidateContext.h"
 
 // auto generated forward declare list
 // clang-format off

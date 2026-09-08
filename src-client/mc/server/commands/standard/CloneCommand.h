@@ -6,8 +6,8 @@
 #include "mc/server/commands/Command.h"
 #include "mc/server/commands/CommandBlockName.h"
 #include "mc/server/commands/CommandPosition.h"
-#include "mc/util/CloneMode.h"
-#include "mc/util/MaskMode.h"
+#include "mc/world/level/clone_blocks_utils/CloneMode.h"
+#include "mc/world/level/clone_blocks_utils/MaskMode.h"
 
 // auto generated forward declare list
 // clang-format off

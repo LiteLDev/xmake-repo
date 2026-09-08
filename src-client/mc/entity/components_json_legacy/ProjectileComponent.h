@@ -3,11 +3,11 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/ProjectileHitState.h"
-#include "mc/ShouldBounce.h"
 #include "mc/comprehensive/ParticleType.h"
 #include "mc/deps/core/math/Vec3.h"
 #include "mc/deps/shared_types/legacy/LevelSoundEvent.h"
+#include "mc/entity/components_json_legacy/ProjectileHitState.h"
+#include "mc/entity/components_json_legacy/ShouldBounce.h"
 #include "mc/legacy/ActorUniqueID.h"
 #include "mc/world/actor/ActorDefinitionTrigger.h"
 #include "mc/world/actor/ActorType.h"
@@ -130,8 +130,6 @@ public:
 
     MCAPI ProjectileComponent(::ProjectileComponent const&);
 
-    MCAPI bool _isLoyaltyTrident(::Actor const& owner) const;
-
     MCAPI void _selectNextMoveDirection(::Actor const& owner, ::ProjectileComponent::EAxis avoidAxis);
 
     MCAPI void _tryReflectOnHurt(::Actor& owner, ::ActorDamageSource const& damageSource);
@@ -173,6 +171,8 @@ public:
 public:
     // static functions
     // NOLINTBEGIN
+    MCAPI static bool _isLoyaltyTrident(::Actor const& owner);
+
     MCAPI static ::Vec2 dampenShooterAngle(::Vec2 const& angle, float angleOffset, ::BaseGameVersion const& version);
     // NOLINTEND
 

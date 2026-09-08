@@ -3,7 +3,7 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/deps/shared_types/BodySizeType.h"
+#include "mc/deps/shared_types/persona/BodySizeType.h"
 
 // auto generated forward declare list
 // clang-format off

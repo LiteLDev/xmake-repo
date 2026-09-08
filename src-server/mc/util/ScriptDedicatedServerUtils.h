@@ -33,7 +33,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~ScriptDedicatedServerUtils() /*override*/;
+    virtual ~ScriptDedicatedServerUtils() /*override*/ = default;
 
     virtual void stopServer() /*override*/;
 
@@ -68,12 +68,6 @@ public:
     virtual bool reloadCDNConfig() /*override*/;
 
     virtual ::std::string const& getSessionID() const /*override*/;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

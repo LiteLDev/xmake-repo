@@ -85,7 +85,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~CreditsRenderer() /*override*/;
+    virtual ~CreditsRenderer() /*override*/ = default;
 
     virtual ::std::shared_ptr<::UICustomRenderer> clone() const /*override*/;
 
@@ -103,12 +103,6 @@ public:
     // NOLINTBEGIN
     MCAPI void
     _parseFiles(::IClientInstance& client, ::UIControl& owner, ::std::vector<::std::string> const& filePaths);
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

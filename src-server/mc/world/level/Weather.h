@@ -43,7 +43,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~Weather() /*override*/;
+    virtual ~Weather() /*override*/ = default;
 
     virtual void levelEvent(::SharedTypes::Legacy::LevelEvent type, ::Vec3 const&, int data) /*override*/;
     // NOLINTEND
@@ -85,12 +85,6 @@ public:
     // static functions
     // NOLINTBEGIN
     MCAPI static void rebuildTopSnowToDepth(::BlockSource& region, ::BlockPos const& testPos, int desiredDepth);
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCFOLD void $dtor();
     // NOLINTEND
 
 public:

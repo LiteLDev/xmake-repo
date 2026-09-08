@@ -18,12 +18,6 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~InvalidResourceItem() /*override*/;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
+    virtual ~InvalidResourceItem() /*override*/ = default;
     // NOLINTEND
 };

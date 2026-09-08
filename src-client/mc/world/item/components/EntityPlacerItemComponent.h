@@ -56,11 +56,7 @@ public:
     // NOLINTBEGIN
 #ifdef LL_PLAT_S
     MCAPI explicit EntityPlacerItemComponent(::SharedTypes::v1_20_50::EntityPlacerItemComponent component);
-#endif
 
-    MCAPI void _setActorCustomName(::Actor& actor, ::ItemStack const& item) const;
-
-#ifdef LL_PLAT_S
     MCAPI bool dispense(::BlockSource& region, ::Container& container, int slot, ::Vec3 const& pos, uchar face) const;
 
     MCAPI ::EntityPlacerItemComponent& operator=(::EntityPlacerItemComponent&&);
@@ -70,6 +66,8 @@ public:
 public:
     // static functions
     // NOLINTBEGIN
+    MCAPI static void _setActorCustomName(::Actor& actor, ::ItemStack const& item);
+
 #ifdef LL_PLAT_S
     MCAPI static void bindType(
         ::cereal::ReflectionCtx&               ctx,
@@ -90,7 +88,9 @@ public:
 public:
     // destructor thunk
     // NOLINTBEGIN
+#ifdef LL_PLAT_S
     MCAPI void $dtor();
+#endif
     // NOLINTEND
 
 public:

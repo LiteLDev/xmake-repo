@@ -33,12 +33,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-#ifdef LL_PLAT_S
     virtual ~PlayerReportingSignalHandler() = default;
-#else // LL_PLAT_C
-    virtual ~PlayerReportingSignalHandler();
-#endif
-
     // NOLINTEND
 
 public:
@@ -67,12 +62,6 @@ public:
 #ifdef LL_PLAT_C
     MCNAPI void* $ctor(::Bedrock::SignalReceiver* listener, bool isTestHandler);
 #endif
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 };
 

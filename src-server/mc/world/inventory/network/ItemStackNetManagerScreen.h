@@ -16,12 +16,6 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~ItemStackNetManagerScreen();
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
+    virtual ~ItemStackNetManagerScreen() = default;
     // NOLINTEND
 };

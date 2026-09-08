@@ -3,9 +3,9 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/AssetEncryptionMode.h"
 #include "mc/deps/core/utility/NonOwnerPointer.h"
 #include "mc/platform/Result.h"
+#include "mc/resources/AssetEncryptionMode.h"
 #include "mc/resources/DirectoryPackAccessStrategy.h"
 #include "mc/resources/PackAccessAssetGenerationResult.h"
 #include "mc/resources/PackAccessStrategyType.h"

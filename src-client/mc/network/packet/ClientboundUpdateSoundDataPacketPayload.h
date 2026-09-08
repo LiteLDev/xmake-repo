@@ -3,14 +3,14 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/SoundDataEvent__Fade.h"
-#include "mc/SoundDataEvent__Pause.h"
-#include "mc/SoundDataEvent__Resume.h"
-#include "mc/SoundDataEvent__SeekTo.h"
-#include "mc/SoundDataEvent__SetPitch.h"
-#include "mc/SoundDataEvent__SetVolume.h"
-#include "mc/SoundDataEvent__Stop.h"
 #include "mc/deps/audio/ServerSoundHandle.h"
+#include "mc/network/packet/sound_data_event/Fade.h"
+#include "mc/network/packet/sound_data_event/Pause.h"
+#include "mc/network/packet/sound_data_event/Resume.h"
+#include "mc/network/packet/sound_data_event/SeekTo.h"
+#include "mc/network/packet/sound_data_event/SetPitch.h"
+#include "mc/network/packet/sound_data_event/SetVolume.h"
+#include "mc/network/packet/sound_data_event/Stop.h"
 
 struct ClientboundUpdateSoundDataPacketPayload {
 public:

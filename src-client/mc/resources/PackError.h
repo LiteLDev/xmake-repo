@@ -22,7 +22,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~PackError();
+    virtual ~PackError() = default;
 
     virtual ::std::string getLocErrorMessage(::I18n& loc) const;
 
@@ -35,12 +35,6 @@ public:
     // member functions
     // NOLINTBEGIN
     MCNAPI ::std::string getEventErrorMessage() const;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

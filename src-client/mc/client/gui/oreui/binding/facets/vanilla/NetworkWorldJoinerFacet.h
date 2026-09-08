@@ -58,7 +58,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~NetworkWorldJoinerFacet() /*override*/;
+    virtual ~NetworkWorldJoinerFacet() /*override*/ = default;
 
     virtual bool update() /*override*/;
     // NOLINTEND
@@ -145,12 +145,6 @@ public:
         ::std::shared_ptr<::Social::User>                    user,
         ::OreUI::Router&                                     uiRouter
     );
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

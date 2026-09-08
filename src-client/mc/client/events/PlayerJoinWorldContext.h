@@ -3,7 +3,7 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/Connection__ReconnectionType.h"
+#include "mc/network/connection/ReconnectionType.h"
 
 struct PlayerJoinWorldContext {
 public:

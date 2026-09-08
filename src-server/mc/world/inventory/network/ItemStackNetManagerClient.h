@@ -185,11 +185,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-#ifdef LL_PLAT_S
     virtual ~ItemStackNetManagerClient() /*override*/ = default;
-#else // LL_PLAT_C
-    virtual ~ItemStackNetManagerClient() /*override*/;
-#endif
 
     virtual ::SparseContainer* initOpenContainer(
         ::BlockSource&             region,
@@ -254,12 +250,6 @@ public:
 
     MCNAPI void trySendBatch();
 #endif
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

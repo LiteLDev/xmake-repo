@@ -3,8 +3,8 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/common/editor/block_utils/ContiguousSelectionType.h"
 #include "mc/deps/script_core/runtime/scripting/Result_deprecated.h"
+#include "mc/editor/block_utils/ContiguousSelectionType.h"
 #include "mc/editor/serviceproviders/CommonBlockUtilityServiceProvider.h"
 #include "mc/editor/services/IEditorService.h"
 #include "mc/editor/services/PayloadStoreHelper.h"

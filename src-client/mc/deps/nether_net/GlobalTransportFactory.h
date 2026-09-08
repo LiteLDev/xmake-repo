@@ -23,13 +23,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~GlobalTransportFactory() /*override*/;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
+    virtual ~GlobalTransportFactory() /*override*/ = default;
     // NOLINTEND
 };
 

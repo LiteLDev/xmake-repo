@@ -19,18 +19,6 @@ public:
     // NOLINTBEGIN
     ::ll::TypedStorage<8, 16, ::std::shared_ptr<::std::vector<::mce::Image> const>> mImages;
     // NOLINTEND
-
-public:
-    // member functions
-    // NOLINTBEGIN
-    MCAPI ~GeometryAtlasCapture();
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCFOLD void $dtor();
-    // NOLINTEND
 };
 
 } // namespace GeometryAtlas

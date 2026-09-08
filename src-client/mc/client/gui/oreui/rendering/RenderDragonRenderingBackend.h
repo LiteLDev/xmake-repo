@@ -181,7 +181,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~RenderDragonRenderingBackend() /*override*/;
+    virtual ~RenderDragonRenderingBackend() /*override*/ = default;
 
     virtual void initializeStaticResources(::Bedrock::NonOwnerPointer<::mce::ShaderGroup> const&) /*override*/;
 
@@ -310,12 +310,6 @@ public:
     // NOLINTBEGIN
     MCAPI void*
     $ctor(::OreUI::FrameDebugData& frameDebugData, ::Gameface::TemporaryTextureHolder& temporaryTextureHolder);
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

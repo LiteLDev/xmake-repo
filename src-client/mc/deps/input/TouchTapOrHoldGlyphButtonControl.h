@@ -39,7 +39,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~TouchTapOrHoldGlyphButtonControl() /*override*/;
+    virtual ~TouchTapOrHoldGlyphButtonControl() /*override*/ = default;
 
     virtual void render(::InputRenderContext& context) const /*override*/;
 
@@ -47,12 +47,6 @@ public:
     tick(::InputEventQueue& eventQueue, ::TouchPointResults& touchPointResults, int yAxisInversionFactor) /*override*/;
 
     virtual void release(::InputEventQueue& eventQueue) /*override*/;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

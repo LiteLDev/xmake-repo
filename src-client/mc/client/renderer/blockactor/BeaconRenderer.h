@@ -28,7 +28,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~BeaconRenderer() /*override*/;
+    virtual ~BeaconRenderer() /*override*/ = default;
 
     virtual void
     render(::BaseActorRenderContext& renderContext, ::BlockActorRenderData& blockEntityRenderData) /*override*/;
@@ -49,12 +49,6 @@ public:
         float               time,
         float               scale
     );
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

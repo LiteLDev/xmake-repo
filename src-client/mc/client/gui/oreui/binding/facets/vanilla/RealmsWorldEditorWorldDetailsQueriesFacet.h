@@ -3,10 +3,10 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/Realms__RealmsWorldGeneralSettings.h"
 #include "mc/client/gui/oreui/binding/FacetBase_DEPRECATED.h"
 #include "mc/client/realms/RealmsWorldEditorState.h"
 #include "mc/client/realms/RealmsWorldEditorStateStatus.h"
+#include "mc/client/realms/RealmsWorldGeneralSettings.h"
 #include "mc/deps/core/utility/pub_sub/Subscription.h"
 #include "mc/util/SubscribedValue.h"
 
@@ -59,7 +59,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~RealmsWorldEditorWorldDetailsQueriesFacet() /*override*/;
+    virtual ~RealmsWorldEditorWorldDetailsQueriesFacet() /*override*/ = default;
 
     virtual bool update() /*override*/;
     // NOLINTEND
@@ -114,12 +114,6 @@ public:
     // constructor thunks
     // NOLINTBEGIN
     MCAPI void* $ctor(::std::shared_ptr<::Realms::RealmsWorldEditor> worldEditor);
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

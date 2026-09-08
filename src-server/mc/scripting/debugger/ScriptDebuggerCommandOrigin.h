@@ -38,7 +38,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~ScriptDebuggerCommandOrigin() /*override*/;
+    virtual ~ScriptDebuggerCommandOrigin() /*override*/ = default;
 
     virtual ::std::string const& getRequestId() const /*override*/;
 
@@ -91,12 +91,6 @@ public:
         ::DimensionType                             dimensionType,
         ::std::function<void(int, ::std::string&&)> outputCallback
     );
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

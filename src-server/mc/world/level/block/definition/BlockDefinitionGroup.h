@@ -95,18 +95,6 @@ public:
         bool                              isVanillaBlock
     );
 
-    MCAPI ::SharedTypes::v1_21_110::ItemCategory::CreativeItemCategory
-    _stringToCreativeItemCategory(::std::string const& category, ::std::string const& blockIdentifier);
-
-    MCAPI bool _validatePrereleaseRequirements(
-        ::LogArea                                   logArea,
-        ::std::string const&                        jsonType,
-        ::std::string const&                        jsonIdentifier,
-        ::std::optional<::SemVersion> const&        releaseVersion,
-        ::std::vector<::PackLoadRequirement> const& requirements,
-        ::PackLoadContext const&                    packLoadContext
-    ) const;
-
     MCAPI void digestServerBlockProperties(::std::vector<::ServerBlockProperty> const& blocks);
 
     MCAPI ::std::unique_ptr<::BlockDefinition>
@@ -136,6 +124,22 @@ public:
     MCAPI ::BlockDefinition const* tryGetBlockDefinition(::std::string const& name) const;
 
     MCAPI ~BlockDefinitionGroup();
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCAPI static ::SharedTypes::v1_21_110::ItemCategory::CreativeItemCategory
+    _stringToCreativeItemCategory(::std::string const& category, ::std::string const& blockIdentifier);
+
+    MCAPI static bool _validatePrereleaseRequirements(
+        ::LogArea                                   logArea,
+        ::std::string const&                        jsonType,
+        ::std::string const&                        jsonIdentifier,
+        ::std::optional<::SemVersion> const&        releaseVersion,
+        ::std::vector<::PackLoadRequirement> const& requirements,
+        ::PackLoadContext const&                    packLoadContext
+    );
     // NOLINTEND
 
 public:

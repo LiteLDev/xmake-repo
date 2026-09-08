@@ -113,8 +113,6 @@ public:
 #endif
 
     MCAPI void setLocale(::std::string const& code);
-
-    MCAPI ~ResourcePack();
     // NOLINTEND
 
 public:
@@ -129,11 +127,5 @@ public:
     // constructor thunks
     // NOLINTBEGIN
     MCAPI void* $ctor(::gsl::not_null<::std::shared_ptr<::Pack>> pack);
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 };

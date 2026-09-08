@@ -20,7 +20,7 @@ class RandomDyeFunction : public ::LootItemFunction {
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~RandomDyeFunction() /*override*/;
+    virtual ~RandomDyeFunction() /*override*/ = default;
 
     virtual void apply(::ItemStack& item, ::Random& random, ::LootTableContext&) /*override*/;
 
@@ -30,24 +30,14 @@ public:
     // NOLINTEND
 
 public:
-    // member functions
-    // NOLINTBEGIN
-    MCAPI void _applyBase(::ItemStackBase& item, ::Random& random) const;
-    // NOLINTEND
-
-public:
     // static functions
     // NOLINTBEGIN
+    MCAPI static void _applyBase(::ItemStackBase& item, ::Random& random);
+
 #ifdef LL_PLAT_S
     MCAPI static ::std::unique_ptr<::LootItemFunction>
     deserialize(::Json::Value, ::std::vector<::std::unique_ptr<::LootItemCondition>>& predicates);
 #endif
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCFOLD void $dtor();
     // NOLINTEND
 
 public:

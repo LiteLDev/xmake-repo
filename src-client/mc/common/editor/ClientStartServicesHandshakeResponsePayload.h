@@ -12,13 +12,7 @@ class ClientStartServicesHandshakeResponsePayload
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~ClientStartServicesHandshakeResponsePayload() /*override*/;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
+    virtual ~ClientStartServicesHandshakeResponsePayload() /*override*/ = default;
     // NOLINTEND
 
 public:

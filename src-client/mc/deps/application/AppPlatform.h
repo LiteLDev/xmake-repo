@@ -3,6 +3,7 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
+#include "mc/client/gui/oreui/binding/queries/core/PlatformType.h"
 #include "mc/deps/application/AppAction.h"
 #include "mc/deps/application/ClipboardFeatureFlags.h"
 #include "mc/deps/application/DeviceSunsetTier.h"
@@ -22,7 +23,6 @@
 #include "mc/deps/core/platform/FullscreenMode.h"
 #include "mc/deps/core/platform/OperationMode.h"
 #include "mc/deps/core/platform/PermissionRequestReason.h"
-#include "mc/deps/core/platform/PlatformType.h"
 #include "mc/deps/core/platform/UIScalingRules.h"
 #include "mc/deps/core/resource/ResourceFileSystem.h"
 #include "mc/deps/core/secure_storage/ISecureStorageKeySystem.h"

@@ -24,7 +24,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~InMemorySequentialFile() /*override*/;
+    virtual ~InMemorySequentialFile() /*override*/ = default;
 
     virtual ::leveldb::Status Read(uint64 n, ::leveldb::Slice* result, char* scratch) /*override*/;
 
@@ -45,12 +45,6 @@ public:
 #ifdef LL_PLAT_S
     MCNAPI void* $ctor(::std::shared_ptr<::InMemoryFile> file);
 #endif
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

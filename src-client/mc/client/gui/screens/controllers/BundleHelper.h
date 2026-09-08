@@ -37,12 +37,6 @@ public:
 public:
     // member functions
     // NOLINTBEGIN
-    MCAPI ::ItemStack const& getItemStackFromBundle(
-        ::ContainerScreenController const& controller,
-        ::ItemStackBase const&             bundleItem,
-        int                                bundleItemIdx
-    ) const;
-
     MCAPI ::ui::ViewRequest handleBundlePlaceAll(
         ::ContainerScreenController& controller,
         ::std::string const&         collectionName,
@@ -88,6 +82,12 @@ public:
         int                       collectionIndex,
         bool                      usingTouchScheme,
         ::ActiveBundleData const& activeBundleData
+    );
+
+    MCAPI static ::ItemStack const& getItemStackFromBundle(
+        ::ContainerScreenController const& controller,
+        ::ItemStackBase const&             bundleItem,
+        int                                bundleItemIdx
     );
 
     MCAPI static void registerBindings(::ContainerScreenController& controller);

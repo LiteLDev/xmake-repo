@@ -25,14 +25,14 @@ struct SpatialQueryUtility {
 public:
     // static functions
     // NOLINTBEGIN
-    MCNAPI static bool forEachBlockInAABB(
+    MCAPI static bool forEachBlockInAABB(
         ::IConstBlockSource const&                                      region,
         ::AABB const&                                                   aabb,
         float                                                           grow,
         ::std::function<void(::Block const&, ::BlockPos const&)> const& callback
     );
 
-    MCNAPI static void testForCollidableMobs(
+    MCAPI static void testForCollidableMobs(
         ::StrictEntityContext const& except,
         ::LocalSpatialEntityFetcher& fetcher,
         ::AABB const&                actorAABB,
@@ -42,7 +42,7 @@ public:
         ::CollisionShapes&                                                     collisionShapes
     );
 
-    MCNAPI static void testForEntityStacking(
+    MCAPI static void testForEntityStacking(
         ::StrictEntityContext const& except,
         ::LocalSpatialEntityFetcher& component,
         ::AABB const&                intersectTestBox,

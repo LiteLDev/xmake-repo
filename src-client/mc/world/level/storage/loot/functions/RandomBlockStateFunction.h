@@ -43,7 +43,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~RandomBlockStateFunction() /*override*/;
+    virtual ~RandomBlockStateFunction() /*override*/ = default;
 
     virtual void apply(::ItemStack& item, ::Random& random, ::LootTableContext& context) /*override*/;
 
@@ -86,12 +86,6 @@ public:
         ::std::string const&                                   blockStateName
     );
 #endif
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCFOLD void $dtor();
     // NOLINTEND
 
 public:

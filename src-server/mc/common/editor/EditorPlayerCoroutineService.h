@@ -37,7 +37,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~EditorPlayerCoroutineService() /*override*/;
+    virtual ~EditorPlayerCoroutineService() /*override*/ = default;
 
     virtual ::Scripting::Result_deprecated<void> init() /*override*/;
 
@@ -74,12 +74,6 @@ public:
     // static variables
     // NOLINTBEGIN
     MCNAPI static ::std::string_view const& ServiceName();
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

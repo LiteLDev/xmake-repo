@@ -33,7 +33,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~ScriptDiagnostics() /*override*/;
+    virtual ~ScriptDiagnostics() /*override*/ = default;
     // NOLINTEND
 
 public:
@@ -48,12 +48,6 @@ public:
     // constructor thunks
     // NOLINTBEGIN
     MCNAPI void* $ctor(::std::vector<::gsl::not_null<::IScriptStatPublisher*>>&& publishers);
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

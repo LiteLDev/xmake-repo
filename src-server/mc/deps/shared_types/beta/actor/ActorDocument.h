@@ -3,8 +3,8 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/deps/shared_types/ActorDocument.h"
 #include "mc/deps/shared_types/beta/actor/ActorDefinitions.h"
+#include "mc/deps/shared_types/v1_26_40/actor/ActorDocument.h"
 
 // auto generated forward declare list
 // clang-format off

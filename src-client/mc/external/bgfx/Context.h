@@ -36,7 +36,6 @@
 #include "mc/external/bx/HandleHashMapT.h"
 #include "mc/external/bx/Mutex.h"
 #include "mc/external/bx/Semaphore.h"
-#include "mc/external/bx/StringT.h"
 #include "mc/external/bx/Thread.h"
 
 // auto generated forward declare list

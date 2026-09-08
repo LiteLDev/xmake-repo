@@ -4,7 +4,7 @@
 
 // auto generated inclusion list
 #include "mc/deps/core/string/HashedString.h"
-#include "mc/deps/shared_types/PieceType.h"
+#include "mc/deps/shared_types/persona/PieceType.h"
 #include "mc/world/actor/player/persona/Rarity.h"
 
 // auto generated forward declare list

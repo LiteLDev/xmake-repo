@@ -26,7 +26,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~IJsonDefinitionSerializer();
+    virtual ~IJsonDefinitionSerializer() = default;
 
     virtual ::std::shared_ptr<::IDefinitionInstance>
     serializeDefinitionInstance(::Json::Value const&, ::MinEngineVersion const&) = 0;
@@ -36,12 +36,6 @@ public:
 
     virtual ::std::shared_ptr<::IDefinitionInstance>
     _serializeDefinitionInstance(::Json::Value const&, ::MinEngineVersion const&, bool, bool const) const = 0;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

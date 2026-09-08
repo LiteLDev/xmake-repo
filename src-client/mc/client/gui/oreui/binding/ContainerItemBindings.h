@@ -3,9 +3,9 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/client/gui/gameplay/api/gameplayui/ContainerItemStatusType.h"
-#include "mc/client/gui/gameplay/api/gameplayui/ContainerItemType.h"
 #include "mc/client/gui/gameplay/data/gameplayui/BundleColor.h"
+#include "mc/client/gui/gameplay/data/gameplayui/ContainerItemStatusType.h"
+#include "mc/client/gui/gameplay/data/gameplayui/ContainerItemType.h"
 #include "mc/client/gui/oreui/binding/properties/Property.h"
 
 // auto generated forward declare list

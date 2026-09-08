@@ -3,9 +3,9 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/ShouldBounce.h"
 #include "mc/comprehensive/ParticleType.h"
 #include "mc/deps/core/math/Vec3.h"
+#include "mc/entity/components_json_legacy/ShouldBounce.h"
 #include "mc/world/actor/ActorComponentDescription.h"
 #include "mc/world/actor/ActorDefinitionTrigger.h"
 #include "mc/world/actor/projectile/ProjectileAnchor.h"

@@ -15,7 +15,7 @@ class CommandPropertyBag : public ::PropertyBag {
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~CommandPropertyBag();
+    virtual ~CommandPropertyBag() = default;
     // NOLINTEND
 
 public:
@@ -26,12 +26,6 @@ public:
     MCAPI void set(::std::string const& key, ::BlockPos const& pos);
 
     MCAPI void set(::std::string const& key, ::Vec3 size);
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCFOLD void $dtor();
     // NOLINTEND
 
 public:

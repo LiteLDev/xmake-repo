@@ -4,7 +4,7 @@
 
 // auto generated inclusion list
 #include "mc/deps/core/string/HashedString.h"
-#include "mc/deps/shared_types/v1_26_20/block/GeometryComponent.h"
+#include "mc/deps/shared_types/v1_26_20/block/components/GeometryComponent.h"
 #include "mc/world/level/block/components/BlockComponentDescription.h"
 #include "mc/world/level/block/components/BlockRendererDescription.h"
 #include "mc/world/level/block/components/NetworkedBlockComponentDescription.h"

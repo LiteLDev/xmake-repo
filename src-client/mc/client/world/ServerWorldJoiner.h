@@ -120,14 +120,6 @@ public:
         ::std::function<void(::std::unique_ptr<::ProgressHandler>)> onCompleteCallback,
         ::std::function<void(::World::JoinServerWorldResult)>       onErrorCallback
     );
-
-    MCAPI ~ServerWorldJoiner();
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 };
 

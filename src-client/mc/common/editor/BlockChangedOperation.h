@@ -69,7 +69,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~BlockChangedOperation() /*override*/;
+    virtual ~BlockChangedOperation() /*override*/ = default;
 
     virtual ::std::string_view getName() /*override*/;
 
@@ -114,12 +114,6 @@ public:
     // static variables
     // NOLINTBEGIN
     MCNAPI static ::std::string const& DEFAULT_OPERATION_NAME();
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

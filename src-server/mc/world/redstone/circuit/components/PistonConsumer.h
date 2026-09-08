@@ -23,7 +23,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~PistonConsumer() /*override*/;
+    virtual ~PistonConsumer() /*override*/ = default;
 
     virtual bool canConsumePowerAnyDirection() const /*override*/;
 
@@ -38,12 +38,6 @@ public:
     ) /*override*/;
 
     virtual ::CircuitComponentType getCircuitComponentType() const /*override*/;
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCFOLD void $dtor();
     // NOLINTEND
 
 public:

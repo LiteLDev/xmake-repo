@@ -46,7 +46,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~OpenSSLInterface() /*override*/;
+    virtual ~OpenSSLInterface() /*override*/ = default;
 
     virtual bool generateKeyPair(::std::string& privateKey, ::std::string& publicKey) /*override*/;
 
@@ -96,12 +96,6 @@ public:
     // NOLINTBEGIN
     MCNAPI static ::Bedrock::Result<::Crypto::Asymmetric::System>
     inferSystemFromPublicKey(::std::string const& publicKey);
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:

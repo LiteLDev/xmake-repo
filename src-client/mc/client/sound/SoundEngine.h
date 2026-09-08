@@ -3,10 +3,10 @@
 #include "mc/_HeaderOutputPredefine.h"
 
 // auto generated inclusion list
-#include "mc/SoundPauseSource.h"
 #include "mc/client/sound/SoundMapping.h"
 #include "mc/client/sound/VolumeMultipliers.h"
 #include "mc/deps/audio/SoundEventRepository.h"
+#include "mc/deps/audio/SoundPauseSource.h"
 #include "mc/deps/audio/SoundPlayerInterface.h"
 #include "mc/deps/core/file/PathBuffer.h"
 #include "mc/deps/core/utility/NonOwnerPointer.h"
@@ -90,7 +90,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~SoundEngine() /*override*/;
+    virtual ~SoundEngine() /*override*/ = default;
 
     virtual void pauseMusic(bool state) /*override*/;
 
@@ -219,12 +219,6 @@ public:
     MCAPI void setTTSClient(::std::shared_ptr<::TextToSpeechClient> ttsClient);
 
     MCAPI void update(::gsl::span<::std::pair<int, ::ListenerState>> listenerStates, float elapsedTime);
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCAPI void $dtor();
     // NOLINTEND
 
 public:

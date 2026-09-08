@@ -23,7 +23,7 @@ public:
 public:
     // virtual functions
     // NOLINTBEGIN
-    virtual ~InMemoryWritableFile() /*override*/;
+    virtual ~InMemoryWritableFile() /*override*/ = default;
 
     virtual ::leveldb::Status Append(::leveldb::Slice const& data) /*override*/;
 
@@ -48,12 +48,6 @@ public:
 #ifdef LL_PLAT_S
     MCNAPI void* $ctor(::std::shared_ptr<::InMemoryFile> file);
 #endif
-    // NOLINTEND
-
-public:
-    // destructor thunk
-    // NOLINTBEGIN
-    MCNAPI void $dtor();
     // NOLINTEND
 
 public:
