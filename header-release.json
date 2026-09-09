@@ -194,8 +194,8 @@
     "header_verifier": {
       "manifest_sha256": "9E749942E6F664F56E73C266DB46F73CC45A329463DF576F7C7B83DC0A51DB58",
       "report": "docs/validation/p6-header-header_verifier.json",
-      "report_sha256": "166710650FAE07BAC8D0C765923C7D09368B57EB6F0F708D37BC4AD80833065B",
-      "status": "blocked"
+      "report_sha256": "350125DFA3BB0F0E75BCCA94D1BEDEA8749A2724FDB0A00DB25E53E51656D364",
+      "status": "passed"
     },
     "platform_fidelity": {
       "manifest_sha256": "9E749942E6F664F56E73C266DB46F73CC45A329463DF576F7C7B83DC0A51DB58",

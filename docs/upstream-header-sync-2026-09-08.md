@@ -96,11 +96,18 @@ diagnostic comparison to the historical non-tracked lists finds 75 symbol-name
 and 7 bypass-name differences. This is not claimed as a new P0 literal symbol-list
 superset pass; those lists and the frozen runtime BMB are not republished or changed.
 
-HeaderVerifier has not passed in this execution yet: rebuilt and recovered
-same-source executables encountered allocation failures while other applications
-held substantial system commit. Original and analysis-copy attempts remain in the
-external evidence, with failure status. Publication stays gated until an actual
-successful run produces the new three-class report.
+On 2026-09-09, after system commit headroom was restored, the rebuilt frozen
+HeaderVerifier passed against the original ELF: Actor, Player and ClientInstance
+have zero issues, with 136, 136 and 435 vtable slots checked respectively and no
+slot mismatches. Peak private memory was 32,982,048,768 bytes. The new receipt
+contains the executable, original input, Header and report identities. Earlier
+allocation failures remain recorded in the unpublished candidate commit
+`5dd0a3663c44ea9d9a075e46310da2c62207bd55` and external evidence.
+
+The upstream Header tip was rechecked and remains H. Upstream core has advanced
+to `c9a3b9cb0507cfb072f3d33be4324d1642c24889`; its three Windows compatibility
+changes belong to the subsequent core integration and do not alter this Header
+publication's frozen H or Android view.
 
 P5R private CI remains deferred. The P6 kernel, real Minecraft Hooks and device
 cycles are not established by this Header synchronization.
