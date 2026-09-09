@@ -40,9 +40,9 @@
     "entry": "libLeviLamina.so",
     "name": "LeviLamina",
     "type": "preload-native",
-    "version": "26.40.0-android.p6.g2"
+    "version": "26.40.0-android.p6.g3"
   },
-  "phase": "P6-G2",
+  "phase": "P6-G3",
   "prelink_executable_sha256": "A07913F4205991A3B0DE3B574C53E5CEA67DB77115ED884F5D29C331E2F9CC90",
   "provider": {
     "bytes": 4482728,

@@ -13,6 +13,16 @@ import subprocess
 from android_kernel_inputs import InputError, git, read_json, sha
 
 SOURCE_NAMES = {"KernelEntry", "KernelLifecycle", "HeaderSmoke"}
+SOURCE_NAMES_G3 = SOURCE_NAMES | {"KernelApi", "KernelContext", "KernelLogger", "KernelRuntime"}
+EXPORTS_G3 = {"PLGetModRegistration", "LLAndroidKernel_GetApiVersion", "LLAndroidKernel_GetState",
+              "LLAndroidKernel_Log", "LLAndroidKernel_Subscribe", "LLAndroidKernel_Unsubscribe"}
+
+
+def source_names(config: dict) -> set[str]:
+    phase = config.get("phase", "G2")
+    if phase not in ("G2", "G3"):
+        raise InputError("unsupported kernel phase")
+    return SOURCE_NAMES_G3 if phase == "G3" else SOURCE_NAMES
 
 
 def write_json(path: Path, value: dict) -> None:
@@ -40,11 +50,12 @@ def verify_traces(config: dict, directory: Path) -> dict:
     h_ids = tree_ids(header, config["commits"]["S"])
     pl_ids = tree_ids(sdk, config["commits"]["PL"])
     actual = {p.stem for p in directory.glob("*.txt")}
-    if actual != SOURCE_NAMES:
+    expected_sources = source_names(config)
+    if actual != expected_sources:
         raise InputError("missing or unexpected compilation include traces")
     units = {}
     all_mc = set()
-    for name in sorted(SOURCE_NAMES):
+    for name in sorted(expected_sources):
         trace = directory / (name + ".txt")
         files = {}
         for line in trace.read_text(encoding="utf-8-sig").splitlines():
@@ -87,8 +98,9 @@ def verify_traces(config: dict, directory: Path) -> dict:
 
 
 def verify_objects(config: dict, traces: Path, objects: list[Path], output: Path) -> None:
-    if len(objects) != len(SOURCE_NAMES) or not all(p.is_file() for p in objects):
-        raise InputError("G2 requires all three explicit compiled objects")
+    count = len(source_names(config))
+    if len(objects) != count or not all(p.is_file() for p in objects):
+        raise InputError("all explicit compiled objects are required")
     coverage = verify_traces(config, traces)
     inputs = config["inputs"]
     dry_output = output / "p5-dry-run-unused"
@@ -101,17 +113,19 @@ def verify_objects(config: dict, traces: Path, objects: list[Path], output: Path
     run = subprocess.run(args, capture_output=True, text=True, encoding="utf-8", errors="replace")
     log = output / "p5-input-authentication.log"
     log.write_text(run.stdout + run.stderr, encoding="utf-8")
-    if run.returncode or not re.search(r"android dry-run ok: inputs=3 functions=0 external=\d+", run.stdout):
+    if run.returncode or not re.search(rf"android dry-run ok: inputs={count} functions=0 external=\d+", run.stdout):
         raise InputError("P5 input authentication or zero-MC-import classification failed: " + run.stdout + run.stderr)
     if dry_output.exists():
         raise InputError("P5 dry-run unexpectedly wrote output")
-    write_json(output / "objects.json", {"phase": "G2", "passed": True, "header_coverage": coverage,
+    write_json(output / "objects.json", {"phase": config.get("phase", "G2"), "passed": True, "header_coverage": coverage,
                "p5_command": args, "p5_log_sha256": sha(log), "function_imports": 0,
                "objects": [{"path": str(p), "sha256": sha(p)} for p in objects], "G6_complete": False})
-    print("G2 object checks passed: actual MC includes are S; P5 functionImports=0.")
+    print("Kernel object checks passed: actual MC includes are S; P5 functionImports=0.")
 
 
-def elf_contract(path: Path) -> dict:
+def elf_contract(path: Path, phase: str = "G2") -> dict:
+    if phase not in ("G2", "G3"):
+        raise InputError("unsupported kernel phase")
     data = path.read_bytes()
 
     def block(offset: int, size: int) -> bytes:
@@ -198,10 +212,11 @@ def elf_contract(path: Path) -> dict:
                 offset += (desc_size + 3) & ~3
                 if name == b"Android" and len(desc) >= 4:
                     api_notes.append(struct.unpack_from("<I", desc)[0])
-    if sorted(exports) != ["PLGetModRegistration"]:
-        raise InputError("G2 dynamic exports must contain only PLGetModRegistration")
-    if export_details["PLGetModRegistration"] != (2, 1, 0):
-        raise InputError("PLGetModRegistration must be a global function with default visibility")
+    expected_exports = EXPORTS_G3 if phase == "G3" else {"PLGetModRegistration"}
+    if len(exports) != len(expected_exports) or set(exports) != expected_exports:
+        raise InputError(f"{phase} dynamic export set mismatch")
+    if any(export_details[name] != (2, 1, 0) for name in expected_exports):
+        raise InputError("kernel exports must be global functions with default visibility")
     if soname != "libLeviLamina.so" or api_notes != [28]:
         raise InputError("kernel SONAME or Android API note mismatch")
     allowed = {"libc++_shared.so", "libc.so", "libm.so", "libdl.so", "liblog.so", "libpreloader.so"}
@@ -230,10 +245,10 @@ def main() -> None:
         else:
             if not args.elf:
                 raise InputError("kernel ELF is required")
-            result = elf_contract(args.elf)
-            result.update(phase="G2", passed=True, G6_complete=False)
+            result = elf_contract(args.elf, config["phase"])
+            result.update(phase=config["phase"], passed=True, G6_complete=False)
             write_json(args.inputs.parent / "elf.json", result)
-            print("G2 ELF checks passed: API28/AArch64, SONAME, exact export and 16 KiB alignment.")
+            print("Kernel ELF checks passed: API28/AArch64, SONAME, exact exports and 16 KiB alignment.")
     except (InputError, OSError, ValueError, KeyError, struct.error, IndexError) as exc:
         parser.exit(1, f"P6 binary rejected: {exc}\n")
 

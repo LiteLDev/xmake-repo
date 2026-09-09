@@ -107,6 +107,23 @@ class IncludeTraceTests(unittest.TestCase):
         with self.assertRaisesRegex(inputs.InputError, "include traces"):
             binary.verify_traces(self.config, self.traces)
 
+    def test_g3_requires_every_new_translation_unit(self):
+        self.config["phase"] = "G3"
+        with self.assertRaisesRegex(inputs.InputError, "include traces"):
+            binary.verify_traces(self.config, self.traces)
+        for name in binary.SOURCE_NAMES_G3 - binary.SOURCE_NAMES:
+            self.write(self.traces / (name + ".txt"), str(self.ll) + "\n")
+        result = binary.verify_traces(self.config, self.traces)
+        self.assertEqual(len(result["units"]), 7)
+        (self.traces / "KernelApi.txt").unlink()
+        with self.assertRaisesRegex(inputs.InputError, "include traces"):
+            binary.verify_traces(self.config, self.traces)
+
+    def test_unknown_phase_cannot_relax_the_source_contract(self):
+        self.config["phase"] = "unknown"
+        with self.assertRaisesRegex(inputs.InputError, "unsupported kernel phase"):
+            binary.verify_traces(self.config, self.traces)
+
     def test_changed_pl_sdk_is_rejected(self):
         self.write(self.pl, "// changed SDK\n")
         with self.assertRaisesRegex(inputs.InputError, "Git blob"):

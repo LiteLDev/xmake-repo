@@ -1,4 +1,10 @@
 {
-    global: PLGetModRegistration;
+    global:
+        PLGetModRegistration;
+        LLAndroidKernel_GetApiVersion;
+        LLAndroidKernel_GetState;
+        LLAndroidKernel_Log;
+        LLAndroidKernel_Subscribe;
+        LLAndroidKernel_Unsubscribe;
     local: *;
 };

@@ -28,7 +28,7 @@ $taskResults = [Collections.Generic.List[object]]::new()
 function Get-SourceIdentity {
     $taskNames = @('xmake.lua', 'config/android-kernel-inputs.lock.json',
         'scripts/Validate-AndroidKernel.ps1', 'scripts/android_kernel_inputs.py', 'scripts/android_kernel_binary.py')
-    $taskNames += @(Get-ChildItem -LiteralPath (Join-Path $taskRepo 'scripts/xmake'), (Join-Path $taskRepo 'src-android/ll/core/android') -File |
+    $taskNames += @(Get-ChildItem -LiteralPath (Join-Path $taskRepo 'scripts/xmake'), (Join-Path $taskRepo 'src-android/ll') -File -Recurse |
         ForEach-Object { [IO.Path]::GetRelativePath($taskRepo, $_.FullName).Replace('\', '/') })
     $taskHashes = [ordered]@{}
     foreach ($taskName in $taskNames | Sort-Object) {
@@ -73,7 +73,7 @@ try {
         "--android_provider_elf=$Provider", "--android_target_elf=$TargetElf", '-o', $taskBuild
     )
     Invoke-Phase 'build' @('build', '-vD', '-j', '2', 'LeviLaminaAndroidKernel')
-    $taskElfReport = Get-Content -Raw -LiteralPath (Join-Path $taskBuild 'g2/elf.json') | ConvertFrom-Json
-    if (-not $taskElfReport.passed -or $taskElfReport.G6_complete) { throw 'Unexpected G2 ELF validation state.' }
-    Write-Output 'G2 compilation and ELF checks passed. Device lifecycle is a separate gate; G6 is not complete.'
+    $taskElfReport = Get-Content -Raw -LiteralPath (Join-Path $taskBuild 'android-kernel/elf.json') | ConvertFrom-Json
+    if (-not $taskElfReport.passed -or $taskElfReport.G6_complete) { throw 'Unexpected kernel ELF validation state.' }
+    Write-Output 'Kernel compilation and ELF checks passed. Runtime fixtures remain separate; G6 is not complete.'
 } finally { Pop-Location }

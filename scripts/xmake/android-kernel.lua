@@ -26,7 +26,8 @@ target("LeviLaminaAndroidKernel")
     set_languages("c++20")
     set_symbols("debug")
     set_exceptions("none")
-    add_defines("LL_PLAT_A")
+    add_defines("LL_PLAT_A", "LL_ANDROID_KERNEL_EXPORTS")
+    add_cxxflags("-include", path.join(os.projectdir(), "src-android/ll/core/android/CompilationContract.h"), {force = true})
     add_cxxflags("-fPIC", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-fno-exceptions", "-fno-rtti", {force = true})
     add_cxxflags("-Wall", "-Wextra", "-Wpedantic", "-Werror", "--system-header-prefix=mc/", {force = true})
     add_shflags("-Wl,-z,defs", "-Wl,-z,max-page-size=16384", "-Wl,-z,common-page-size=16384", {force = true})
@@ -35,7 +36,7 @@ target("LeviLaminaAndroidKernel")
     on_load(function(target)
         import("core.project.config")
         import("core.base.json")
-        local output = path.absolute(path.join(config.builddir(), "g2/inputs.json"))
+        local output = path.absolute(path.join(config.builddir(), "android-kernel/inputs.json"))
         assert(tonumber(get_config("ndk_sdkver")) == 28, "P6 requires --ndk_sdkver=28")
         assert(get_config("runtimes") == "c++_shared", "P6 requires --runtimes=c++_shared for the NDK toolchain")
         local args = {
@@ -55,10 +56,10 @@ target("LeviLaminaAndroidKernel")
         local resolved = json.loadfile(output)
         for _, root in ipairs(resolved.include_roots) do target:add("includedirs", root) end
         for _, root in ipairs(resolved.system_include_roots) do target:add("sysincludedirs", root) end
-        local traces = path.absolute(path.join(config.builddir(), "g2/includes"))
+        local traces = path.absolute(path.join(config.builddir(), "android-kernel/includes"))
         os.mkdir(traces)
         -- Explicit source table: new desktop or Android files never enter implicitly.
-        for _, name in ipairs({"KernelEntry", "KernelLifecycle", "HeaderSmoke"}) do
+        for _, name in ipairs({"KernelEntry", "KernelLifecycle", "HeaderSmoke", "KernelApi", "KernelContext", "KernelLogger", "KernelRuntime"}) do
             target:add("files", path.join(os.projectdir(), "src-android/ll/core/android/" .. name .. ".cpp"), {
                 cxxflags = {"-H", "-Xclang=-header-include-file", "-Xclang=" .. path.join(traces, name .. ".txt")}
             })
