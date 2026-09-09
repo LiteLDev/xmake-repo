@@ -1,0 +1,72 @@
+{
+  "binary": {
+    "api_level": 28,
+    "architecture": "arm64-v8a",
+    "cxx": "c++20",
+    "page_alignment": 16384,
+    "runtime": "c++_shared",
+    "soname": "libLeviLamina.so"
+  },
+  "bmb": {
+    "bytes": 17626204,
+    "sha256": "FC2502A6B0AD9B5DA18068209D5DBA1FD86584BD30F1A92022DE72FFF4DB1B7A"
+  },
+  "commits": {
+    "H": "48f5fbfc2cbd539c08316d855555ce084478a678",
+    "M": "c9a3b9cb0507cfb072f3d33be4324d1642c24889",
+    "P5": "1ab96df1790e2cd8082c4c72b656b0996ae4c311",
+    "PL": "7e80428d4b298653fc050a8d03e54ac7c6321846",
+    "S": "6d5f02513384b051436fa0a26902894d10f6205a"
+  },
+  "dependency_header_api": 21,
+  "dependency_manifest_sha256": "66DDEF1DB1B89D872EDAC888F3B07C0C19F052C325D43D1B8FB97CF3A6855262",
+  "header": {
+    "android_effective_sha256": "4C68F48A202CBF892C316EA86B5FAE33FA77444A5033A2A34A52382BB31B45F2",
+    "count": 17367,
+    "manifest_sha256": "9E749942E6F664F56E73C266DB46F73CC45A329463DF576F7C7B83DC0A51DB58"
+  },
+  "ndk": {
+    "files": {
+      "source.properties": "C00AA236FDB205E9BE9EDD9E2169763E48ACA52735EFFF4E16F34205D49783B5",
+      "toolchains/llvm/prebuilt/windows-x86_64/bin/clang++.exe": "1C7792EF6DF195B6AF5919071A9CA7850BCB850153F02BED9C7D642E266C4FF3",
+      "toolchains/llvm/prebuilt/windows-x86_64/bin/ld.lld.exe": "3208134DFD067FB969F8D052DB5DA2E9E44802E239494E051113D81CE8700E83",
+      "toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-readelf.exe": "2646E382D8B2559B5C4AE91E9A98E187ED9BD59F23936054D424049EF795BA5E",
+      "toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-strip.exe": "2D411DB64E0B45508775E9E8FD436FB6E0AF814A9DFBF8AEA8FC37CE436C435C",
+      "toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/libc++_shared.so": "AB4E6C71B96B851DE45A8A9BD86369E7DBC2130A44B3B4520564BE94847910F2"
+    },
+    "revision": "28.2.13676358"
+  },
+  "package": {
+    "entry": "libLeviLamina.so",
+    "name": "LeviLamina",
+    "type": "preload-native",
+    "version": "26.40.0-android.p6.g2"
+  },
+  "phase": "P6-G2",
+  "prelink_executable_sha256": "A07913F4205991A3B0DE3B574C53E5CEA67DB77115ED884F5D29C331E2F9CC90",
+  "provider": {
+    "bytes": 4482728,
+    "sha256": "E430962236CADB040B6DA4D7BDA19F274072BD7F8D6FAE352930C50A7E25384C"
+  },
+  "runtime_manifest": {
+    "bmbBytes": "17626204",
+    "bmbSha256": "fc2502a6b0ad9b5da18068209d5dba1fd86584bd30f1a92022de72fff4db1b7a",
+    "functionReverseIndexCount": 25667,
+    "membershipCount": 540340,
+    "minecraftVersion": "1.26.40.5",
+    "providerBuildId": "5f150334aad3561cd050ac527ebb5ce6cb46fc03",
+    "providerFileSha256": "e430962236cadb040b6da4d7bda19f274072bd7f8d6fae352930c50a7e25384c",
+    "providerTextSha256": "e0eafefe74deef72fed0f36d26a72920a916f45081a50ff0e3e8964fd320ef58",
+    "schemaVersion": 1,
+    "semanticSha256": "b1f905519c0b7dfb709ed23e475ed48eb3705b525e924e20116cde6ebec6a82c",
+    "targetBuildId": "5893edc8d56c93cbdb50e0f9436320236b78c89d",
+    "targetTextSha256": "f17aa60a840a88fc1212abfa92e362fec86b871126f30ae03000de8d90f3b0aa",
+    "whitelistValueCount": 26092
+  },
+  "runtime_manifest_sha256": "64651E25D4B39A6E669B791FD9ABB4F6856394E104899E643152E2BB0087FFDB",
+  "schema_version": 1,
+  "target": {
+    "bytes": 1583570128,
+    "sha256": "1CCBC128196E1A522B0000E81CBDCCF6CA3E7025F2D99E1640877D35B860665F"
+  }
+}

@@ -1,0 +1,4 @@
+{
+    global: PLGetModRegistration;
+    local: *;
+};

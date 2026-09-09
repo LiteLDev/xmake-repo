@@ -1,3 +1,10 @@
+includes("scripts/xmake/android-options.lua")
+
+if is_plat("android") then
+    includes("scripts/xmake/android-kernel.lua")
+    return
+end
+
 add_rules("mode.release", "mode.debug")
 
 set_xmakever("3.0.0")
