@@ -1,5 +1,5 @@
 #include "ll/api/android/Kernel.h"
-#include "ll/core/android/KernelLifecycle.h"
+#include "ll/core/KernelLifecycle.h"
 #include "pl/android/Mod.hpp"
 
 #include <array>

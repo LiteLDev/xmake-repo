@@ -55,17 +55,17 @@ $taskCxx = $taskCommon + @('-std=c++20', '-fno-exceptions', '-fno-rtti', '-Wall'
     '-Wl,-z,defs', '-Wl,-z,max-page-size=16384')
 Invoke-FixtureCommand 'c-abi' $taskClang ($taskCommon + @('-std=c11', '-Wall', '-Wextra', '-Wpedantic', '-Werror',
     '-c', "$taskRepo/test/android/kernel_api_c.c", '-o', "$taskOut/kernel_c.o"))
-$taskKernelSources = @('KernelApi.cpp', 'KernelContext.cpp', 'KernelLifecycle.cpp', 'KernelLogger.cpp') |
-    ForEach-Object { "$taskRepo/src-android/ll/core/android/$_" }
+$taskKernelSources = @('api/android/KernelApi.cpp', 'core/KernelContext.cpp', 'core/KernelLifecycle.cpp', 'core/io/KernelLogger.cpp') |
+    ForEach-Object { "$taskRepo/src-android/ll/$_" }
 Invoke-FixtureCommand 'kernel-fixture-build' $taskClangxx ($taskCxx + $taskKernelSources + @(
     "$taskRepo/test/android/kernel_fixture.cpp", "$taskOut/kernel_c.o", '-o', "$taskOut/kernel_fixture"))
 Invoke-FixtureCommand 'production-probe-build' $taskClangxx ($taskCxx + @(
     "$taskRepo/test/android/kernel_production_probe.cpp", '-ldl', '-o', "$taskOut/kernel_production_probe"))
 Invoke-FixtureCommand 'hook-fake-build' $taskClangxx ($taskCxx + @(
-    "$taskRepo/src-android/ll/core/android/RuntimeSymbols.cpp", "$taskRepo/src-android/ll/core/android/HookTransaction.cpp",
+    "$taskRepo/src-android/ll/core/memory/RuntimeSymbols.cpp", "$taskRepo/src-android/ll/core/memory/HookTransaction.cpp",
     "$taskRepo/test/android/hook_transaction_fixture.cpp", '-o', "$taskOut/hook_transaction_fixture"))
 Invoke-FixtureCommand 'hook-owned-build' $taskClangxx ($taskCxx + @(
-    "$taskRepo/src-android/ll/core/android/HookTransaction.cpp", "$taskRepo/test/android/hook_owned_device.cpp",
+    "$taskRepo/src-android/ll/core/memory/HookTransaction.cpp", "$taskRepo/test/android/hook_owned_device.cpp",
     '-ldl', '-o', "$taskOut/hook_owned_device"))
 
 $taskArtifacts = @("$taskOut/kernel_fixture", "$taskOut/kernel_production_probe", "$taskOut/hook_transaction_fixture",

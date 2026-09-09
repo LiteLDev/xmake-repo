@@ -1,0 +1,65 @@
+{
+  "G4_complete": false,
+  "common_ll_tree": "34da55c4bbbfeaca8b388407155f2f25dbdf71a1",
+  "code_parent": "0bbbe0d086b76831174cbbc3d102f2ff8554161e",
+  "device": {
+    "unloaded": "09-09 16:49:07.522",
+    "force_stop": false,
+    "pid": 16621,
+    "old_package_restored": true,
+    "world_entered": false,
+    "clean_activation_refusal": "09-09 16:44:33.104",
+    "normal_menu_quit": true,
+    "loaded": "09-09 16:44:33.060"
+  },
+  "python_passed": 49,
+  "gate": "G3-platform-layout",
+  "windows_platform_ll_unchanged": true,
+  "evidence": {
+    "layout-python.log": "E2487060AD8CC97B13A1659ADA42233FEDA8461C5C5FCD2DC10D4FB4D22BC32C",
+    "layout-host/run.log": "EEF34A2C0AA6EDBD6D91482645291093B1B656ABA059398E1EC62714D943FF2A",
+    "layout-native/fixture-results.json": "FF2AD19727E3DFC8719BC0A03E9BBCCAA6B7FFEFDF4FFDAF57E726F82BD26C85",
+    "layout-native/commands.json": "7F6BEFC800D00878A5C9D236150A1CC6D61784CB9767B1EB2BD9FF36187B3B35",
+    "layout-device/loaded.log": "3C13BC81E97AE8E2AA74B3921F177B1076F9C71E3D513AA8748F718BB0DD224F",
+    "layout-device/exit.log": "81FCEAB3CB9458E5B399575FC704CBDE609E8491DC7B5B0A0FD867AC307976F5",
+    "layout-device/crash.log": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "layout-device/quit.png": "952FCF19862B7811C6B4A72BB20E8E5BF78757E586D282C33466E16C5654B096"
+  },
+  "status": "passed",
+  "schema_version": 1,
+  "android": {
+    "debug": {
+      "function_imports": 0,
+      "bytes": 248096,
+      "object_count": 8,
+      "build_results_sha256": "FEC80ADEDBE98442B5BA87B5BECF2A532D9D4044283B08C86657E8CDC4484F01",
+      "exports": [
+        "PLGetModRegistration",
+        "LLAndroidKernel_GetApiVersion",
+        "LLAndroidKernel_GetState",
+        "LLAndroidKernel_Log",
+        "LLAndroidKernel_Subscribe",
+        "LLAndroidKernel_Unsubscribe"
+      ],
+      "sha256": "059ACEE9A9B2E3192A993249FD75A6A0BF8933BE0E2DFFC403AE54DA6B65C493",
+      "elf_report_sha256": "1AE16369F19E70F8F62DFC124E0387984319958DDB3A091C2A56E1337B3208AC"
+    },
+    "release": {
+      "function_imports": 0,
+      "bytes": 14040,
+      "object_count": 8,
+      "build_results_sha256": "E2371D1B355288FE83640AED8CB3A7AE9B5EA014E2EACE73A5C025CC8B803E3F",
+      "exports": [
+        "PLGetModRegistration",
+        "LLAndroidKernel_GetApiVersion",
+        "LLAndroidKernel_GetState",
+        "LLAndroidKernel_Log",
+        "LLAndroidKernel_Subscribe",
+        "LLAndroidKernel_Unsubscribe"
+      ],
+      "sha256": "0F54B97FC20C5A946F6AEFA3995E652343E13E8CB50AC2CF09CB4C18E8691EE8",
+      "elf_report_sha256": "AECB4C8158A9169883AA19A17ACE6D3DD1DDDEB2CBD8C822DE35A434F63F70FF"
+    }
+  },
+  "common_ll_unchanged": true
+}

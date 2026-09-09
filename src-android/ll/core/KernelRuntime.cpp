@@ -1,11 +1,8 @@
-#include "ll/core/android/KernelLifecycle.h"
-#include <android/log.h>
+#include "ll/core/KernelLifecycle.h"
+#include "ll/core/io/Output.h"
 
 namespace ll::android {
 namespace {
-void fallbackLog(int32_t priority, char const* message) noexcept {
-    __android_log_write(priority, "LeviLamina", message);
-}
 class QuiescenceGate final : public RuntimeOperations {
 public:
     explicit QuiescenceGate(KernelLogger& logger) : logger(logger) {}

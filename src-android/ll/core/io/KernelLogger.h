@@ -1,5 +1,5 @@
 #pragma once
-#include "ll/core/android/KernelContext.h"
+#include "ll/core/KernelContext.h"
 
 namespace ll::android {
 class KernelLogger {

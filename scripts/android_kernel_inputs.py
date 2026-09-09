@@ -153,6 +153,9 @@ def authenticate(repo: Path, inputs: dict[str, str], api: int = 28, arch: str = 
     phase = lock.get("phase", "")
     if phase not in ("P6-G2", "P6-G3"):
         raise InputError("unsupported kernel validation phase")
+    layout = lock.get("source_layout", "legacy")
+    if layout not in ("legacy", "platform-v1") or (phase == "P6-G2" and layout != "legacy"):
+        raise InputError("unsupported kernel source layout")
     if api != lock["binary"]["api_level"] or arch != lock["binary"]["architecture"]:
         raise InputError("P6 binary requires API 28 and arm64-v8a")
     folders = {"header_root", "preloader_root", "ndk"}
@@ -179,7 +182,7 @@ def authenticate(repo: Path, inputs: dict[str, str], api: int = 28, arch: str = 
     for path in sdk:
         if (path / "mc").exists():
             raise InputError("PL SDK include root would shadow Minecraft Headers")
-    return {"schema_version": 1, "phase": phase.removeprefix("P6-"), "repository": str(repo),
+    return {"schema_version": 1, "phase": phase.removeprefix("P6-"), "source_layout": layout, "repository": str(repo),
             "lock_sha256": sha(lock_path), "inputs": {k: str(v) for k, v in resolved.items()},
             "commits": lock["commits"], "binary": lock["binary"],
             "include_roots": [str(v) for v in direct], "system_include_roots": [str(v) for v in sdk + roots],

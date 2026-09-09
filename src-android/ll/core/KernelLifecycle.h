@@ -1,8 +1,8 @@
 #pragma once
 
-#include "ll/core/android/KernelContext.h"
-#include "ll/core/android/KernelLogger.h"
-#include "ll/core/android/RuntimeOperations.h"
+#include "ll/core/KernelContext.h"
+#include "ll/core/RuntimeOperations.h"
+#include "ll/core/io/KernelLogger.h"
 
 #include <atomic>
 #include <cstdint>

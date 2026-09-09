@@ -1,4 +1,4 @@
-#include "ll/core/android/RuntimeSymbols.h"
+#include "ll/core/memory/RuntimeSymbols.h"
 #include <bit>
 
 namespace ll::android {

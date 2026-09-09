@@ -1,5 +1,9 @@
 # P6 G4: tested transactions, blocked Minecraft activation
 
+Historical frozen-contract review. The user subsequently approved the bounded
+provider-resident gateway contract in [the platform continuation notes](android-platform-core.md).
+G4 remains incomplete until that replacement is implemented and validated.
+
 `RuntimeSymbols` and `HookTransaction` are compiled by the native fixtures only.
 They are not in the production kernel's explicit seven-source list. No real
 Minecraft hook is installed by this stage.

@@ -1,4 +1,4 @@
-#include "ll/core/android/KernelLifecycle.h"
+#include "ll/core/KernelLifecycle.h"
 
 namespace ll::android {
 

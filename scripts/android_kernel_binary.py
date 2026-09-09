@@ -14,6 +14,7 @@ from android_kernel_inputs import InputError, git, read_json, sha
 
 SOURCE_NAMES = {"KernelEntry", "KernelLifecycle", "HeaderSmoke"}
 SOURCE_NAMES_G3 = SOURCE_NAMES | {"KernelApi", "KernelContext", "KernelLogger", "KernelRuntime"}
+SOURCE_NAMES_G3_PLATFORM = (SOURCE_NAMES_G3 - {"KernelEntry"}) | {"main_android", "Output_android"}
 EXPORTS_G3 = {"PLGetModRegistration", "LLAndroidKernel_GetApiVersion", "LLAndroidKernel_GetState",
               "LLAndroidKernel_Log", "LLAndroidKernel_Subscribe", "LLAndroidKernel_Unsubscribe"}
 
@@ -22,6 +23,11 @@ def source_names(config: dict) -> set[str]:
     phase = config.get("phase", "G2")
     if phase not in ("G2", "G3"):
         raise InputError("unsupported kernel phase")
+    layout = config.get("source_layout", "legacy")
+    if layout not in ("legacy", "platform-v1") or (phase == "G2" and layout != "legacy"):
+        raise InputError("unsupported kernel source layout")
+    if layout == "platform-v1":
+        return SOURCE_NAMES_G3_PLATFORM
     return SOURCE_NAMES_G3 if phase == "G3" else SOURCE_NAMES
 
 

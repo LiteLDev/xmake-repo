@@ -1,4 +1,4 @@
-#include "ll/core/android/CompilationContract.h"
+#include "ll/core/CompilationContract.h"
 
 #include "mc/client/game/ClientInstance.h"
 #include "mc/client/player/LocalPlayer.h"

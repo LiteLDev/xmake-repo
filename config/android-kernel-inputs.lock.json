@@ -65,6 +65,7 @@
   },
   "runtime_manifest_sha256": "64651E25D4B39A6E669B791FD9ABB4F6856394E104899E643152E2BB0087FFDB",
   "schema_version": 1,
+  "source_layout": "platform-v1",
   "target": {
     "bytes": 1583570128,
     "sha256": "1CCBC128196E1A522B0000E81CBDCCF6CA3E7025F2D99E1640877D35B860665F"

@@ -1,4 +1,4 @@
-#include "ll/core/android/KernelLogger.h"
+#include "ll/core/io/KernelLogger.h"
 
 namespace ll::android {
 bool KernelLogger::validUtf8(char const* message, size_t size) noexcept {

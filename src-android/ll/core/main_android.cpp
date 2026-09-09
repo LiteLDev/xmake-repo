@@ -1,4 +1,4 @@
-#include "ll/core/android/KernelLifecycle.h"
+#include "ll/core/KernelLifecycle.h"
 
 static_assert(sizeof(PLAndroidModContextV1) == 64);
 static_assert(sizeof(PLAndroidModRegistrationV1) == 48);

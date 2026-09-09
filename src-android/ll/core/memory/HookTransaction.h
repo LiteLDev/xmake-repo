@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ll/core/android/RuntimeSymbols.h"
+#include "ll/core/memory/RuntimeSymbols.h"
 #include "pl/Hook.h"
 #include <array>
 

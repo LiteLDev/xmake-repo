@@ -44,7 +44,7 @@ class IncludeTraceTests(unittest.TestCase):
             self.write(self.header / "src-android" / name, "// frozen " + name + "\n")
         self.pl = self.sdk / "src-android/pl/android/Mod.h"
         self.write(self.pl, "// frozen public SDK\n")
-        self.ll = self.repo / "src-android/ll/core/android/CompilationContract.h"
+        self.ll = self.repo / "src-android/ll/core/CompilationContract.h"
         self.write(self.ll, "// project contract\n")
         self.s, self.pl_commit = (self.commit(path) for path in (self.header, self.sdk))
         self.config = {"repository": str(self.repo), "inputs": {"header_root": str(self.header), "preloader_root": str(self.sdk)},
@@ -77,7 +77,7 @@ class IncludeTraceTests(unittest.TestCase):
         self.assertTrue(result["all_mc_from_S"])
 
     def test_byte_identical_project_mc_shadow_is_rejected(self):
-        shadow = self.repo / "src-android/ll/core/android/mc/world/actor/Actor.h"
+        shadow = self.repo / "src-android/ll/core/mc/world/actor/Actor.h"
         self.write(shadow, (self.header / "src-android" / self.mc_names[0]).read_text())
         self.append(shadow)
         with self.assertRaisesRegex(inputs.InputError, "outside Header S"):
@@ -122,6 +122,16 @@ class IncludeTraceTests(unittest.TestCase):
     def test_unknown_phase_cannot_relax_the_source_contract(self):
         self.config["phase"] = "unknown"
         with self.assertRaisesRegex(inputs.InputError, "unsupported kernel phase"):
+            binary.verify_traces(self.config, self.traces)
+
+    def test_platform_layout_requires_entry_and_output_units(self):
+        self.config.update(phase="G3", source_layout="platform-v1")
+        (self.traces / "KernelEntry.txt").unlink()
+        for name in binary.SOURCE_NAMES_G3_PLATFORM - {"KernelLifecycle", "HeaderSmoke"}:
+            self.write(self.traces / (name + ".txt"), str(self.ll) + "\n")
+        self.assertEqual(len(binary.verify_traces(self.config, self.traces)["units"]), 8)
+        (self.traces / "Output_android.txt").unlink()
+        with self.assertRaisesRegex(inputs.InputError, "include traces"):
             binary.verify_traces(self.config, self.traces)
 
     def test_changed_pl_sdk_is_rejected(self):

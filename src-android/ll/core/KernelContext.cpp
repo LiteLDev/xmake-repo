@@ -1,4 +1,4 @@
-#include "ll/core/android/KernelContext.h"
+#include "ll/core/KernelContext.h"
 #include <cstring>
 #include <limits>
 #include <new>
