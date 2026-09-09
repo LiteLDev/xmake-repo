@@ -1,0 +1,51 @@
+{
+  "G4_complete": false,
+  "aarch64_fake_backend": {
+    "exit_code": 0,
+    "log_sha256": "61129034FED39700564B0768EAE5253CD17CB868BBD894F056497BC2888CA615"
+  },
+  "aarch64_owned_functions": {
+    "exit_code": 0,
+    "fmt_sha256": "E09533550F4FC9FDCC36A1E4A2261C82F15451E58ACF1C2A1BB4322D30AB594A",
+    "log_sha256": "AA4B788D0DE85B19B02F5C724BBDFEA2B8B2CBA6B141267DA7933EB2C9330967",
+    "minecraft_hooks_installed": false,
+    "minecraft_symbols_queried": false,
+    "pid": 942,
+    "provider_sha256": "E430962236CADB040B6DA4D7BDA19F274072BD7F8D6FAE352930C50A7E25384C",
+    "quiescence": "single-thread owned entry points; install/remove strictly between complete calls",
+    "real_pl_hooks": true
+  },
+  "blocker": "No frozen PL/Launcher contract prevents new target entry, drains callers and preserves trampoline lifetime.",
+  "code_commit": "ef5279ddc9d7c0171a806aa7cf231f9b1e8783ca",
+  "date": "2026-09-09",
+  "fixture_receipt_sha256": "F72FE548F7ACB2F31A6FABA2FA34AC3CE1EEF86E115D4101E37000F6592FC13B",
+  "gate": "G4",
+  "host_fake_backend": {
+    "evidence": {
+      "g4-host-fixture/build.log": "8BC75353FCE09156C267A359872FC8AD3C798FAE09B58B351D90587977B7F62C",
+      "g4-host-fixture/configure.log": "48382290CDFEBDBE3D47EF85B6ADAC227A258DFB50EEE5FA383ED73A6F402380",
+      "g4-host-fixture/result.json": "1473A91A8F9501F4F15DF5B647F356EA3BC026D931A36FB4810E61E02DBCD1FF",
+      "g4-host-fixture/run.log": "61129034FED39700564B0768EAE5253CD17CB868BBD894F056497BC2888CA615"
+    },
+    "exit_code": 0
+  },
+  "production_activation": false,
+  "production_linked": false,
+  "remaining": [
+    "Minecraft quiescence proof",
+    "production runtime integration and in-flight accounting",
+    "real Minecraft dual-hook validation"
+  ],
+  "schema_version": 1,
+  "source_files": {
+    "scripts/Validate-AndroidKernelFixtures.ps1": "87CCB2E1231F8A843B859A1F2E0A0E9F734BC24E84EC5D76838AB1375701B4B1",
+    "src-android/ll/core/android/HookTransaction.cpp": "97977A5E7235039AA5150C9CC77C04283E79D2AF2A3F708F748B9C52DAC19629",
+    "src-android/ll/core/android/HookTransaction.h": "1192F18882611ABD5AE08F40EB336641F49CC94542517A18B8FF556749459B59",
+    "src-android/ll/core/android/RuntimeSymbols.cpp": "E304620A4DD451F5DA97749FB6845CEACDC87572A09BBEC9010F1124B377066C",
+    "src-android/ll/core/android/RuntimeSymbols.h": "C47ABEB14BC553ECB8479A9C35F571B51C5ADCF342641DE51A24B5719F8AC836",
+    "test/android/hook_owned_device.cpp": "C2D3FE84C713BB656695E2A4310E8430ACD03F8BB6741765B03FC539C4DBD6BF",
+    "test/android/hook_transaction_fixture.cpp": "F021E7F405020322EAF8F0047B6B40B2B44DDA12F6F49CE9B694A8C51A67A864"
+  },
+  "source_identity": "SHA-256 after CRLF to LF normalization",
+  "status": "blocked"
+}

@@ -1,0 +1,15 @@
+{
+  "G9_complete": false,
+  "date": "2026-09-09",
+  "frozen_M": "c9a3b9cb0507cfb072f3d33be4324d1642c24889",
+  "header_S": "6d5f02513384b051436fa0a26902894d10f6205a",
+  "new_change": "Block::getMaterial inline accessor; src/mc/world/level/block/Block.h, two added lines",
+  "new_change_integrated": false,
+  "new_change_validated": false,
+  "observed_upstream_header": "48f5fbfc2cbd539c08316d855555ce084478a678",
+  "observed_upstream_main": "d1fefe8d71b960a82c812380d91cccebbae63d16",
+  "protected_repository_receipt_sha256": "00BB284BD84DB68DACFB91179C085A0DC93F1B6C0907D337DDDC90E493854D92",
+  "reason": "This checkpoint preserves the frozen batch and its evidence; latest main requires a new synchronization batch.",
+  "schema_version": 1,
+  "checked_at": "2026-09-09T16:00:24.9782823+08:00"
+}

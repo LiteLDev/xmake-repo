@@ -1,0 +1,161 @@
+{
+  "aarch64_fixture": {
+    "evidence": {
+      "g3-g4-accepted-final/commands.json": "B532EB985A3A9F6AAF6EB40D9C691B23E649E9007025CBD3BF908DEADD24E5C5",
+      "g3-g4-accepted-final/device-hashes.log": "941D664F459E6C39CA620D5CA852FDDE76298677DFD8CE441E1B38377CFC8BF3",
+      "g3-g4-accepted-final/fixture-results.json": "F72FE548F7ACB2F31A6FABA2FA34AC3CE1EEF86E115D4101E37000F6592FC13B",
+      "g3-g4-accepted-final/kernel-fixture.log": "7A80AC94B21B503B185BAF44871DC5C3A4E93EBBDB02E72E71FE777D4FD8B9BE",
+      "g3-g4-accepted-final/production-probe.log": "578E66D1353F82E4B6237DC96625436F9FCCCEF92E3C9FEC44521E6EBD98E9FB"
+    },
+    "exit_code": 0
+  },
+  "android_builds": {
+    "debug": {
+      "android_api": 28,
+      "bytes": 246488,
+      "exports": [
+        "PLGetModRegistration",
+        "LLAndroidKernel_GetApiVersion",
+        "LLAndroidKernel_GetState",
+        "LLAndroidKernel_Log",
+        "LLAndroidKernel_Subscribe",
+        "LLAndroidKernel_Unsubscribe"
+      ],
+      "mc_include_count": 204,
+      "objects": 7,
+      "p5_function_imports": 0,
+      "receipts": {
+        "g3-accepted-build/build-debug/android-kernel/elf.json": "3C03B8582FF6D32F312A5D3D54571FC2050643EAAD739D89CD049B023D00F187",
+        "g3-accepted-build/build-debug/android-kernel/objects.json": "81E2361E11985E4A3F4C1216026D54A6ED4FA0B721B456E3C2F1AF933F9D1A72",
+        "g3-accepted-build/debug-results.json": "767BA1062F5B39F503F2EC559095E16ABB5AC29B699A3F3F08690239633AA2FD"
+      },
+      "sha256": "770189680BF6CC127723D52BFAEF5774CCFD5C53D6313FD67F420736A61FFDEC"
+    },
+    "release": {
+      "android_api": 28,
+      "bytes": 14000,
+      "exports": [
+        "PLGetModRegistration",
+        "LLAndroidKernel_GetApiVersion",
+        "LLAndroidKernel_GetState",
+        "LLAndroidKernel_Log",
+        "LLAndroidKernel_Subscribe",
+        "LLAndroidKernel_Unsubscribe"
+      ],
+      "mc_include_count": 204,
+      "objects": 7,
+      "p5_function_imports": 0,
+      "receipts": {
+        "g3-accepted-build/build-release/android-kernel/elf.json": "4F903322209E5AE3B1E81A8776765F287E38F0489D8F8DD00D5B18DAE6539033",
+        "g3-accepted-build/build-release/android-kernel/objects.json": "5148CD3B926DED55AD2854C84E31359F26CA08D47873AED348C81F2BAEB400F6",
+        "g3-accepted-build/release-results.json": "3A6CC905E092FD37F4BD84EDB7A946A7E319BE875D1CD34F6812715AA85ECB66"
+      },
+      "sha256": "DA07DDE36612790BB54AB4E6DF5E598136154CD3B8EF6CC34C2B0AA66DD77A20"
+    }
+  },
+  "boundaries": {
+    "G4_complete": false,
+    "G6_complete": false,
+    "G8_complete": false,
+    "event_registry": "not implemented",
+    "mod_loader": "not implemented",
+    "production_enable": "refused before any Minecraft query/hook"
+  },
+  "code_commit": "8515f0fbb1ab90614c376d6927088bd9e99a3174",
+  "code_parent": "159ae1ab7c6fb51db1dfc19654cc7d4ded0e93a1",
+  "date": "2026-09-09",
+  "desktop": {
+    "baseline": "p6-g2-host.json",
+    "inputs_unchanged_since": "7ae535f216767e3be07b027736b536862fc24ff1",
+    "new_windows_runtime_claim": false
+  },
+  "elf_negative_cases": {
+    "receipt_sha256": "3DAC9E5751A84587EFE3F912C4FD4FCDC9B60C16CAC202D2713AF9A20D381649",
+    "rejected": 26
+  },
+  "gate": "G3",
+  "host_fixture": {
+    "binary_sha256": "221219A4B3C9485543AC80487C9E8044C4FF583617ED6E9C7B191390609ECE68",
+    "evidence": {
+      "g3-host-fixture/accepted-build.log": "7AE1C7E752AE4993AB79A84B3A05C93EE9A349A2DB4BF45D72707EADC38C4191",
+      "g3-host-fixture/accepted-result.json": "B0EEF288CB91CDA7752F220FE3296A95E968A53149627B587F61879E701CA262",
+      "g3-host-fixture/accepted-run.log": "EEF34A2C0AA6EDBD6D91482645291093B1B656ABA059398E1EC62714D943FF2A"
+    },
+    "exit_code": 0
+  },
+  "launcher_device": {
+    "apk_sha256": "84192C7034624136149DFB584B13E98FA941A3EF44D0C5A2F4EE381BF8B0E243",
+    "evidence": {
+      "g3-app-device/apk-fmt-hashes.txt": "6C4EF32D459135834449F54EBD7C9F20396EAA4DBA46BD114F26225F2D0FE4D5",
+      "g3-app-device/final-crash.log": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "g3-app-device/final-exit.log": "955D64A5D64785D3B9342673311326E597B54A0FCA50BC4798C53532AA13263C",
+      "g3-app-device/final-loaded.log": "A295FE2A58F420A7CE7F0F3FB278B5591E9D4359E402619A03FDAAB569F4AFEB",
+      "g3-app-device/final-maps.txt": "FF4574C614B4341957ED7F619D6EDC63C4003E2A1F8C3A9CDA7B5BC3D6D4F68E",
+      "g3-app-device/final-quit.png": "232AE7BF3F5EC3BA68731930A9FF22041480FB5242B0FFDC11ACB6E50164D125",
+      "g3-app-device/restored-g2-hash.txt": "940BB1E5CDD09C4A1D7C5BD9CDD4EA709F73E98EAA52C622AB79BAEF6FB106BA"
+    },
+    "force_stop": false,
+    "g2_source_package_restored": true,
+    "incomplete_first_log_cycle_accepted": false,
+    "kernel_sha256": "770189680BF6CC127723D52BFAEF5774CCFD5C53D6313FD67F420736A61FFDEC",
+    "logger_tag": "PreLoader",
+    "logging_property_restored": true,
+    "matching_pid_crash_entries": 0,
+    "menu_loaded": true,
+    "mod_configuration_unchanged": true,
+    "model": "V2454A",
+    "normal_quit": true,
+    "pid": 23298,
+    "sequence": [
+      {
+        "state": "Loaded",
+        "time": "09-09 15:54:21.970"
+      },
+      {
+        "reason": "activation refused without resources",
+        "state": "Failed",
+        "time": "09-09 15:54:22.013"
+      },
+      {
+        "state": "Unloaded",
+        "time": "09-09 15:55:59.435"
+      }
+    ],
+    "world_entered": false
+  },
+  "python_tests": {
+    "failed": 0,
+    "log_sha256": "8C91256586D3AB5FF8AD6C2933F2DF94A3BEDBD0EBDAB54E9F366691F026B6C8",
+    "passed": 48
+  },
+  "schema_version": 1,
+  "source_files": {
+    "config/android-kernel-inputs.lock.json": "8814865222C0F41472C15D381D67BE5BCD024016E58E37DB3DB4BEFACA25BC97",
+    "scripts/Validate-AndroidKernel.ps1": "74F62E1331B5E8E61117065574C57A00E9F338DB7230743CA977A47F97FDCE26",
+    "scripts/android_kernel_binary.py": "F0AA06A982E67B3628C3D3CDD7DC973990F638A9091579FF2550DB2B61F4FECD",
+    "scripts/android_kernel_inputs.py": "B346678665DB806B98B754C94F04D2D31883A963374B949C569B6680D3A5E22C",
+    "scripts/xmake/android-kernel.exports": "80BCB0E72E31305F6BB2C2628977AADC969E617DF03F0A9F1C68C9E92EC5F21C",
+    "scripts/xmake/android-kernel.lua": "8A51C50D64DC99301DDB2B0AA4AF8A466B8FA53BBDFDF08CA80E279F84BB3BE2",
+    "scripts/xmake/android-options.lua": "E77066EE9C323B9AA8F4A2D87E71E012EF966FD8E2E6D67E79CD2A59084E0A61",
+    "src-android/ll/api/android/Kernel.h": "FA3DCDE753453339E3C33777222A425B83434F9B7B5B7FCA8D3765FCDCC141DE",
+    "src-android/ll/core/android/CompilationContract.h": "731B984CE4FBA508399CE804CE99DC5F31906FE2E54E545FE2AD7B12AB9537DD",
+    "src-android/ll/core/android/HeaderSmoke.cpp": "26BBBF469711BA38EE0F20F28432C260C1BD420174CD919BB369A42145FEE9EF",
+    "src-android/ll/core/android/KernelApi.cpp": "766068600651B89CCF182DD772F20DABF639D8A4FCB0EE62CFA5A3E366C4CD57",
+    "src-android/ll/core/android/KernelContext.cpp": "E409C9D8753D4AB904B4CC189AB2A2DF037041272954876BDFA8DFCFF73B25EA",
+    "src-android/ll/core/android/KernelContext.h": "54AC385BE890D0261FE478D72AF36499748A60CBA39754D21D636EADCD6CBB04",
+    "src-android/ll/core/android/KernelEntry.cpp": "092AED34A322F2D9A5D205F5DE4FE7E69ADA5FE51CBD28C6C556E895BC2FEB06",
+    "src-android/ll/core/android/KernelLifecycle.cpp": "87B4696B7181BA0ACE70D61FA8ECDDE4AD7827DA405D43E3E2323077A15422FA",
+    "src-android/ll/core/android/KernelLifecycle.h": "83B3329AA2CE90964B2B350F107F95C2C940F468F5EEFA32784C7889F54D7646",
+    "src-android/ll/core/android/KernelLogger.cpp": "E741608687DBB336D4724592FE5029B8795DFF73C95959B8F0B6EBBAEA2B4A11",
+    "src-android/ll/core/android/KernelLogger.h": "9FD11FB820BCE5FBEDB36E7D8F426DDE399C1701BFD79DBB21FA2A0823383313",
+    "src-android/ll/core/android/KernelRuntime.cpp": "B4100ECF36B00059C8ED3BD2F5F702138AD14EDE3C30DDE7BFCF892F58FF50EC",
+    "src-android/ll/core/android/RuntimeOperations.h": "106FEC0EB1416B51B5216AD01C543593E4890F49718DDE5545E924221C86D203",
+    "test/android/kernel_api_c.c": "EA3E8A24835AF78E42634F72A9BBA6C0BD4384B903C70E3FD18426AD22ED10B4",
+    "test/android/kernel_fixture.cpp": "48A6D738C034BA9CA1EFB8800F79AD3BB8309A80987403A83F16F318F3941DBF",
+    "test/android/kernel_production_probe.cpp": "F98C6B65061E4FA5B450C4704E4357A5BDE62B33DB91635ED5B3F04345DD160C",
+    "test/python/test_android_kernel.py": "5B1D952BE5CD884CB82CF9745A3218E243F5A09EEE292B5CE2B2EA64725A66CC",
+    "xmake.lua": "42EF1F12DCEB8A62407CEFF5C63BC6243BC3C6FE1A98E7BB5C111C51DAEED73A"
+  },
+  "source_identity": "SHA-256 after CRLF to LF normalization",
+  "status": "passed"
+}

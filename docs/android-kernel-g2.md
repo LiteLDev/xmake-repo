@@ -1,5 +1,9 @@
 # Android empty kernel (P6 G2)
 
+This records the accepted G2 code at `7ae535f216767e3be07b027736b536862fc24ff1`.
+For the subsequent API/logger implementation and blocked activation boundary, see
+[the G3 notes](android-kernel-g3.md).
+
 The Android target is isolated before desktop dependencies and architecture rules.
 `LeviLaminaAndroidKernel` compiles an explicit three-file source table and produces
 `libLeviLamina.so`. It includes Actor, ClientInstance and LocalPlayer from detached
