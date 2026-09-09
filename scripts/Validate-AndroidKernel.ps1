@@ -25,8 +25,22 @@ New-Item -ItemType Directory -Path $taskEvidence -Force | Out-Null
 $taskBuild = Join-Path $taskEvidence "build-$Mode"
 $taskResults = [Collections.Generic.List[object]]::new()
 
+function Get-SourceIdentity {
+    $taskNames = @('xmake.lua', 'config/android-kernel-inputs.lock.json',
+        'scripts/Validate-AndroidKernel.ps1', 'scripts/android_kernel_inputs.py', 'scripts/android_kernel_binary.py')
+    $taskNames += @(Get-ChildItem -LiteralPath (Join-Path $taskRepo 'scripts/xmake'), (Join-Path $taskRepo 'src-android/ll/core/android') -File |
+        ForEach-Object { [IO.Path]::GetRelativePath($taskRepo, $_.FullName).Replace('\', '/') })
+    $taskHashes = [ordered]@{}
+    foreach ($taskName in $taskNames | Sort-Object) {
+        $taskText = [IO.File]::ReadAllText((Join-Path $taskRepo $taskName)).Replace("`r`n", "`n")
+        $taskHashes[$taskName] = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($taskText)))
+    }
+    return $taskHashes
+}
+
 function Invoke-Phase([string]$Name, [string[]]$Arguments) {
     $taskLog = Join-Path $taskEvidence "$Mode-$Name.log"
+    $taskSources = Get-SourceIdentity
     $taskStart = Get-Date
     & $Xmake @Arguments *> $taskLog
     $taskExit = $LASTEXITCODE
@@ -34,12 +48,16 @@ function Invoke-Phase([string]$Name, [string[]]$Arguments) {
         phase=$Name; mode=$Mode; command=@($Xmake)+$Arguments; exit_code=$taskExit
         elapsed_seconds=((Get-Date)-$taskStart).TotalSeconds
         log=$taskLog; log_sha256=(Get-FileHash -LiteralPath $taskLog).Hash
+        source_files=$taskSources
     })
     ConvertTo-Json -InputObject @($taskResults.ToArray()) -Depth 5 |
         Set-Content -LiteralPath (Join-Path $taskEvidence "$Mode-results.json") -Encoding utf8
     if ($taskExit -ne 0) {
         Get-Content -LiteralPath $taskLog -Tail 20
         throw "Android kernel $Name failed. Evidence retained in $taskLog"
+    }
+    if (($taskSources | ConvertTo-Json -Compress) -ne ((Get-SourceIdentity) | ConvertTo-Json -Compress)) {
+        throw 'Kernel source changed during validation.'
     }
     Write-Output "Android $Mode $Name passed"
 }
