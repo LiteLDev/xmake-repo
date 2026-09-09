@@ -1,4 +1,4 @@
-#include "MolangVariableMap.h"
+#include "mc/util/MolangVariableMap.h"
 
 
 void MolangVariableMap::setMolangVariable(::MolangVariableIndex molangVariableIndex, ::MolangScriptArg const& value) {

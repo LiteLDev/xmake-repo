@@ -1,0 +1,31 @@
+{
+  "header_bytes_changed": false,
+  "header_release": "6d5f02513384b051436fa0a26902894d10f6205a",
+  "integration_commit": "101e7399401c51c50f6bad2e92bb8d3a27e33410",
+  "patches": [
+    {
+      "after_sha256": "DE8EA9D81AC63C6452E8D767B62AF5DCED79C375C4C7A9114C3796682FDC8813",
+      "before_sha256": "222EB68394B6B50F4406E72F3F3F826127247B69B96374E2F033EA2830BF31E4",
+      "new_include": "mc/util/MolangVariableMap.h",
+      "old_include": "MolangVariableMap.h",
+      "path": "src/mc/util/MolangVariableMap.cpp"
+    },
+    {
+      "after_sha256": "105B59B5255440EB2890BC95C634A501FA0A4CC2D5F42B83EEF7B3F389958595",
+      "before_sha256": "8A3CED4FF09E25A101E132C97BBADCC1E2F310DF2C116AF902ED672A99D43C5E",
+      "new_include": "mc/world/actor/provider/ActorEquipment.h",
+      "old_include": "provider/ActorEquipment.h",
+      "path": "src/mc/world/actor/Actor.cpp"
+    },
+    {
+      "after_sha256": "927629C28CDBBDE4DCE8E070BFEDE21588E769CF31E2AD779F60B7A9413F8A9A",
+      "before_sha256": "7A649071686664A986969FE97D91947264F7174D404E777160CE5C5143E5C169",
+      "new_include": "mc/world/actor/provider/ActorEquipment.h",
+      "old_include": "provider/ActorEquipment.h",
+      "path": "src/mc/world/actor/Mob.cpp"
+    }
+  ],
+  "reason": "Resolve the same upstream Header declarations through configured platform include roots after repartitioning.",
+  "schema_version": 1,
+  "upstream_main": "c9a3b9cb0507cfb072f3d33be4324d1642c24889"
+}

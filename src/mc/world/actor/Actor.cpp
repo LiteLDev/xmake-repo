@@ -45,7 +45,7 @@
 #include "mc/world/level/dimension/Dimension.h"
 #include "mc/world/phys/HitDetection.h"
 #include "mc/world/phys/HitResult.h"
-#include "provider/ActorEquipment.h"
+#include "mc/world/actor/provider/ActorEquipment.h"
 
 
 void Actor::refresh() { _sendDirtyActorData(); }

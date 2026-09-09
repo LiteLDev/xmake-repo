@@ -4,7 +4,7 @@
 #include "mc/deps/shared_types/legacy/actor/ArmorSlot.h"
 #include "mc/world/SimpleContainer.h"
 #include "mc/world/item/ItemStack.h"
-#include "provider/ActorEquipment.h"
+#include "mc/world/actor/provider/ActorEquipment.h"
 
 void Mob::refreshInventory() {
     sendInventory(true);

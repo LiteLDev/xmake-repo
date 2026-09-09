@@ -78,8 +78,9 @@ the Windows platform layers. Its complete H-to-M hunks remain in the audit:
    by M's LL implementations. PCH `src/ll/api/Global.h` and its dependencies remain
    exactly M; Android does not consume this PCH.
 
-M's `src/ll`, platform LL sources, `src-test`, all MC `.cpp` files and root xmake
-entry retain their original paths and bytes. This also repairs merge rename
+At integration commit `101e7399401c51c50f6bad2e92bb8d3a27e33410`, M's `src/ll`,
+platform LL sources, `src-test`, all MC `.cpp` files and root xmake entry retain
+their original paths and bytes. This also repairs merge rename
 heuristics that relocated some MC implementation files while S split Headers
 across platforms. The resolver checks every non-Header source file against M.
 
@@ -89,13 +90,34 @@ materialization rules. `test/main.cpp` retains the S Header harness. Header rele
 validation is run against the detached S checkout using its own root harness;
 the core tree is not falsely certified by S's Header-only metadata/receipts.
 
+## Source compatibility after the merge
+
+The first integrated server/release build exposed a local include whose Header
+had moved into a platform layer. A scan of all original source/Header quote
+includes found three affected `.cpp` include sites and no affected Header sites:
+
+| Source | Original include | Qualified include |
+| --- | --- | --- |
+| `src/mc/util/MolangVariableMap.cpp` | `MolangVariableMap.h` | `mc/util/MolangVariableMap.h` |
+| `src/mc/world/actor/Actor.cpp` | `provider/ActorEquipment.h` | `mc/world/actor/provider/ActorEquipment.h` |
+| `src/mc/world/actor/Mob.cpp` | `provider/ActorEquipment.h` | `mc/world/actor/provider/ActorEquipment.h` |
+
+These three one-line changes use the existing include roots to find the same M
+declarations in their platform layers. Header bytes, APIs, bodies, layouts and
+calling conventions are unchanged. The patch is a separate commit following the
+real merge; `config/upstream-core-compatibility.json` records original/result
+source hashes and the exact include substitutions. The synchronization helper
+describes the initial merge; subsequent source changes must retain this separate
+audit rather than be reset to M to make a check pass.
+
 ## Validation status
 
 G1-H is complete, including a fresh original-ELF HeaderVerifier pass (zero issues).
-G1-K Windows matrix and synchronization tooling validation are in progress.
+All eight pure-M Windows build combinations and 36 Python tests have passed.
+The integrated Windows matrix is being rerun with the three include fixes above.
 G2 and later gates are not complete.
 
-Pure M client/server debug/release, with tests disabled, compile and link locally.
+Pure M client/server debug/release, both with tests enabled and disabled, compile and link locally.
 The local compiler is clang-cl 21.1.0, xmake 3.0.7, and installed MSVC 14.51.36231
 (VS 2026). Upstream CI currently selects LLVM 22; local evidence is not presented
 as that CI result. Windows bedrockdata versions are M's 26.40.5-client.2 and
@@ -113,8 +135,7 @@ its warnings-as-errors flags reject clang's character-conversion warning. This
 dependency build issue was resolved by building that exact package with process-local
 `CL=/clang:-Wno-error=character-conversion`. The warning remains visible; the flag
 was scoped to the package install and is absent from core builds. No source,
-library version, or test assertion was changed. The tests-enabled matrix is being
-rerun. Existing
+library version, or test assertion was changed. Existing
 LL tests execute through the game server-thread executor; a tests-enabled DLL
 build does not count as executing those tests in Minecraft.
 
