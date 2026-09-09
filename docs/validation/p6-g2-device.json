@@ -1,0 +1,67 @@
+{
+  "accepted_pid_crash_entries": 0,
+  "apk_sha256": "84192c7034624136149dfb584b13e98fa941a3ef44d0c5a2f4ee381bf8b0e243",
+  "application_id": "org.levimc.launcher",
+  "boundaries": {
+    "G3_complete": false,
+    "G4_real_mc_hooks": false,
+    "G6_complete": false,
+    "G8_complete": false
+  },
+  "cached_kernel_sha256": "9050E76A3BE6511E1223D23E4E9425464398BC9BCB5EF1131FB37C6A13168476",
+  "code_commit": "7ae535f216767e3be07b027736b536862fc24ff1",
+  "device": {
+    "android_user": 0,
+    "model": "V2454A",
+    "page_size": 4096
+  },
+  "evidence": {
+    "second-crash.log": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "second-exit.log": "6C6DB854177C85D081EAF1D143814E8102E9C97A4DAFEFAD6104A3945541B33D",
+    "second-launcher-ui.xml": "B437EA4BEF1902FF407CFE1A37A50EA505896C78BC1A382D9B8F7BE46E79221D",
+    "second-loaded.log": "80670464111BD7079653746DB1D5F705A09A2F8683B5A13652BE2CE8EA591467",
+    "second-maps.txt": "E982BC7884FB000CCF91445C7268B59D2E3227F42C16185635598461162812AF",
+    "second-quit-dialog.png": "19B122F81A32FCD6AE2D3E46A464206908685E21D377F14C856B1B63F56FC60A"
+  },
+  "force_stop_used": false,
+  "gate": "G2",
+  "kernel_sha256": "9050E76A3BE6511E1223D23E4E9425464398BC9BCB5EF1131FB37C6A13168476",
+  "lifecycle": [
+    {
+      "phase": "load",
+      "pid": 25072,
+      "tid": 29450,
+      "time": "09-09 14:27:19.618"
+    },
+    {
+      "phase": "enable",
+      "pid": 25072,
+      "tid": 25072,
+      "time": "09-09 14:27:19.663"
+    },
+    {
+      "phase": "disable",
+      "pid": 25072,
+      "tid": 25072,
+      "time": "09-09 14:31:38.972"
+    },
+    {
+      "phase": "unload",
+      "pid": 25072,
+      "tid": 25072,
+      "time": "09-09 14:31:38.972"
+    }
+  ],
+  "logging": {
+    "first_incomplete_log_cycle_counted": false,
+    "previous_value": "",
+    "restored": true,
+    "temporary_tag": "log.tag.PreLoader=V"
+  },
+  "menu_loaded": true,
+  "minecraft_version": "1.26.40.5",
+  "normal_exit": "Minecraft quit confirmation; then LauncherRestartActivity and MainActivity",
+  "schema_version": 1,
+  "status": "passed",
+  "world_entered": false
+}

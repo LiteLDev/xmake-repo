@@ -49,7 +49,8 @@ function export, shared-library dependencies, LOAD alignment and non-executable 
 Final debug and release builds pass the include/P5/ELF gates with captured source
 fingerprints. All eight Windows increment combinations pass; desktop native source
 files remain byte-identical to the G1-K code. `docs/validation/p6-g2-host.json` records
-these gates while explicitly leaving device lifecycle pending. Negative checks cover
+these host gates. `docs/validation/p6-g2-device.json` completes the separate device
+lifecycle gate. Negative checks cover
 18 missing/tampered/platform input cases, eight actual compiler contract violations,
 a real compiler run with an identical foreign Actor Header, and nine malformed ELF
 variants. Additional source-provenance unit tests use isolated Git fixtures.
@@ -59,8 +60,13 @@ in that receipt.
 The existing vivo and installed Launcher APK were identified and their APK/BMB/
 manifest hashes matched the frozen inputs. The debug smoke package was staged and
 atomically installed as a new `LeviLamina` package without replacing existing Mods.
-Minecraft launch currently awaits the user's Launcher login; no device lifecycle
-pass is claimed yet. The user is handling login, and the login preference is unchanged.
+After the user completed login, the accepted cold launch reached the Minecraft menu.
+PID 25072 logged load, enable, disable and unload in that exact order. The cached
+loaded SO hash matched the verified debug artifact. Exit used Minecraft's normal
+quit confirmation, followed by the Launcher's restart activity; no force-stop or
+matching-PID crash entry was used as success evidence. The initial cycle with
+incomplete logs was not counted. PreLoader tag verbosity was temporarily increased
+for capture and restored afterwards; the login preference was unchanged.
 
-After device lifecycle checks finish, G2 can be marked
-complete. The known G4 quiescence gate still applies before adding real MC hooks.
+G2 is complete. This menu/lifecycle smoke is not G8 world/event validation. The known
+G4 quiescence gate still applies before adding real MC hooks.
