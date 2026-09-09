@@ -233,8 +233,10 @@ target("LeviLamina")
             file = io.open("src-test/common/include_all.cpp", "w")
             file:write(headers)
             file:close()
+            -- Platform test units need the common definitions after Header repartitioning.
+            local common_headers = headers
         if is_server then
-            headers = ""
+            headers = common_headers
             for _,x in ipairs(os.files("src-server/**.h")) do
                 headers = headers.."#include \""..path.relative(x, "src-server/").."\"\n"
             end
@@ -242,7 +244,7 @@ target("LeviLamina")
             file:write(headers)
             file:close()
         else
-            headers = ""
+            headers = common_headers
             for _,x in ipairs(os.files("src-client/**.h")) do
                 headers = headers.."#include \""..path.relative(x, "src-client/").."\"\n"
             end
@@ -250,6 +252,10 @@ target("LeviLamina")
             file:write(headers)
             file:close()
         end
+            os.mkdir("$(builddir)/test-includes")
+            os.cp("src-test/common/include_all.cpp", "$(builddir)/test-includes/common.cpp")
+            local platform = is_server and "server" or "client"
+            os.cp("src-test/" .. platform .. "/include_all.cpp", "$(builddir)/test-includes/" .. platform .. ".cpp")
         end)
         after_build(function (target)
             io.writefile("src-test/common/include_all.cpp", "// auto gen when build test\n")

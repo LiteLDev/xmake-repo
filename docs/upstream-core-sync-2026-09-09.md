@@ -110,11 +110,22 @@ source hashes and the exact include substitutions. The synchronization helper
 describes the initial merge; subsequent source changes must retain this separate
 audit rather than be reset to M to make a check pass.
 
+The tests-enabled build then exposed an independent grouping assumption in the
+upstream test generator. It generated separate common/platform translation units
+from physical directories. After repartitioning, platform units lacked common
+definitions for `FallingBlockSystemOnLand::DelayDelegateData`,
+`ArmorSlotAndDamagePair`, and `cereal::ComponentStorageSentinelType`.
+Platform `include_all` units now prepend the existing common Header list before
+their platform list. All Headers remain covered and no declarations or storage
+checks change. The exact generated lists are copied into the build directory's
+`test-includes` folder before compilation so coverage can be checked after the
+upstream cleanup resets the tracked source lists.
+
 ## Validation status
 
 G1-H is complete, including a fresh original-ELF HeaderVerifier pass (zero issues).
 All eight pure-M Windows build combinations and 36 Python tests have passed.
-The integrated Windows matrix is being rerun with the three include fixes above.
+The integrated Windows matrix is being rerun with the include and test-generator fixes above.
 G2 and later gates are not complete.
 
 Pure M client/server debug/release, both with tests enabled and disabled, compile and link locally.

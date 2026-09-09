@@ -27,5 +27,12 @@
   ],
   "reason": "Resolve the same upstream Header declarations through configured platform include roots after repartitioning.",
   "schema_version": 1,
+  "test_generator": {
+    "after_sha256": "36C43DEFC77C43C6E9E9CBE0EEC2055C6DE4AF0583A632655C3C0D261C747B9D",
+    "before_sha256": "05EC4455984D1303DA6597EE969F83077619712FE56437456CB6CD0753278C14",
+    "change": "Prepend the complete common Header list to each platform include_all translation unit and preserve the actual generated lists in the build directory.",
+    "path": "xmake.lua",
+    "scope": "tests-only before_build callback"
+  },
   "upstream_main": "c9a3b9cb0507cfb072f3d33be4324d1642c24889"
 }
