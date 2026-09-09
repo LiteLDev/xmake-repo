@@ -1,0 +1,40 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/core/math/Vec3.h"
+#include "mc/deps/script_core/lifetime_registry/scripting/StrongTypedObjectHandle.h"
+#include "mc/scripting/modules/minecraft/options/ScriptEaseOptions.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace ScriptModuleMinecraft { class ScriptActor; }
+namespace Scripting { struct InterfaceBinding; }
+// clang-format on
+
+namespace ScriptModuleMinecraft {
+
+struct ScriptCameraSetFacingOptions {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::UntypedStorage<8, 32>                                                        mFacingEntity;
+    ::ll::TypedStorage<4, 16, std::optional<Vec3>>                                     mLocation;
+    ::ll::TypedStorage<4, 20, std::optional<ScriptModuleMinecraft::ScriptEaseOptions>> mEaseOptions;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI bool operator==(::ScriptModuleMinecraft::ScriptCameraSetFacingOptions const&) const;
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCNAPI static ::Scripting::InterfaceBinding bind();
+    // NOLINTEND
+};
+
+} // namespace ScriptModuleMinecraft

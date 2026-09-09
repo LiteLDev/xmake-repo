@@ -1,0 +1,66 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/client/gui/oreui/resources/AllowListPath.h"
+#include "mc/client/social/manual_achievement_tracking/TrackedSetting.h"
+#include "mc/world/actor/player/persona/Rarity.h"
+
+namespace OreUI {
+
+struct FacetAchievementData {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 24, std::string>                                mId;
+    ::ll::TypedStorage<8, 24, std::string>                                mPlatformIndependentId;
+    ::ll::TypedStorage<8, 24, std::string>                                mAchievementName;
+    ::ll::TypedStorage<8, 24, std::string>                                mDescription;
+    ::ll::TypedStorage<4, 4, int>                                         mGamerScore;
+    ::ll::TypedStorage<8, 8, long>                                        mDateUnlocked;
+    ::ll::UntypedStorage<8, 72>                                           mAchievementImageURL;
+    ::ll::TypedStorage<1, 1, bool>                                        mIsLocked;
+    ::ll::TypedStorage<1, 1, bool>                                        mIsSecret;
+    ::ll::TypedStorage<4, 4, float>                                       mProgressCompleted;
+    ::ll::TypedStorage<4, 4, float>                                       mProgressTarget;
+    ::ll::TypedStorage<4, 4, ::ManualAchievementTracking::TrackedSetting> mTrackedByUser;
+    ::ll::TypedStorage<4, 4, int>                                         mSuggestedOrder;
+    ::ll::TypedStorage<8, 24, std::string>                                mPersonaRewardId;
+    ::ll::TypedStorage<1, 1, bool>                                        mHasPersonaReward;
+    ::ll::TypedStorage<1, 1, bool>                                        mIsPersonaRewardOwned;
+    ::ll::TypedStorage<8, 24, std::string>                                mPersonaRewardName;
+    ::ll::UntypedStorage<8, 72>                                           mPersonaRewardImageURL;
+    ::ll::TypedStorage<1, 1, ::persona::Rarity>                           mPersonaRewardRarity;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    FacetAchievementData& operator=(FacetAchievementData const&);
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI FacetAchievementData();
+
+    MCNAPI FacetAchievementData(::OreUI::FacetAchievementData const&);
+
+    MCNAPI ~FacetAchievementData();
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor();
+
+    MCNAPI void* $ctor(::OreUI::FacetAchievementData const&);
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+};
+
+} // namespace OreUI

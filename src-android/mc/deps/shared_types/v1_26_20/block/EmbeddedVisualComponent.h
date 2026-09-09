@@ -1,0 +1,20 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/shared_types/v1_26_20/block/GeometryComponent.h"
+#include "mc/deps/shared_types/v1_26_20/block/MaterialInstancesComponent.h"
+
+namespace SharedTypes::v1_26_20::BlockDefinition {
+
+struct EmbeddedVisualComponent {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 248, ::SharedTypes::v1_26_20::BlockDefinition::GeometryComponent>         mGeometry;
+    ::ll::TypedStorage<8, 80, ::SharedTypes::v1_26_20::BlockDefinition::MaterialInstancesComponent> mMaterialInstances;
+    // NOLINTEND
+};
+
+} // namespace SharedTypes::v1_26_20::BlockDefinition

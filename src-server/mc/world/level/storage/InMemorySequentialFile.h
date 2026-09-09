@@ -1,0 +1,59 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+class InMemoryFile;
+// clang-format on
+
+class InMemorySequentialFile : public ::leveldb::SequentialFile {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::UntypedStorage<8, 16> mUnka09c7f;
+    ::ll::UntypedStorage<8, 8>  mUnk686272;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    InMemorySequentialFile& operator=(InMemorySequentialFile const&);
+    InMemorySequentialFile(InMemorySequentialFile const&);
+    InMemorySequentialFile();
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~InMemorySequentialFile() /*override*/ = default;
+
+    virtual ::leveldb::Status Read(uint64 n, ::leveldb::Slice* result, char* scratch) /*override*/;
+
+    virtual ::leveldb::Status Skip(uint64 n) /*override*/;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+#ifdef LL_PLAT_S
+    MCNAPI explicit InMemorySequentialFile(::std::shared_ptr<::InMemoryFile> file);
+#endif
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+#ifdef LL_PLAT_S
+    MCNAPI void* $ctor(::std::shared_ptr<::InMemoryFile> file);
+#endif
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCNAPI ::leveldb::Status $Read(uint64 n, ::leveldb::Slice* result, char* scratch);
+
+    MCNAPI ::leveldb::Status $Skip(uint64 n);
+
+
+    // NOLINTEND
+};

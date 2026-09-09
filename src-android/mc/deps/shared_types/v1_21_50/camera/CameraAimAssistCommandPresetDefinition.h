@@ -1,0 +1,44 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/core/math/Vec2.h"
+#include "mc/deps/shared_types/util/AssetType.h"
+#include "mc/deps/shared_types/util/Reference.h"
+#include "mc/platform/Result.h"
+#include "mc/world/level/camera/aimassist/camera_aim_assist/TargetMode.h"
+
+// auto generated forward declare list
+// clang-format off
+class BinaryStream;
+class ReadOnlyBinaryStream;
+namespace cereal { struct ReflectionCtx; }
+// clang-format on
+
+namespace SharedTypes::v1_21_50 {
+
+struct CameraAimAssistCommandPresetDefinition {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::UntypedStorage<8, 32>                                          mPresetId;
+    ::ll::TypedStorage<1, 2, std::optional<CameraAimAssist::TargetMode>> mTargetMode;
+    ::ll::TypedStorage<4, 12, std::optional<Vec2>>                       mAngle;
+    ::ll::TypedStorage<4, 8, std::optional<float>>                       mDistance;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI bool operator==(::SharedTypes::v1_21_50::CameraAimAssistCommandPresetDefinition const&) const;
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCNAPI static void bindType(::cereal::ReflectionCtx&);
+    // NOLINTEND
+};
+
+} // namespace SharedTypes::v1_21_50

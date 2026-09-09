@@ -1,0 +1,56 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/shared_types/v1_21_10/scatter_params/ScatterParamsData.h"
+#include "mc/deps/shared_types/v1_21_20/feature_rules/AutomaticFeatureRuleConditions.h"
+#include "mc/deps/shared_types/v1_21_20/feature_rules/AutomaticFeatureRuleDescription.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace cereal { struct ReflectionCtx; }
+// clang-format on
+
+namespace SharedTypes::v1_21_20 {
+
+struct AutomaticFeatureRulesData {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 48, ::SharedTypes::v1_21_20::AutomaticFeatureRuleDescription> mDescription;
+    ::ll::TypedStorage<8, 224, ::SharedTypes::v1_21_20::AutomaticFeatureRuleConditions> mConditions;
+    ::ll::TypedStorage<8, 576, std::optional<SharedTypes::v1_21_10::ScatterParamsData>> mDistribution;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI AutomaticFeatureRulesData(::SharedTypes::v1_21_20::AutomaticFeatureRulesData const&);
+
+    MCNAPI ::SharedTypes::v1_21_20::AutomaticFeatureRulesData&
+    operator=(::SharedTypes::v1_21_20::AutomaticFeatureRulesData&&);
+
+    MCNAPI ~AutomaticFeatureRulesData();
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCNAPI static void bindType(::cereal::ReflectionCtx&);
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor(::SharedTypes::v1_21_20::AutomaticFeatureRulesData const&);
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+};
+
+} // namespace SharedTypes::v1_21_20

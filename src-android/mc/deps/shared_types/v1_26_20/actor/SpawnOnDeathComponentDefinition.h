@@ -1,0 +1,67 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/shared_types/shared_types/IntRange.h"
+#include "mc/deps/shared_types/v1_21_20/filter_groups/FilterGroupData.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace cereal { struct ReflectionCtx; }
+// clang-format on
+
+namespace SharedTypes::v1_26_20 {
+
+struct SpawnOnDeathComponentDefinition {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 192, ::SharedTypes::v1_21_20::FilterGroupData> mFilters;
+    ::ll::TypedStorage<8, 24, std::string>                               mEntityToSpawn;
+    ::ll::TypedStorage<8, 24, std::string>                               mSpawnMethod;
+    ::ll::TypedStorage<4, 8, ::SharedTypes::IntRange>                    mAdditionalSpawnRange;
+    ::ll::TypedStorage<4, 4, int>                                        mAmount;
+    ::ll::TypedStorage<1, 1, bool>                                       mInheritName;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    SpawnOnDeathComponentDefinition& operator=(SpawnOnDeathComponentDefinition const&);
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI SpawnOnDeathComponentDefinition(::SharedTypes::v1_26_20::SpawnOnDeathComponentDefinition const&);
+
+    MCNAPI bool operator==(::SharedTypes::v1_26_20::SpawnOnDeathComponentDefinition const&) const;
+
+    MCNAPI ~SpawnOnDeathComponentDefinition();
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCNAPI static void bindType(::cereal::ReflectionCtx&);
+    // NOLINTEND
+
+public:
+    // static variables
+    // NOLINTBEGIN
+    MCNAPI static std::string_view const& NAME();
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor(::SharedTypes::v1_26_20::SpawnOnDeathComponentDefinition const&);
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+};
+
+} // namespace SharedTypes::v1_26_20

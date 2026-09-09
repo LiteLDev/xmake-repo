@@ -1,0 +1,33 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/util/Factory.h"
+#include "mc/util/json_util/JsonSchemaObjectNode.h"
+
+// auto generated forward declare list
+// clang-format off
+class EventResponse;
+class SemVersion;
+namespace JsonUtil { class EmptyClass; }
+// clang-format on
+
+struct EventResponseCollection {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 24, std::vector<std::shared_ptr<EventResponse>>> mResponses;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    EventResponseCollection& operator=(EventResponseCollection const&);
+
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCNAPI static std::shared_ptr<JsonUtil::JsonSchemaObjectNode<JsonUtil::EmptyClass, EventResponseCollection>>
+    buildSchema(std::string const&, ::SemVersion const&, ::Factory<EventResponse> const&);
+    // NOLINTEND
+};

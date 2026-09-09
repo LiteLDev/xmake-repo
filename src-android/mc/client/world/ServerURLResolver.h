@@ -1,0 +1,48 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/client/world/IServerURLResolver.h"
+
+// auto generated forward declare list
+// clang-format off
+struct PingedCompatibleServer;
+namespace RakNet { struct RakNetGUID; }
+// clang-format on
+
+namespace World {
+
+class ServerURLResolver : public ::World::IServerURLResolver {
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~ServerURLResolver();
+
+    virtual bool fromStringExplicitPort(::PingedCompatibleServer&, char const*, ushort, int);
+
+    virtual void fromString(::RakNet::RakNetGUID&, char const*);
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCNAPI bool $fromStringExplicitPort(::PingedCompatibleServer&, char const*, ushort, int);
+
+    MCNAPI void $fromString(::RakNet::RakNetGUID&, char const*);
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+    // NOLINTEND
+};
+
+} // namespace World

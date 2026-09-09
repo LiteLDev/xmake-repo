@@ -1,0 +1,71 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/platform/container/list_base_hook.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace Bedrock::PubSub { class SubscriptionContext; }
+namespace Bedrock::PubSub::Detail { class PublisherDisconnector; }
+// clang-format on
+
+namespace Bedrock::PubSub::Detail {
+
+class SubscriptionBodyBase
+: public ::Bedrock::Intrusive::list_base_hook<Bedrock::PubSub::Detail::SubscriptionBodyBase> {
+public:
+    // SubscriptionBodyBase inner types declare
+    // clang-format off
+    struct CompareEntries;
+    // clang-format on
+
+    // SubscriptionBodyBase inner types define
+    struct CompareEntries {};
+
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 16, std::shared_ptr<Bedrock::PubSub::Detail::SubscriptionBodyBase>> mStrongSelf;
+    ::ll::TypedStorage<8, 8, ::Bedrock::PubSub::Detail::PublisherDisconnector*>               mDisconnector;
+    ::ll::TypedStorage<8, 8, std::unique_ptr<Bedrock::PubSub::SubscriptionContext>>           mContext;
+    ::ll::TypedStorage<4, 4, int>                                                             mGroup;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    SubscriptionBodyBase();
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~SubscriptionBodyBase();
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI explicit SubscriptionBodyBase(std::unique_ptr<Bedrock::PubSub::SubscriptionContext>&&);
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor(std::unique_ptr<Bedrock::PubSub::SubscriptionContext>&&);
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+    // NOLINTEND
+};
+
+} // namespace Bedrock::PubSub::Detail

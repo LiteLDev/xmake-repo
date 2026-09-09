@@ -1,0 +1,27 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/game_refs/WeakRef.h"
+#include "mc/ui/DataDrivenScreenClosedReason.h"
+
+// auto generated forward declare list
+// clang-format off
+class EntityContext;
+// clang-format on
+
+struct PlayerDataDrivenScreenClosedEvent {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::UntypedStorage<1, 24>                              mPlayer;
+    ::ll::TypedStorage<4, 4, uint>                           mFormId;
+    ::ll::TypedStorage<1, 1, ::DataDrivenScreenClosedReason> mCloseReason;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    PlayerDataDrivenScreenClosedEvent& operator=(PlayerDataDrivenScreenClosedEvent const&);
+    PlayerDataDrivenScreenClosedEvent();
+};

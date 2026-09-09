@@ -1,0 +1,42 @@
+{
+  "adaptations": {
+    "manifest": "docs/validation/upstream-core-header-adaptations.json",
+    "manifest_sha256": "7248686A0A1CE8E3FB0E64E40A2ED11AF5C45011E5F495AF0E829AFB036B1C8E",
+    "patch": "docs/validation/upstream-core-header-adaptations.patch",
+    "patch_sha256": "6411DF57C04AE35FF8BCD51B022991157C5E10246526FA04C3B614E16ED29D7D",
+    "rows": 1181
+  },
+  "commits": {
+    "D": "a1e1f0d7be65959a4c68822cb861b3365ae43755",
+    "H": "48f5fbfc2cbd539c08316d855555ce084478a678",
+    "M": "c9a3b9cb0507cfb072f3d33be4324d1642c24889",
+    "S": "6d5f02513384b051436fa0a26902894d10f6205a"
+  },
+  "effective_headers": {
+    "android": {
+      "headers": 17367,
+      "sha256": "4C68F48A202CBF892C316EA86B5FAE33FA77444A5033A2A34A52382BB31B45F2"
+    },
+    "client": {
+      "headers": 20897,
+      "sha256": "A787187BF9CCA9A6624C418D1405B35BB522ACA3989C1E4A493892415AEB36E1"
+    },
+    "server": {
+      "headers": 20824,
+      "sha256": "A85654B59CBCA623FCE764371693BF644570096CFF5C11F8FCEDDAD82F368806"
+    }
+  },
+  "header_release_manifest": "9E749942E6F664F56E73C266DB46F73CC45A329463DF576F7C7B83DC0A51DB58",
+  "policy": "H-to-M core edits retained per logical Windows path; Android stays S; MC type edits are audited, not infrastructure exemptions",
+  "schema_version": 1,
+  "upstream_header_views": {
+    "client": {
+      "headers": 20864,
+      "sha256": "CBBDAF6AD54AAC5F0E49D5947A10E0B1B1F6D2CE13B59A4EE1E3D3C0821FBF1E"
+    },
+    "server": {
+      "headers": 20791,
+      "sha256": "8969459684645CBFB180F5FA3C92D883EC9F6145CB684F9457999A6848215D68"
+    }
+  }
+}

@@ -1,0 +1,106 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/shared_types/legacy/LevelSoundEvent.h"
+#include "mc/world/actor/ActorFlags.h"
+#include "mc/world/actor/ai/goal/MeleeAttackGoal.h"
+
+// auto generated forward declare list
+// clang-format off
+class Actor;
+class BaseGameVersion;
+class Mob;
+struct GoalId;
+// clang-format on
+
+class DelayedAttackGoal : public ::MeleeAttackGoal {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<4, 4, int>                                    mAttackDurationTicks;
+    ::ll::TypedStorage<4, 4, int>                                    mPostPathingTicks;
+    ::ll::TypedStorage<4, 4, int>                                    mHitDelayTicks;
+    ::ll::TypedStorage<4, 4, ::ActorFlags>                           mAttackFlag;
+    ::ll::TypedStorage<4, 4, ::SharedTypes::Legacy::LevelSoundEvent> mSound;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    DelayedAttackGoal();
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~DelayedAttackGoal();
+
+    virtual bool canUse();
+
+    virtual bool canContinueToUse();
+
+    virtual void start();
+
+    virtual void stop();
+
+    virtual void tick();
+
+    virtual void appendDebugInfo(std::string&) const;
+
+    virtual int getAttackTicksResetValue() const;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI explicit DelayedAttackGoal(::Mob&);
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCNAPI static bool _isTargetInLineOfSightLegacy(::Mob const&, ::Actor const&);
+    // NOLINTEND
+
+public:
+    // static variables
+    // NOLINTBEGIN
+    MCNAPI static ::BaseGameVersion const& mMinLineOfSightFixVersion();
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor(::Mob&);
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCNAPI bool $canUse();
+
+    MCNAPI bool $canContinueToUse();
+
+    MCNAPI void $start();
+
+    MCNAPI void $stop();
+
+    MCNAPI void $tick();
+
+    MCNAPI void $appendDebugInfo(std::string&) const;
+
+    MCNAPI int $getAttackTicksResetValue() const;
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+    // NOLINTEND
+};

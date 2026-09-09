@@ -1,0 +1,145 @@
+{
+  "exit_code": 0,
+  "gate": "header_verifier",
+  "log": {
+    "bytes": 463,
+    "name": "header-verifier.log",
+    "sha256": "C0164196C5C1C4A7B902E6E5B7DAAA3C014B5151FA511EA17420CB464E6DE803"
+  },
+  "manifest_sha256": "9E749942E6F664F56E73C266DB46F73CC45A329463DF576F7C7B83DC0A51DB58",
+  "provenance": {
+    "android_dependency_manifest_sha256": "66DDEF1DB1B89D872EDAC888F3B07C0C19F052C325D43D1B8FB97CF3A6855262",
+    "base_release_commit": "a1e1f0d7be65959a4c68822cb861b3365ae43755",
+    "content_algorithm": "sha256(path-utf8 + NUL + Git-LF-bytes + NUL), ordinal path order",
+    "effective_views": {
+      "android": {
+        "headers": 17367,
+        "sha256": "4C68F48A202CBF892C316EA86B5FAE33FA77444A5033A2A34A52382BB31B45F2"
+      },
+      "client": {
+        "headers": 20864,
+        "sha256": "8F293880B6415DC8F177954F2B37DAD73C103956C7CDB966534F0A9E870E0CB1"
+      },
+      "server": {
+        "headers": 20791,
+        "sha256": "1F4258F098C67F43B1F3A0F8B997D5E8BCCF1FBC4763E858758890D21E9236DA"
+      }
+    },
+    "infrastructure_adjustments": [
+      {
+        "kind": "concurrentqueue-include-trailing-space",
+        "path": "mc/_HeaderOutputPredefine.h",
+        "platform": "client",
+        "published_sha256": "084A05B212FF2D961ED7267049762648AB01681B6FDE9CAFDB944ACC90F5E332",
+        "source_sha256": "0FFC73FBE94646B93E04D0062AA024913B8AE69C2EF987669BE8A0E1A21D39F5"
+      },
+      {
+        "kind": "concurrentqueue-include-trailing-space",
+        "path": "mc/_HeaderOutputPredefine.h",
+        "platform": "server",
+        "published_sha256": "084A05B212FF2D961ED7267049762648AB01681B6FDE9CAFDB944ACC90F5E332",
+        "source_sha256": "0FFC73FBE94646B93E04D0062AA024913B8AE69C2EF987669BE8A0E1A21D39F5"
+      }
+    ],
+    "kind": "upstream-header-sync",
+    "source_effective_views": {
+      "android": {
+        "headers": 17367,
+        "sha256": "4C68F48A202CBF892C316EA86B5FAE33FA77444A5033A2A34A52382BB31B45F2"
+      },
+      "client": {
+        "headers": 20864,
+        "sha256": "CBBDAF6AD54AAC5F0E49D5947A10E0B1B1F6D2CE13B59A4EE1E3D3C0821FBF1E"
+      },
+      "server": {
+        "headers": 20791,
+        "sha256": "8969459684645CBFB180F5FA3C92D883EC9F6145CB684F9457999A6848215D68"
+      }
+    },
+    "upstream_header_commit": "48f5fbfc2cbd539c08316d855555ce084478a678",
+    "upstream_include_precedence": "common-before-platform (upstream xmake Header harness)"
+  },
+  "schema_version": 1,
+  "source_algorithm": "sha256 of LF-normalized source text",
+  "source_files": {
+    "scripts/validate_header_release.py": "0C8CE89F14A36E1158231012B3E41F5340DFA1530254F98ABA8461269A9AFCE4"
+  },
+  "status": "passed",
+  "summary": {
+    "classes": [
+      {
+        "class": "Actor",
+        "dwarf_size": 912,
+        "header_sha256": "1F50B7934EF1CED4A0661A2B882A62BC094F3FE47E8395E0848FCCF81C8953C9",
+        "issues": 0,
+        "members": {
+          "dwarf_count": 93,
+          "header_count": 93,
+          "matches": 93,
+          "type_checks_skipped": 2,
+          "typed_member_count": 91,
+          "untyped_member_count": 2
+        },
+        "virtual_functions": {
+          "dwarf_count": 137,
+          "header_count": 137,
+          "matches": 137
+        },
+        "vtable_checked_slots": 136,
+        "vtable_slot_mismatches": 0
+      },
+      {
+        "class": "Player",
+        "dwarf_size": 3024,
+        "header_sha256": "C1E376B37711D7F0BD746F3A7BD90474ED2D0685CA350527CF8DEB1A3A528EBB",
+        "issues": 0,
+        "members": {
+          "dwarf_count": 111,
+          "header_count": 111,
+          "matches": 111,
+          "type_checks_skipped": 1,
+          "typed_member_count": 110,
+          "untyped_member_count": 1
+        },
+        "virtual_functions": {
+          "dwarf_count": 146,
+          "header_count": 146,
+          "matches": 146
+        },
+        "vtable_checked_slots": 136,
+        "vtable_slot_mismatches": 0
+      },
+      {
+        "class": "ClientInstance",
+        "dwarf_size": 3296,
+        "header_sha256": "ED929DED5E6D6103CC835A7580A7992C6033B8C564A9BF3939F50CDD75BD277A",
+        "issues": 0,
+        "members": {
+          "dwarf_count": 131,
+          "header_count": 131,
+          "matches": 131,
+          "type_checks_skipped": 17,
+          "typed_member_count": 114,
+          "untyped_member_count": 17
+        },
+        "virtual_functions": {
+          "dwarf_count": 435,
+          "header_count": 435,
+          "matches": 435
+        },
+        "vtable_checked_slots": 435,
+        "vtable_slot_mismatches": 0
+      }
+    ],
+    "elapsed_seconds": 565.014781,
+    "executable_sha256": "3AE75C77A45F72EE36A11DC35BFEC8D7E61B069303EF869E144BF4DD2E82614A",
+    "issue_count": 0,
+    "markdown_sha256": "F0AF91228DDEE98D9B317E32873B05DAFCCECE47E114B3DC57388595E4799D49",
+    "original_elf_used": true,
+    "peak_private_bytes": 32982048768,
+    "previous_failures_preserved_in_candidate": "5dd0a3663c44ea9d9a075e46310da2c62207bd55",
+    "report_sha256": "95F6607185AB1A5E3442B28D87260418176E867FFDDA02772154A23966209A2A",
+    "source_commit": "cf44b94232975641f5eeb758ce122d798dda7941",
+    "target_sha256": "1CCBC128196E1A522B0000E81CBDCCF6CA3E7025F2D99E1640877D35B860665F"
+  }
+}

@@ -1,0 +1,25 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/core/utility/NonOwnerPointer.h"
+
+// auto generated forward declare list
+// clang-format off
+class FeatureRegistry;
+class IStructureTemplateManager;
+class JigsawStructureRegistry;
+// clang-format on
+
+class VanillaAncientCityJigsawStructureElements {
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCNAPI static void initialize(
+        ::gsl::not_null<Bedrock::NonOwnerPointer<IStructureTemplateManager>>,
+        ::FeatureRegistry&,
+        ::JigsawStructureRegistry&
+    );
+    // NOLINTEND
+};

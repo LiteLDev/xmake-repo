@@ -1,0 +1,106 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/client/gui/oreui/GeometryProtocolType.h"
+#include "mc/deps/core/utility/pub_sub/Subscription.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace Gameface { class IResourceHandler; }
+namespace Gameface { class TemporaryTextureHolder; }
+namespace GeometryAtlas { class IGeometryAtlas; }
+namespace GeometryAtlas { class IGeometryAtlasCaptureService; }
+namespace GeometryAtlas { class IPaperDollHandleFactory; }
+namespace OreUI { class AllKnownTiles; }
+namespace OreUI { class IGeometryAtlasKnownTilesReader; }
+namespace OreUI { class IItemHandleFactory; }
+namespace OreUI { class ILiveViewCollectionPublisher; }
+namespace OreUI { struct LiveViewCollection; }
+// clang-format on
+
+namespace OreUI {
+
+class GeometryAtlasStorage {
+public:
+    // GeometryAtlasStorage inner types declare
+    // clang-format off
+    struct Impl;
+    // clang-format on
+
+    // GeometryAtlasStorage inner types define
+    struct Impl {
+    public:
+        // member variables
+        // NOLINTBEGIN
+        ::ll::TypedStorage<8, 16, std::shared_ptr<GeometryAtlas::IGeometryAtlas>>               mGeometryAtlas;
+        ::ll::TypedStorage<8, 16, std::shared_ptr<GeometryAtlas::IGeometryAtlasCaptureService>> mCaptureService;
+        ::ll::TypedStorage<8, 16, ::Bedrock::PubSub::Subscription>                              mTileChangeSubscription;
+        ::ll::TypedStorage<8, 16, std::shared_ptr<OreUI::IGeometryAtlasKnownTilesReader>>       mKnownItems;
+        ::ll::TypedStorage<8, 16, std::shared_ptr<OreUI::IGeometryAtlasKnownTilesReader>>       mKnownDolls;
+        // NOLINTEND
+
+    public:
+        // prevent constructor by default
+        Impl();
+
+    public:
+        // member functions
+        // NOLINTBEGIN
+        MCNAPI ~Impl();
+        // NOLINTEND
+
+    public:
+        // destructor thunk
+        // NOLINTBEGIN
+        MCNAPI void $dtor();
+        // NOLINTEND
+    };
+
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 8, std::unique_ptr<OreUI::GeometryAtlasStorage::Impl>> mImpl;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI GeometryAtlasStorage();
+
+    MCNAPI explicit GeometryAtlasStorage(std::shared_ptr<GeometryAtlas::IGeometryAtlas>);
+
+    MCNAPI std::unique_ptr<Gameface::IResourceHandler> createGeometryAtlasResourceHandler(
+        std::unique_ptr<OreUI::IItemHandleFactory>,
+        std::unique_ptr<GeometryAtlas::IPaperDollHandleFactory>,
+        std::shared_ptr<OreUI::ILiveViewCollectionPublisher>,
+        ::Gameface::TemporaryTextureHolder&,
+        ::OreUI::GeometryProtocolType
+    );
+
+    MCNAPI ::OreUI::LiveViewCollection createLiveViewCollection();
+
+    MCNAPI ::gsl::not_null<std::shared_ptr<GeometryAtlas::IGeometryAtlasCaptureService>> getCaptureService();
+
+    MCNAPI ::gsl::not_null<std::shared_ptr<GeometryAtlas::IGeometryAtlas>> getGeometryAtlas();
+
+    MCNAPI ~GeometryAtlasStorage();
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor();
+
+    MCNAPI void* $ctor(std::shared_ptr<GeometryAtlas::IGeometryAtlas>);
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+};
+
+} // namespace OreUI

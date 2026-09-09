@@ -1,0 +1,26 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/script_core/lifetime_registry/scripting/StrongTypedObjectHandle.h"
+
+// auto generated forward declare list
+// clang-format off
+class Level;
+namespace ScriptModuleMinecraft { class ScriptGameRules; }
+namespace Scripting { class WeakLifetimeScope; }
+// clang-format on
+
+namespace ScriptModuleMinecraft {
+
+class ScriptGameRulesFactory {
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCNAPI static ::Scripting::StrongTypedObjectHandle<ScriptModuleMinecraft::ScriptGameRules>
+    getHandle(::Scripting::WeakLifetimeScope&, ::Level&);
+    // NOLINTEND
+};
+
+} // namespace ScriptModuleMinecraft

@@ -1,0 +1,77 @@
+{
+  "exit_code": 0,
+  "gate": "python",
+  "log": {
+    "bytes": 4649,
+    "name": "python.log",
+    "sha256": "2D16157B5C721FBF823ED192F7AE170FED5A4D5E45A8967707675CD19C0C2EAF"
+  },
+  "manifest_sha256": "9E749942E6F664F56E73C266DB46F73CC45A329463DF576F7C7B83DC0A51DB58",
+  "provenance": {
+    "android_dependency_manifest_sha256": "66DDEF1DB1B89D872EDAC888F3B07C0C19F052C325D43D1B8FB97CF3A6855262",
+    "base_release_commit": "a1e1f0d7be65959a4c68822cb861b3365ae43755",
+    "content_algorithm": "sha256(path-utf8 + NUL + Git-LF-bytes + NUL), ordinal path order",
+    "effective_views": {
+      "android": {
+        "headers": 17367,
+        "sha256": "4C68F48A202CBF892C316EA86B5FAE33FA77444A5033A2A34A52382BB31B45F2"
+      },
+      "client": {
+        "headers": 20864,
+        "sha256": "8F293880B6415DC8F177954F2B37DAD73C103956C7CDB966534F0A9E870E0CB1"
+      },
+      "server": {
+        "headers": 20791,
+        "sha256": "1F4258F098C67F43B1F3A0F8B997D5E8BCCF1FBC4763E858758890D21E9236DA"
+      }
+    },
+    "infrastructure_adjustments": [
+      {
+        "kind": "concurrentqueue-include-trailing-space",
+        "path": "mc/_HeaderOutputPredefine.h",
+        "platform": "client",
+        "published_sha256": "084A05B212FF2D961ED7267049762648AB01681B6FDE9CAFDB944ACC90F5E332",
+        "source_sha256": "0FFC73FBE94646B93E04D0062AA024913B8AE69C2EF987669BE8A0E1A21D39F5"
+      },
+      {
+        "kind": "concurrentqueue-include-trailing-space",
+        "path": "mc/_HeaderOutputPredefine.h",
+        "platform": "server",
+        "published_sha256": "084A05B212FF2D961ED7267049762648AB01681B6FDE9CAFDB944ACC90F5E332",
+        "source_sha256": "0FFC73FBE94646B93E04D0062AA024913B8AE69C2EF987669BE8A0E1A21D39F5"
+      }
+    ],
+    "kind": "upstream-header-sync",
+    "source_effective_views": {
+      "android": {
+        "headers": 17367,
+        "sha256": "4C68F48A202CBF892C316EA86B5FAE33FA77444A5033A2A34A52382BB31B45F2"
+      },
+      "client": {
+        "headers": 20864,
+        "sha256": "CBBDAF6AD54AAC5F0E49D5947A10E0B1B1F6D2CE13B59A4EE1E3D3C0821FBF1E"
+      },
+      "server": {
+        "headers": 20791,
+        "sha256": "8969459684645CBFB180F5FA3C92D883EC9F6145CB684F9457999A6848215D68"
+      }
+    },
+    "upstream_header_commit": "48f5fbfc2cbd539c08316d855555ce084478a678",
+    "upstream_include_precedence": "common-before-platform (upstream xmake Header harness)"
+  },
+  "schema_version": 1,
+  "source_algorithm": "sha256 of LF-normalized source text",
+  "source_files": {
+    "scripts/Sync-LeviLaminaUpstream.ps1": "79DF424ADC73CB10152A1E8DCAAC3FCCAA51F135D9A2AA76FBF7DC50C7C526A2",
+    "scripts/Validate-HeaderSync.ps1": "4ABADD7AAFAC9CE848E1855A716E3B0C91173537DC96B57C36164E8A6C3E1141",
+    "scripts/materialize_android_dependencies.py": "6B8C6FCD0ABD661A7727C319A8A5C3759FE9E16D9882B0C2F725E07500C83C56",
+    "scripts/record_header_validation.py": "C9698D9E0198451835DBA01F53D8D32930DE88961B76D3C00AB2E009525A3478",
+    "scripts/sync_upstream_headers.py": "4188BC3C5B231EFB42293C682A84BC3A343E5D3EBC91FAAF6647F08A4E50AAB5",
+    "scripts/validate_header_release.py": "0C8CE89F14A36E1158231012B3E41F5340DFA1530254F98ABA8461269A9AFCE4",
+    "test/python/test_materialize_android_dependencies.py": "05244020218DE180966F951D42BB8BD086BF712EC6EAF950CE9616A91071B85D",
+    "test/python/test_sync_upstream_headers.py": "488906C7D43CAB00BA1B064266D74433607D46C1D135BF9190DFC596BE0013F2",
+    "test/python/test_validate_header_release.py": "09DE4038D3F1EDD595B28969B13B40CCD358757FD5FE44A6E1073B6D27DD77BF"
+  },
+  "status": "passed",
+  "summary": {}
+}

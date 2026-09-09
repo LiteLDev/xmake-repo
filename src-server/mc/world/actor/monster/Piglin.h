@@ -1,0 +1,63 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/world/actor/monster/HumanoidMonster.h"
+
+// auto generated forward declare list
+// clang-format off
+class ActorDefinitionGroup;
+class ActorInteraction;
+class EntityContext;
+class InteractionResult;
+class Player;
+class Vec3;
+struct ActorDefinitionIdentifier;
+// clang-format on
+
+class Piglin : public ::HumanoidMonster {
+public:
+    // prevent constructor by default
+    Piglin();
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ::InteractionResult
+    getInteraction(::Player& player, ::ActorInteraction& interaction, ::Vec3 const& location) /*override*/;
+
+    virtual bool isDarkEnoughToSpawn() const /*override*/;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCAPI Piglin(
+        ::ActorDefinitionGroup*            definitions,
+        ::ActorDefinitionIdentifier const& definitionName,
+        ::EntityContext&                   entityContext
+    );
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCAPI void* $ctor(
+        ::ActorDefinitionGroup*            definitions,
+        ::ActorDefinitionIdentifier const& definitionName,
+        ::EntityContext&                   entityContext
+    );
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCAPI ::InteractionResult
+    $getInteraction(::Player& player, ::ActorInteraction& interaction, ::Vec3 const& location);
+
+    MCFOLD bool $isDarkEnoughToSpawn() const;
+
+
+    // NOLINTEND
+};

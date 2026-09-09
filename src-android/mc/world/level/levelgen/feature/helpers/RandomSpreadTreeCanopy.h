@@ -1,0 +1,98 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/util/IntRange.h"
+#include "mc/world/level/block/BlockDescriptor.h"
+#include "mc/world/level/levelgen/feature/helpers/ITreeCanopy.h"
+
+// auto generated forward declare list
+// clang-format off
+class Block;
+class BlockPos;
+class IBlockWorldGenAPI;
+class Random;
+class RenderParams;
+namespace TreeHelper { struct TreeParams; }
+// clang-format on
+
+class RandomSpreadTreeCanopy : public ::ITreeCanopy {
+public:
+    // RandomSpreadTreeCanopy inner types declare
+    // clang-format off
+    struct WeightedBlockReference;
+    // clang-format on
+
+    // RandomSpreadTreeCanopy inner types define
+    struct WeightedBlockReference {
+    public:
+        // member variables
+        // NOLINTBEGIN
+        ::ll::TypedStorage<8, 168, ::BlockDescriptor> mBlockDescriptor;
+        ::ll::TypedStorage<4, 4, float>               mWeight;
+        // NOLINTEND
+
+    public:
+        // prevent constructor by default
+        WeightedBlockReference& operator=(WeightedBlockReference const&);
+    };
+
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<4, 8, ::IntRange>                                                   mCanopyHeight;
+    ::ll::TypedStorage<4, 8, ::IntRange>                                                   mCanopyRadius;
+    ::ll::TypedStorage<4, 4, int>                                                          mLeafPlacementAttempts;
+    ::ll::TypedStorage<8, 24, std::vector<RandomSpreadTreeCanopy::WeightedBlockReference>> mLeavesBlockDescriptors;
+    // NOLINTEND
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    // clang-format off
+    virtual ~RandomSpreadTreeCanopy();
+
+    virtual std::optional<BlockPos> placeCanopy(::IBlockWorldGenAPI&, ::BlockPos const&, ::ITreeCanopy::BranchSize const&, ::Random&, ::RenderParams&, ::TreeHelper::TreeParams const&, std::vector<BlockPos> const&, std::vector<ITreeCanopy::BranchSize> const&) const;
+    // clang-format on
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI RandomSpreadTreeCanopy();
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor();
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCNAPI std::optional<BlockPos> $placeCanopy(
+        ::IBlockWorldGenAPI&,
+        ::BlockPos const&,
+        ::ITreeCanopy::BranchSize const&,
+        ::Random&,
+        ::RenderParams&,
+        ::TreeHelper::TreeParams const&,
+        std::vector<BlockPos> const&,
+        std::vector<ITreeCanopy::BranchSize> const&
+    ) const;
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+    // NOLINTEND
+};

@@ -1,0 +1,51 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/client/sound/Sound.h"
+#include "mc/deps/shared_types/legacy/LevelSoundEvent.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace Json { class Value; }
+// clang-format on
+
+class EventToSoundListMap {
+public:
+    // EventToSoundListMap inner types define
+    using SoundList = std::unordered_map<std::string, Sound>;
+
+public:
+    // member variables
+    // NOLINTBEGIN
+    // clang-format off
+    ::ll::TypedStorage<8, 40, std::unordered_map<SharedTypes::Legacy::LevelSoundEvent, std::unordered_map<std::string, Sound>>> mEventToSoundListMap;
+    ::ll::TypedStorage<4, 4, float> mVolumeMin;
+    ::ll::TypedStorage<4, 4, float> mVolumeMax;
+    ::ll::TypedStorage<4, 4, float> mPitchMin;
+    ::ll::TypedStorage<4, 4, float> mPitchMax;
+    // clang-format on
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    EventToSoundListMap& operator=(EventToSoundListMap const&);
+    EventToSoundListMap(EventToSoundListMap const&);
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI ::Sound getSound(::SharedTypes::Legacy::LevelSoundEvent, std::string const&) const;
+
+    MCNAPI void parse(::Json::Value const&);
+
+    MCNAPI ~EventToSoundListMap();
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+};

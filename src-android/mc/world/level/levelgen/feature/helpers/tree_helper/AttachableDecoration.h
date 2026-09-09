@@ -1,0 +1,101 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/util/ChanceInformation.h"
+#include "mc/util/IntRange.h"
+#include "mc/world/level/block/BlockDescriptor.h"
+#include "mc/world/level/block/states/CommonDirection.h"
+
+// auto generated forward declare list
+// clang-format off
+class BlockPos;
+class IBlockWorldGenAPI;
+class Random;
+// clang-format on
+
+namespace TreeHelper {
+
+struct AttachableDecoration {
+public:
+    // AttachableDecoration inner types declare
+    // clang-format off
+    struct DecorationBlockDescriptor;
+    struct DirectionMask;
+    // clang-format on
+
+    // AttachableDecoration inner types define
+    enum class GrowthDirection : int {
+        Down = 0,
+        Up   = 1,
+        Out  = 2,
+    };
+
+    struct DecorationBlockDescriptor {
+    public:
+        // member variables
+        // NOLINTBEGIN
+        ::ll::TypedStorage<8, 168, ::BlockDescriptor> blockDescriptor;
+        ::ll::TypedStorage<4, 8, ::IntRange>          count;
+        // NOLINTEND
+
+    public:
+        // prevent constructor by default
+        DecorationBlockDescriptor& operator=(DecorationBlockDescriptor const&);
+    };
+
+    struct DirectionMask {
+    public:
+        // member variables
+        // NOLINTBEGIN
+        ::ll::TypedStorage<1, 1, bool> mWest;
+        ::ll::TypedStorage<1, 1, bool> mEast;
+        ::ll::TypedStorage<1, 1, bool> mNorth;
+        ::ll::TypedStorage<1, 1, bool> mSouth;
+        ::ll::TypedStorage<1, 1, bool> mUp;
+        ::ll::TypedStorage<1, 1, bool> mDown;
+        // NOLINTEND
+    };
+
+public:
+    // member variables
+    // NOLINTBEGIN
+    // clang-format off
+    ::ll::TypedStorage<4, 4, ::TreeHelper::AttachableDecoration::GrowthDirection> mDirection;
+    ::ll::TypedStorage<4, 4, int> mNumSteps;
+    ::ll::TypedStorage<8, 168, ::BlockDescriptor> mDecorationBlock;
+    ::ll::TypedStorage<4, 12, ::ChanceInformation> mDecorationChance;
+    ::ll::TypedStorage<8, 24, std::vector<TreeHelper::AttachableDecoration::DecorationBlockDescriptor>> mDecorationSequence;
+    // clang-format on
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI void _placeMultiDecoration(
+        ::IBlockWorldGenAPI&,
+        ::Random&,
+        ::BlockPos const&,
+        ::CommonDirection const,
+        ::BlockPos const&
+    ) const;
+
+    MCNAPI void placeDecoration(
+        ::IBlockWorldGenAPI&,
+        ::BlockPos const&,
+        ::Random&,
+        ::TreeHelper::AttachableDecoration::DirectionMask const&
+    ) const;
+
+    MCNAPI ~AttachableDecoration();
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+};
+
+} // namespace TreeHelper

@@ -1,0 +1,47 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace cereal { struct ReflectionCtx; }
+// clang-format on
+
+struct Dependencies {
+public:
+    // Dependencies inner types define
+    enum AccessType : uint {
+        Filter      = 0,
+        Read        = 1,
+        Write       = 2,
+        AddRemove   = 3,
+        GlobalRead  = 4,
+        GlobalWrite = 5,
+        Count       = 6,
+    };
+
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<1, 1, bool>                               mBlocking;
+    ::ll::TypedStorage<1, 1, bool>                               mUsesEntityFactory;
+    ::ll::TypedStorage<8, 144, std::array<std::vector<uint>, 6>> mAccessGroups;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    Dependencies& operator=(Dependencies const&);
+    Dependencies(Dependencies const&);
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI ~Dependencies();
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+};

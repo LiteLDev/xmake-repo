@@ -1,0 +1,26 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/core/utility/EnableNonOwnerReferences.h"
+#include "mc/deps/core/utility/NonOwnerPointer.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace OreUI { class IFacet; }
+// clang-format on
+
+namespace OreUI::Debug {
+
+class IFacetProvider : public ::Bedrock::EnableNonOwnerReferences {
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    // clang-format off
+    virtual std::unordered_map<std::string, gsl::not_null<Bedrock::NonOwnerPointer<OreUI::IFacet>>> getActiveFacets() = 0;
+    // clang-format on
+    // NOLINTEND
+};
+
+} // namespace OreUI::Debug

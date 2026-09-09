@@ -559,3 +559,9 @@ fabric.properties
 /.vs
 /test/include_all_c.h
 /test/include_all_s.h
+/test/include_all_a.h
+/build/android-deps/
+/build/android-dependencies.runtime.json
+/build/levilamina_header_include_all_*.h
+__pycache__/
+*.py[cod]

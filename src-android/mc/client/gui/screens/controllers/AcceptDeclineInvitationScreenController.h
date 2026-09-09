@@ -1,0 +1,104 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/client/gui/DirtyFlag.h"
+#include "mc/client/gui/screens/controllers/MinecraftScreenController.h"
+
+// auto generated forward declare list
+// clang-format off
+class MinecraftScreenModel;
+class PlatformMultiplayerRestrictions;
+// clang-format on
+
+class AcceptDeclineInvitationScreenController : public ::MinecraftScreenController {
+public:
+    // AcceptDeclineInvitationScreenController inner types define
+    enum class AcceptDeclineInvitationState : uchar {
+        DisplayAcceptDeclineModal           = 0,
+        WaitingForAcceptDeclineModalResult  = 1,
+        CheckPlatformMultiplayerRestriction = 2,
+        WaitingForPlatformUpsellResult      = 3,
+        WaitingForPlatformRestrictionResult = 4,
+        SendResult                          = 5,
+        Exit                                = 6,
+        Complete                            = 7,
+    };
+
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 24, std::string>                                                            mTitle;
+    ::ll::TypedStorage<8, 24, std::string>                                                            mSubtitle;
+    ::ll::UntypedStorage<8, 48>                                                                       mCallback;
+    ::ll::TypedStorage<1, 1, ::AcceptDeclineInvitationScreenController::AcceptDeclineInvitationState> mState;
+    ::ll::TypedStorage<1, 1, bool>                                             mAcceptDeclineModalAccepted;
+    ::ll::TypedStorage<1, 1, bool>                                             mAcceptDeclineModalCancelled;
+    ::ll::TypedStorage<8, 8, std::unique_ptr<PlatformMultiplayerRestrictions>> mPlatformMultiplayerRestrictions;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    AcceptDeclineInvitationScreenController();
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~AcceptDeclineInvitationScreenController();
+
+    virtual ::ui::DirtyFlag tick();
+
+    virtual std::string getAdditionalScreenInfo() const;
+
+    virtual std::string getTelemetryOverride() const;
+
+    virtual void addEventProperties(std::unordered_map<std::string, std::string>&) const;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI AcceptDeclineInvitationScreenController(
+        std::shared_ptr<MinecraftScreenModel>,
+        std::string const&,
+        std::string const&,
+        std::function<void(bool, bool)>
+    );
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor(
+        std::shared_ptr<MinecraftScreenModel>,
+        std::string const&,
+        std::string const&,
+        std::function<void(bool, bool)>
+    );
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCNAPI ::ui::DirtyFlag $tick();
+
+    MCNAPI std::string $getAdditionalScreenInfo() const;
+
+    MCNAPI std::string $getTelemetryOverride() const;
+
+    MCNAPI void $addEventProperties(std::unordered_map<std::string, std::string>&) const;
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+    // NOLINTEND
+};

@@ -1,0 +1,58 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/script_core/runtime/scripting/Result.h"
+#include "mc/deps/script_core/runtime/scripting/Result_deprecated.h"
+
+// auto generated forward declare list
+// clang-format off
+class ServerLevel;
+namespace Scripting { struct ClassBinding; }
+namespace Scripting { struct EngineError; }
+namespace SharedTypes::v1_21_50 { struct CameraAimAssistCategoryDefinition; }
+// clang-format on
+
+namespace ScriptModuleMinecraft {
+
+class ScriptAimAssistCategory {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 8, ::gsl::not_null<ServerLevel*>> mLevel;
+    ::ll::TypedStorage<8, 24, std::string>                  mName;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    ScriptAimAssistCategory();
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI ::SharedTypes::v1_21_50::CameraAimAssistCategoryDefinition const* _getCategoryDefinition() const;
+
+    MCNAPI ::Scripting::Result_deprecated<std::unordered_map<std::string, int>> getBlockPriorities() const;
+
+    MCNAPI ::Scripting::Result<std::unordered_map<std::string, int>, Scripting::EngineError>
+    getBlockTagPriorities() const;
+
+    MCNAPI ::Scripting::Result_deprecated<int> getDefaultBlockPriority() const;
+
+    MCNAPI ::Scripting::Result_deprecated<int> getDefaultEntityPriority() const;
+
+    MCNAPI ::Scripting::Result_deprecated<std::unordered_map<std::string, int>> getEntityPriorities() const;
+
+    MCNAPI ::Scripting::Result<std::unordered_map<std::string, int>, Scripting::EngineError>
+    getEntityTypeFamilyPriorities() const;
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCNAPI static ::Scripting::ClassBinding bind();
+    // NOLINTEND
+};
+
+} // namespace ScriptModuleMinecraft

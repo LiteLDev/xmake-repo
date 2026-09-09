@@ -1,0 +1,39 @@
+{
+  "adaptation_rows": 1181,
+  "android_effective_headers_equal_release": true,
+  "commits": {
+    "D": "a1e1f0d7be65959a4c68822cb861b3365ae43755",
+    "H": "48f5fbfc2cbd539c08316d855555ce084478a678",
+    "M": "c9a3b9cb0507cfb072f3d33be4324d1642c24889",
+    "S": "6d5f02513384b051436fa0a26902894d10f6205a"
+  },
+  "core_sources_equal_main": true,
+  "effective_headers": {
+    "android": {
+      "headers": 17367,
+      "sha256": "4C68F48A202CBF892C316EA86B5FAE33FA77444A5033A2A34A52382BB31B45F2"
+    },
+    "client": {
+      "headers": 20897,
+      "sha256": "A787187BF9CCA9A6624C418D1405B35BB522ACA3989C1E4A493892415AEB36E1"
+    },
+    "server": {
+      "headers": 20824,
+      "sha256": "A85654B59CBCA623FCE764371693BF644570096CFF5C11F8FCEDDAD82F368806"
+    }
+  },
+  "physical_headers": 55394,
+  "python_tests": {
+    "log": "core-all-python-tests-final.log",
+    "log_sha256": "E10DC216279431E18B5FEF959486C2CE91447E794EA69E5D313927A3D8D5918D",
+    "passed": 36
+  },
+  "runtime_tests_executed": false,
+  "schema_version": 1,
+  "source_files": {
+    "scripts/sync_core_headers.py": "C52A0FA7487EFF30F46C3A168266C7DB88D7B48A9E6DD1CBB1D766AD3128347E",
+    "test/python/test_sync_core_headers.py": "1E1D20ADC080D0A8E0332DC9199A9B8044CF840C0A6B55E61A00F2672E5ECA76"
+  },
+  "status": "source-merge-verified-windows-matrix-pending",
+  "windows_effective_headers_equal_main": true
+}

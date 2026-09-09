@@ -1,0 +1,17 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/detail/ColorBase.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace mce { class Color; }
+// clang-format on
+
+namespace SharedTypes {
+
+struct Color255RGBA : public ::Detail::ColorBase {};
+
+} // namespace SharedTypes

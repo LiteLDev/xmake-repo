@@ -1,0 +1,65 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/scripting/modules/minecraft/loot_tables/functions/ScriptLootItemFunction.h"
+
+// auto generated forward declare list
+// clang-format off
+class LootItemFunction;
+class RandomBlockStateFunction;
+namespace Scripting { class WeakLifetimeScope; }
+namespace Scripting { struct ClassBinding; }
+namespace Scripting { struct NumberRange; }
+// clang-format on
+
+namespace ScriptModuleMinecraft {
+
+class ScriptRandomBlockStateFunction : public ::ScriptModuleMinecraft::ScriptLootItemFunction {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 8, ::RandomBlockStateFunction const&> mFunction;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    ScriptRandomBlockStateFunction& operator=(ScriptRandomBlockStateFunction const&);
+    ScriptRandomBlockStateFunction(ScriptRandomBlockStateFunction const&);
+    ScriptRandomBlockStateFunction();
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~ScriptRandomBlockStateFunction();
+
+    virtual ::LootItemFunction const& _getFunction() const;
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCNAPI static ::Scripting::ClassBinding bind();
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCNAPI ::LootItemFunction const& $_getFunction() const;
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+    // NOLINTEND
+};
+
+} // namespace ScriptModuleMinecraft

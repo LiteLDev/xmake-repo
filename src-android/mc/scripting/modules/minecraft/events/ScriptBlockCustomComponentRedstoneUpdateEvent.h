@@ -1,0 +1,71 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/scripting/modules/minecraft/events/ScriptBlockEvent.h"
+#include "mc/scripting/modules/minecraft/events/ScriptCustomComponentAfterEvent.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace ScriptModuleMinecraft { class ScriptBlockCustomComponentInterface; }
+namespace ScriptModuleMinecraft { struct ScriptBlockCustomComponentRedstoneUpdateEventIntermediateStorage; }
+namespace ScriptModuleMinecraft { template<typename T0, typename T1> class ScriptCustomComponentToExecute; }
+namespace Scripting { class WeakLifetimeScope; }
+namespace Scripting { struct ClassBinding; }
+// clang-format on
+
+namespace ScriptModuleMinecraft {
+
+struct ScriptBlockCustomComponentRedstoneUpdateEvent : public ::ScriptModuleMinecraft::ScriptBlockEvent,
+                                                       public ::ScriptModuleMinecraft::ScriptCustomComponentAfterEvent {
+public:
+    // ScriptBlockCustomComponentRedstoneUpdateEvent inner types define
+    using IntermediateStorage =
+        ::ScriptModuleMinecraft::ScriptBlockCustomComponentRedstoneUpdateEventIntermediateStorage;
+
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<2, 2, short> mSignalLevel;
+    ::ll::TypedStorage<2, 2, short> mPreviousSignalLevel;
+    ::ll::TypedStorage<1, 1, bool>  mIsFirstUpdate;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    ScriptBlockCustomComponentRedstoneUpdateEvent();
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI ScriptBlockCustomComponentRedstoneUpdateEvent(
+        ::ScriptModuleMinecraft::ScriptBlockCustomComponentRedstoneUpdateEventIntermediateStorage const&,
+        ::Scripting::WeakLifetimeScope const&
+    );
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCNAPI static ::Scripting::ClassBinding bind();
+
+    MCNAPI static std::vector<ScriptModuleMinecraft::ScriptCustomComponentToExecute<
+        const ScriptModuleMinecraft::ScriptBlockCustomComponentInterface&,
+        void>>
+    tryGetComponentsToExecute(
+        ::ScriptModuleMinecraft::ScriptBlockCustomComponentRedstoneUpdateEventIntermediateStorage const&
+    );
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor(
+        ::ScriptModuleMinecraft::ScriptBlockCustomComponentRedstoneUpdateEventIntermediateStorage const&,
+        ::Scripting::WeakLifetimeScope const&
+    );
+    // NOLINTEND
+};
+
+} // namespace ScriptModuleMinecraft

@@ -1,0 +1,43 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+#include "mc/world/level/storage/loot/predicates/LootItemCondition.h"
+
+// auto generated forward declare list
+// clang-format off
+class ItemStack;
+class LootItemCondition;
+class LootTableContext;
+class Random;
+// clang-format on
+
+class LootPoolEntry {
+public:
+    // LootPoolEntry inner types define
+    enum class EntryType : int {
+        LootItem           = 0,
+        EmptyLootItem      = 1,
+        LootTableEntry     = 2,
+        LootTableReference = 3,
+    };
+
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<4, 4, int>                                                    mWeight;
+    ::ll::TypedStorage<4, 4, int>                                                    mQuality;
+    ::ll::TypedStorage<8, 24, ::std::vector<::std::unique_ptr<::LootItemCondition>>> mConditions;
+    ::ll::TypedStorage<8, 8, ::std::unique_ptr<::LootPoolEntry>>                     mSubTable;
+    // NOLINTEND
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual bool
+    _createItem(::std::vector<::ItemStack>& output, ::Random& random, ::LootTableContext& context) const = 0;
+
+    virtual ~LootPoolEntry() = default;
+
+    virtual ::LootPoolEntry::EntryType getEntryType() const = 0;
+    // NOLINTEND
+};

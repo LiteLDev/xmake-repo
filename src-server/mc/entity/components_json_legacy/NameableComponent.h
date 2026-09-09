@@ -1,0 +1,29 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+class Actor;
+class ActorInteraction;
+class InteractionResult;
+class Player;
+namespace Bedrock::Safety { class RedactableString; }
+// clang-format on
+
+class NameableComponent {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<1, 1, bool> mAllowNameTagRenaming;
+    ::ll::TypedStorage<1, 1, bool> mAlwaysShow;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCAPI ::InteractionResult getInteraction(::Actor& owner, ::Player& player, ::ActorInteraction& interaction);
+
+    MCAPI void nameEntity(::Actor& owner, ::Bedrock::Safety::RedactableString const& name);
+    // NOLINTEND
+};

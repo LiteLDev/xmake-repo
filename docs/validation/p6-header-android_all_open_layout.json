@@ -1,0 +1,135 @@
+{
+  "exit_code": 0,
+  "gate": "android_all_open_layout",
+  "log": {
+    "bytes": 264,
+    "name": "all-open-full-probe.log",
+    "sha256": "F0F9F170DB13690C3BC3B78BD62EBE6546E6B1E040BA3CAE0ED749EE07933644"
+  },
+  "manifest_sha256": "9E749942E6F664F56E73C266DB46F73CC45A329463DF576F7C7B83DC0A51DB58",
+  "provenance": {
+    "android_dependency_manifest_sha256": "66DDEF1DB1B89D872EDAC888F3B07C0C19F052C325D43D1B8FB97CF3A6855262",
+    "base_release_commit": "a1e1f0d7be65959a4c68822cb861b3365ae43755",
+    "content_algorithm": "sha256(path-utf8 + NUL + Git-LF-bytes + NUL), ordinal path order",
+    "effective_views": {
+      "android": {
+        "headers": 17367,
+        "sha256": "4C68F48A202CBF892C316EA86B5FAE33FA77444A5033A2A34A52382BB31B45F2"
+      },
+      "client": {
+        "headers": 20864,
+        "sha256": "8F293880B6415DC8F177954F2B37DAD73C103956C7CDB966534F0A9E870E0CB1"
+      },
+      "server": {
+        "headers": 20791,
+        "sha256": "1F4258F098C67F43B1F3A0F8B997D5E8BCCF1FBC4763E858758890D21E9236DA"
+      }
+    },
+    "infrastructure_adjustments": [
+      {
+        "kind": "concurrentqueue-include-trailing-space",
+        "path": "mc/_HeaderOutputPredefine.h",
+        "platform": "client",
+        "published_sha256": "084A05B212FF2D961ED7267049762648AB01681B6FDE9CAFDB944ACC90F5E332",
+        "source_sha256": "0FFC73FBE94646B93E04D0062AA024913B8AE69C2EF987669BE8A0E1A21D39F5"
+      },
+      {
+        "kind": "concurrentqueue-include-trailing-space",
+        "path": "mc/_HeaderOutputPredefine.h",
+        "platform": "server",
+        "published_sha256": "084A05B212FF2D961ED7267049762648AB01681B6FDE9CAFDB944ACC90F5E332",
+        "source_sha256": "0FFC73FBE94646B93E04D0062AA024913B8AE69C2EF987669BE8A0E1A21D39F5"
+      }
+    ],
+    "kind": "upstream-header-sync",
+    "source_effective_views": {
+      "android": {
+        "headers": 17367,
+        "sha256": "4C68F48A202CBF892C316EA86B5FAE33FA77444A5033A2A34A52382BB31B45F2"
+      },
+      "client": {
+        "headers": 20864,
+        "sha256": "CBBDAF6AD54AAC5F0E49D5947A10E0B1B1F6D2CE13B59A4EE1E3D3C0821FBF1E"
+      },
+      "server": {
+        "headers": 20791,
+        "sha256": "8969459684645CBFB180F5FA3C92D883EC9F6145CB684F9457999A6848215D68"
+      }
+    },
+    "upstream_header_commit": "48f5fbfc2cbd539c08316d855555ce084478a678",
+    "upstream_include_precedence": "common-before-platform (upstream xmake Header harness)"
+  },
+  "schema_version": 1,
+  "source_algorithm": "sha256 of LF-normalized source text",
+  "source_files": {
+    "scripts/validate_header_release.py": "0C8CE89F14A36E1158231012B3E41F5340DFA1530254F98ABA8461269A9AFCE4"
+  },
+  "status": "passed",
+  "summary": {
+    "analyzer_source_commit": "cf44b94232975641f5eeb758ce122d798dda7941",
+    "class_coverage_complete": true,
+    "final_filter": false,
+    "generator_sha256": "2B507F0A64AE7F0BC5D2D503EB259F22515F0B34B0024BB6E8D4782A2D692A43",
+    "generator_source_commit": "75b3cb1bd5b0b403a505b560c51d70c551c86673",
+    "historical_nontracked_list_diagnostics": [
+      {
+        "all_open_count": 85578,
+        "all_open_sha256": "B3E02463A3C63A6B992F7313B0A037503AEE796B2DB816F814415E13E8A8ED67",
+        "formal_count": 26088,
+        "formal_sha256": "C58EA02FEA0C64CE0985E1232D76506497FD340B934CF9DCEE26E7E9234A80FB",
+        "literal_missing_count": 75,
+        "missing_sample": [
+          "_ZN10BasicTimerC2EdNSt6__ndk18functionIFdvEEE",
+          "_ZN11PropertyBag3setENSt6__ndk117basic_string_viewIcNS0_11char_traitsIcEEEE11buffer_spanIbE",
+          "_ZN11PropertyBagC2Ev",
+          "_ZN12BinaryStreamC2Ev",
+          "_ZN12FileArchiver15CopyWorldResultC2ERKS0_",
+          "_ZN12ServerPlayer20openManagedContainerI26ChestContainerManagerModelR13ActorUniqueIDJEEE11ContainerIDOT0_DpOT1_",
+          "_ZN13CommandOutputC2ERKS_",
+          "_ZN13CommandOutputC2Ev"
+        ],
+        "name": "symbol_allowlist_android.txt"
+      },
+      {
+        "all_open_count": 22518,
+        "all_open_sha256": "360665CF1A00908ED92822EA65261EDB57BB7233A51FBC0BC87107A00675A79D",
+        "formal_count": 3401,
+        "formal_sha256": "19CB43E6D04DD0BC21CB1AFCA9D0E2072EB52D89F4FF7A652D85A4D70805021B",
+        "literal_missing_count": 0,
+        "missing_sample": [],
+        "name": "class_allowlist_android.txt"
+      },
+      {
+        "all_open_count": 4219,
+        "all_open_sha256": "6F1B5CB522BE11862EA4EEC665ACBB1E44071AE03224115F71161091186F4BE0",
+        "formal_count": 4170,
+        "formal_sha256": "E4A780207E17AEADF1F439EEC15EEC68A94EB7A60D4200EA2B52C568B99BA5BE",
+        "literal_missing_count": 7,
+        "missing_sample": [
+          "_ZN12BinaryStreamC2Ev",
+          "_ZN17VanillaBlockActor11tryGetTypedITkNSt6__ndk112derived_fromI10BlockActorEE20MobSpawnerBlockActorEEPT_PS3_",
+          "_ZN4ItemC2ERKNSt6__ndk112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEs",
+          "_ZNK17ConduitBlockActor17getAnimationValueEv",
+          "_ZNK20ReadOnlyBinaryStream15getUnreadLengthEv",
+          "_ZNK20ReadOnlyBinaryStream7getViewEv",
+          "_ZNK5Block22needsLegacyTopRotationEv"
+        ],
+        "name": "bypass_android.txt"
+      }
+    ],
+    "metrics": {
+      "clang_version": "Android (13624864, based on r530567e) clang version 19.0.1 (https://android.googlesource.com/toolchain/llvm-project 97a699bf4812a18fb657c2779f5296a4ab2694d2)",
+      "failed_count": 0,
+      "header_count": 10526,
+      "header_failed_count": 0,
+      "header_tree_hash": "dcd359d964303c9b0ce449d9ff73498a94da391633a2f5e1ef22350ad171b7a2",
+      "passed_count": 48441,
+      "target": "aarch64-linux-android21",
+      "typed_count": 48441,
+      "untyped_count": 7818
+    },
+    "probe_sha256": "A0831A92033E48C254A92D98CF5DC0DAD2C286A1D7945229D433AEF722C41ED5",
+    "report_sha256": "D7EA76AA413BADE3F2FF54A36294515FC611181594D8C99818BF1D7DDF5476B4",
+    "scope": "Fresh Header layout and formal class coverage. Historical symbol/bypass text lists differ and are not republished or replaced; the frozen runtime whitelist is unchanged."
+  }
+}

@@ -1,0 +1,49 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/world/level/levelgen/structure/structurepools/StructurePoolBlockPredicateType.h"
+
+// auto generated forward declare list
+// clang-format off
+class Block;
+class BlockPos;
+class BlockSource;
+class IRandom;
+namespace Util { class XXHash; }
+// clang-format on
+
+class IStructurePoolBlockPredicate {
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~IStructurePoolBlockPredicate();
+
+    virtual bool test(::BlockPos const&, ::BlockPos const&, ::IRandom&) const = 0;
+
+    virtual bool test(::Block const&, ::IRandom&) const = 0;
+
+    virtual bool finalize(::BlockSource&, ::IRandom&);
+
+    virtual std::string validate() const;
+
+    virtual ::StructurePoolBlockPredicateType getType() const = 0;
+
+    virtual void appendMetadataKey(::Util::XXHash&) const = 0;
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCNAPI bool $finalize(::BlockSource&, ::IRandom&);
+
+    MCNAPI std::string $validate() const;
+    // NOLINTEND
+};

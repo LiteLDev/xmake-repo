@@ -1,0 +1,243 @@
+{
+  "android_toolchain": {
+    "api_level": 21,
+    "architecture": "arm64-v8a",
+    "dependency_manifest_sha256": "66DDEF1DB1B89D872EDAC888F3B07C0C19F052C325D43D1B8FB97CF3A6855262",
+    "ndk_revision": "28.2.13676358",
+    "target": "aarch64-linux-android21"
+  },
+  "historical_baseline": {
+    "commit": "a1e1f0d7be65959a4c68822cb861b3365ae43755",
+    "metadata": {
+      "android_toolchain": {
+        "api_level": 21,
+        "architecture": "arm64-v8a",
+        "dependency_manifest_sha256": "66DDEF1DB1B89D872EDAC888F3B07C0C19F052C325D43D1B8FB97CF3A6855262",
+        "ndk_revision": "28.2.13676358",
+        "target": "aarch64-linux-android21"
+      },
+      "generator_predecessor_manifest": {
+        "rows": 54785,
+        "scope": "four Header layers and nine non-published validation lists",
+        "sha256": "E0AA244DF9A8A4062231B17BC954A296269D94AA4D926551CCC9EE0BD4299AF8"
+      },
+      "inputs": {
+        "android": {
+          "build_id": "5893edc8d56c93cbdb50e0f9436320236b78c89d",
+          "sha256": "1CCBC128196E1A522B0000E81CBDCCF6CA3E7025F2D99E1640877D35B860665F",
+          "version": "1.26.40.5"
+        },
+        "windows_client": {
+          "sha256": "0D3991E8A1DB02BD3221BF5B21F8EBB1490AE83CC7734878ED971F01EFCD66B6",
+          "version": "1.26.40.5"
+        },
+        "windows_server": {
+          "sha256": "B3B541BB0B4A3F1C802E8F72912A27C3C01C76223F636BE90393D35D8F5C3A6D",
+          "version": "1.26.40.8"
+        }
+      },
+      "layers": {
+        "src": 1922,
+        "src-android": 15453,
+        "src-client": 18751,
+        "src-server": 18678
+      },
+      "manifest": {
+        "algorithm": "sha256(path-utf8 + NUL + raw-bytes + NUL), ordinal path order",
+        "rows": 54804,
+        "scope": "four Header layers",
+        "sha256": "10E951E1788A415795158DC62388164F0D8BC70AE636F960455493616A7C61EC"
+      },
+      "release": "1.26.40.5",
+      "schema_version": 1,
+      "tools": {
+        "bedrock_analyzer_code": "0e8a0dd98776d510bbf9c5cf9a7e268eda199d89",
+        "bedrock_analyzer_summary": "cf44b94232975641f5eeb758ce122d798dda7941",
+        "header_generator_code": "fef0570d37515fec48d92574252ce601aafbf255",
+        "header_generator_summary": "75b3cb1bd5b0b403a505b560c51d70c551c86673"
+      },
+      "validation": {
+        "all_open_header_count": 10526,
+        "all_open_header_failures": 0,
+        "all_open_layout_failures": 0,
+        "all_open_typed": 48441,
+        "all_open_untyped": 7818,
+        "android_effective_headers": 17367,
+        "formal_repetitions_byte_identical": true,
+        "header_verifier_issues": 0,
+        "header_verifier_json_sha256": "5B30B939DE2696C4B3B06DCA466B12FBDD4818BF73E23488C5B7918F5570AF4D",
+        "header_verifier_markdown_sha256": "CD97D76131D4E2830133479E7DE96C3E102C8C69C30A97FF5E4E031FB9CA6D50",
+        "windows_effective_client_headers": 20673,
+        "windows_effective_oracle": true,
+        "windows_effective_server_headers": 20600
+      }
+    }
+  },
+  "inputs": {
+    "android": {
+      "build_id": "5893edc8d56c93cbdb50e0f9436320236b78c89d",
+      "sha256": "1CCBC128196E1A522B0000E81CBDCCF6CA3E7025F2D99E1640877D35B860665F",
+      "version": "1.26.40.5"
+    },
+    "windows_client": {
+      "commit": "48f5fbfc2cbd539c08316d855555ce084478a678",
+      "effective_view": {
+        "headers": 20864,
+        "sha256": "8F293880B6415DC8F177954F2B37DAD73C103956C7CDB966534F0A9E870E0CB1"
+      },
+      "repository": "https://github.com/LiteLDev/LeviLamina",
+      "source_effective_view": {
+        "headers": 20864,
+        "sha256": "CBBDAF6AD54AAC5F0E49D5947A10E0B1B1F6D2CE13B59A4EE1E3D3C0821FBF1E"
+      },
+      "source_kind": "git-header"
+    },
+    "windows_server": {
+      "commit": "48f5fbfc2cbd539c08316d855555ce084478a678",
+      "effective_view": {
+        "headers": 20791,
+        "sha256": "1F4258F098C67F43B1F3A0F8B997D5E8BCCF1FBC4763E858758890D21E9236DA"
+      },
+      "repository": "https://github.com/LiteLDev/LeviLamina",
+      "source_effective_view": {
+        "headers": 20791,
+        "sha256": "8969459684645CBFB180F5FA3C92D883EC9F6145CB684F9457999A6848215D68"
+      },
+      "source_kind": "git-header"
+    }
+  },
+  "layers": {
+    "src": 1929,
+    "src-android": 15438,
+    "src-client": 18935,
+    "src-server": 18862
+  },
+  "manifest": {
+    "algorithm": "sha256(path-utf8 + NUL + raw-bytes + NUL), ordinal path order",
+    "rows": 55164,
+    "scope": "four Header layers",
+    "sha256": "9E749942E6F664F56E73C266DB46F73CC45A329463DF576F7C7B83DC0A51DB58"
+  },
+  "provenance": {
+    "android_dependency_manifest_sha256": "66DDEF1DB1B89D872EDAC888F3B07C0C19F052C325D43D1B8FB97CF3A6855262",
+    "base_release_commit": "a1e1f0d7be65959a4c68822cb861b3365ae43755",
+    "content_algorithm": "sha256(path-utf8 + NUL + Git-LF-bytes + NUL), ordinal path order",
+    "effective_views": {
+      "android": {
+        "headers": 17367,
+        "sha256": "4C68F48A202CBF892C316EA86B5FAE33FA77444A5033A2A34A52382BB31B45F2"
+      },
+      "client": {
+        "headers": 20864,
+        "sha256": "8F293880B6415DC8F177954F2B37DAD73C103956C7CDB966534F0A9E870E0CB1"
+      },
+      "server": {
+        "headers": 20791,
+        "sha256": "1F4258F098C67F43B1F3A0F8B997D5E8BCCF1FBC4763E858758890D21E9236DA"
+      }
+    },
+    "infrastructure_adjustments": [
+      {
+        "kind": "concurrentqueue-include-trailing-space",
+        "path": "mc/_HeaderOutputPredefine.h",
+        "platform": "client",
+        "published_sha256": "084A05B212FF2D961ED7267049762648AB01681B6FDE9CAFDB944ACC90F5E332",
+        "source_sha256": "0FFC73FBE94646B93E04D0062AA024913B8AE69C2EF987669BE8A0E1A21D39F5"
+      },
+      {
+        "kind": "concurrentqueue-include-trailing-space",
+        "path": "mc/_HeaderOutputPredefine.h",
+        "platform": "server",
+        "published_sha256": "084A05B212FF2D961ED7267049762648AB01681B6FDE9CAFDB944ACC90F5E332",
+        "source_sha256": "0FFC73FBE94646B93E04D0062AA024913B8AE69C2EF987669BE8A0E1A21D39F5"
+      }
+    ],
+    "kind": "upstream-header-sync",
+    "source_effective_views": {
+      "android": {
+        "headers": 17367,
+        "sha256": "4C68F48A202CBF892C316EA86B5FAE33FA77444A5033A2A34A52382BB31B45F2"
+      },
+      "client": {
+        "headers": 20864,
+        "sha256": "CBBDAF6AD54AAC5F0E49D5947A10E0B1B1F6D2CE13B59A4EE1E3D3C0821FBF1E"
+      },
+      "server": {
+        "headers": 20791,
+        "sha256": "8969459684645CBFB180F5FA3C92D883EC9F6145CB684F9457999A6848215D68"
+      }
+    },
+    "upstream_header_commit": "48f5fbfc2cbd539c08316d855555ce084478a678",
+    "upstream_include_precedence": "common-before-platform (upstream xmake Header harness)"
+  },
+  "release": "1.26.40.5",
+  "schema_version": 1,
+  "validation": {
+    "android_all_open_layout": {
+      "manifest_sha256": "9E749942E6F664F56E73C266DB46F73CC45A329463DF576F7C7B83DC0A51DB58",
+      "report": "docs/validation/p6-header-android_all_open_layout.json",
+      "report_sha256": "75DBF83AA2AF640A7C827F583069A72B9896CDBBBF08B677D318E22F0C436455",
+      "status": "passed"
+    },
+    "android_debug": {
+      "manifest_sha256": "9E749942E6F664F56E73C266DB46F73CC45A329463DF576F7C7B83DC0A51DB58",
+      "report": "docs/validation/p6-header-android_debug.json",
+      "report_sha256": "A27A2FA1693ECFCAE116245E3AFC362E36B56851B555A46AF5425242F5E2E949",
+      "status": "passed"
+    },
+    "android_release": {
+      "manifest_sha256": "9E749942E6F664F56E73C266DB46F73CC45A329463DF576F7C7B83DC0A51DB58",
+      "report": "docs/validation/p6-header-android_release.json",
+      "report_sha256": "EA27F0863245AA80C379FAC35C7DC2ED4995B365D1FF2F7D23A1F5FD3B65D9F2",
+      "status": "passed"
+    },
+    "header_verifier": {
+      "manifest_sha256": "9E749942E6F664F56E73C266DB46F73CC45A329463DF576F7C7B83DC0A51DB58",
+      "report": "docs/validation/p6-header-header_verifier.json",
+      "report_sha256": "350125DFA3BB0F0E75BCCA94D1BEDEA8749A2724FDB0A00DB25E53E51656D364",
+      "status": "passed"
+    },
+    "platform_fidelity": {
+      "manifest_sha256": "9E749942E6F664F56E73C266DB46F73CC45A329463DF576F7C7B83DC0A51DB58",
+      "report": "docs/validation/p6-header-platform_fidelity.json",
+      "report_sha256": "D3D214461C3A248CB4178F0026329543187226827B2FB15C6709CB7C9B37859B",
+      "status": "passed"
+    },
+    "python": {
+      "manifest_sha256": "9E749942E6F664F56E73C266DB46F73CC45A329463DF576F7C7B83DC0A51DB58",
+      "report": "docs/validation/p6-header-python.json",
+      "report_sha256": "F7975FF24E27DBA3D7FBF53EA1027FF4F2F36E3A778E03990CC69A4194837CD5",
+      "status": "passed"
+    },
+    "release_validator": {
+      "manifest_sha256": "9E749942E6F664F56E73C266DB46F73CC45A329463DF576F7C7B83DC0A51DB58",
+      "report": "docs/validation/p6-header-release_validator.json",
+      "report_sha256": "4EF4877DD3CA194AD94E9DF89708BF31F97463E8F924AB7F2A5E1D679900A458",
+      "status": "passed"
+    },
+    "windows_client_debug": {
+      "manifest_sha256": "9E749942E6F664F56E73C266DB46F73CC45A329463DF576F7C7B83DC0A51DB58",
+      "report": "docs/validation/p6-header-windows_client_debug.json",
+      "report_sha256": "B9351AA60BC92C62385F596651FFA735B1E9BF8052DE8D879C0C18EF835E9B2B",
+      "status": "passed"
+    },
+    "windows_client_release": {
+      "manifest_sha256": "9E749942E6F664F56E73C266DB46F73CC45A329463DF576F7C7B83DC0A51DB58",
+      "report": "docs/validation/p6-header-windows_client_release.json",
+      "report_sha256": "167EA2A51E80DB357E243CFD3BE8F13E01168B445BF3AC4D249D4F6416670B2B",
+      "status": "passed"
+    },
+    "windows_server_debug": {
+      "manifest_sha256": "9E749942E6F664F56E73C266DB46F73CC45A329463DF576F7C7B83DC0A51DB58",
+      "report": "docs/validation/p6-header-windows_server_debug.json",
+      "report_sha256": "111CE43EBECEB43E2D969953F04499DEC9829FE3C1B4BBD7A02A944A22F89236",
+      "status": "passed"
+    },
+    "windows_server_release": {
+      "manifest_sha256": "9E749942E6F664F56E73C266DB46F73CC45A329463DF576F7C7B83DC0A51DB58",
+      "report": "docs/validation/p6-header-windows_server_release.json",
+      "report_sha256": "65E703155CFFB0715B38C45F06C3DD229B866CAE8461017E1ADF9C95DD27CE1A",
+      "status": "passed"
+    }
+  }
+}

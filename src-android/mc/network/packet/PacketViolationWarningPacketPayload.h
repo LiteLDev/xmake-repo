@@ -1,0 +1,37 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/network/MinecraftPacketIds.h"
+#include "mc/network/PacketViolationResponse.h"
+#include "mc/network/packet/PacketViolationSeverity.h"
+#include "mc/network/packet/PacketViolationType.h"
+
+struct PacketViolationWarningPacketPayload {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<4, 4, ::PacketViolationType>     mViolationType;
+    ::ll::TypedStorage<4, 4, ::PacketViolationSeverity> mViolationSeverity;
+    ::ll::TypedStorage<4, 4, ::MinecraftPacketIds>      mViolatingPacketId;
+    ::ll::TypedStorage<8, 24, std::string>              mViolationContext;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI PacketViolationWarningPacketPayload(
+        std::error_code const&,
+        ::PacketViolationResponse,
+        ::MinecraftPacketIds,
+        std::string const&
+    );
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor(std::error_code const&, ::PacketViolationResponse, ::MinecraftPacketIds, std::string const&);
+    // NOLINTEND
+};

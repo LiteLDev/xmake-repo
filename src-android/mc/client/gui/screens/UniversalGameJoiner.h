@@ -1,0 +1,34 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/core/utility/NonOwnerPointer.h"
+
+// auto generated forward declare list
+// clang-format off
+class IClientInstance;
+class INetworkGameConnector;
+struct ExperienceJoinRequestInfo;
+struct GameConnectionInfoEx;
+struct PlayerJoinWorldContext;
+namespace Realms { struct RealmId; }
+namespace Social { class MultiplayerGameInfo; }
+// clang-format on
+
+class UniversalGameJoiner {
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCNAPI static void joinGame(
+        ::INetworkGameConnector&,
+        ::gsl::not_null<Bedrock::NonOwnerPointer<IClientInstance>>,
+        std::variant<
+            GameConnectionInfoEx,
+            Social::MultiplayerGameInfo,
+            ExperienceJoinRequestInfo,
+            Realms::RealmId> const&,
+        ::PlayerJoinWorldContext
+    );
+    // NOLINTEND
+};

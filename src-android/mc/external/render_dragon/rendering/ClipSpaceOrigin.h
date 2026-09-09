@@ -1,0 +1,12 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+namespace dragon::rendering {
+
+enum class ClipSpaceOrigin : uchar {
+    TopLeft    = 0,
+    BottomLeft = 1,
+};
+
+}
