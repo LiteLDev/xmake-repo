@@ -1,0 +1,598 @@
+{
+  "builds": {
+    "core": {
+      "accepted_report_sha256": "80E5629000A47326CFC5342A8CB96F64B8D9C2D4B83650B43A4DE3A898908698",
+      "combinations": [
+        {
+          "artifacts": [
+            {
+              "bytes": 10027520,
+              "name": "LeviLamina.dll",
+              "sha256": "2CDC6429D3166119E4AE48A81E86E62358FB1883EBF22911F65CED0E2C0FFCCB"
+            },
+            {
+              "bytes": 526704,
+              "name": "LeviLamina.lib",
+              "sha256": "1A5A3C056791F22B32FB194F662386E88737CF19A7136DC9698B9459D5B5B9CD"
+            },
+            {
+              "bytes": 86380544,
+              "name": "LeviLamina.pdb",
+              "sha256": "13DDF27C9545DB3CD1F4BE0256E50592818F508EBAACAFDA50AFBA41162F24AF"
+            }
+          ],
+          "build_exit": 0,
+          "build_log_sha256": "AE48F861149744D6755A030C964EDE8C01E1346423CD828FE8874C3CCAC5FA42",
+          "config_exit": 0,
+          "config_log_sha256": "5989B3BDAA8D23D314C03F27979195926B9EAEDF596900AC89BBE7E5CC658BC8",
+          "mode": "debug",
+          "target_type": "client",
+          "tests_enabled": false
+        },
+        {
+          "artifacts": [
+            {
+              "bytes": 12429824,
+              "name": "LeviLamina.dll",
+              "sha256": "85C0A5A0035EC903EEF130973DD504512B34762C18B2A464EA34E351A35DFEBD"
+            },
+            {
+              "bytes": 526704,
+              "name": "LeviLamina.lib",
+              "sha256": "1A5A3C056791F22B32FB194F662386E88737CF19A7136DC9698B9459D5B5B9CD"
+            },
+            {
+              "bytes": 102264832,
+              "name": "LeviLamina.pdb",
+              "sha256": "0461770B5EBC20D49DA09E4348CAE0B974F0EBBB2E5B9E869601DE6837D7DB08"
+            }
+          ],
+          "build_exit": 0,
+          "build_log_sha256": "36329BBD56A8BD5A2EFE1A1992211FC30123B3A032CC834CD7DD221B8BAD413B",
+          "config_exit": 0,
+          "config_log_sha256": "5989B3BDAA8D23D314C03F27979195926B9EAEDF596900AC89BBE7E5CC658BC8",
+          "mode": "debug",
+          "target_type": "client",
+          "tests_enabled": true
+        },
+        {
+          "artifacts": [
+            {
+              "bytes": 4266496,
+              "name": "LeviLamina.dll",
+              "sha256": "6865A117D89A312BA296EA0CE7D01594E6A2508AB414A0A03C99F9FDA6640B9B"
+            },
+            {
+              "bytes": 526704,
+              "name": "LeviLamina.lib",
+              "sha256": "1A5A3C056791F22B32FB194F662386E88737CF19A7136DC9698B9459D5B5B9CD"
+            },
+            {
+              "bytes": 42831872,
+              "name": "LeviLamina.pdb",
+              "sha256": "8DDEF3D0F2F80985B53401F36748FD213D9333FB22EA44514DB6706A5828C974"
+            }
+          ],
+          "build_exit": 0,
+          "build_log_sha256": "1CA4E2AC734410DBCBAE6C974BFDCFC23AD7E64005031C89FC5E3680BE953AD5",
+          "config_exit": 0,
+          "config_log_sha256": "5989B3BDAA8D23D314C03F27979195926B9EAEDF596900AC89BBE7E5CC658BC8",
+          "mode": "release",
+          "target_type": "client",
+          "tests_enabled": false
+        },
+        {
+          "artifacts": [
+            {
+              "bytes": 5471744,
+              "name": "LeviLamina.dll",
+              "sha256": "FD870C9D251BF3B947F65A59443ED30197863C24AD70327D14E9573B6A482156"
+            },
+            {
+              "bytes": 526704,
+              "name": "LeviLamina.lib",
+              "sha256": "1A5A3C056791F22B32FB194F662386E88737CF19A7136DC9698B9459D5B5B9CD"
+            },
+            {
+              "bytes": 53866496,
+              "name": "LeviLamina.pdb",
+              "sha256": "C54748558CC35D23C68BA387ECC205EA13E45AF385F5E1C145FB11BC0C60BC17"
+            }
+          ],
+          "build_exit": 0,
+          "build_log_sha256": "CA820345D0A9607F492606EB019F2063DF078ADAF1FDFCEAADDF1685C74D54AC",
+          "config_exit": 0,
+          "config_log_sha256": "5989B3BDAA8D23D314C03F27979195926B9EAEDF596900AC89BBE7E5CC658BC8",
+          "mode": "release",
+          "target_type": "client",
+          "tests_enabled": true
+        },
+        {
+          "artifacts": [
+            {
+              "bytes": 10229248,
+              "name": "LeviLamina.dll",
+              "sha256": "A010FA823FE3FAF20289613D4F727F10BECD0CCDA0E7DBE5D1D4D5F5FC3BC5CE"
+            },
+            {
+              "bytes": 490196,
+              "name": "LeviLamina.lib",
+              "sha256": "A42A283AADDAE32E5E661067F4BD790CEF3BD346ACA4B4D57648618970AD7B82"
+            },
+            {
+              "bytes": 85037056,
+              "name": "LeviLamina.pdb",
+              "sha256": "B5949C1AD3D5D37410F7C1E1657E2B2EF19004FF9E2EC5D9C847BF57AA9FA0EF"
+            }
+          ],
+          "build_exit": 0,
+          "build_log_sha256": "FAEDA4FCDCF84B4322B3EC6A3BFA117852FDF020413737D7DBAC5D1664970C62",
+          "config_exit": 0,
+          "config_log_sha256": "5989B3BDAA8D23D314C03F27979195926B9EAEDF596900AC89BBE7E5CC658BC8",
+          "mode": "debug",
+          "target_type": "server",
+          "tests_enabled": false
+        },
+        {
+          "artifacts": [
+            {
+              "bytes": 13842944,
+              "name": "LeviLamina.dll",
+              "sha256": "B9B59A42A80C11A822C8A22A2F89EAA5FDF68EAACC972F72C2678D312CE39C30"
+            },
+            {
+              "bytes": 490380,
+              "name": "LeviLamina.lib",
+              "sha256": "F6072F945743553F1F88457400B13A2699531762FF47AAD6AAFFFEE3E7A145B1"
+            },
+            {
+              "bytes": 106491904,
+              "name": "LeviLamina.pdb",
+              "sha256": "207CEBE4A086C1D846CCEE56AAAA0633580C8074615C6317417BF486E7DDB41D"
+            }
+          ],
+          "build_exit": 0,
+          "build_log_sha256": "A4A6F097DF8FAE6C971AEEAEE4944925EFD74C0B9CFDBA2FAC74FE9D3D5E9C3E",
+          "config_exit": 0,
+          "config_log_sha256": "5989B3BDAA8D23D314C03F27979195926B9EAEDF596900AC89BBE7E5CC658BC8",
+          "mode": "debug",
+          "target_type": "server",
+          "tests_enabled": true
+        },
+        {
+          "artifacts": [
+            {
+              "bytes": 4350464,
+              "name": "LeviLamina.dll",
+              "sha256": "9372BF1C5565B52A18DFECD852EB6832960A0F60B3758C0FB52E8DA3EF08D971"
+            },
+            {
+              "bytes": 490196,
+              "name": "LeviLamina.lib",
+              "sha256": "A42A283AADDAE32E5E661067F4BD790CEF3BD346ACA4B4D57648618970AD7B82"
+            },
+            {
+              "bytes": 43634688,
+              "name": "LeviLamina.pdb",
+              "sha256": "D250287768D9B5B19EE225BDC3618998D95F995F24E22298C1A3C8B479BE1759"
+            }
+          ],
+          "build_exit": 0,
+          "build_log_sha256": "3F8FD735AE39E62E7167BA8AA47E6B410DCB9D0578EAB4E2A3B4FDBF9C6A3A95",
+          "config_exit": 0,
+          "config_log_sha256": "5989B3BDAA8D23D314C03F27979195926B9EAEDF596900AC89BBE7E5CC658BC8",
+          "mode": "release",
+          "target_type": "server",
+          "tests_enabled": false
+        },
+        {
+          "artifacts": [
+            {
+              "bytes": 6316032,
+              "name": "LeviLamina.dll",
+              "sha256": "D431854382213C68E8EEBEE4F5C706A65C850BA800A9F770C75A243EC504D9F7"
+            },
+            {
+              "bytes": 490380,
+              "name": "LeviLamina.lib",
+              "sha256": "F6072F945743553F1F88457400B13A2699531762FF47AAD6AAFFFEE3E7A145B1"
+            },
+            {
+              "bytes": 56905728,
+              "name": "LeviLamina.pdb",
+              "sha256": "2CE5C4527436BD8B050E85B58B326D0787CCDDBA4CF5217D6810BC98031BF6B7"
+            }
+          ],
+          "build_exit": 0,
+          "build_log_sha256": "04EB19979E641AC19FA293C363D405E557C7F96C88BC718480CE3E3EA31CDB5F",
+          "config_exit": 0,
+          "config_log_sha256": "5989B3BDAA8D23D314C03F27979195926B9EAEDF596900AC89BBE7E5CC658BC8",
+          "mode": "release",
+          "target_type": "server",
+          "tests_enabled": true
+        }
+      ]
+    },
+    "main": {
+      "accepted_report_sha256": "23C3164AEC67EB9D8B7B084F2E803A639C3F77BD2E55A47C312D161F4167A47D",
+      "combinations": [
+        {
+          "artifacts": [
+            {
+              "bytes": 10027520,
+              "name": "LeviLamina.dll",
+              "sha256": "A69233DA806ACAF936767CFC313A2076F5F60F04FAAD3A27ADCF62A6EF9519FE"
+            },
+            {
+              "bytes": 526704,
+              "name": "LeviLamina.lib",
+              "sha256": "1A5A3C056791F22B32FB194F662386E88737CF19A7136DC9698B9459D5B5B9CD"
+            },
+            {
+              "bytes": 86421504,
+              "name": "LeviLamina.pdb",
+              "sha256": "82C3499F54D2E6F43B8F192894B0C293E00B70B10EA6E519BB5D7AB79F8AC76E"
+            }
+          ],
+          "build_exit": 0,
+          "build_log_sha256": "B2CF6EAA5A19788E7B66BC35EED2ED649A268DEBA46B84D363136A6F01B7FD02",
+          "config_exit": 0,
+          "config_log_sha256": "5989B3BDAA8D23D314C03F27979195926B9EAEDF596900AC89BBE7E5CC658BC8",
+          "mode": "debug",
+          "target_type": "client",
+          "tests_enabled": false
+        },
+        {
+          "artifacts": [
+            {
+              "bytes": 12428800,
+              "name": "LeviLamina.dll",
+              "sha256": "EAE9C122A378F22F2DC16F37EBDB8460E0632F54C711D67F9F20D52A2BCB3F31"
+            },
+            {
+              "bytes": 526704,
+              "name": "LeviLamina.lib",
+              "sha256": "1A5A3C056791F22B32FB194F662386E88737CF19A7136DC9698B9459D5B5B9CD"
+            },
+            {
+              "bytes": 101191680,
+              "name": "LeviLamina.pdb",
+              "sha256": "5510EC464F2D155B9BAD8ECB27999EBBA3E54CBDE3C1ABF0A25353F38A906888"
+            }
+          ],
+          "build_exit": 0,
+          "build_log_sha256": "7955A5225763B6BABF02373DCAEB9ADD08B7CC1384DE2AE7BB4EACAA4E8F60CF",
+          "config_exit": 0,
+          "config_log_sha256": "5989B3BDAA8D23D314C03F27979195926B9EAEDF596900AC89BBE7E5CC658BC8",
+          "mode": "debug",
+          "target_type": "client",
+          "tests_enabled": true
+        },
+        {
+          "artifacts": [
+            {
+              "bytes": 4266496,
+              "name": "LeviLamina.dll",
+              "sha256": "AB174BBAC5E39303A6A392A72DE0F068576934DF4C72D6BC33921A2D20892BAC"
+            },
+            {
+              "bytes": 526704,
+              "name": "LeviLamina.lib",
+              "sha256": "1A5A3C056791F22B32FB194F662386E88737CF19A7136DC9698B9459D5B5B9CD"
+            },
+            {
+              "bytes": 42864640,
+              "name": "LeviLamina.pdb",
+              "sha256": "DAD520FF48AF5AACF69AE3E4AC60D661D08BB7AE22DE13DF24D3A7CED5E97F0D"
+            }
+          ],
+          "build_exit": 0,
+          "build_log_sha256": "FDCF780B4FD08A8063EF4828FE8BD8305C1343DB7C234559A9C24C88F7099A0E",
+          "config_exit": 0,
+          "config_log_sha256": "9C7886242268108C958C3DC899088F5177A27367F17FCDBEA92AF127CD824BBC",
+          "mode": "release",
+          "target_type": "client",
+          "tests_enabled": false
+        },
+        {
+          "artifacts": [
+            {
+              "bytes": 5470720,
+              "name": "LeviLamina.dll",
+              "sha256": "A9A3419E0040BFA4C8430DC5B18D6C2BEC51A6B7ED026948EEA4495D918066FB"
+            },
+            {
+              "bytes": 526704,
+              "name": "LeviLamina.lib",
+              "sha256": "1A5A3C056791F22B32FB194F662386E88737CF19A7136DC9698B9459D5B5B9CD"
+            },
+            {
+              "bytes": 52940800,
+              "name": "LeviLamina.pdb",
+              "sha256": "11882258253021F9C5A4F6D6E3C86573438CEA7010C71D432094FD6DB3275CCA"
+            }
+          ],
+          "build_exit": 0,
+          "build_log_sha256": "111984EF87A7CFAFE6733C4602D4CEA3D215CEE04ED4FA0F1087C68245A09052",
+          "config_exit": 0,
+          "config_log_sha256": "5989B3BDAA8D23D314C03F27979195926B9EAEDF596900AC89BBE7E5CC658BC8",
+          "mode": "release",
+          "target_type": "client",
+          "tests_enabled": true
+        },
+        {
+          "artifacts": [
+            {
+              "bytes": 10229248,
+              "name": "LeviLamina.dll",
+              "sha256": "0AEC116A2A6E0D94C6E7B85A78D50FA7A58AFFC53280FF40E3679B2B848C184E"
+            },
+            {
+              "bytes": 490196,
+              "name": "LeviLamina.lib",
+              "sha256": "A42A283AADDAE32E5E661067F4BD790CEF3BD346ACA4B4D57648618970AD7B82"
+            },
+            {
+              "bytes": 85069824,
+              "name": "LeviLamina.pdb",
+              "sha256": "BE177FE4A1D56BB98EAC890835C0B84EC474F593EBF585D013792F002DB89155"
+            }
+          ],
+          "build_exit": 0,
+          "build_log_sha256": "3455D1D4DA6EEEB79FDE061C5EA278C3D62BCAE723C842D74F11578162A27B16",
+          "config_exit": 0,
+          "config_log_sha256": "5989B3BDAA8D23D314C03F27979195926B9EAEDF596900AC89BBE7E5CC658BC8",
+          "mode": "debug",
+          "target_type": "server",
+          "tests_enabled": false
+        },
+        {
+          "artifacts": [
+            {
+              "bytes": 13842432,
+              "name": "LeviLamina.dll",
+              "sha256": "06EAC41932A8B82A8802C8D52BD1C4FD75C19981285AB4C3FD5A80852743A2BF"
+            },
+            {
+              "bytes": 490380,
+              "name": "LeviLamina.lib",
+              "sha256": "F6072F945743553F1F88457400B13A2699531762FF47AAD6AAFFFEE3E7A145B1"
+            },
+            {
+              "bytes": 106311680,
+              "name": "LeviLamina.pdb",
+              "sha256": "B71F38275AE8D08ED981002E7C25DD296EC2CF43CBF9A861D25D199D6A25F00E"
+            }
+          ],
+          "build_exit": 0,
+          "build_log_sha256": "73607FBC3D1DEEBD45F19842D977EB02664C969D13423D824EA21E5F371A11E3",
+          "config_exit": 0,
+          "config_log_sha256": "5989B3BDAA8D23D314C03F27979195926B9EAEDF596900AC89BBE7E5CC658BC8",
+          "mode": "debug",
+          "target_type": "server",
+          "tests_enabled": true
+        },
+        {
+          "artifacts": [
+            {
+              "bytes": 4558336,
+              "name": "LeviLamina.dll",
+              "sha256": "F3DCCBFEBBD22FF3A9BD847FDB9F73A91C15A1AE8DE5BC695DA31BAF6BAC80D7"
+            },
+            {
+              "bytes": 490196,
+              "name": "LeviLamina.lib",
+              "sha256": "A42A283AADDAE32E5E661067F4BD790CEF3BD346ACA4B4D57648618970AD7B82"
+            },
+            {
+              "bytes": 43233280,
+              "name": "LeviLamina.pdb",
+              "sha256": "E76528039FAB53F4BB1F7A1E2526D3F9F40DD7BBB804C3E279809D1F0DD6B702"
+            }
+          ],
+          "build_exit": 0,
+          "build_log_sha256": "33047A68549BE612B1E952F00DF96490CC02579824F7471A4C0593FB8B8E2AA7",
+          "config_exit": 0,
+          "config_log_sha256": "5989B3BDAA8D23D314C03F27979195926B9EAEDF596900AC89BBE7E5CC658BC8",
+          "mode": "release",
+          "target_type": "server",
+          "tests_enabled": false
+        },
+        {
+          "artifacts": [
+            {
+              "bytes": 6313984,
+              "name": "LeviLamina.dll",
+              "sha256": "1E078F439531400BBB5907F776C38FFD53A209EA612250F1739C9D3B001197F8"
+            },
+            {
+              "bytes": 490380,
+              "name": "LeviLamina.lib",
+              "sha256": "F6072F945743553F1F88457400B13A2699531762FF47AAD6AAFFFEE3E7A145B1"
+            },
+            {
+              "bytes": 56954880,
+              "name": "LeviLamina.pdb",
+              "sha256": "F72B947CA855787D65F013D84BC94B97F3CF6DF204629247F236F5A1F5273E13"
+            }
+          ],
+          "build_exit": 0,
+          "build_log_sha256": "FFBF22BEF7D58D240C8924022472FD091986CE9106EE9DE3888B73C2CAF57CD1",
+          "config_exit": 0,
+          "config_log_sha256": "5989B3BDAA8D23D314C03F27979195926B9EAEDF596900AC89BBE7E5CC658BC8",
+          "mode": "release",
+          "target_type": "server",
+          "tests_enabled": true
+        }
+      ]
+    }
+  },
+  "client_runtime": {
+    "prior_source_commit": "not supplied; no new runtime attribution to M or core",
+    "rerun_in_this_turn": false,
+    "status": "prior-validation-confirmed-by-user"
+  },
+  "compiled_header_coverage": [
+    {
+      "compiled_list_sha256": "7F83E396E20721FF2BE5C8AEF3008225DB13A3D8843618DDF1AE4DBFB2EDA77F",
+      "covers_every_header": true,
+      "mc_unique": 20897,
+      "mode": "release",
+      "platform": "client",
+      "total_includes": 21115
+    },
+    {
+      "compiled_list_sha256": "7F83E396E20721FF2BE5C8AEF3008225DB13A3D8843618DDF1AE4DBFB2EDA77F",
+      "covers_every_header": true,
+      "mc_unique": 20897,
+      "mode": "debug",
+      "platform": "client",
+      "total_includes": 21115
+    },
+    {
+      "compiled_list_sha256": "FAB366E227BD1059502CD31EA97EE8906604F466C395E4F0835BD558809FDBC7",
+      "covers_every_header": true,
+      "mc_unique": 20824,
+      "mode": "release",
+      "platform": "server",
+      "total_includes": 21027
+    },
+    {
+      "compiled_list_sha256": "FAB366E227BD1059502CD31EA97EE8906604F466C395E4F0835BD558809FDBC7",
+      "covers_every_header": true,
+      "mc_unique": 20824,
+      "mode": "debug",
+      "platform": "server",
+      "total_includes": 21027
+    }
+  ],
+  "core_code_commit": "81c838863feee269220bf4d33cd7868c5479a2f4",
+  "header_release": "6d5f02513384b051436fa0a26902894d10f6205a",
+  "main_commit": "c9a3b9cb0507cfb072f3d33be4324d1642c24889",
+  "package_identities": [
+    {
+      "bytes": 39424936,
+      "package_path": "b/bedrockdata/v26.40.5-client.2/ec8107f49e0d4ed3865deaf2b269ba94/bin/bedrock_runtime_data",
+      "sha256": "137FF0931428A2C518D789F48CF4BF980F7E583A721E07149DE3B0F5C68C5FE4"
+    },
+    {
+      "bytes": 28943880,
+      "package_path": "b/bedrockdata/v26.40.8-server.2/029bce524eb64c4abd30cd544fb8c8e6/bin/bedrock_runtime_data",
+      "sha256": "EAF9B09E7418C56FC1C9BC99F7F50C9D3C687E1B8F9A896E3B2AF5277435BFBB"
+    },
+    {
+      "bytes": 10743296,
+      "package_path": "p/preloader/v1.16.2/e7ad469d089e4781af7219c826eee86a/bin/PreLoader.dll",
+      "sha256": "77156A83CC3D7F87A2EE88AD9AEAB9286D1CFF7244FB454740A4A6C091909498"
+    },
+    {
+      "bytes": 16046080,
+      "package_path": "p/prelink/v0.8.5/edee48ef7cf54f3a9a38d549b6316f65/bin/prelink.exe",
+      "sha256": "A32D41206CB6BF8F0DFDEF258846E30F33E7B98861F5873994588064BDCF4CBD"
+    },
+    {
+      "bytes": 1830104,
+      "package_path": "g/gtest/v1.17.0/a14402329573418185bf52f17f8d405b/lib/gtest.lib",
+      "sha256": "E0935749B3338FAFF91A318B183398E6404645307153233AC95C15C907D6A65E"
+    },
+    {
+      "bytes": 2149678,
+      "package_path": "g/gtest/v1.17.0/a14402329573418185bf52f17f8d405b/lib/gmock.lib",
+      "sha256": "3A694D801DADD72079E527F3EFEB803FF5275BED8E522205C237CC500EAB8A4B"
+    }
+  ],
+  "schema_version": 1,
+  "server_runtime": [
+    {
+      "exit_code": 0,
+      "forced_cleanup": false,
+      "gtest_xml_sha256": "9881645566E613E5032071CD79522E48FDE75782D87EC972A4907941C360259F",
+      "label": "main-server-release",
+      "normal_stop_requested": true,
+      "passed": true,
+      "pid": 52820,
+      "run_report_sha256": "AEF091ADE764CED59A4E1AB2E570713621E0FAECF04E34E9FEECE1DFFD665F7D",
+      "source_commit": "c9a3b9cb0507cfb072f3d33be4324d1642c24889",
+      "stdout_sha256": "484217035DA2C90B7EF1C8B8BCF4A9C26BA45269CBD878B59641F47F5B8AE728",
+      "tests": {
+        "disabled": "0",
+        "errors": "0",
+        "failures": "0",
+        "name": "AllTests",
+        "tests": "94",
+        "time": "7.136",
+        "timestamp": "2026-09-09T11:35:06.701"
+      }
+    },
+    {
+      "exit_code": 0,
+      "forced_cleanup": false,
+      "gtest_xml_sha256": "13DFB7C18A76382CF54CE2E1BC1A3E81C0EBE13335EE04DA71BEB77AD49543F9",
+      "label": "main-server-debug",
+      "normal_stop_requested": true,
+      "passed": true,
+      "pid": 55824,
+      "run_report_sha256": "78E087CBF6A013A8D08BBFA967B6EE5AD936C47519FDE57F4B5E9E6BFEF1CB8D",
+      "source_commit": "c9a3b9cb0507cfb072f3d33be4324d1642c24889",
+      "stdout_sha256": "06753109B882E806720B9190071D34200F22B1FC625967E52289024C1B5C4B24",
+      "tests": {
+        "disabled": "0",
+        "errors": "0",
+        "failures": "0",
+        "name": "AllTests",
+        "tests": "94",
+        "time": "6.778",
+        "timestamp": "2026-09-09T11:36:47.312"
+      }
+    },
+    {
+      "exit_code": 0,
+      "forced_cleanup": false,
+      "gtest_xml_sha256": "C144FC58A2496BE08CA97601A6A4903905C45F7DAB5E8F7B2E264D0BA1E97EA1",
+      "label": "core-server-release",
+      "normal_stop_requested": true,
+      "passed": true,
+      "pid": 15912,
+      "run_report_sha256": "B21177267F9E2021D81B8D39DACD009984DCE35E732026BBE3A3BDC2A7462C9B",
+      "source_commit": "81c838863feee269220bf4d33cd7868c5479a2f4",
+      "stdout_sha256": "E2FD9F9B2E0D7F885F52A0E0E0B26EAD3B3D5EBC2CC18DE96FCE77EAE8AF08FA",
+      "tests": {
+        "disabled": "0",
+        "errors": "0",
+        "failures": "0",
+        "name": "AllTests",
+        "tests": "94",
+        "time": "6.61",
+        "timestamp": "2026-09-09T11:38:31.322"
+      }
+    },
+    {
+      "exit_code": 0,
+      "forced_cleanup": false,
+      "gtest_xml_sha256": "6FBA51CC760CCE3CB2074D79F4FA044E80441C00507D25BA22BA6A2906A617BF",
+      "label": "core-server-debug",
+      "normal_stop_requested": true,
+      "passed": true,
+      "pid": 20148,
+      "run_report_sha256": "937F522F03F908DF354EE2E727CB825C6AC0A53DFB0ADD23296B6535B1B56150",
+      "source_commit": "81c838863feee269220bf4d33cd7868c5479a2f4",
+      "stdout_sha256": "BF1CD4674E58042ACE167FE81E730E178F3E10B4DCA90D636E8CA67747598B90",
+      "tests": {
+        "disabled": "0",
+        "errors": "0",
+        "failures": "0",
+        "name": "AllTests",
+        "tests": "94",
+        "time": "6.727",
+        "timestamp": "2026-09-09T12:01:07.520"
+      }
+    }
+  ],
+  "status": "passed-with-user-confirmed-prior-client-runtime",
+  "toolchain": {
+    "clang_cl": "21.1.0",
+    "msvc": "14.51.36231",
+    "visual_studio": "2026",
+    "xmake": "3.0.7"
+  }
+}

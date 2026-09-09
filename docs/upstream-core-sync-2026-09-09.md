@@ -124,9 +124,19 @@ upstream cleanup resets the tracked source lists.
 ## Validation status
 
 G1-H is complete, including a fresh original-ELF HeaderVerifier pass (zero issues).
-All eight pure-M Windows build combinations and 36 Python tests have passed.
-The integrated Windows matrix is being rerun with the include and test-generator fixes above.
-G2 and later gates are not complete.
+All eight pure-M and eight integrated Windows build combinations have passed,
+as have 36 Python tests. All four tests-enabled integrated include lists were
+checked against every platform Header path. Each pure-M and integrated server
+debug/release DLL ran all 94 existing GTests in actual Minecraft 1.26.40.8, with
+zero failures/skips/disabled tests and normal process exit. Test names/statuses
+match across all four runs. `docs/validation/p6-core-windows.json` records artifact,
+log and XML identities.
+
+The user confirmed that the client runtime had already been validated and asked
+to retain that prior result. Client runtime is therefore explicitly historical;
+this turn adds fresh client builds, not fresh client game execution or attribution
+of the prior runtime result to a new source commit. G1-K is accepted within that
+user-confirmed boundary. G2 and later gates are not complete.
 
 Pure M client/server debug/release, both with tests enabled and disabled, compile and link locally.
 The local compiler is clang-cl 21.1.0, xmake 3.0.7, and installed MSVC 14.51.36231
