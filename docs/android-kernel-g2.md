@@ -46,12 +46,15 @@ function export, shared-library dependencies, LOAD alignment and non-executable 
 
 ## Current validation
 
-Debug and release compile and pass the include/P5/ELF gates. Negative checks cover
+Final debug and release builds pass the include/P5/ELF gates with captured source
+fingerprints. All eight Windows increment combinations pass; desktop native source
+files remain byte-identical to the G1-K code. `docs/validation/p6-g2-host.json` records
+these gates while explicitly leaving device lifecycle pending. Negative checks cover
 18 missing/tampered/platform input cases, eight actual compiler contract violations,
 a real compiler run with an identical foreign Actor Header, and nine malformed ELF
 variants. Additional source-provenance unit tests use isolated Git fixtures.
 All evidence is retained outside the repository; final receipt hashes are recorded
-when this stage is accepted.
+in that receipt.
 
 The existing vivo and installed Launcher APK were identified and their APK/BMB/
 manifest hashes matched the frozen inputs. The debug smoke package was staged and
@@ -59,5 +62,5 @@ atomically installed as a new `LeviLamina` package without replacing existing Mo
 Minecraft launch currently awaits the user's Launcher login; no device lifecycle
 pass is claimed yet. The user is handling login, and the login preference is unchanged.
 
-After the device lifecycle and desktop increment checks finish, G2 can be marked
+After device lifecycle checks finish, G2 can be marked
 complete. The known G4 quiescence gate still applies before adding real MC hooks.

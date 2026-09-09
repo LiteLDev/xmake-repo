@@ -1,0 +1,373 @@
+{
+  "G6_complete": false,
+  "android": {
+    "debug": {
+      "build_results_sha256": "369BBA64D7920A6BC12C67D886438336AB716C256E9F0EDE79AFBC0EB42D159B",
+      "elf": {
+        "G6_complete": false,
+        "android_api": 28,
+        "bytes": 99968,
+        "elf_sha256": "9050E76A3BE6511E1223D23E4E9425464398BC9BCB5EF1131FB37C6A13168476",
+        "exports": [
+          "PLGetModRegistration"
+        ],
+        "load_segments": [
+          {
+            "alignment": 16384,
+            "flags": 4,
+            "offset": 0,
+            "vaddr": 0
+          },
+          {
+            "alignment": 16384,
+            "flags": 5,
+            "offset": 4400,
+            "vaddr": 20784
+          },
+          {
+            "alignment": 16384,
+            "flags": 6,
+            "offset": 10560,
+            "vaddr": 43328
+          },
+          {
+            "alignment": 16384,
+            "flags": 6,
+            "offset": 11192,
+            "vaddr": 60344
+          }
+        ],
+        "machine": "AArch64",
+        "needed": [
+          "liblog.so",
+          "libc++_shared.so",
+          "libm.so",
+          "libdl.so",
+          "libc.so"
+        ],
+        "passed": true,
+        "phase": "G2",
+        "soname": "libLeviLamina.so"
+      },
+      "function_imports": 0,
+      "input_lock_sha256": "1C43A54C68B2D02B6749FE1AF0FD15F7C0AC3B951D32EECB8BC47A9C13893C0E",
+      "mc_unique_headers": 204,
+      "objects_report_sha256": "737E0891E166B5D23D18D517D87EA6A9BDEEFE50F2BFA26D061D76E91E092AC2",
+      "source_files": {
+        "config/android-kernel-inputs.lock.json": "1C43A54C68B2D02B6749FE1AF0FD15F7C0AC3B951D32EECB8BC47A9C13893C0E",
+        "scripts/Validate-AndroidKernel.ps1": "846DA43324C32A9E37B9C34B611A614663ED32DF641276B8F52017DCDB6C7124",
+        "scripts/android_kernel_binary.py": "396D09E7EB4B570B24275FB1ED0980280CF0D0D4DB872499BA935117E16F6B41",
+        "scripts/android_kernel_inputs.py": "22BB78E92216BD27887C07A0BC54B21E63B6B12D8D3DF208B0F74650D2F03779",
+        "scripts/xmake/android-kernel.exports": "5D6241276D70F609242975A475A1678056EE46A934C7FACD61077F3FDA0AD310",
+        "scripts/xmake/android-kernel.lua": "6FFE479167224E05827A23DC61BE55FA5B0BB45BCA6B869335BFA12117E36B49",
+        "scripts/xmake/android-options.lua": "E77066EE9C323B9AA8F4A2D87E71E012EF966FD8E2E6D67E79CD2A59084E0A61",
+        "src-android/ll/core/android/CompilationContract.h": "731B984CE4FBA508399CE804CE99DC5F31906FE2E54E545FE2AD7B12AB9537DD",
+        "src-android/ll/core/android/HeaderSmoke.cpp": "26BBBF469711BA38EE0F20F28432C260C1BD420174CD919BB369A42145FEE9EF",
+        "src-android/ll/core/android/KernelEntry.cpp": "827200C91D8391368827C56468BFE59B065741DE514ED48297141044E3C5F95C",
+        "src-android/ll/core/android/KernelLifecycle.cpp": "D40AB4DD4298B2B19DB62605F9A0EFEDBE3DCED6E0962335AE85013B98AE6777",
+        "src-android/ll/core/android/KernelLifecycle.h": "D294BD0B02445DFA6F28B61F2B5043B8658DC7A13189C9005DC3C315EE86D37C",
+        "xmake.lua": "42EF1F12DCEB8A62407CEFF5C63BC6243BC3C6FE1A98E7BB5C111C51DAEED73A"
+      }
+    },
+    "release": {
+      "build_results_sha256": "86C8DF354CC710A8B72C417D8AE30BBA760B45334298AD189F58BF94680A3158",
+      "elf": {
+        "G6_complete": false,
+        "android_api": 28,
+        "bytes": 8848,
+        "elf_sha256": "C1CC90AE8B631A2957A39F8CAC2CC834AC0BE7985DF00BCF24E08DCBC0D56CA2",
+        "exports": [
+          "PLGetModRegistration"
+        ],
+        "load_segments": [
+          {
+            "alignment": 16384,
+            "flags": 4,
+            "offset": 0,
+            "vaddr": 0
+          },
+          {
+            "alignment": 16384,
+            "flags": 5,
+            "offset": 3488,
+            "vaddr": 19872
+          },
+          {
+            "alignment": 16384,
+            "flags": 6,
+            "offset": 6528,
+            "vaddr": 39296
+          },
+          {
+            "alignment": 16384,
+            "flags": 6,
+            "offset": 7152,
+            "vaddr": 56304
+          }
+        ],
+        "machine": "AArch64",
+        "needed": [
+          "liblog.so",
+          "libc++_shared.so",
+          "libm.so",
+          "libdl.so",
+          "libc.so"
+        ],
+        "passed": true,
+        "phase": "G2",
+        "soname": "libLeviLamina.so"
+      },
+      "function_imports": 0,
+      "input_lock_sha256": "1C43A54C68B2D02B6749FE1AF0FD15F7C0AC3B951D32EECB8BC47A9C13893C0E",
+      "mc_unique_headers": 204,
+      "objects_report_sha256": "6F6DC89F2D444BB9AC190141991BB4ADEECF9E3F482428C7C083ADBBBCBA8B80",
+      "source_files": {
+        "config/android-kernel-inputs.lock.json": "1C43A54C68B2D02B6749FE1AF0FD15F7C0AC3B951D32EECB8BC47A9C13893C0E",
+        "scripts/Validate-AndroidKernel.ps1": "846DA43324C32A9E37B9C34B611A614663ED32DF641276B8F52017DCDB6C7124",
+        "scripts/android_kernel_binary.py": "396D09E7EB4B570B24275FB1ED0980280CF0D0D4DB872499BA935117E16F6B41",
+        "scripts/android_kernel_inputs.py": "22BB78E92216BD27887C07A0BC54B21E63B6B12D8D3DF208B0F74650D2F03779",
+        "scripts/xmake/android-kernel.exports": "5D6241276D70F609242975A475A1678056EE46A934C7FACD61077F3FDA0AD310",
+        "scripts/xmake/android-kernel.lua": "6FFE479167224E05827A23DC61BE55FA5B0BB45BCA6B869335BFA12117E36B49",
+        "scripts/xmake/android-options.lua": "E77066EE9C323B9AA8F4A2D87E71E012EF966FD8E2E6D67E79CD2A59084E0A61",
+        "src-android/ll/core/android/CompilationContract.h": "731B984CE4FBA508399CE804CE99DC5F31906FE2E54E545FE2AD7B12AB9537DD",
+        "src-android/ll/core/android/HeaderSmoke.cpp": "26BBBF469711BA38EE0F20F28432C260C1BD420174CD919BB369A42145FEE9EF",
+        "src-android/ll/core/android/KernelEntry.cpp": "827200C91D8391368827C56468BFE59B065741DE514ED48297141044E3C5F95C",
+        "src-android/ll/core/android/KernelLifecycle.cpp": "D40AB4DD4298B2B19DB62605F9A0EFEDBE3DCED6E0962335AE85013B98AE6777",
+        "src-android/ll/core/android/KernelLifecycle.h": "D294BD0B02445DFA6F28B61F2B5043B8658DC7A13189C9005DC3C315EE86D37C",
+        "xmake.lua": "42EF1F12DCEB8A62407CEFF5C63BC6243BC3C6FE1A98E7BB5C111C51DAEED73A"
+      }
+    }
+  },
+  "code_commit": "7ae535f216767e3be07b027736b536862fc24ff1",
+  "desktop_native_sources_unchanged_from_G1K": true,
+  "device": {
+    "apk_sha256": "84192c7034624136149dfb584b13e98fa941a3ef44d0c5a2f4ee381bf8b0e243",
+    "installed_smoke_sha256": "9050E76A3BE6511E1223D23E4E9425464398BC9BCB5EF1131FB37C6A13168476",
+    "lifecycle_passed": false,
+    "login_preference_changed": false,
+    "reason": "Launcher login required; user is completing login; ADB is currently disconnected"
+  },
+  "negative_checks": {
+    "compiler_contract_and_shadow": {
+      "rejected_cases": 9,
+      "report_sha256": "363E0349D04EA3938D87148A71AF9AD0B06DF659878805371271BC2CB3E3F4AA"
+    },
+    "input_rejections": {
+      "rejected_cases": 18,
+      "report_sha256": "6E32C0E172997B475C996DD6B8FE9AD0A63C72CD65DB9222C495632F04A1AA08"
+    },
+    "malformed_elf": {
+      "rejected_cases": 9,
+      "report_sha256": "A3C635963250E2E9F450CB4E84EDCDF89D520A63E83DB287F319B9EF0381299A"
+    }
+  },
+  "phase": "G2",
+  "python_tests": {
+    "log_sha256": "1AFC74ABCFE00C3E00A0B53FD4245261E57604261EAF7905C58604E955EBBD33",
+    "passed": 46
+  },
+  "schema_version": 1,
+  "status": "host-gates-passed-device-lifecycle-pending",
+  "windows_increment": [
+    {
+      "artifacts": [
+        {
+          "bytes": 4350464,
+          "name": "LeviLamina.dll",
+          "sha256": "54AEC09027A4C25C559371BBE9AE781DA55E13E3FB12C11959B7B5B089241546"
+        },
+        {
+          "bytes": 490196,
+          "name": "LeviLamina.lib",
+          "sha256": "A42A283AADDAE32E5E661067F4BD790CEF3BD346ACA4B4D57648618970AD7B82"
+        },
+        {
+          "bytes": 43659264,
+          "name": "LeviLamina.pdb",
+          "sha256": "5DFCF6517403F6984623E10F7656396B34E58C3DA9AD95BA1DC03744DC840857"
+        }
+      ],
+      "build_log_sha256": "E535E645549E696D2F8640BBD38959AD3621768FBFF357791209FB55EAECB476",
+      "config_log_sha256": "3C57AD599B7A47ECF1FEF8F58C99D9EAD61151E795C9E35185C95411E3E15734",
+      "mode": "release",
+      "passed": true,
+      "platform": "server",
+      "tests_enabled": false
+    },
+    {
+      "artifacts": [
+        {
+          "bytes": 6316032,
+          "name": "LeviLamina.dll",
+          "sha256": "47BD48C815D06C676700B152A2ACCDBFCC82241AF4DDEF5E99F026D6A65FC5E5"
+        },
+        {
+          "bytes": 490380,
+          "name": "LeviLamina.lib",
+          "sha256": "F6072F945743553F1F88457400B13A2699531762FF47AAD6AAFFFEE3E7A145B1"
+        },
+        {
+          "bytes": 59174912,
+          "name": "LeviLamina.pdb",
+          "sha256": "58C9CBC6CF9A00F59705A85F3C6C8ABB553ED44F391DA12E1DC7A7DBDAAD4794"
+        }
+      ],
+      "build_log_sha256": "7AA937E6045CC967E89F4BAA49829BF5C63AE64E6AD16DF7D010B88B355529B1",
+      "config_log_sha256": "916C4EB523E8406B46D87235AD8699A6B177B92F72F1A05FF083BEAA561591BE",
+      "mode": "release",
+      "passed": true,
+      "platform": "server",
+      "tests_enabled": true
+    },
+    {
+      "artifacts": [
+        {
+          "bytes": 10229248,
+          "name": "LeviLamina.dll",
+          "sha256": "43A53667EFA16FBC5B496EC9CA674160D0B9773E244A4B3C04FBB02CBBDB6DC1"
+        },
+        {
+          "bytes": 490196,
+          "name": "LeviLamina.lib",
+          "sha256": "A42A283AADDAE32E5E661067F4BD790CEF3BD346ACA4B4D57648618970AD7B82"
+        },
+        {
+          "bytes": 87199744,
+          "name": "LeviLamina.pdb",
+          "sha256": "4D5337A03E11B951B0D8A2721B93F5CFBD1A18BE66CD14EC93456B66ACC3E2A2"
+        }
+      ],
+      "build_log_sha256": "7C577BA44EDEF6889A4FEB4A5DB92AC13210CC59194A2ECC425132D7EA02C8D4",
+      "config_log_sha256": "59FEFCAD2B274ADD4C558A37C01F094D2021617F156F4C0904177B5C37F863C3",
+      "mode": "debug",
+      "passed": true,
+      "platform": "server",
+      "tests_enabled": false
+    },
+    {
+      "artifacts": [
+        {
+          "bytes": 13842944,
+          "name": "LeviLamina.dll",
+          "sha256": "AC244AFCAF3E1B88BEF4DBBC1D62EE70E1797D632939965B016508539520545B"
+        },
+        {
+          "bytes": 490380,
+          "name": "LeviLamina.lib",
+          "sha256": "F6072F945743553F1F88457400B13A2699531762FF47AAD6AAFFFEE3E7A145B1"
+        },
+        {
+          "bytes": 110055424,
+          "name": "LeviLamina.pdb",
+          "sha256": "62DB3CB7E8AEF34C942701830B2997E14F006F62610223AD5E8A750BAAC14ED5"
+        }
+      ],
+      "build_log_sha256": "E19B5DF7DD2B48FF0E46B53CE404D3EDBBCA21F0F9FF98359103EE1F426770F4",
+      "config_log_sha256": "708172BED8AD3DC68B8AC3E34C292577E5FAF90068773F235FFD90A29238586C",
+      "mode": "debug",
+      "passed": true,
+      "platform": "server",
+      "tests_enabled": true
+    },
+    {
+      "artifacts": [
+        {
+          "bytes": 4266496,
+          "name": "LeviLamina.dll",
+          "sha256": "A85CF28D907A085C4DC491B71631D24D2BF98B7D296FAF2D4EE424B6EA587E79"
+        },
+        {
+          "bytes": 526704,
+          "name": "LeviLamina.lib",
+          "sha256": "1A5A3C056791F22B32FB194F662386E88737CF19A7136DC9698B9459D5B5B9CD"
+        },
+        {
+          "bytes": 44486656,
+          "name": "LeviLamina.pdb",
+          "sha256": "E9AE64526BDB6D8E6075C0525ECED5AC663F96ADE9955C4833A7DC4B3AE1A701"
+        }
+      ],
+      "build_log_sha256": "71B292E89E48429F0BDAB7B21EC0F5FFC9029A5B0F4CA457A7EEEE88B4887DB7",
+      "config_log_sha256": "370BB244C589CA24D688894479A22BAD0E31E0C6D3BF26C1008866BB67D07DFF",
+      "mode": "release",
+      "passed": true,
+      "platform": "client",
+      "tests_enabled": false
+    },
+    {
+      "artifacts": [
+        {
+          "bytes": 5471744,
+          "name": "LeviLamina.dll",
+          "sha256": "88B25780E7E746CC9A8F00BCF328ABD5DFFC34DA6E0E3DC5AF1F099D46711A9F"
+        },
+        {
+          "bytes": 526704,
+          "name": "LeviLamina.lib",
+          "sha256": "1A5A3C056791F22B32FB194F662386E88737CF19A7136DC9698B9459D5B5B9CD"
+        },
+        {
+          "bytes": 56078336,
+          "name": "LeviLamina.pdb",
+          "sha256": "9EC68DFF116E0A25EB1D4ED9E9838DC06EF973E030D31CC59AA4E4527E25AB97"
+        }
+      ],
+      "build_log_sha256": "8BF5E84E84CD9090DE2A66C872D9F89F1D900AAC612DDBEB546FFA003280F9B1",
+      "config_log_sha256": "11465E15EF3D3717E806362073622F07F07E78F2961F96EF69EF3D0112ABD866",
+      "mode": "release",
+      "passed": true,
+      "platform": "client",
+      "tests_enabled": true
+    },
+    {
+      "artifacts": [
+        {
+          "bytes": 10027520,
+          "name": "LeviLamina.dll",
+          "sha256": "33BC422B21D80A5F3D517754478E5A8B3D91B1383F0A02A3B6B79AD0D10583A7"
+        },
+        {
+          "bytes": 526704,
+          "name": "LeviLamina.lib",
+          "sha256": "1A5A3C056791F22B32FB194F662386E88737CF19A7136DC9698B9459D5B5B9CD"
+        },
+        {
+          "bytes": 88330240,
+          "name": "LeviLamina.pdb",
+          "sha256": "5C8A33FB0614F117A18B1078C4A68AFC4E300C3152AD296B5766276CDCBC7E61"
+        }
+      ],
+      "build_log_sha256": "BDBDF6D96AD21A2642DAB67065E29287B4454EDC30ADD5C854E6BCBABCDD0940",
+      "config_log_sha256": "261565ED02749E09692FB47A8423DA1AA3C98EEC4DB53ABB3376E87A03D58271",
+      "mode": "debug",
+      "passed": true,
+      "platform": "client",
+      "tests_enabled": false
+    },
+    {
+      "artifacts": [
+        {
+          "bytes": 12429824,
+          "name": "LeviLamina.dll",
+          "sha256": "1AD278FBD19EE858A945611B9168CE56FD03ECC944663FFF1AF6D7ADC638CB2D"
+        },
+        {
+          "bytes": 526704,
+          "name": "LeviLamina.lib",
+          "sha256": "1A5A3C056791F22B32FB194F662386E88737CF19A7136DC9698B9459D5B5B9CD"
+        },
+        {
+          "bytes": 105828352,
+          "name": "LeviLamina.pdb",
+          "sha256": "508A877E1BB3FC9009ED11E9E699E2F9649DA63BF080B05D85FD7E5A521D0A45"
+        }
+      ],
+      "build_log_sha256": "39519A5D81E05956184B7323E7892D00E7F3CC17C1E88D5813518F49A1704404",
+      "config_log_sha256": "BFB6F25FAD2A05A24B3CBE44342B09194AB44DB4CA45191644FF5ACA7CB07CEA",
+      "mode": "debug",
+      "passed": true,
+      "platform": "client",
+      "tests_enabled": true
+    }
+  ]
+}
