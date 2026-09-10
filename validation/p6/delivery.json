@@ -441,24 +441,24 @@
     "traces": [
       {
         "pid": 1555,
-        "file": "device-pid-1555.log",
-        "sha256": "9bb5760907dbc60ba4e3467ae979086bdd046097852c860538b0d252aa80fc2e",
+        "file": "device-pid-1555.json",
+        "sha256": "25a844f1887d2352d33d4b68603410b09b755943ac244391d1b8dec25f8e467e",
         "both_events": true,
         "children_listeners_callbacks_snapshots_bindings": 0,
         "resident_gateways": 2
       },
       {
         "pid": 10647,
-        "file": "device-pid-10647.log",
-        "sha256": "a9a84c066508982443e25d080e71988e0c0a1578cd11058cd01482de9a477c2d",
+        "file": "device-pid-10647.json",
+        "sha256": "302e3ae09c43f8aeec36aa10009c9ea12665e65f1a6839f36fa8eaf16fb56fe7",
         "both_events": true,
         "children_listeners_callbacks_snapshots_bindings": 0,
         "resident_gateways": 2
       },
       {
         "pid": 16174,
-        "file": "device-pid-16174.log",
-        "sha256": "a3f5201abfa3cf65e72c08caa31df93c37e61f1e1101aef881843f3a95fb074d",
+        "file": "device-pid-16174.json",
+        "sha256": "512600261367fe096a5816240e3c0ee821c35fcd5de689c3584137bb83ae7039",
         "both_events": true,
         "children_listeners_callbacks_snapshots_bindings": 0,
         "resident_gateways": 2

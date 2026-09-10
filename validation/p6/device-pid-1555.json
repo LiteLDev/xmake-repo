@@ -1,0 +1,24 @@
+{
+  "pid": 1555,
+  "source_log_sha256": "9bb5760907dbc60ba4e3467ae979086bdd046097852c860538b0d252aa80fc2e",
+  "lines": [
+    "--------- beginning of main",
+    "09-10 13:39:43.974  1555  8891 I PreLoader: LeviLamina: Loaded",
+    "09-10 13:39:43.992  1555  1555 I PreLoader: LeviLamina: ActorNormalTick/ClientLocalPlayer guarded bindings ready",
+    "09-10 13:39:43.992  1555  1555 I PreLoader: LeviLamina: Enabled",
+    "09-10 13:39:44.007  1555  1555 I PreLoader: LeviLaminaP6Example: load",
+    "09-10 13:39:44.007  1555  1555 I PreLoader: LeviLamina Mod LeviLaminaP6Example: load ok",
+    "09-10 13:39:44.007  1555  1555 I PreLoader: LeviLamina Mod LeviLaminaP6Example: enable ok",
+    "09-10 13:39:44.007  1555  1555 I PreLoader: Guarded startup sealed; enable result=true",
+    "09-10 13:40:04.004  1555  9704 I PreLoader: LeviLaminaP6Example: first ActorNormalTickAfter",
+    "09-10 13:40:04.027  1555  9003 I PreLoader: LeviLaminaP6Example: first non-null ClientInstanceLocalPlayerAfter",
+    "09-10 13:40:58.962  1555  1555 I PreLoader: LeviLaminaP6Example: final actor=19810 client=489921 nonNullPlayer=474558",
+    "09-10 13:40:58.962  1555  1555 I PreLoader: LeviLamina Mod LeviLaminaP6Example: disable ok",
+    "09-10 13:40:58.962  1555  1555 I PreLoader: LeviLamina Mod LeviLaminaP6Example: unload ok",
+    "09-10 13:40:58.962  1555  1555 I PreLoader: LeviLamina Mod LeviLaminaP6Example: dlclose ok",
+    "09-10 13:40:58.962  1555  1555 I PreLoader: LeviLamina: final actor=19810 client=489921 nonNullPlayer=474558 childHandles=0 listeners=0 callbacks=0 snapshots=0; guarded retirement=ok",
+    "09-10 13:40:58.962  1555  1555 I PreLoader: LeviLamina: Loaded; disabled",
+    "09-10 13:40:58.962  1555  1555 I PreLoader: LeviLamina: Unloaded",
+    "09-10 13:40:58.962  1555  1555 I PreLoader: Guarded shutdown: clean=true bindings=0 inFlight=0 resident=2"
+  ]
+}
