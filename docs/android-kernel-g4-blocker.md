@@ -2,7 +2,9 @@
 
 Historical frozen-contract review. The user subsequently approved the bounded
 provider-resident gateway contract in [the platform continuation notes](android-platform-core.md).
-G4 remains incomplete until that replacement is implemented and validated.
+That replacement has now been implemented. Current results and the remaining
+P6 acceptance gaps are in [the delivery checkpoint](android-p6-validation.md).
+The analysis below preserves the earlier frozen-contract blocker.
 
 `RuntimeSymbols` and `HookTransaction` are compiled by the native fixtures only.
 They are not in the production kernel's explicit seven-source list. No real

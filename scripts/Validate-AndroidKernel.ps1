@@ -14,6 +14,8 @@ param(
     [Parameter(Mandatory)][string]$Ndk,
     [string]$Xmake = 'xmake',
     [string]$PackageRoot,
+    [string]$CompareReleaseEvidence,
+    [string]$ArtifactEvidenceRoot,
     [switch]$RunFixtures,
     [string]$DeviceSerial,
     [string]$FmtLibrary,
@@ -23,6 +25,7 @@ param(
 $ErrorActionPreference = 'Stop'
 $env:XMAKE_STATS = 'false'
 $taskRepo = (Resolve-Path -LiteralPath $Repository).Path
+if ($CompareReleaseEvidence -and $Mode -ne 'release') { throw 'Release comparison requires -Mode release.' }
 $taskEvidence = [IO.Path]::GetFullPath($EvidenceRoot)
 if ($taskEvidence.StartsWith($taskRepo.TrimEnd('\') + '\', [StringComparison]::OrdinalIgnoreCase)) {
     throw 'Validation artifacts must be outside the source worktree.'
@@ -34,7 +37,7 @@ $taskResults = [Collections.Generic.List[object]]::new()
 function Get-SourceIdentity {
     $taskNames = @('xmake.lua', 'config/android-kernel-inputs.lock.json',
         'scripts/Validate-AndroidKernel.ps1', 'scripts/android_kernel_inputs.py', 'scripts/android_kernel_binary.py', 'scripts/android_kernel_link.py',
-        'scripts/package_android_kernel.py')
+        'scripts/package_android_kernel.py', 'scripts/Validate-AndroidKernelArtifacts.py')
     $taskNames += @(Get-ChildItem -LiteralPath (Join-Path $taskRepo 'scripts/xmake'), (Join-Path $taskRepo 'xmake/rules'), (Join-Path $taskRepo 'src-android/ll'), (Join-Path $taskRepo 'examples/android-minimal-mod') -File -Recurse |
         ForEach-Object { [IO.Path]::GetRelativePath($taskRepo, $_.FullName).Replace('\', '/') })
     $taskHashes = [ordered]@{}
@@ -90,6 +93,11 @@ try {
         & (Join-Path $PSScriptRoot 'Validate-AndroidKernelFixtures.ps1') -EvidenceRoot (Join-Path $taskEvidence "fixtures-$Mode") `
             -Ndk $Ndk -PreloaderRoot $PreloaderRoot -KernelElf (Join-Path $taskBuild 'android-kernel/kernel/stripped/libLeviLamina.so') `
             -Provider $Provider -FmtLibrary $FmtLibrary -FmtSha256 $FmtSha256 -DeviceSerial $DeviceSerial -Adb $Adb
+    }
+    if ($CompareReleaseEvidence) {
+        if (-not $ArtifactEvidenceRoot) { $ArtifactEvidenceRoot = "$taskEvidence-artifacts" }
+        & python (Join-Path $PSScriptRoot 'Validate-AndroidKernelArtifacts.py') --repository $taskRepo --build-a $CompareReleaseEvidence --build-b $taskEvidence --output $ArtifactEvidenceRoot
+        if ($LASTEXITCODE) { throw 'Determinism/publication-recovery validation failed.' }
     }
     if ($PackageRoot) {
         & python (Join-Path $PSScriptRoot 'package_android_kernel.py') --repository $taskRepo --evidence $taskEvidence --mode $Mode --output $PackageRoot

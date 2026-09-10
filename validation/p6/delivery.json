@@ -1,0 +1,563 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-09-10T15:12:08.021517+08:00",
+  "implementation_commit": "3368645613a61363390ad96c700ef0ad61a3a257",
+  "implementation_parent": "3d7df647db7fa5d11e94508922d2c186c1a7b619",
+  "src_ll_tree": "34da55c4bbbfeaca8b388407155f2f25dbdf71a1",
+  "component_commits": {
+    "PL": "d12886b33ff46364efcc42252ea2e124fff051d9",
+    "Launcher": "4c4c68ba6862a21e2409f35670c09572531f11f8",
+    "BMB_creator": "17cb32a11e8f86e5ef380c277575584e3f5584dc",
+    "BMB_runtime_reader": "194310d7fb9c3c9712618c9776cd7db1e5b521dd",
+    "H": "48f5fbfc2cbd539c08316d855555ce084478a678",
+    "M": "c9a3b9cb0507cfb072f3d33be4324d1642c24889",
+    "P5": "1ab96df1790e2cd8082c4c72b656b0996ae4c311",
+    "S": "6d5f02513384b051436fa0a26902894d10f6205a",
+    "D": "a1e1f0d7be65959a4c68822cb861b3365ae43755"
+  },
+  "android_contract": {
+    "api_level": 28,
+    "architecture": "arm64-v8a",
+    "cxx": "c++20",
+    "page_alignment": 16384,
+    "runtime": "c++_shared",
+    "soname": "libLeviLamina.so"
+  },
+  "runtime_manifest": {
+    "schemaVersion": 1,
+    "minecraftVersion": "1.26.40.5",
+    "targetBuildId": "5893edc8d56c93cbdb50e0f9436320236b78c89d",
+    "providerBuildId": "28e2a87adfd42148c2d425b3c57f39558febd365",
+    "providerFileSha256": "4d1468df67c36702b521fabd553d0b8350016e58f49e18501354be4481c0c60f",
+    "providerTextSha256": "57f852b8f4fd7118945d5d9f38e1e556d0083edf96417f813c060a940e02a6a0",
+    "targetTextSha256": "f17aa60a840a88fc1212abfa92e362fec86b871126f30ae03000de8d90f3b0aa",
+    "bmbSha256": "ed856efc548b483caf78c0e9798226fbd0fb3c716b3c3ab85a35482f40f0afc7",
+    "bmbBytes": "17626204",
+    "membershipCount": 540340,
+    "whitelistValueCount": 26092,
+    "functionReverseIndexCount": 25667,
+    "semanticSha256": "b1f905519c0b7dfb709ed23e475ed48eb3705b525e924e20116cde6ebec6a82c"
+  },
+  "runtime_files": {
+    "provider": {
+      "bytes": 4617552,
+      "sha256": "4D1468DF67C36702B521FABD553D0B8350016E58F49E18501354BE4481C0C60F"
+    },
+    "bmb": {
+      "bytes": 17626204,
+      "sha256": "ED856EFC548B483CAF78C0E9798226FBD0FB3C716B3C3AB85A35482F40F0AFC7"
+    },
+    "target": {
+      "bytes": 1583570128,
+      "sha256": "1CCBC128196E1A522B0000E81CBDCCF6CA3E7025F2D99E1640877D35B860665F"
+    }
+  },
+  "apk": {
+    "sha256": "62029623456af4835cf912a877c15b3218393f0d6dd81b8e0f2e375adccc31f1",
+    "certificate_sha256": "cf749824b0f1afb003a9a101eaa50b909f9cff5234a9ca1531651300293031e4"
+  },
+  "release_packages": {
+    "device_acceptance": "separate evidence required",
+    "generation": "0277aaef134e0338aaae0b7c1ad7b8b6fe19e94251f9876d1c289dcf4f5c927c",
+    "input_lock_sha256": "FCF1F5334126311DB9C670DDC84508D555AFF233FCD87CDABB4F801108AAE0B2",
+    "mode": "release",
+    "packages": [
+      {
+        "archive": "LeviLamina.zip",
+        "elf_sha256": "9E6FBDEF44293C134D1EDC8671A1D0E917463C7E1686D560AA60091844DA19AA",
+        "name": "LeviLamina",
+        "sha256": "96CBAEB3C4A1DFAE3E79349C21779EDFBD5B0788B2C2FBFCE41C6AE32D6F074F"
+      },
+      {
+        "archive": "LeviLaminaP6Example.zip",
+        "elf_sha256": "5EA79222D32C140C1874F78B2CF6E62461F0A52F7E90A678807F753EDA810520",
+        "name": "LeviLaminaP6Example",
+        "sha256": "5A41FF0010EF480F29D2EC52944BDDBB8CEF1070A80EEF82CCE47A1D8E0DD47B"
+      }
+    ],
+    "provider_sha256": "4D1468DF67C36702B521FABD553D0B8350016E58F49E18501354BE4481C0C60F",
+    "schema_version": 1
+  },
+  "debug_packages": {
+    "device_acceptance": "separate evidence required",
+    "generation": "7b4340907f912af18decaa1be75cdd1d76b77c851848c46f829b9674bcfb0519",
+    "input_lock_sha256": "FCF1F5334126311DB9C670DDC84508D555AFF233FCD87CDABB4F801108AAE0B2",
+    "mode": "debug",
+    "packages": [
+      {
+        "archive": "LeviLamina.zip",
+        "elf_sha256": "1978703E7EFDF27E46E4979DC222AC22213FDE694908C055D39B67DDC5D041D6",
+        "name": "LeviLamina",
+        "sha256": "88117C5440020559E7552A56B352F0B7984660A10918D0B941A4F2EDA32591E1"
+      },
+      {
+        "archive": "LeviLaminaP6Example.zip",
+        "elf_sha256": "F5E3940D6B636AE4741EAAAE26B66F966300031E1AB028EEDD64087746EDF3D7",
+        "name": "LeviLaminaP6Example",
+        "sha256": "B91BAA134D616CE4A3324E2DB5C95795086172C17E832890E8F8A7AFED8F4A85"
+      }
+    ],
+    "provider_sha256": "4D1468DF67C36702B521FABD553D0B8350016E58F49E18501354BE4481C0C60F",
+    "schema_version": 1
+  },
+  "formal_links": {
+    "kernel": {
+      "passed": true,
+      "function_imports": 0,
+      "stripped": {
+        "android_api": 28,
+        "bytes": 92312,
+        "elf_sha256": "9E6FBDEF44293C134D1EDC8671A1D0E917463C7E1686D560AA60091844DA19AA",
+        "exports": [
+          "LLAndroidKernel_GetApiVersion",
+          "LLAndroidKernel_GetState",
+          "LLAndroidKernel_Log",
+          "LLAndroidKernel_Subscribe",
+          "LLAndroidKernel_Unsubscribe",
+          "PLGetModRegistration"
+        ],
+        "load_segments": [
+          {
+            "alignment": 16384,
+            "flags": 4,
+            "offset": 0,
+            "vaddr": 0
+          },
+          {
+            "alignment": 16384,
+            "flags": 5,
+            "offset": 31952,
+            "vaddr": 48336
+          },
+          {
+            "alignment": 16384,
+            "flags": 6,
+            "offset": 88624,
+            "vaddr": 121392
+          },
+          {
+            "alignment": 16384,
+            "flags": 6,
+            "offset": 90280,
+            "vaddr": 139432
+          }
+        ],
+        "machine": "AArch64",
+        "needed": [
+          "libpreloader.so",
+          "libc++_shared.so",
+          "liblog.so",
+          "libdl.so",
+          "libm.so",
+          "libc.so"
+        ],
+        "soname": "libLeviLamina.so"
+      },
+      "unstripped": {
+        "android_api": 28,
+        "bytes": 1572232,
+        "elf_sha256": "EBDB20EE85C268865FC937D2C91A1474FBAE5A901ADBE9B4A9408F8EA5FF036C",
+        "exports": [
+          "LLAndroidKernel_GetApiVersion",
+          "LLAndroidKernel_GetState",
+          "LLAndroidKernel_Log",
+          "LLAndroidKernel_Subscribe",
+          "LLAndroidKernel_Unsubscribe",
+          "PLGetModRegistration"
+        ],
+        "load_segments": [
+          {
+            "alignment": 16384,
+            "flags": 4,
+            "offset": 0,
+            "vaddr": 0
+          },
+          {
+            "alignment": 16384,
+            "flags": 5,
+            "offset": 31952,
+            "vaddr": 48336
+          },
+          {
+            "alignment": 16384,
+            "flags": 6,
+            "offset": 88624,
+            "vaddr": 121392
+          },
+          {
+            "alignment": 16384,
+            "flags": 6,
+            "offset": 90280,
+            "vaddr": 139432
+          }
+        ],
+        "machine": "AArch64",
+        "needed": [
+          "libpreloader.so",
+          "libc++_shared.so",
+          "liblog.so",
+          "libdl.so",
+          "libm.so",
+          "libc.so"
+        ],
+        "soname": "libLeviLamina.so"
+      },
+      "p5_artifacts": {
+        "bedrock_runtime_imports.json": "7660610586AF385FA0DDB31E6E1BC5D9626A50E274661C3AA48578726DD07125",
+        "bedrock_runtime_link.rsp": "CB05FA5F10ADA9BACEFF2EBEB835C99667B8F357945D1EC76E70F4346038BD70",
+        "bedrock_runtime_thunks.S": "888330A4FE6C9C98BD5F3931EA66D7041CA41F72DA9389193CBFD075BDF4C8B5",
+        "bedrock_runtime_thunks.o": "338785A4C70DD6CAD4B41B27494C38D986D3D892DBD3299E968C6D32FDB3BC12",
+        "libbedrock_runtime_thunks.a": "DC73BAB587CAB5D0F3CD88E02E0E04B92EBEC0D9E10279824EDCBC94565CA488"
+      },
+      "mc_unique_headers": 204
+    },
+    "example": {
+      "passed": true,
+      "function_imports": 0,
+      "stripped": {
+        "android_api": 28,
+        "bytes": 9096,
+        "elf_sha256": "5EA79222D32C140C1874F78B2CF6E62461F0A52F7E90A678807F753EDA810520",
+        "exports": [
+          "LLGetModRegistration"
+        ],
+        "load_segments": [
+          {
+            "alignment": 16384,
+            "flags": 4,
+            "offset": 0,
+            "vaddr": 0
+          },
+          {
+            "alignment": 16384,
+            "flags": 5,
+            "offset": 3952,
+            "vaddr": 20336
+          },
+          {
+            "alignment": 16384,
+            "flags": 6,
+            "offset": 6528,
+            "vaddr": 39296
+          },
+          {
+            "alignment": 16384,
+            "flags": 6,
+            "offset": 7232,
+            "vaddr": 56384
+          }
+        ],
+        "machine": "AArch64",
+        "needed": [
+          "libpreloader.so",
+          "libLeviLamina.so",
+          "libc++_shared.so",
+          "liblog.so",
+          "libdl.so",
+          "libm.so",
+          "libc.so"
+        ],
+        "soname": "libLeviLaminaP6Example.so"
+      },
+      "unstripped": {
+        "android_api": 28,
+        "bytes": 60064,
+        "elf_sha256": "BD18C2288D7797A833AFA8B910349EDAA3ED65A23FA56816E8287C6539D0B624",
+        "exports": [
+          "LLGetModRegistration"
+        ],
+        "load_segments": [
+          {
+            "alignment": 16384,
+            "flags": 4,
+            "offset": 0,
+            "vaddr": 0
+          },
+          {
+            "alignment": 16384,
+            "flags": 5,
+            "offset": 3952,
+            "vaddr": 20336
+          },
+          {
+            "alignment": 16384,
+            "flags": 6,
+            "offset": 6528,
+            "vaddr": 39296
+          },
+          {
+            "alignment": 16384,
+            "flags": 6,
+            "offset": 7232,
+            "vaddr": 56384
+          }
+        ],
+        "machine": "AArch64",
+        "needed": [
+          "libpreloader.so",
+          "libLeviLamina.so",
+          "libc++_shared.so",
+          "liblog.so",
+          "libdl.so",
+          "libm.so",
+          "libc.so"
+        ],
+        "soname": "libLeviLaminaP6Example.so"
+      },
+      "p5_artifacts": {
+        "bedrock_runtime_imports.json": "17A4D282AE22BA02A30DC8826751005985E478FC00CE0D8E534C908F69C8FD13",
+        "bedrock_runtime_link.rsp": "CB05FA5F10ADA9BACEFF2EBEB835C99667B8F357945D1EC76E70F4346038BD70",
+        "bedrock_runtime_thunks.S": "888330A4FE6C9C98BD5F3931EA66D7041CA41F72DA9389193CBFD075BDF4C8B5",
+        "bedrock_runtime_thunks.o": "338785A4C70DD6CAD4B41B27494C38D986D3D892DBD3299E968C6D32FDB3BC12",
+        "libbedrock_runtime_thunks.a": "DC73BAB587CAB5D0F3CD88E02E0E04B92EBEC0D9E10279824EDCBC94565CA488"
+      },
+      "mc_unique_headers": 0
+    }
+  },
+  "determinism": {
+    "passed": true,
+    "two_clean_release_directories": true,
+    "object_order_reversed": true,
+    "objects_p5_artifacts_unstripped_stripped_identical": true,
+    "package_repeat_identical": true,
+    "negative_cases": {
+      "tampered example": {
+        "rejected": true,
+        "previous_index_preserved": true,
+        "reason": "kernel must be ELF64 little-endian AArch64 ET_DYN"
+      },
+      "tampered P5 artifact": {
+        "rejected": true,
+        "previous_index_preserved": true,
+        "reason": "P5 artifact changed: libbedrock_runtime_thunks.a"
+      },
+      "stale source": {
+        "rejected": true,
+        "previous_index_preserved": true,
+        "reason": "source changed after build: src-android/ll/core/KernelRuntime.cpp"
+      },
+      "index switch failure": {
+        "rejected": true,
+        "previous_index_preserved": true,
+        "reason": "injected index switch failure"
+      }
+    },
+    "evidence": {
+      "local_path": "C:\\llp6-0909\\guarded\\delivery-artifacts\\results.json",
+      "sha256": "98a9e4fc63ebe456ddb85984ba70b65b77531285e7c0166fd574faa082dde16a",
+      "bytes": 10253
+    }
+  },
+  "python_tests": {
+    "passed": 51,
+    "failed": 0,
+    "evidence": {
+      "local_path": "C:\\llp6-0909\\guarded\\closeout-python.log",
+      "sha256": "49f98b8d487430fc33aebd76180a164e08668873b8f4b3920631c6924179fa3e",
+      "bytes": 7895
+    }
+  },
+  "aarch64_fixtures": {
+    "passed": true,
+    "evidence": {
+      "local_path": "C:\\llp6-0909\\guarded\\child-failure-final\\fixtures-release\\fixture-results.json",
+      "sha256": "8c7f6529c25819dc841e0bbe0949db84300450d30640e46b4b2ac0fb06afe56d",
+      "bytes": 8396
+    }
+  },
+  "runtime_input_negatives": {
+    "passed": 15,
+    "evidence": {
+      "local_path": "C:\\llp6-0909\\guarded\\runtime-negative-matrix\\results.json",
+      "sha256": "6cd10b136384213c4830a1bd1894dca1c5db9eaac2acdcdb71dc7d73dd127235",
+      "bytes": 22447
+    }
+  },
+  "windows_compile": [
+    {
+      "name": "p6-final-server-release-tests-y",
+      "source_commit": "3368645613a61363390ad96c700ef0ad61a3a257",
+      "config_exit": 0,
+      "build_exit": 0,
+      "tests_runtime_executed": false,
+      "config_log_sha256": "554BD2F6A4D41F7BF3EF079BE77AACCC0194D75AD06F2F48958A4402CDE2B892",
+      "build_log_sha256": "495FEC8D60311328D78FDD19DF7E9382E19B3719DB67B90FF727CFE12621F86C"
+    },
+    {
+      "name": "p6-final-server-debug-tests-y",
+      "source_commit": "3368645613a61363390ad96c700ef0ad61a3a257",
+      "config_exit": 0,
+      "build_exit": 0,
+      "tests_runtime_executed": false,
+      "config_log_sha256": "59FC416379309F67A5016FCFBEEAD7268658EC622B2CD0D55D80C0DCCAD63911",
+      "build_log_sha256": "2A00A1B7578AAE4E506183DC4B9574C2982973551EAE964233418AAD78252544"
+    },
+    {
+      "name": "p6-final-client-release-tests-y",
+      "source_commit": "3368645613a61363390ad96c700ef0ad61a3a257",
+      "config_exit": 0,
+      "build_exit": 0,
+      "tests_runtime_executed": false,
+      "config_log_sha256": "F8A16EDD5628FD7622C5112971F6B72F84E76606910C25383EA8CA5469F3BCA7",
+      "build_log_sha256": "1CA606C4A244A0DB00DAF0D68309CF4D4B716639A6971BB364C526795291FBA3"
+    },
+    {
+      "name": "p6-final-client-debug-tests-y",
+      "source_commit": "3368645613a61363390ad96c700ef0ad61a3a257",
+      "config_exit": 0,
+      "build_exit": 0,
+      "tests_runtime_executed": false,
+      "config_log_sha256": "E8CF1C6B0ABB625B9ED6104DF9FA5FDA45D7DB605CD1EB138F8473D238E6F6FC",
+      "build_log_sha256": "21450F09AD1F02C3B7EB08CDE5CECC03F63AD34BD5C7CC110CB4BA81AEDAD94F"
+    }
+  ],
+  "nested_cold_load": {
+    "passed": true,
+    "pid": 10362,
+    "evidence": {
+      "local_path": "C:\\llp6-0909\\guarded\\nested-libdl\\pid10362-final.log",
+      "sha256": "50108ec29261174ace6e037aea0bd0f5c7ddb0413856a70505e9deabc97246eb",
+      "bytes": 634563
+    }
+  },
+  "loader_matrix": {
+    "passed": true,
+    "pid": 27211,
+    "stable_order": [
+      "LeviLaminaP6Example",
+      "P6OrderA",
+      "P6OrderB"
+    ],
+    "reverse_cleanup": true,
+    "evidence": {
+      "local_path": "C:\\llp6-0909\\guarded\\loader-matrix\\pid27211-final.log",
+      "sha256": "9181884d4dfc68b266bc3c1738e7295d37a11abd56686977bc3a618250caa016",
+      "bytes": 2959957
+    }
+  },
+  "device": {
+    "user_reported_rounds": 5,
+    "complete_log_verified_rounds": 3,
+    "traces": [
+      {
+        "pid": 1555,
+        "file": "device-pid-1555.log",
+        "sha256": "9bb5760907dbc60ba4e3467ae979086bdd046097852c860538b0d252aa80fc2e",
+        "both_events": true,
+        "children_listeners_callbacks_snapshots_bindings": 0,
+        "resident_gateways": 2
+      },
+      {
+        "pid": 10647,
+        "file": "device-pid-10647.log",
+        "sha256": "a9a84c066508982443e25d080e71988e0c0a1578cd11058cd01482de9a477c2d",
+        "both_events": true,
+        "children_listeners_callbacks_snapshots_bindings": 0,
+        "resident_gateways": 2
+      },
+      {
+        "pid": 16174,
+        "file": "device-pid-16174.log",
+        "sha256": "a3f5201abfa3cf65e72c08caa31df93c37e61f1e1101aef881843f3a95fb074d",
+        "both_events": true,
+        "children_listeners_callbacks_snapshots_bindings": 0,
+        "resident_gateways": 2
+      }
+    ],
+    "no_further_phone_repetition_requested": true,
+    "original_ten_round_gate_complete": false
+  },
+  "event_performance": {
+    "warmup": 10000,
+    "rounds": 5,
+    "iterations_per_round": 100000,
+    "zero_listener_net_us": 0.012118,
+    "zero_listener_allocations": 0,
+    "zero_listener_logs": 0,
+    "one_listener_net_us": 0.900315,
+    "passed": true,
+    "evidence": {
+      "local_path": "C:\\llp6-0909\\guarded\\performance\\device.log",
+      "sha256": "ee53d19d4f4bb35eaef00f5dc16daf48f46f8f94863f11978bf12de3edbeb938",
+      "bytes": 999
+    }
+  },
+  "rss_observations": {
+    "controlled_game_comparison_complete": false,
+    "per_pid": {
+      "10647": {
+        "samples": 84,
+        "first_sample": "2026-09-10T13:47:53.568781+08:00",
+        "last_sample": "2026-09-10T13:51:19.610493+08:00",
+        "min_rss_kib": 269332,
+        "max_rss_kib": 1450624
+      },
+      "16174": {
+        "samples": 160,
+        "first_sample": "2026-09-10T13:51:23.545115+08:00",
+        "last_sample": "2026-09-10T13:57:54.991453+08:00",
+        "min_rss_kib": 171176,
+        "max_rss_kib": 1407956
+      },
+      "20570": {
+        "samples": 18,
+        "first_sample": "2026-09-10T13:57:58.899188+08:00",
+        "last_sample": "2026-09-10T13:58:40.200122+08:00",
+        "min_rss_kib": 275932,
+        "max_rss_kib": 1494364
+      },
+      "21382": {
+        "samples": 15,
+        "first_sample": "2026-09-10T13:58:43.105667+08:00",
+        "last_sample": "2026-09-10T13:59:17.344768+08:00",
+        "min_rss_kib": 278956,
+        "max_rss_kib": 1448096
+      },
+      "22315": {
+        "samples": 19,
+        "first_sample": "2026-09-10T13:59:20.284559+08:00",
+        "last_sample": "2026-09-10T14:00:03.928970+08:00",
+        "min_rss_kib": 279368,
+        "max_rss_kib": 1517804
+      },
+      "23628": {
+        "samples": 33,
+        "first_sample": "2026-09-10T14:00:06.849879+08:00",
+        "last_sample": "2026-09-10T14:01:24.642944+08:00",
+        "min_rss_kib": 263836,
+        "max_rss_kib": 280540
+      }
+    },
+    "evidence": {
+      "local_path": "C:\\llp6-0909\\guarded\\rounds-20260910\\rss.jsonl",
+      "sha256": "a344f5ba6eb3873a476ceb3755fc1494a956814e432647c4583ca3eab0fa75ac",
+      "bytes": 54736
+    }
+  },
+  "remote_snapshot": {
+    "upstream_main": "d1fefe8d71b960a82c812380d91cccebbae63d16",
+    "upstream_header": "1bc96d524a5245a6ce28af8c13f31c281241c8fa",
+    "header_fork_main": "6d5f02513384b051436fa0a26902894d10f6205a",
+    "new_header_consumed": false
+  },
+  "P6_complete": false,
+  "outstanding": [
+    "Original G8 ten-round requirement: user reports five, complete logs cover three.",
+    "Successful full guarded Hook performance measurement remains outstanding; failed performance fixture is not acceptance evidence.",
+    "Matched game RSS control remains outstanding."
+  ],
+  "P5R_private_CI": "deferred_unverified",
+  "ancestry_verified": [
+    "M",
+    "H",
+    "D",
+    "S",
+    "d1fefe8d"
+  ],
+  "reference_repository_observation": {
+    "current_head": "1bc96d524a5245a6ce28af8c13f31c281241c8fa",
+    "previous_checkpoint_head": "6edbf69e8a54294303f879c0ebc896d329c98626",
+    "clean": true,
+    "used_as_build_input": false
+  }
+}
