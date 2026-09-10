@@ -139,6 +139,26 @@ class IncludeTraceTests(unittest.TestCase):
         with self.assertRaisesRegex(inputs.InputError, "Git blob"):
             binary.verify_traces(self.config, self.traces)
 
+    def test_g5_requires_all_explicit_modules_and_rejects_extra_units(self):
+        self.config.update(phase="G5", source_layout="platform-v1", role="kernel")
+        (self.traces / "KernelEntry.txt").unlink()
+        for name in binary.SOURCE_NAMES_G5 - {"KernelLifecycle", "HeaderSmoke"}:
+            self.write(self.traces / (name + ".txt"), str(self.ll) + "\n")
+        self.assertEqual(len(binary.verify_traces(self.config, self.traces)["units"]), 17)
+        self.write(self.traces / "Unlisted.txt", str(self.ll) + "\n")
+        with self.assertRaisesRegex(inputs.InputError, "include traces"):
+            binary.verify_traces(self.config, self.traces)
+
+    def test_example_has_no_mc_and_cannot_use_kernel_source_set(self):
+        self.config.update(phase="G5", source_layout="platform-v1", role="example")
+        for path in self.traces.iterdir():
+            path.unlink()
+        self.write(self.traces / "main.txt", str(self.ll) + "\n")
+        self.assertEqual(binary.verify_traces(self.config, self.traces)["mc_unique_count"], 0)
+        self.write(self.traces / "main.txt", str(self.header / "src-android" / self.mc_names[0]) + "\n")
+        with self.assertRaises(inputs.InputError):
+            binary.verify_traces(self.config, self.traces)
+
 
 if __name__ == "__main__":
     unittest.main()

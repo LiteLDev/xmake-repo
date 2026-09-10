@@ -1,4 +1,13 @@
 #include "ll/api/android/Kernel.h"
+#include "ll/api/android/Mod.h"
+
+_Static_assert(sizeof(LLAndroidModContextV1) == 56, "LL Mod context ABI");
+_Static_assert(offsetof(LLAndroidModContextV1, javaVm) == 8, "LL Mod VM offset");
+_Static_assert(offsetof(LLAndroidModContextV1, resourcePath) == 48, "LL Mod resource offset");
+_Static_assert(sizeof(LLAndroidModRegistrationV1) == 56, "LL Mod registration ABI");
+_Static_assert(offsetof(LLAndroidModRegistrationV1, requiredKernelApiVersion) == 8, "LL Mod required API offset");
+_Static_assert(offsetof(LLAndroidModRegistrationV1, instance) == 16, "LL Mod instance offset");
+_Static_assert(offsetof(LLAndroidModRegistrationV1, unload) == 48, "LL Mod unload offset");
 
 _Static_assert(
     LLAndroidKernel_Unloaded == 0 && LLAndroidKernel_Loaded == 1 && LLAndroidKernel_Enabling == 2

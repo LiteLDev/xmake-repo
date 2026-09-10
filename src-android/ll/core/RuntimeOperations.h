@@ -6,8 +6,10 @@ namespace ll::android {
 // Fixtures supply owned backends; this interface is never dynamically exported.
 class RuntimeOperations {
 public:
-    virtual ~RuntimeOperations()                                                                        = default;
-    virtual bool     enable() noexcept                                                                  = 0;
+    virtual ~RuntimeOperations()       = default;
+    virtual bool     enable() noexcept = 0;
+    virtual bool     enableChildren() noexcept { return true; }
+    virtual void     reset() noexcept {}
     virtual bool     disable() noexcept                                                                 = 0;
     virtual bool     clean() const noexcept                                                             = 0;
     virtual bool     inCallback() const noexcept                                                        = 0;

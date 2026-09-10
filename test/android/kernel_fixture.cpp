@@ -63,6 +63,7 @@ void fallback(int32_t level, char const* message) noexcept { sink(level, message
 struct Backend final : ll::android::RuntimeOperations {
     bool     enableResult{true}, disableResult{true}, residualOnFailure{}, resources{}, callback{}, owner{};
     bool     cleanOnDisableFailure{};
+    bool     childResult{true};
     unsigned enables{}, disables{}, subscriptions{};
     int32_t  enablingObserved{}, disablingObserved{};
     uint64_t lastToken{};
@@ -80,6 +81,7 @@ struct Backend final : ll::android::RuntimeOperations {
         if (disableResult || cleanOnDisableFailure) resources = false;
         return disableResult;
     }
+    bool     enableChildren() noexcept override { return childResult; }
     bool     clean() const noexcept override { return !resources; }
     bool     inCallback() const noexcept override { return callback; }
     uint64_t subscribe(uint32_t, LLAndroidEventCallback cb, void* data) noexcept override {
@@ -202,6 +204,28 @@ bool failureTests() {
     return true;
 }
 
+bool childFailureTests() {
+    auto* registration  = PLGetModRegistration();
+    backend.childResult = false;
+    for (bool retained : {false, true}) {
+        backend.disableResult = !retained;
+        auto before           = backend.disables;
+        CHECK(registration->load(registration->instance, &raw));
+        CHECK(!registration->enable(registration->instance, &raw));
+        CHECK(LLAndroidKernel_GetState() == LLAndroidKernel_Failed && backend.disables == before + 1);
+        CHECK(!registration->disable(registration->instance, &raw) && backend.disables == before + 1);
+        CHECK(registration->unload(registration->instance, &raw) == !retained);
+        if (retained) {
+            CHECK(!context.view().identityAndPaths[0].empty());
+            // Release only the fixture's synthetic resource between cases.
+            backend.resources = false;
+            CHECK(registration->unload(registration->instance, &raw));
+        }
+    }
+    backend.childResult = backend.disableResult = true;
+    return true;
+}
+
 bool logTests() {
     auto* r              = PLGetModRegistration();
     auto  beforeFallback = capture.fallbackCalls;
@@ -298,7 +322,7 @@ KernelLifecycle& kernel() noexcept { return fixture::lifecycle; }
 PL_REGISTER_MOD(ll::android::KernelLifecycle, fixture::lifecycle);
 
 int main() {
-    if (!fixture::lifecycleTests() || !fixture::failureTests() || !fixture::logTests()
+    if (!fixture::lifecycleTests() || !fixture::failureTests() || !fixture::childFailureTests() || !fixture::logTests()
         || !fixture::concurrentLogReset())
         return 1;
 #if defined(__aarch64__)

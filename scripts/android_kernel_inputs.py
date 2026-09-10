@@ -146,13 +146,15 @@ def validate_dependencies(root: Path, runtime: dict, ndk: Path, lock: dict) -> l
     return roots
 
 
-def authenticate(repo: Path, inputs: dict[str, str], api: int = 28, arch: str = "arm64-v8a") -> dict[str, Any]:
+def authenticate(repo: Path, inputs: dict[str, str], api: int = 28, arch: str = "arm64-v8a", role: str = "kernel") -> dict[str, Any]:
     repo = repo.resolve()
     lock_path = repo / "config/android-kernel-inputs.lock.json"
     lock = read_json(lock_path)
     phase = lock.get("phase", "")
-    if phase not in ("P6-G2", "P6-G3"):
+    if phase not in ("P6-G2", "P6-G3", "P6-G5"):
         raise InputError("unsupported kernel validation phase")
+    if role not in ("kernel", "example") or (role == "example" and phase != "P6-G5"):
+        raise InputError("unsupported binary role")
     layout = lock.get("source_layout", "legacy")
     if layout not in ("legacy", "platform-v1") or (phase == "P6-G2" and layout != "legacy"):
         raise InputError("unsupported kernel source layout")
@@ -182,11 +184,11 @@ def authenticate(repo: Path, inputs: dict[str, str], api: int = 28, arch: str = 
     for path in sdk:
         if (path / "mc").exists():
             raise InputError("PL SDK include root would shadow Minecraft Headers")
-    return {"schema_version": 1, "phase": phase.removeprefix("P6-"), "source_layout": layout, "repository": str(repo),
+    return {"schema_version": 1, "phase": phase.removeprefix("P6-"), "role": role, "source_layout": layout, "repository": str(repo),
             "lock_sha256": sha(lock_path), "inputs": {k: str(v) for k, v in resolved.items()},
             "commits": lock["commits"], "binary": lock["binary"],
             "include_roots": [str(v) for v in direct], "system_include_roots": [str(v) for v in sdk + roots],
-            "header_manifest_sha256": metadata["manifest"]["sha256"], "package": lock["package"]}
+            "header_manifest_sha256": metadata["manifest"]["sha256"], "package": lock["package"] if role == "kernel" else lock["example"]}
 
 
 def main() -> None:
@@ -195,6 +197,7 @@ def main() -> None:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--api", type=int, required=True)
     parser.add_argument("--arch", required=True)
+    parser.add_argument("--role", choices=("kernel", "example"), default="kernel")
     for name in ("header-root", "dependency-lock", "preloader-root", "prelink", "runtime-manifest", "bmb", "provider", "target", "ndk"):
         parser.add_argument("--" + name, required=True)
     args = parser.parse_args()
@@ -202,7 +205,7 @@ def main() -> None:
         output = args.output.resolve()
         if output.is_relative_to(args.repo.resolve()):
             raise InputError("validation output must be outside the source worktree")
-        result = authenticate(args.repo, vars(args), args.api, args.arch)
+        result = authenticate(args.repo, vars(args), args.api, args.arch, args.role)
         output.parent.mkdir(parents=True, exist_ok=True)
         staged = output.with_suffix(output.suffix + ".tmp")
         staged.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")

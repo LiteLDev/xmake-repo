@@ -15,14 +15,20 @@ from android_kernel_inputs import InputError, git, read_json, sha
 SOURCE_NAMES = {"KernelEntry", "KernelLifecycle", "HeaderSmoke"}
 SOURCE_NAMES_G3 = SOURCE_NAMES | {"KernelApi", "KernelContext", "KernelLogger", "KernelRuntime"}
 SOURCE_NAMES_G3_PLATFORM = (SOURCE_NAMES_G3 - {"KernelEntry"}) | {"main_android", "Output_android"}
+SOURCE_NAMES_G5 = SOURCE_NAMES_G3_PLATFORM | {"RuntimeSymbols", "HookTransaction", "EventRegistry", "ModOwner",
+    "ModManifest", "ElfModule", "ModuleFiles", "NativeModRegistry", "NativeModManager"}
 EXPORTS_G3 = {"PLGetModRegistration", "LLAndroidKernel_GetApiVersion", "LLAndroidKernel_GetState",
               "LLAndroidKernel_Log", "LLAndroidKernel_Subscribe", "LLAndroidKernel_Unsubscribe"}
 
 
 def source_names(config: dict) -> set[str]:
     phase = config.get("phase", "G2")
-    if phase not in ("G2", "G3"):
+    if phase not in ("G2", "G3", "G5"):
         raise InputError("unsupported kernel phase")
+    if phase == "G5":
+        if config.get("source_layout") != "platform-v1" or config.get("role", "kernel") not in ("kernel", "example"):
+            raise InputError("unsupported G5 layout or role")
+        return {"main"} if config.get("role") == "example" else SOURCE_NAMES_G5
     layout = config.get("source_layout", "legacy")
     if layout not in ("legacy", "platform-v1") or (phase == "G2" and layout != "legacy"):
         raise InputError("unsupported kernel source layout")
@@ -98,7 +104,9 @@ def verify_traces(config: dict, directory: Path) -> dict:
             raise InputError("compiler trace contains no project or SDK Headers")
         units[name] = {"trace_sha256": sha(trace), "authenticated_headers": files}
     required = {"mc/world/actor/Actor.h", "mc/client/game/ClientInstance.h", "mc/client/player/LocalPlayer.h"}
-    if not required <= all_mc:
+    if config.get("role") == "example" and all_mc:
+        raise InputError("example must not compile Minecraft Headers")
+    if config.get("role") != "example" and not required <= all_mc:
         raise InputError("the actual compiler trace does not contain the required MC smoke Headers")
     return {"units": units, "mc_unique_count": len(all_mc), "all_mc_from_S": True}
 
@@ -129,8 +137,8 @@ def verify_objects(config: dict, traces: Path, objects: list[Path], output: Path
     print("Kernel object checks passed: actual MC includes are S; P5 functionImports=0.")
 
 
-def elf_contract(path: Path, phase: str = "G2") -> dict:
-    if phase not in ("G2", "G3"):
+def elf_contract(path: Path, phase: str = "G2", role: str = "kernel") -> dict:
+    if phase not in ("G2", "G3", "G5") or role not in ("kernel", "example"):
         raise InputError("unsupported kernel phase")
     data = path.read_bytes()
 
@@ -218,14 +226,21 @@ def elf_contract(path: Path, phase: str = "G2") -> dict:
                 offset += (desc_size + 3) & ~3
                 if name == b"Android" and len(desc) >= 4:
                     api_notes.append(struct.unpack_from("<I", desc)[0])
-    expected_exports = EXPORTS_G3 if phase == "G3" else {"PLGetModRegistration"}
+    expected_exports = {"LLGetModRegistration"} if role == "example" else EXPORTS_G3 if phase != "G2" else {"PLGetModRegistration"}
     if len(exports) != len(expected_exports) or set(exports) != expected_exports:
         raise InputError(f"{phase} dynamic export set mismatch")
     if any(export_details[name] != (2, 1, 0) for name in expected_exports):
         raise InputError("kernel exports must be global functions with default visibility")
-    if soname != "libLeviLamina.so" or api_notes != [28]:
+    expected_soname = "libLeviLaminaP6Example.so" if role == "example" else "libLeviLamina.so"
+    if soname != expected_soname or api_notes != [28]:
         raise InputError("kernel SONAME or Android API note mismatch")
     allowed = {"libc++_shared.so", "libc.so", "libm.so", "libdl.so", "liblog.so", "libpreloader.so"}
+    if role == "example":
+        allowed.add("libLeviLamina.so")
+        if "libLeviLamina.so" not in needed:
+            raise InputError("example must depend on the kernel")
+    if phase == "G5" and "libpreloader.so" not in needed:
+        raise InputError("formal binary must retain its provider dependency")
     if not set(needed) <= allowed or "libc++_shared.so" not in needed:
         raise InputError("unexpected shared-library dependencies or missing c++_shared")
     return {"elf_sha256": sha(path), "bytes": len(data), "machine": "AArch64", "soname": soname,
@@ -251,7 +266,7 @@ def main() -> None:
         else:
             if not args.elf:
                 raise InputError("kernel ELF is required")
-            result = elf_contract(args.elf, config["phase"])
+            result = elf_contract(args.elf, config["phase"], config.get("role", "kernel"))
             result.update(phase=config["phase"], passed=True, G6_complete=False)
             write_json(args.inputs.parent / "elf.json", result)
             print("Kernel ELF checks passed: API28/AArch64, SONAME, exact exports and 16 KiB alignment.")

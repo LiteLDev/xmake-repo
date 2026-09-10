@@ -65,11 +65,19 @@ Invoke-FixtureCommand 'hook-fake-build' $taskClangxx ($taskCxx + @(
     "$taskRepo/src-android/ll/core/memory/RuntimeSymbols.cpp", "$taskRepo/src-android/ll/core/memory/HookTransaction.cpp",
     "$taskRepo/test/android/hook_transaction_fixture.cpp", '-o', "$taskOut/hook_transaction_fixture"))
 Invoke-FixtureCommand 'hook-owned-build' $taskClangxx ($taskCxx + @(
-    "$taskRepo/src-android/ll/core/memory/HookTransaction.cpp", "$taskRepo/test/android/hook_owned_device.cpp",
+    "$taskRepo/test/android/hook_owned_device.cpp",
     '-ldl', '-o', "$taskOut/hook_owned_device"))
+$taskEventSources = @("$taskRepo/src-android/ll/core/event/EventRegistry.cpp", "$taskRepo/src-android/ll/core/mod/ModOwner.cpp")
+Invoke-FixtureCommand 'event-build' $taskClangxx ($taskCxx + $taskEventSources + @(
+    "$taskRepo/test/android/event_registry_fixture.cpp", '-o', "$taskOut/event_registry_fixture"))
+Invoke-FixtureCommand 'native-mod-build' $taskClangxx ($taskCxx + $taskEventSources + @(
+    "$taskRepo/src-android/ll/core/mod/NativeModRegistry.cpp", "$taskRepo/src-android/ll/core/KernelContext.cpp",
+    "$taskRepo/src-android/ll/core/io/KernelLogger.cpp", "$taskRepo/test/android/native_mod_registry_fixture.cpp",
+    '-o', "$taskOut/native_mod_registry_fixture"))
 
 $taskArtifacts = @("$taskOut/kernel_fixture", "$taskOut/kernel_production_probe", "$taskOut/hook_transaction_fixture",
-    "$taskOut/hook_owned_device", $KernelElf, $Provider, $FmtLibrary, $taskRuntime)
+    "$taskOut/hook_owned_device", "$taskOut/event_registry_fixture", "$taskOut/native_mod_registry_fixture",
+    $KernelElf, $Provider, $FmtLibrary, $taskRuntime)
 $taskRemote = $null
 if ($DeviceSerial) {
     if ($DeviceSerial -notmatch '^[A-Za-z0-9:._-]+$') { throw 'Invalid device serial.' }
@@ -79,12 +87,15 @@ if ($DeviceSerial) {
         Invoke-FixtureCommand ('push-' + [IO.Path]::GetFileName($taskFile)) $Adb @('-s', $DeviceSerial, 'push', $taskFile, "$taskRemote/")
     }
     Invoke-FixtureCommand 'device-permissions' $Adb @('-s', $DeviceSerial, 'shell', 'chmod', '755',
-        "$taskRemote/kernel_fixture", "$taskRemote/kernel_production_probe", "$taskRemote/hook_transaction_fixture", "$taskRemote/hook_owned_device")
+        "$taskRemote/kernel_fixture", "$taskRemote/kernel_production_probe", "$taskRemote/hook_transaction_fixture", "$taskRemote/hook_owned_device",
+        "$taskRemote/event_registry_fixture", "$taskRemote/native_mod_registry_fixture")
     foreach ($taskCase in @(
         @{name='kernel-fixture'; command='kernel_fixture'},
         @{name='production-probe'; command="kernel_production_probe $taskRemote/libLeviLamina.so"},
         @{name='hook-fake'; command='hook_transaction_fixture'},
-        @{name='hook-owned'; command="hook_owned_device $taskRemote/libpreloader.so"}
+        @{name='hook-owned'; command="hook_owned_device $taskRemote/libpreloader.so"},
+        @{name='events'; command='event_registry_fixture'},
+        @{name='native-mods'; command='native_mod_registry_fixture'}
     )) {
         Invoke-FixtureCommand $taskCase.name $Adb @('-s', $DeviceSerial, 'shell',
             "LD_LIBRARY_PATH=$taskRemote $taskRemote/$($taskCase.command)")

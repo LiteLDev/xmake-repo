@@ -27,6 +27,17 @@ bool KernelLifecycle::enable(pl::android::ModContext const&) noexcept {
     }
     state.store(LLAndroidKernel_Enabled, std::memory_order_release);
     logger.write(LLAndroidLog_Info, "LeviLamina: Enabled");
+    if (!operations.enableChildren()) {
+        state.store(LLAndroidKernel_Disabling, std::memory_order_release);
+        operations.disable(); // one rollback; failed child callbacks are never retried
+        state.store(LLAndroidKernel_Failed, std::memory_order_release);
+        logger.write(
+            LLAndroidLog_Error,
+            operations.clean() ? "LeviLamina: Failed; child startup rolled back cleanly"
+                               : "LeviLamina: Failed; child cleanup retained resources"
+        );
+        return false;
+    }
     return true;
 }
 
@@ -59,6 +70,7 @@ bool KernelLifecycle::unload(pl::android::ModContext const&) noexcept {
     if (current == LLAndroidKernel_Unloaded) return true;
     if ((current != LLAndroidKernel_Loaded && current != LLAndroidKernel_Failed) || !operations.clean()) return false;
     logger.write(LLAndroidLog_Info, "LeviLamina: Unloaded");
+    operations.reset();
     context.reset();
     state.store(LLAndroidKernel_Unloaded, std::memory_order_release);
     return true;

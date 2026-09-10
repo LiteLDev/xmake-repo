@@ -1,4 +1,5 @@
-#include "ll/core/memory/HookTransaction.h"
+#include "ll/core/memory/RuntimeSymbols.h"
+#include "pl/Hook.h"
 
 #include <bit>
 #include <cstdio>
@@ -19,12 +20,10 @@ public:
 
 namespace {
 using namespace ll::android;
-HookTransaction* transaction{};
-bool             inOwnedCall{};
-int              actorAfter{}, clientAfter{};
-struct Scope final : HookQuiescence {
-    bool held() const noexcept override { return !inOwnedCall; }
-} scope;
+void* actorOrigin{};
+void* clientOrigin{};
+bool  inOwnedCall{};
+int   actorAfter{}, clientAfter{};
 
 // There is one thread, no callbacks/threads retain these private entries, and
 // call sites set inOwnedCall around the complete synchronous call. Installation
@@ -32,13 +31,13 @@ struct Scope final : HookQuiescence {
 __attribute__((noinline)) void         actorTarget(Actor* actor) { ++actor->calls; }
 __attribute__((noinline)) LocalPlayer* clientTarget(ClientInstance const* client) { return client->value; }
 void                                   actorDetour(Actor* actor) {
-    auto origin = transaction->actorOrigin();
+    auto origin = std::bit_cast<ActorNormalTick>(actorOrigin);
     if (!origin) std::abort();
     origin(actor);
     ++actorAfter;
 }
 LocalPlayer* clientDetour(ClientInstance const* client) {
-    auto origin = transaction->clientOrigin();
+    auto origin = std::bit_cast<ClientLocalPlayer>(clientOrigin);
     if (!origin) std::abort();
     auto result = origin(client);
     ++clientAfter;
@@ -64,14 +63,20 @@ int main(int argc, char** argv) {
     auto hook   = reinterpret_cast<decltype(&pl::pl_hook)>(dlsym(provider, "pl_hook"));
     auto unhook = reinterpret_cast<decltype(&pl::pl_unhook)>(dlsym(provider, "pl_unhook"));
     REQUIRE(hook && unhook);
-    HookTransaction value(hook, unhook);
-    transaction = &value;
     Actor          actor;
     LocalPlayer    player;
     ClientInstance client{&player};
     ActorNormalTick volatile actorEntry    = actorTarget;
     ClientLocalPlayer volatile clientEntry = clientTarget;
-    REQUIRE(value.install({actorTarget, clientTarget}, {actorDetour, clientDetour}, scope));
+    REQUIRE(!inOwnedCall);
+    REQUIRE(
+        hook(std::bit_cast<void*>(&actorTarget), std::bit_cast<void*>(&actorDetour), &actorOrigin, pl::PriorityNormal)
+        == 0
+    );
+    REQUIRE(
+        hook(std::bit_cast<void*>(&clientTarget), std::bit_cast<void*>(&clientDetour), &clientOrigin, pl::PriorityNormal)
+        == 0
+    );
     inOwnedCall = true;
     actorEntry(&actor);
     REQUIRE(clientEntry(&client) == &player);
@@ -79,8 +84,10 @@ int main(int argc, char** argv) {
     REQUIRE(clientEntry(&client) == nullptr);
     inOwnedCall = false;
     REQUIRE(actor.calls == 1 && actorAfter == 1 && clientAfter == 2);
-    REQUIRE(value.remove(scope) && value.clean());
-    REQUIRE(!value.actorOrigin() && !value.clientOrigin());
+    REQUIRE(!inOwnedCall);
+    REQUIRE(unhook(std::bit_cast<void*>(&clientTarget), std::bit_cast<void*>(&clientDetour)));
+    REQUIRE(unhook(std::bit_cast<void*>(&actorTarget), std::bit_cast<void*>(&actorDetour)));
+    REQUIRE(!actorOrigin && !clientOrigin);
     inOwnedCall = true;
     actorEntry(&actor);
     REQUIRE(clientEntry(&client) == nullptr);
@@ -88,7 +95,8 @@ int main(int argc, char** argv) {
     REQUIRE(actor.calls == 2 && actorAfter == 1 && clientAfter == 2);
     REQUIRE(dlclose(provider) == 0);
     std::printf(
-        "G4 owned AArch64 functions passed (PID %d): real PL hooks, typed origins, null return, reverse removal; no "
+        "Legacy API owned AArch64 functions passed (PID %d): real PL hooks, typed origins, null return, reverse "
+        "removal; no "
         "Minecraft\n",
         getpid()
     );

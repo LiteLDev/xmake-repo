@@ -12,7 +12,13 @@ param(
     [Parameter(Mandatory)][string]$Provider,
     [Parameter(Mandatory)][string]$TargetElf,
     [Parameter(Mandatory)][string]$Ndk,
-    [string]$Xmake = 'xmake'
+    [string]$Xmake = 'xmake',
+    [string]$PackageRoot,
+    [switch]$RunFixtures,
+    [string]$DeviceSerial,
+    [string]$FmtLibrary,
+    [string]$FmtSha256,
+    [string]$Adb = 'adb'
 )
 $ErrorActionPreference = 'Stop'
 $env:XMAKE_STATS = 'false'
@@ -27,8 +33,9 @@ $taskResults = [Collections.Generic.List[object]]::new()
 
 function Get-SourceIdentity {
     $taskNames = @('xmake.lua', 'config/android-kernel-inputs.lock.json',
-        'scripts/Validate-AndroidKernel.ps1', 'scripts/android_kernel_inputs.py', 'scripts/android_kernel_binary.py')
-    $taskNames += @(Get-ChildItem -LiteralPath (Join-Path $taskRepo 'scripts/xmake'), (Join-Path $taskRepo 'src-android/ll') -File -Recurse |
+        'scripts/Validate-AndroidKernel.ps1', 'scripts/android_kernel_inputs.py', 'scripts/android_kernel_binary.py', 'scripts/android_kernel_link.py',
+        'scripts/package_android_kernel.py')
+    $taskNames += @(Get-ChildItem -LiteralPath (Join-Path $taskRepo 'scripts/xmake'), (Join-Path $taskRepo 'xmake/rules'), (Join-Path $taskRepo 'src-android/ll'), (Join-Path $taskRepo 'examples/android-minimal-mod') -File -Recurse |
         ForEach-Object { [IO.Path]::GetRelativePath($taskRepo, $_.FullName).Replace('\', '/') })
     $taskHashes = [ordered]@{}
     foreach ($taskName in $taskNames | Sort-Object) {
@@ -65,15 +72,27 @@ function Invoke-Phase([string]$Name, [string[]]$Arguments) {
 Push-Location -LiteralPath $taskRepo
 try {
     Invoke-Phase 'configure' @(
-        'f', '-c', '-p', 'android', '-a', 'arm64-v8a', '-m', $Mode, '-y',
+        'f', '-P', $taskRepo, '-c', '-p', 'android', '-a', 'arm64-v8a', '-m', $Mode, '-y',
         "--ndk=$Ndk", '--ndk_sdkver=28', '--runtimes=c++_shared',
         "--android_header_root=$HeaderRoot", "--android_dependency_lock=$DependencyLock",
         "--preloader_android_root=$PreloaderRoot", "--android_prelink_executable=$Prelink",
         "--android_runtime_manifest=$RuntimeManifest", "--android_bmb=$Bmb",
         "--android_provider_elf=$Provider", "--android_target_elf=$TargetElf", '-o', $taskBuild
     )
-    Invoke-Phase 'build' @('build', '-vD', '-j', '2', 'LeviLaminaAndroidKernel')
-    $taskElfReport = Get-Content -Raw -LiteralPath (Join-Path $taskBuild 'android-kernel/elf.json') | ConvertFrom-Json
-    if (-not $taskElfReport.passed -or $taskElfReport.G6_complete) { throw 'Unexpected kernel ELF validation state.' }
-    Write-Output 'Kernel compilation and ELF checks passed. Runtime fixtures remain separate; G6 is not complete.'
+    Invoke-Phase 'build' @('build', '-P', $taskRepo, '-vD', '-j', '2', 'LeviLaminaP6Example')
+    foreach ($taskRole in @('kernel', 'example')) {
+        $taskElfReport = Get-Content -Raw -LiteralPath (Join-Path $taskBuild "android-kernel/$taskRole/elf.json") | ConvertFrom-Json
+        if (-not $taskElfReport.passed -or -not $taskElfReport.G6_complete) { throw 'Formal link/ELF gate is incomplete.' }
+    }
+    Write-Output 'Both targets consumed P5 artifacts and passed ELF/strip verification; device/determinism gates remain separate.'
+    if ($RunFixtures) {
+        if (-not $FmtLibrary -or -not $FmtSha256) { throw 'Fixture execution requires the matching APK fmt and its SHA-256.' }
+        & (Join-Path $PSScriptRoot 'Validate-AndroidKernelFixtures.ps1') -EvidenceRoot (Join-Path $taskEvidence "fixtures-$Mode") `
+            -Ndk $Ndk -PreloaderRoot $PreloaderRoot -KernelElf (Join-Path $taskBuild 'android-kernel/kernel/stripped/libLeviLamina.so') `
+            -Provider $Provider -FmtLibrary $FmtLibrary -FmtSha256 $FmtSha256 -DeviceSerial $DeviceSerial -Adb $Adb
+    }
+    if ($PackageRoot) {
+        & python (Join-Path $PSScriptRoot 'package_android_kernel.py') --repository $taskRepo --evidence $taskEvidence --mode $Mode --output $PackageRoot
+        if ($LASTEXITCODE) { throw 'Package validation failed; previous index preserved.' }
+    }
 } finally { Pop-Location }
