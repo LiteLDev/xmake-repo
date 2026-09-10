@@ -20,6 +20,7 @@ bool KernelContext::initialize(pl::android::ModContext const& source) noexcept {
     text = std::move(copies);
     vm   = source.javaVm();
     context.emplace(source);
+    if (mirror.open) mirror.open({text[2].get(), lengths[2]});
     return true;
 }
 void KernelContext::reset() noexcept {
@@ -28,11 +29,13 @@ void KernelContext::reset() noexcept {
     for (auto& value : text) value.reset();
     lengths.fill(0);
     vm = nullptr;
+    if (mirror.close) mirror.close();
 }
 void KernelContext::write(int32_t priority, std::string_view message, FallbackLog fallback) noexcept {
     std::lock_guard lock(mutex);
     if (context) {
         context->log(priority, message);
+        if (mirror.write) mirror.write(priority, message);
     } else if (fallback) {
         char terminated[4097];
         if (message.size() > sizeof(terminated) - 1) return;

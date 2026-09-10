@@ -2,5 +2,7 @@
 #include <cstdint>
 
 namespace ll::android {
-void fallbackLog(int32_t priority, char const* message) noexcept;
-}
+struct LogMirror;
+LogMirror platformLogMirror() noexcept;
+void      fallbackLog(int32_t priority, char const* message) noexcept;
+} // namespace ll::android

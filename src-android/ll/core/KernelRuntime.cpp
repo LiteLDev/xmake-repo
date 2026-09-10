@@ -52,15 +52,18 @@ public:
             logger.write(LLAndroidLog_Error, "LeviLamina: event drain timed out; resources retained");
             return false;
         }
-        bool children   = mods.shutdown();
-        bool detached   = hooks.remove();
-        auto eventState = events.stats();
-        char text[384];
-        int  size = std::snprintf(
+        bool                 children = mods.shutdown();
+        bool                 detached = hooks.remove();
+        PLGuardedHookStateV1 guarded{sizeof(guarded), 1, 0, 0, 0, 0, 0};
+        auto                 api        = pl_get_guarded_hook_api_v1();
+        bool                 queried    = api && api->query(0, &guarded) == PLGuardedHook_Ok;
+        auto                 eventState = events.stats();
+        char                 text[384];
+        int                  size = std::snprintf(
             text,
             sizeof(text),
             "LeviLamina: final actor=%llu client=%llu nonNullPlayer=%llu childHandles=%zu listeners=%zu callbacks=%zu "
-             "snapshots=%zu; guarded retirement=%s",
+                             "snapshots=%zu; guarded retirement=%s",
             static_cast<unsigned long long>(actorCalls.load()),
             static_cast<unsigned long long>(clientCalls.load()),
             static_cast<unsigned long long>(nonNullPlayers.load()),
@@ -72,7 +75,18 @@ public:
         );
         if (size > 0 && static_cast<size_t>(size) < sizeof(text))
             logger.write(LLAndroidLog_Info, text, static_cast<size_t>(size));
-        return children && detached && events.clean();
+        size = std::snprintf(
+            text,
+            sizeof(text),
+            "LeviLamina: PL guarded summary query=%s bindings=%llu inFlight=%llu resident=%llu",
+            queried ? "ok" : "failed",
+            static_cast<unsigned long long>(guarded.ownerBindings),
+            static_cast<unsigned long long>(guarded.inFlight),
+            static_cast<unsigned long long>(guarded.residentGateways)
+        );
+        if (size > 0 && static_cast<size_t>(size) < sizeof(text))
+            logger.write(LLAndroidLog_Info, text, static_cast<size_t>(size));
+        return children && detached && events.clean() && queried && !guarded.ownerBindings && !guarded.inFlight;
     }
     bool     clean() const noexcept override { return hooks.clean() && events.clean() && mods.clean(); }
     bool     inCallback() const noexcept override { return hookDepth != 0 || currentOwner().callbackToken != 0; }
@@ -88,7 +102,7 @@ public:
     std::atomic<uint64_t> actorCalls{}, clientCalls{}, nonNullPlayers{};
 };
 struct Runtime {
-    KernelContext   context;
+    KernelContext   context{platformLogMirror()};
     KernelLogger    logger{context, fallbackLog};
     AndroidRuntime  operations{context, logger};
     KernelLifecycle lifecycle{context, logger, operations};

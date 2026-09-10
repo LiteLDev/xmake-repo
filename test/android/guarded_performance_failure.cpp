@@ -11,7 +11,7 @@ PLGuardedHookApiV1 const api{sizeof(api),1,install,retire,query};
 extern "C" PLGuardedHookApiV1 const* pl_get_guarded_hook_api_v1() noexcept {return &api;}
 int main() {
     auto* registration=PLGetModRegistration();
-    PLAndroidModContextV1 context{sizeof(context),1,nullptr,"owned-failure","/owned","/owned/data","/owned/config","/owned/resources",nullptr};
+    PLAndroidModContextV1 context{sizeof(context),1,nullptr,"owned-failure","/owned","/data/local/tmp","/owned/config","/owned/resources",nullptr};
     if(!registration->load(registration->instance,&context))return 1;
     if(registration->enable(registration->instance,&context))return 1;
     if(!registration->unload(registration->instance,&context) || installs!=1 || retires!=0)return 1;

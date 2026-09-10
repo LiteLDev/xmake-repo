@@ -9,9 +9,15 @@
 
 namespace ll::android {
 using FallbackLog = void (*)(int32_t priority, char const* message) noexcept;
+struct LogMirror {
+    void (*open)(std::string_view dataPath) noexcept {};
+    void (*write)(int32_t priority, std::string_view message) noexcept {};
+    void (*close)() noexcept {};
+};
 
 class KernelContext {
 public:
+    explicit KernelContext(LogMirror mirror = {}) noexcept : mirror(mirror) {}
     // PL owns the referenced C context until safe unload. Copy its C++ wrapper;
     // never retain the address of the temporary wrapper passed into load.
     bool initialize(pl::android::ModContext const& source) noexcept;
@@ -30,5 +36,6 @@ private:
     std::array<std::unique_ptr<char[]>, 5> text;
     std::array<size_t, 5>                  lengths{};
     std::optional<pl::android::ModContext> context;
+    LogMirror                              mirror;
 };
 } // namespace ll::android

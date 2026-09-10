@@ -226,6 +226,32 @@ bool childFailureTests() {
     return true;
 }
 
+int         mirrorOpened{}, mirrorWritten{}, mirrorClosed{};
+std::string mirroredData, mirroredMessage;
+void        mirrorOpen(std::string_view path) noexcept {
+    ++mirrorOpened;
+    mirroredData = path;
+}
+void mirrorWrite(int32_t, std::string_view text) noexcept {
+    ++mirrorWritten;
+    mirroredMessage = text;
+}
+void mirrorClose() noexcept { ++mirrorClosed; }
+bool mirrorTests() {
+    ll::android::KernelContext local({mirrorOpen, mirrorWrite, mirrorClose});
+    ll::android::KernelLogger  output(local, fallback);
+    auto                       before = capture.plCalls;
+    CHECK(local.initialize(pl::android::ModContext(raw)));
+    CHECK(mirrorOpened == 1 && mirroredData == raw.dataPath);
+    output.write(LLAndroidLog_Info, "mirror preserves PL logging");
+    CHECK(capture.plCalls == before + 1 && mirrorWritten == 1 && mirroredMessage == "mirror preserves PL logging");
+    local.reset();
+    CHECK(mirrorClosed == 1 && local.view().javaVm == nullptr && local.view().identityAndPaths[0].empty());
+    output.write(LLAndroidLog_Info, "after reset");
+    CHECK(mirrorWritten == 1);
+    return true;
+}
+
 bool logTests() {
     auto* r              = PLGetModRegistration();
     auto  beforeFallback = capture.fallbackCalls;
@@ -323,7 +349,7 @@ PL_REGISTER_MOD(ll::android::KernelLifecycle, fixture::lifecycle);
 
 int main() {
     if (!fixture::lifecycleTests() || !fixture::failureTests() || !fixture::childFailureTests() || !fixture::logTests()
-        || !fixture::concurrentLogReset())
+        || !fixture::concurrentLogReset() || !fixture::mirrorTests())
         return 1;
 #if defined(__aarch64__)
     std::puts("G3 AArch64 fixture passed: ABI, lifecycle, retention, context copy, logging and synchronized reset");
