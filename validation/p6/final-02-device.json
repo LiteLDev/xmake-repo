@@ -1,0 +1,37 @@
+{
+  "round": 2,
+  "pid": 29991,
+  "source_log_sha256": "ec73639dd828dc3ed33d3e1ab07efd538816ab786eef16edd9c6dec9b520bf77",
+  "lines": [
+    "1789034712.462325964 pid=29991 priority=4 LeviLamina: Loaded",
+    "1789034712.484076589 pid=29991 priority=4 LeviLamina: ActorNormalTick/ClientLocalPlayer guarded bindings ready",
+    "1789034712.484096849 pid=29991 priority=4 LeviLamina: Enabled",
+    "1789034712.502209662 pid=29991 priority=4 LeviLaminaP6Example: load",
+    "1789034712.502223464 pid=29991 priority=4 LeviLamina Mod LeviLaminaP6Example: load ok",
+    "1789034712.502234505 pid=29991 priority=4 LeviLamina Mod LeviLaminaP6Example: enable ok",
+    "1789034725.875386115 pid=29991 priority=4 LeviLaminaP6Example: first ActorNormalTickAfter",
+    "1789034725.972491896 pid=29991 priority=4 LeviLaminaP6Example: first non-null ClientInstanceLocalPlayerAfter",
+    "1789036601.983799514 pid=29991 priority=4 LeviLaminaP6Example: final actor=10037 client=1747326 nonNullPlayer=1729592",
+    "1789036601.983855139 pid=29991 priority=4 LeviLamina Mod LeviLaminaP6Example: disable ok",
+    "1789036601.983867483 pid=29991 priority=4 LeviLamina Mod LeviLaminaP6Example: unload ok",
+    "1789036601.985171858 pid=29991 priority=4 LeviLamina Mod LeviLaminaP6Example: dlclose ok",
+    "1789036601.985217743 pid=29991 priority=4 LeviLamina: final actor=10037 client=1747330 nonNullPlayer=1729592 childHandles=0 listeners=0 callbacks=0 snapshots=0; guarded retirement=ok",
+    "1789036601.985229826 pid=29991 priority=4 LeviLamina: PL guarded summary query=ok bindings=0 inFlight=0 resident=2",
+    "1789036601.985240399 pid=29991 priority=4 LeviLamina: Loaded; disabled",
+    "1789036601.985252014 pid=29991 priority=4 LeviLamina: Unloaded",
+    "1789036601.985265399 pid=29991 priority=4 LeviLamina: context cleared"
+  ],
+  "result": {
+    "label": "final-02",
+    "pid": 29991,
+    "kernel_enabled": true,
+    "profiled": false,
+    "normal_close": true,
+    "passed": true,
+    "background_resume_observed": true,
+    "rss": [],
+    "matched_rss_excluded_reason": "foreground interruption after measurement; in-memory samples were not retained",
+    "final_log_sha256": "549b621309045ddd57ed3e095afb95e71c5d9e853b1f928edeadd66db75874b0",
+    "recorded_at": "2026-09-10T18:36:45.143159+08:00"
+  }
+}

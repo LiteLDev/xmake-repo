@@ -1,0 +1,41 @@
+{
+  "pid": 15777,
+  "warmup": 10000,
+  "rounds": 5,
+  "iterations_per_round": 100000,
+  "original_calls": 2040000,
+  "listener_calls": 510000,
+  "net_mean_microseconds": {
+    "active-zero": 0.093653,
+    "active-one": 0.246731,
+    "retired-forward": 0.072247
+  },
+  "bindings_after_retirement": 0,
+  "in_flight_after_retirement": 0,
+  "resident_gateways": 1,
+  "cleanup": true,
+  "target": "Fixture-owned fixed function only; actual packaged provider and public guarded API.",
+  "source_log_sha256": "276c64cb45fe0b9364169ffa01a668a240e3d3bac110fd556d3091cb0b6627f5",
+  "lines": [
+    "P6GuardedPerf: active-zero round=1 baseline_us=0.013459 total_us=0.106834 net_us=0.093375",
+    "P6GuardedPerf: active-zero round=2 baseline_us=0.013125 total_us=0.107025 net_us=0.093900",
+    "P6GuardedPerf: active-zero round=3 baseline_us=0.013125 total_us=0.106529 net_us=0.093404",
+    "P6GuardedPerf: active-zero round=4 baseline_us=0.013259 total_us=0.107064 net_us=0.093805",
+    "P6GuardedPerf: active-zero round=5 baseline_us=0.013123 total_us=0.106905 net_us=0.093782",
+    "P6GuardedPerf: active-zero net_mean_us=0.093653",
+    "P6GuardedPerf: active-one round=1 baseline_us=0.013459 total_us=0.257806 net_us=0.244347",
+    "P6GuardedPerf: active-one round=2 baseline_us=0.013125 total_us=0.258937 net_us=0.245812",
+    "P6GuardedPerf: active-one round=3 baseline_us=0.013125 total_us=0.262239 net_us=0.249114",
+    "P6GuardedPerf: active-one round=4 baseline_us=0.013259 total_us=0.260961 net_us=0.247702",
+    "P6GuardedPerf: active-one round=5 baseline_us=0.013123 total_us=0.259804 net_us=0.246681",
+    "P6GuardedPerf: active-one net_mean_us=0.246731",
+    "P6GuardedPerf: retired-forward round=1 baseline_us=0.013459 total_us=0.076427 net_us=0.062967",
+    "P6GuardedPerf: retired-forward round=2 baseline_us=0.013125 total_us=0.087111 net_us=0.073986",
+    "P6GuardedPerf: retired-forward round=3 baseline_us=0.013125 total_us=0.087063 net_us=0.073938",
+    "P6GuardedPerf: retired-forward round=4 baseline_us=0.013259 total_us=0.088816 net_us=0.075557",
+    "P6GuardedPerf: retired-forward round=5 baseline_us=0.013123 total_us=0.087908 net_us=0.074785",
+    "P6GuardedPerf: retired-forward net_mean_us=0.072247",
+    "P6GuardedPerf: complete actual APK provider gateway; owned target; 2040000 original calls; bindings=0 inFlight=0 resident=1",
+    "P6GuardedPerf: cleanup=true"
+  ]
+}

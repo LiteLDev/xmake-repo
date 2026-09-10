@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "recorded_at": "2026-09-10T15:12:08.021517+08:00",
-  "implementation_commit": "3368645613a61363390ad96c700ef0ad61a3a257",
+  "recorded_at": "2026-09-10T19:15:36.948589+08:00",
+  "implementation_commit": "372239650c93856e76cb0acd555ebdc0a42d4248",
   "implementation_parent": "3d7df647db7fa5d11e94508922d2c186c1a7b619",
   "src_ll_tree": "34da55c4bbbfeaca8b388407155f2f25dbdf71a1",
   "component_commits": {
@@ -57,16 +57,16 @@
     "certificate_sha256": "cf749824b0f1afb003a9a101eaa50b909f9cff5234a9ca1531651300293031e4"
   },
   "release_packages": {
-    "device_acceptance": "separate evidence required",
-    "generation": "0277aaef134e0338aaae0b7c1ad7b8b6fe19e94251f9876d1c289dcf4f5c927c",
+    "device_acceptance": "passed: ten complete cycles on this kernel and example",
+    "generation": "0698ccbdf2e9d23fe572c811a42996e11bcbd42234ceec02f9b295f47d28af21",
     "input_lock_sha256": "FCF1F5334126311DB9C670DDC84508D555AFF233FCD87CDABB4F801108AAE0B2",
     "mode": "release",
     "packages": [
       {
         "archive": "LeviLamina.zip",
-        "elf_sha256": "9E6FBDEF44293C134D1EDC8671A1D0E917463C7E1686D560AA60091844DA19AA",
+        "elf_sha256": "CB59AE2897C18F5959FF3C136C2B66EDE83928155DEF0E66E648E1DD11D30103",
         "name": "LeviLamina",
-        "sha256": "96CBAEB3C4A1DFAE3E79349C21779EDFBD5B0788B2C2FBFCE41C6AE32D6F074F"
+        "sha256": "E9778E81B146D77B808138E06F1D5A8A5974F8E867B9D65BB9343C3DE7BD9776"
       },
       {
         "archive": "LeviLaminaP6Example.zip",
@@ -80,15 +80,15 @@
   },
   "debug_packages": {
     "device_acceptance": "separate evidence required",
-    "generation": "7b4340907f912af18decaa1be75cdd1d76b77c851848c46f829b9674bcfb0519",
+    "generation": "fac076c62c102a8456ed82c5029bd104be291f108c9d68ba4c7928d1cbc74f52",
     "input_lock_sha256": "FCF1F5334126311DB9C670DDC84508D555AFF233FCD87CDABB4F801108AAE0B2",
     "mode": "debug",
     "packages": [
       {
         "archive": "LeviLamina.zip",
-        "elf_sha256": "1978703E7EFDF27E46E4979DC222AC22213FDE694908C055D39B67DDC5D041D6",
+        "elf_sha256": "36295D51B458F1EBF22C6037FA3BB77BA8BBD4D5640C0972D976D248FE8CE31D",
         "name": "LeviLamina",
-        "sha256": "88117C5440020559E7552A56B352F0B7984660A10918D0B941A4F2EDA32591E1"
+        "sha256": "4E003EF1FD1743754188EE9C0EBED2CABB1D702A568397B3A58E9FFC115609DD"
       },
       {
         "archive": "LeviLaminaP6Example.zip",
@@ -106,8 +106,8 @@
       "function_imports": 0,
       "stripped": {
         "android_api": 28,
-        "bytes": 92312,
-        "elf_sha256": "9E6FBDEF44293C134D1EDC8671A1D0E917463C7E1686D560AA60091844DA19AA",
+        "bytes": 94016,
+        "elf_sha256": "CB59AE2897C18F5959FF3C136C2B66EDE83928155DEF0E66E648E1DD11D30103",
         "exports": [
           "LLAndroidKernel_GetApiVersion",
           "LLAndroidKernel_GetState",
@@ -126,20 +126,20 @@
           {
             "alignment": 16384,
             "flags": 5,
-            "offset": 31952,
-            "vaddr": 48336
+            "offset": 32640,
+            "vaddr": 49024
           },
           {
             "alignment": 16384,
             "flags": 6,
-            "offset": 88624,
-            "vaddr": 121392
+            "offset": 90288,
+            "vaddr": 123056
           },
           {
             "alignment": 16384,
             "flags": 6,
-            "offset": 90280,
-            "vaddr": 139432
+            "offset": 91976,
+            "vaddr": 141128
           }
         ],
         "machine": "AArch64",
@@ -155,8 +155,8 @@
       },
       "unstripped": {
         "android_api": 28,
-        "bytes": 1572232,
-        "elf_sha256": "EBDB20EE85C268865FC937D2C91A1474FBAE5A901ADBE9B4A9408F8EA5FF036C",
+        "bytes": 1599568,
+        "elf_sha256": "D342298961796F394783CCB601CD7AEF4CE742AB8C081E4ACEFD14D896E652DE",
         "exports": [
           "LLAndroidKernel_GetApiVersion",
           "LLAndroidKernel_GetState",
@@ -175,20 +175,20 @@
           {
             "alignment": 16384,
             "flags": 5,
-            "offset": 31952,
-            "vaddr": 48336
+            "offset": 32640,
+            "vaddr": 49024
           },
           {
             "alignment": 16384,
             "flags": 6,
-            "offset": 88624,
-            "vaddr": 121392
+            "offset": 90288,
+            "vaddr": 123056
           },
           {
             "alignment": 16384,
             "flags": 6,
-            "offset": 90280,
-            "vaddr": 139432
+            "offset": 91976,
+            "vaddr": 141128
           }
         ],
         "machine": "AArch64",
@@ -203,7 +203,7 @@
         "soname": "libLeviLamina.so"
       },
       "p5_artifacts": {
-        "bedrock_runtime_imports.json": "7660610586AF385FA0DDB31E6E1BC5D9626A50E274661C3AA48578726DD07125",
+        "bedrock_runtime_imports.json": "1CD66D452714E6451464D9E9819E848B5D1D953ADA4C40D270780DFD17D050F5",
         "bedrock_runtime_link.rsp": "CB05FA5F10ADA9BACEFF2EBEB835C99667B8F357945D1EC76E70F4346038BD70",
         "bedrock_runtime_thunks.S": "888330A4FE6C9C98BD5F3931EA66D7041CA41F72DA9389193CBFD075BDF4C8B5",
         "bedrock_runtime_thunks.o": "338785A4C70DD6CAD4B41B27494C38D986D3D892DBD3299E968C6D32FDB3BC12",
@@ -342,28 +342,18 @@
         "reason": "injected index switch failure"
       }
     },
-    "evidence": {
-      "local_path": "C:\\llp6-0909\\guarded\\delivery-artifacts\\results.json",
-      "sha256": "98a9e4fc63ebe456ddb85984ba70b65b77531285e7c0166fd574faa082dde16a",
-      "bytes": 10253
-    }
+    "evidence_sha256": "a3720c40e7a399561d0c6129bc3b513c2d8dfe7e4fd3b0dd12a68fda2c50586b"
   },
   "python_tests": {
     "passed": 51,
     "failed": 0,
-    "evidence": {
-      "local_path": "C:\\llp6-0909\\guarded\\closeout-python.log",
-      "sha256": "49f98b8d487430fc33aebd76180a164e08668873b8f4b3920631c6924179fa3e",
-      "bytes": 7895
-    }
+    "evidence_sha256": "6e50556587b5c93344ece2d7db5e1190e1ab8b7e04ef8f6e70c7d3dd1aa5a36e"
   },
   "aarch64_fixtures": {
     "passed": true,
-    "evidence": {
-      "local_path": "C:\\llp6-0909\\guarded\\child-failure-final\\fixtures-release\\fixture-results.json",
-      "sha256": "8c7f6529c25819dc841e0bbe0949db84300450d30640e46b4b2ac0fb06afe56d",
-      "bytes": 8396
-    }
+    "device_executed": true,
+    "includes_log_mirror_regression": true,
+    "evidence_sha256": "2d86c8103fe31fd9b4a7025136d2128668d97898d92a47a9f9bd38586a487a9b"
   },
   "runtime_input_negatives": {
     "passed": 15,
@@ -436,36 +426,75 @@
     }
   },
   "device": {
-    "user_reported_rounds": 5,
-    "complete_log_verified_rounds": 3,
+    "user_reported_earlier_rounds": 5,
+    "earlier_complete_log_verified_rounds": 3,
+    "final_complete_log_verified_rounds": 10,
+    "original_ten_round_gate_complete": true,
     "traces": [
       {
-        "pid": 1555,
-        "file": "device-pid-1555.json",
-        "sha256": "25a844f1887d2352d33d4b68603410b09b755943ac244391d1b8dec25f8e467e",
-        "both_events": true,
-        "children_listeners_callbacks_snapshots_bindings": 0,
-        "resident_gateways": 2
+        "round": 1,
+        "pid": 28502,
+        "file": "final-01-device.json",
+        "sha256": "9b998ae5f8c48fa85b510b8c2831b9d40e701e142c749f38ab90462d9bc75c41"
       },
       {
-        "pid": 10647,
-        "file": "device-pid-10647.json",
-        "sha256": "302e3ae09c43f8aeec36aa10009c9ea12665e65f1a6839f36fa8eaf16fb56fe7",
-        "both_events": true,
-        "children_listeners_callbacks_snapshots_bindings": 0,
-        "resident_gateways": 2
+        "round": 2,
+        "pid": 29991,
+        "file": "final-02-device.json",
+        "sha256": "721c3ea05ab500182c18c3ffeb0350f3262637fd8d1a2d6890d8a1437856c805"
       },
       {
-        "pid": 16174,
-        "file": "device-pid-16174.json",
-        "sha256": "512600261367fe096a5816240e3c0ee821c35fcd5de689c3584137bb83ae7039",
-        "both_events": true,
-        "children_listeners_callbacks_snapshots_bindings": 0,
-        "resident_gateways": 2
+        "round": 3,
+        "pid": 31491,
+        "file": "final-03-device.json",
+        "sha256": "f0457d01c0e7a28cb184c62005c73a0cbf6396b8d0111aaab732fbcd7663f472"
+      },
+      {
+        "round": 4,
+        "pid": 324,
+        "file": "final-04-device.json",
+        "sha256": "970aaece9a448ae7b1c24efdabc550d065a55219e44606b21555a1739683f805"
+      },
+      {
+        "round": 5,
+        "pid": 3859,
+        "file": "final-05-device.json",
+        "sha256": "c186f3eaabb4c2281dbf7fee7d0b470fc9cb247e8ca390183fb87f3027b9bae9"
+      },
+      {
+        "round": 6,
+        "pid": 6931,
+        "file": "final-06-device.json",
+        "sha256": "11efd14cc6aa7316373cc102172fff55395b2cd7c4f20797a1d4ef5efcf93f29"
+      },
+      {
+        "round": 7,
+        "pid": 9732,
+        "file": "final-07-device.json",
+        "sha256": "d5b7281182ec0c3d6985403462cb6eceebd8e9a7fa3d6ef7377a6abc2718dcda"
+      },
+      {
+        "round": 8,
+        "pid": 11119,
+        "file": "final-08-device.json",
+        "sha256": "aab7db1c69121e1df41bb53383216049c0f39222cf82172f0ba9d01bcd10d0dd"
+      },
+      {
+        "round": 9,
+        "pid": 12519,
+        "file": "final-09-device.json",
+        "sha256": "9374eb49fbfbc8e36afd14df8236da4dfc3eb2c165a38672444162ada598da0b"
+      },
+      {
+        "round": 10,
+        "pid": 14101,
+        "file": "final-10-device.json",
+        "sha256": "d9374a33f9745b8c9f0bd7c26c8153ad4ee6154ba157bba3cb1c552b99169e24"
       }
     ],
-    "no_further_phone_repetition_requested": true,
-    "original_ten_round_gate_complete": false
+    "background_resume_round": 2,
+    "normal_close_all": true,
+    "crash_matches": 0
   },
   "event_performance": {
     "warmup": 10000,
@@ -483,56 +512,16 @@
     }
   },
   "rss_observations": {
-    "controlled_game_comparison_complete": false,
-    "per_pid": {
-      "10647": {
-        "samples": 84,
-        "first_sample": "2026-09-10T13:47:53.568781+08:00",
-        "last_sample": "2026-09-10T13:51:19.610493+08:00",
-        "min_rss_kib": 269332,
-        "max_rss_kib": 1450624
-      },
-      "16174": {
-        "samples": 160,
-        "first_sample": "2026-09-10T13:51:23.545115+08:00",
-        "last_sample": "2026-09-10T13:57:54.991453+08:00",
-        "min_rss_kib": 171176,
-        "max_rss_kib": 1407956
-      },
-      "20570": {
-        "samples": 18,
-        "first_sample": "2026-09-10T13:57:58.899188+08:00",
-        "last_sample": "2026-09-10T13:58:40.200122+08:00",
-        "min_rss_kib": 275932,
-        "max_rss_kib": 1494364
-      },
-      "21382": {
-        "samples": 15,
-        "first_sample": "2026-09-10T13:58:43.105667+08:00",
-        "last_sample": "2026-09-10T13:59:17.344768+08:00",
-        "min_rss_kib": 278956,
-        "max_rss_kib": 1448096
-      },
-      "22315": {
-        "samples": 19,
-        "first_sample": "2026-09-10T13:59:20.284559+08:00",
-        "last_sample": "2026-09-10T14:00:03.928970+08:00",
-        "min_rss_kib": 279368,
-        "max_rss_kib": 1517804
-      },
-      "23628": {
-        "samples": 33,
-        "first_sample": "2026-09-10T14:00:06.849879+08:00",
-        "last_sample": "2026-09-10T14:01:24.642944+08:00",
-        "min_rss_kib": 263836,
-        "max_rss_kib": 280540
-      }
+    "controlled_game_comparison_complete": true,
+    "report": "g8-rounds.json",
+    "control_stable_mean_kib": 1451564,
+    "treatment_stable_mean_kib": 1446171.5,
+    "observed_mean_delta_kib": -5392.5,
+    "excluded_rounds": {
+      "2": "background interruption; no matched RSS samples",
+      "10": "passive sampler enabled"
     },
-    "evidence": {
-      "local_path": "C:\\llp6-0909\\guarded\\rounds-20260910\\rss.jsonl",
-      "sha256": "a344f5ba6eb3873a476ceb3755fc1494a956814e432647c4583ca3eab0fa75ac",
-      "bytes": 54736
-    }
+    "claim": "Observed process RSS comparison; game variation is not attributed solely to the kernel and does not prove absence of all leaks."
   },
   "remote_snapshot": {
     "upstream_main": "d1fefe8d71b960a82c812380d91cccebbae63d16",
@@ -540,12 +529,8 @@
     "header_fork_main": "6d5f02513384b051436fa0a26902894d10f6205a",
     "new_header_consumed": false
   },
-  "P6_complete": false,
-  "outstanding": [
-    "Original G8 ten-round requirement: user reports five, complete logs cover three.",
-    "Successful full guarded Hook performance measurement remains outstanding; failed performance fixture is not acceptance evidence.",
-    "Matched game RSS control remains outstanding."
-  ],
+  "P6_complete": true,
+  "outstanding": [],
   "P5R_private_CI": "deferred_unverified",
   "ancestry_verified": [
     "M",
@@ -559,5 +544,22 @@
     "previous_checkpoint_head": "6edbf69e8a54294303f879c0ebc896d329c98626",
     "clean": true,
     "used_as_build_input": false
-  }
+  },
+  "previous_checkpoint": "82d8680602f2413c50c496e767a6f4b035a97e2f",
+  "full_guarded_hook_performance": {
+    "passed": true,
+    "report": "g8-owned-hook-performance.json"
+  },
+  "real_actor_passive_sampling": {
+    "passed": true,
+    "report": "g8-profile.json"
+  },
+  "actual_mapped_target": {
+    "build_id": "5893edc8d56c93cbdb50e0f9436320236b78c89d",
+    "text_sha256": "f17aa60a840a88fc1212abfa92e362fec86b871126f30ae03000de8d90f3b0aa",
+    "file_sha256": "c0905067e6ce28160d27ce8529d50950b9c3b3e3cad9d8b25e16776b81fe97c7",
+    "bytes": 313870688,
+    "device_path": "/data/data/org.levimc.launcher/files/minecraft_libs/com.mojang.minecraftpe/arm64/libminecraftpe.so"
+  },
+  "log_transport": "PL ModContext.log remains active; a synchronized local transcript survives system log loss and records public PL resource query and final context reset."
 }

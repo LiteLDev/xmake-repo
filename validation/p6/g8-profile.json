@@ -1,0 +1,28 @@
+{
+  "record_command": "/data/user/0/org.levimc.launcher/simpleperf record --app org.levimc.launcher --add-meta-info app_type=debuggable --in-app --tracepoint-events /data/local/tmp/tracepoint_events --out-fd 3 --stop-signal-fd 4 -e cpu-clock:u -f 499 --call-graph fp --duration 20",
+  "architecture": "aarch64",
+  "samples": 18815,
+  "lost_samples": 0,
+  "actor_path_samples": 21,
+  "kernel_path_samples": 78,
+  "relevant_frame_counts": {
+    "ll::android::(anonymous namespace)::clientDetour(ClientInstance const*)": 55,
+    "pl_guarded_entry_pointer_const_pointer": 73,
+    "ll::android::EventRegistry::publish(unsigned int, void const*)": 39,
+    "ll::android::(anonymous namespace)::actorDetour(Actor*)": 21,
+    "pl_guarded_entry_void_pointer": 22,
+    "Actor::normalTick()": 2,
+    "pl_guarded_acquire": 1,
+    "pl::android::detail::GuardedHookRegistry::release(void*)": 2
+  },
+  "sample_frequency_hz": 499,
+  "requested_duration_seconds": 20,
+  "observed_duration_seconds": 19.8678,
+  "recorder_wall_seconds": 21.39,
+  "recorder_user_cpu_seconds": 0.78,
+  "recorder_system_cpu_seconds": 0.54,
+  "record_sha256": "96c2efcb537d32246b01dcb85c5ebacb3b83e3c83fcb5bfbed5f6aedac62de36",
+  "tool_sha256": "7eb29ecba8ae792397bd8c1b0fcd874fed0dc4c44d0cf9cb284e948f80cfe7e5",
+  "method": "Supported non-root simpleperf sampling of the existing debuggable application; no private MC calls or binary modifications.",
+  "interpretation": "Sample counts describe observed CPU paths, not per-call latency. Recorder CPU includes post-processing and does not isolate every kernel interrupt cost."
+}

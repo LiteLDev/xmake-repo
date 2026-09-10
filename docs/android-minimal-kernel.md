@@ -14,4 +14,4 @@ Shutdown closes publication and drains snapshots/callbacks, disables and unloads
 
 The public-libdl, malformed-loader and performance Mods under `test/android` are fixtures, not package contents. A fixture that manages guarded targets must run separately from LL because the provider permits only one binding per supported call shape. The running Launcher's enabled list is authoritative; editing its configuration file externally does not refresh its in-memory selection.
 
-Current validation evidence is tracked separately from implementation. Real cold loading, both events and clean retirement have been observed, and host/AArch64 failure tests are available. Completion of P6 still requires the final binary's full device rounds, performance/RSS evidence, Windows increment checks and remote synchronization. P5R private CI remains deferred.
+P6 validation is complete; see [the final acceptance record](android-p6-validation.md). The full shared src/ll compatibility port remains a later phase. Per-process lifecycle transcripts are mirrored into the kernel data directory while the original PL logging route remains active. P5R private CI remains deferred.

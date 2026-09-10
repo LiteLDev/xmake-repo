@@ -1,0 +1,255 @@
+{
+  "ten_cycles_passed": true,
+  "accepted": [
+    {
+      "round": 1,
+      "pid": 28502,
+      "actor": 14432,
+      "client": 351434,
+      "non_null_player": 333520,
+      "normal_close": true,
+      "context_cleared": true,
+      "bindings": 0,
+      "listeners": 0,
+      "callbacks": 0,
+      "child_handles": 0,
+      "resident_gateways": 2,
+      "log_sha256": "ef35a7fbaf109477f2b56ff2dd0db9e54f3e58dcac61314f04be6824a455cc80",
+      "profiled": false,
+      "rss_kib": {
+        "first": 1416444,
+        "peak": 1421268,
+        "stable_median": 1416340
+      },
+      "cpu_seconds": 40.55
+    },
+    {
+      "round": 2,
+      "pid": 29991,
+      "actor": 10037,
+      "client": 1747330,
+      "non_null_player": 1729592,
+      "normal_close": true,
+      "context_cleared": true,
+      "bindings": 0,
+      "listeners": 0,
+      "callbacks": 0,
+      "child_handles": 0,
+      "resident_gateways": 2,
+      "log_sha256": "ec73639dd828dc3ed33d3e1ab07efd538816ab786eef16edd9c6dec9b520bf77",
+      "profiled": false,
+      "background_resume_observed": true
+    },
+    {
+      "round": 3,
+      "pid": 31491,
+      "actor": 15777,
+      "client": 362724,
+      "non_null_player": 344593,
+      "normal_close": true,
+      "context_cleared": true,
+      "bindings": 0,
+      "listeners": 0,
+      "callbacks": 0,
+      "child_handles": 0,
+      "resident_gateways": 2,
+      "log_sha256": "91626265ea1ff74cf50c9087a20188f9d5c5ba767a461d8295e85f7040673567",
+      "profiled": false,
+      "rss_kib": {
+        "first": 1486328,
+        "peak": 1490232,
+        "stable_median": 1466572
+      },
+      "cpu_seconds": 42.8
+    },
+    {
+      "round": 4,
+      "pid": 324,
+      "actor": 14854,
+      "client": 365488,
+      "non_null_player": 347021,
+      "normal_close": true,
+      "context_cleared": true,
+      "bindings": 0,
+      "listeners": 0,
+      "callbacks": 0,
+      "child_handles": 0,
+      "resident_gateways": 2,
+      "log_sha256": "16c1cb516d14e11cb6fa06baa8b2da4268e8eaa3228064b22b86473e40f63041",
+      "profiled": false,
+      "rss_kib": {
+        "first": 1483700,
+        "peak": 1488776,
+        "stable_median": 1464156
+      },
+      "cpu_seconds": 43.46
+    },
+    {
+      "round": 5,
+      "pid": 3859,
+      "actor": 14248,
+      "client": 370108,
+      "non_null_player": 352421,
+      "normal_close": true,
+      "context_cleared": true,
+      "bindings": 0,
+      "listeners": 0,
+      "callbacks": 0,
+      "child_handles": 0,
+      "resident_gateways": 2,
+      "log_sha256": "f016e66109c404d6704728bc913b31fc53f1d1c70193c9f9e219fe49f0b5fa23",
+      "profiled": false,
+      "rss_kib": {
+        "first": 1456388,
+        "peak": 1456388,
+        "stable_median": 1442432
+      },
+      "cpu_seconds": 40.04
+    },
+    {
+      "round": 6,
+      "pid": 6931,
+      "actor": 13647,
+      "client": 358537,
+      "non_null_player": 341099,
+      "normal_close": true,
+      "context_cleared": true,
+      "bindings": 0,
+      "listeners": 0,
+      "callbacks": 0,
+      "child_handles": 0,
+      "resident_gateways": 2,
+      "log_sha256": "b08ed59589649e4b5e3cc3b16bf7c9e687ed53477bbe1c2414d3ee8bdccab449",
+      "profiled": false,
+      "rss_kib": {
+        "first": 1449856,
+        "peak": 1451248,
+        "stable_median": 1450744
+      },
+      "cpu_seconds": 41.69
+    },
+    {
+      "round": 7,
+      "pid": 9732,
+      "actor": 13176,
+      "client": 363146,
+      "non_null_player": 344072,
+      "normal_close": true,
+      "context_cleared": true,
+      "bindings": 0,
+      "listeners": 0,
+      "callbacks": 0,
+      "child_handles": 0,
+      "resident_gateways": 2,
+      "log_sha256": "d007034d6c72116fa8b1fdaa1126178252ca4e86d58349002f0f8489d2ffac27",
+      "profiled": false,
+      "rss_kib": {
+        "first": 1482708,
+        "peak": 1482708,
+        "stable_median": 1459532
+      },
+      "cpu_seconds": 38.86
+    },
+    {
+      "round": 8,
+      "pid": 11119,
+      "actor": 12418,
+      "client": 329781,
+      "non_null_player": 313214,
+      "normal_close": true,
+      "context_cleared": true,
+      "bindings": 0,
+      "listeners": 0,
+      "callbacks": 0,
+      "child_handles": 0,
+      "resident_gateways": 2,
+      "log_sha256": "34a4a6f3428589bb05a9d1922060adaf805f57026608c1df28f6f062121c5a04",
+      "profiled": false,
+      "rss_kib": {
+        "first": 1441172,
+        "peak": 1441172,
+        "stable_median": 1435760
+      },
+      "cpu_seconds": 40.69
+    },
+    {
+      "round": 9,
+      "pid": 12519,
+      "actor": 12091,
+      "client": 337129,
+      "non_null_player": 321621,
+      "normal_close": true,
+      "context_cleared": true,
+      "bindings": 0,
+      "listeners": 0,
+      "callbacks": 0,
+      "child_handles": 0,
+      "resident_gateways": 2,
+      "log_sha256": "9601d1f75aadb72b6f5db578c4402d333b98b4f162d22177876ba4f03f588165",
+      "profiled": false,
+      "rss_kib": {
+        "first": 1484568,
+        "peak": 1485480,
+        "stable_median": 1433836
+      },
+      "cpu_seconds": 39.71
+    },
+    {
+      "round": 10,
+      "pid": 14101,
+      "actor": 9980,
+      "client": 324486,
+      "non_null_player": 309225,
+      "normal_close": true,
+      "context_cleared": true,
+      "bindings": 0,
+      "listeners": 0,
+      "callbacks": 0,
+      "child_handles": 0,
+      "resident_gateways": 2,
+      "log_sha256": "b2fb899c6549fc118033443272737dcdfed6b69b795086e32f58b36a7e5dc977",
+      "profiled": true,
+      "rss_kib": {
+        "first": 1457976,
+        "peak": 1458372,
+        "stable_median": 1434712
+      },
+      "cpu_seconds": 38.65
+    }
+  ],
+  "rss_controls": [
+    {
+      "pid": 26394,
+      "first_rss_kib": 1482056,
+      "peak_rss_kib": 1482056,
+      "stable_rss_kib": 1455796
+    },
+    {
+      "pid": 28968,
+      "first_rss_kib": 1476248,
+      "peak_rss_kib": 1476248,
+      "stable_rss_kib": 1447332
+    }
+  ],
+  "rss_matched_rounds": [
+    1,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "rss_plan": {
+    "warmup_seconds": 10,
+    "measurement_seconds": 20,
+    "interval_seconds": 2,
+    "same_world": true,
+    "same_apk_provider": true
+  },
+  "control_stable_mean_kib": 1451564,
+  "treatment_stable_mean_kib": 1446171.5,
+  "observed_mean_delta_kib": -5392.5,
+  "memory_claim": "Observed process RSS comparison; game variation is not attributed solely to the kernel and does not prove absence of all leaks."
+}
