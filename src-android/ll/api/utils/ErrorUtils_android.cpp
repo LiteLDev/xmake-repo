@@ -11,6 +11,12 @@ AnyExceptionRef::~AnyExceptionRef() = default;
 
 std::system_error getLastSystemError() noexcept { return {errno, std::generic_category()}; }
 
+std::exception_ptr createExceptionPtr(void*) noexcept {
+    // Android has no SEH record compatible with the Windows implementation.
+    // Callers must pass an existing C++ exception_ptr instead.
+    return nullptr;
+}
+
 std::string makeExceptionString(std::exception_ptr exception) noexcept try {
     if (!exception) return "bad exception, can't make exception string";
     std::string result;

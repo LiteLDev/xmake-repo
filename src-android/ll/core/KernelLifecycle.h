@@ -15,8 +15,9 @@ public:
     bool unload(pl::android::ModContext const&) noexcept;
 
 private:
-    std::mutex mMutex;
-    bool mLoaded{};
+    std::mutex          mMutex;
+    bool                mLoading{};
+    bool                mLoaded{};
     std::optional<bool> mStopResult;
 };
 

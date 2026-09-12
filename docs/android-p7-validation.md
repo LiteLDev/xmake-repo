@@ -64,6 +64,10 @@ workspace; P6 inputs and ten-run evidence remain available.
 | Mod enable failure | State remained Disabled, so normal onDisable skipped rollback after a failed enable | Original Mod runs its registered disable callback on failure and aggregates cleanup errors; native manager retains the original Error while it owns the SO |
 | C++ type exports | Method visibility did not export the vtable used by inline PatternFormatter constructors | Type visibility exports required vtables/RTTI, while unmarked methods stay hidden; post-commit debug/release link checks passed; required vtable public and unmarked internal getter hidden |
 
+The follow-up PL review fixed four concrete issues: lifecycle callbacks now catch exceptions in exception-enabled Mod wrappers; the loader closes a library if registration discovery or registry insertion throws; failed loads always attempt their unload callback even when guarded resources are present; and a failed close keeps the Entry and handle resident. The registry releases its mutex during load/unload callbacks and rejects same-id concurrent loads. Seven host CMake tests pass, and the Android PL target builds with the exception-enabled ModLoader/JNI boundary.
+
+The LL follow-up review also added an Android `createExceptionPtr` definition with explicit unsupported semantics (it returns empty because Android has no Windows SEH record), and KernelLifecycle marks a load in progress before releasing its mutex around ModRegistrar callbacks. The post-fix Android debug build and ELF link/strip verification passed; release verification is recorded separately after completion.
+
 ## Build and device evidence in progress
 
 The formal Android target now compiles 45 shared/client/backend source files,
@@ -82,8 +86,8 @@ The selected HeaderVerifier classes report zero issues. Windows Header receipts
 reuse the previous validated compile only after checking exact effective-header
 and build-rule equality; these are not new Windows compiler runs.
 
-PL now points to `9be84a2b22b4bd7726caf5104a6796918d45c2a4`, including failed-parent
-retention and the expected ABI correction. The Launcher gitlink matches it.
+PL now points to `d35d119b720d9e036912d54b420e98334f9833e6`, including failed-parent
+retention, explicit close-failure ownership, callback exception containment and the expected ABI correction. The Launcher gitlink matches it.
 Launcher APK assembly and the existing Java unit suite passed. The corrected
 APK was installed with application data preserved on vivo `10AF6D0YNL00439`.
 Its SHA256 is `acb0d22b19cd9a5033702e0776b03a81ea78816d8aeebdf618829f9ff8a41c37`.

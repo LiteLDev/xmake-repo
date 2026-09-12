@@ -21,7 +21,7 @@
     "LL_foundations": "c4921d7eae33f6275d31cfce93885c9a564da132",
     "LL_runtime": "38eaa99793dc39ca2c10ced6a226087f9711d5d3",
     "Launcher": "9af3e0dfc15980d02ca8e8f6de5f26cfff2f72b7",
-    "PL": "9be84a2b22b4bd7726caf5104a6796918d45c2a4",
+    "PL": "d35d119b720d9e036912d54b420e98334f9833e6",
     "Header": "2ae3e432d1e4b003e89194979c13e7e437685056",
     "P5": "b46b8ee62f27c0f7337b0d454fd10999366c0107"
   },
@@ -145,10 +145,36 @@
         "sha256": "56a9fc3e580182eef753eecf6bd4e57a534a1c62c96f1e4d13894d8005f5ec91",
         "bytes": 1845
       }
+    },
+    "pl_host_tests": {
+      "passed": 7,
+      "failed": 0,
+      "kind": "clean CMake rebuild and ctest",
+      "evidence": "C:/Users/ROG/levilamina-p7-validation-20260910/pl-host"
+    },
+    "pl_android_build": {
+      "passed": true,
+      "kind": "CMake Android target build",
+      "evidence": "C:/Users/ROG/levilamina-p7-validation-20260910/pl-android"
+    },
+    "post_fix_ll_debug_build": {
+      "passed": true,
+      "kind": "full Android debug build/P5 link/strip",
+      "evidence": "C:/Users/ROG/levilamina-p7-validation-20260910/shared-runtime-debug"
+    },
+    "post_fix_ll_release_build": {
+      "passed": true,
+      "kind": "full Android release build/P5 link/strip",
+      "evidence": "C:/Users/ROG/levilamina-p7-validation-20260910/shared-runtime-release"
+    },
+    "createExceptionPtr_export": {
+      "debug": true,
+      "release": true,
+      "kind": "ELF public symbol inspection"
     }
   },
   "pending": [
-    "Final FileSink/type-visibility example device receipt (user paused device work on 2026-09-12)",
+    "Final FileSink example device receipt (device work paused by user)",
     "Remote publication (GitHub connectivity)"
   ],
   "later_gates": {
