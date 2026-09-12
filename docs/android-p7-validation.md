@@ -137,7 +137,7 @@ publication remains pending.
 Implementation source is committed as `c4921d7eae33f6275d31cfce93885c9a564da132`
 (shared foundations), `38eaa99793dc39ca2c10ced6a226087f9711d5d3` (Android
 runtime and fixtures), and `f227daa338` (post-review input binding and hardening receipt). Launcher is committed as
-`9af3e0dfc15980d02ca8e8f6de5f26cfff2f72b7`. Post-commit debug/release builds,
+`1f3d8c48b1ca44cbdb458d19839a4512ae63419f`. Post-commit debug/release builds,
 P5 linking, stripping and visibility checks passed. The final FileSink/type-
 visibility example still needs its device receipt; the user paused device work
 on 2026-09-12. First-batch closure and remote publication remain pending.
