@@ -207,15 +207,33 @@ LLNDAPI std::string
 
 LLNDAPI Expected<bool> svtobool(std::string_view);
 
+#if defined(LL_PLAT_A)
+namespace detail {
+LLAPI std::from_chars_result fromCharsFloat(char const*, char const*, float&, std::chars_format = std::chars_format::general) noexcept;
+LLAPI std::from_chars_result fromCharsFloat(char const*, char const*, double&, std::chars_format = std::chars_format::general) noexcept;
+LLAPI std::from_chars_result fromCharsFloat(char const*, char const*, long double&, std::chars_format = std::chars_format::general) noexcept;
+}
+#endif
+
 template <class T, class... Args>
 [[nodiscard]] LL_CONSTEXPR23 Expected<T> svtonum(std::string_view str, size_t* idx, Args&&... args) {
-    T          result;
-    const auto ans = ::std::from_chars(&*str.begin(), &*str.end(), result, std::forward<Args>(args)...);
+    if (str.empty()) return makeErrorCodeError(std::errc::invalid_argument);
+    T result{};
+    const auto ans = [&] {
+#if defined(LL_PLAT_A)
+        if constexpr (std::is_floating_point_v<T>) {
+            return detail::fromCharsFloat(str.data(), str.data() + str.size(), result, std::forward<Args>(args)...);
+        } else
+#endif
+        {
+            return ::std::from_chars(str.data(), str.data() + str.size(), result, std::forward<Args>(args)...);
+        }
+    }();
     if (ans.ec != std::errc{}) {
         return makeErrorCodeError(ans.ec);
     }
     if (idx) {
-        *idx = static_cast<size_t>(ans.ptr - &*str.begin());
+        *idx = static_cast<size_t>(ans.ptr - str.data());
     }
     return result;
 }

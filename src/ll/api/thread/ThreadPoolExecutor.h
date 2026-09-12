@@ -3,7 +3,7 @@
 #include "ll/api/coro/Executor.h"
 
 namespace ll::thread {
-class ThreadPoolExecutor final : public coro::Executor {
+class LL_TYPE_API ThreadPoolExecutor final : public coro::Executor {
     struct Impl;
     std::unique_ptr<Impl> impl;
 

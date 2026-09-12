@@ -1,5 +1,6 @@
 #pragma once
 
+#include <exception>
 #include <system_error>
 #include <typeinfo>
 
@@ -15,9 +16,14 @@
 namespace ll::inline utils::error_utils {
 
 class AnyExceptionRef {
+#if defined(LL_PLAT_A)
+    std::exception_ptr         mException;
+    mutable std::exception_ptr mCaughtException;
+#else
     void* impl;
 
     LLAPI void* typeCast(std::type_info const&) const;
+#endif
 
 public:
     LLNDAPI AnyExceptionRef(std::exception_ptr const& ptr);
@@ -30,7 +36,21 @@ public:
 
     template <class T>
     [[nodiscard]] optional_ref<T> tryGet() const {
+#if defined(LL_PLAT_A)
+        if (!mException) return nullptr;
+        try {
+            std::rethrow_exception(mException);
+        } catch (T& value) {
+            // Retain the caught exception as well, including implementations
+            // that copy the exception during rethrow.
+            mCaughtException = std::current_exception();
+            return value;
+        } catch (...) {
+            return nullptr;
+        }
+#else
         return reinterpret_cast<T*>(typeCast(typeid(T)));
+#endif
     }
 };
 

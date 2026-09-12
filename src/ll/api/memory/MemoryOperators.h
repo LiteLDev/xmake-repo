@@ -7,7 +7,7 @@
 
 #include "mc/deps/core/memory/IMemoryAllocator.h"
 
-#include "ll/api/memory/Memory.h"
+#include "ll/api/memory/Allocator.h"
 
 extern "C" LL_SHARED_EXPORT int const ll_memory_operator_overrided{};
 

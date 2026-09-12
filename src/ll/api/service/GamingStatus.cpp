@@ -1,5 +1,7 @@
 #include "ll/api/service/GamingStatus.h"
 
+#include <atomic>
+
 namespace ll {
 static std::atomic<GamingStatus> status;
 void                             setGamingStatus(GamingStatus value) { status = value; }

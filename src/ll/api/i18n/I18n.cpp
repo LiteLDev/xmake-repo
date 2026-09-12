@@ -1,5 +1,7 @@
 #include "ll/api/i18n/I18n.h"
 
+#include "ll/api/base/Containers.h"
+
 #include "ll/api/utils/StringUtils.h"
 #include "ll/api/utils/SystemUtils.h"
 

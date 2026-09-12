@@ -1,7 +1,9 @@
 #pragma once
 
+#include "ll/api/base/Macro.h"
+
 namespace ll::event {
-class EmitterBase {
+class LL_TYPE_API EmitterBase {
 public:
     EmitterBase()          = default;
     virtual ~EmitterBase() = default;

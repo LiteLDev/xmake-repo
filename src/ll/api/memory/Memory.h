@@ -11,6 +11,7 @@
 #include "ll/api/base/FixedString.h"
 #include "ll/api/base/Macro.h"
 #include "ll/api/base/StdInt.h"
+#include "ll/api/memory/Allocator.h"
 #include "ll/api/memory/Signature.h"
 #include "ll/api/memory/Symbol.h"
 #include "mc/platform/brstd/function_ref.h"
@@ -120,12 +121,6 @@ constexpr auto construct(void* ptr, ptrdiff_t off, Args&&... args) {
         std::forward<Args>(args)...
     );
 }
-
-LLNDAPI ::Bedrock::Memory::IMemoryAllocator& getDefaultAllocator();
-
-[[noreturn]] LLAPI void throwMemoryException(size_t);
-
-LLNDAPI size_t getUsableSize(void* ptr);
 
 template <class T, class D>
 [[nodiscard]] inline size_t getUsableSize(std::unique_ptr<T, D>& ptr) {

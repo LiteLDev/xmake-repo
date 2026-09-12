@@ -4,7 +4,7 @@
 #include "ll/api/io/LogMessage.h"
 
 namespace ll::io {
-class Formatter {
+class LL_TYPE_API Formatter {
 public:
     LLNDAPI static bool supportColorLog();
 

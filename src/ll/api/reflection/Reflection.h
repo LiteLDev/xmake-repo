@@ -8,7 +8,7 @@
 #include "ll/api/base/Meta.h"
 #include "ll/api/reflection/TypeName.h"
 
-#if defined(__clang__) && !defined(BOOST_PFR_CORE_NAME_PARSING)
+#if defined(__clang__) && defined(_MSC_VER) && !defined(BOOST_PFR_CORE_NAME_PARSING)
 #define BOOST_PFR_CORE_NAME_PARSING                                                                                    \
     (sizeof("auto boost::pfr::detail::name_of_field_impl() [MsvcWorkaround = ") - 1, sizeof("}]") - 1, backward("."))
 

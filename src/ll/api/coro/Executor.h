@@ -14,7 +14,7 @@
 #include "mc/deps/core/utility/optional_ref.h"
 
 namespace ll::coro {
-class Executor {
+class LL_TYPE_API Executor {
     std::string name;
 
 public:

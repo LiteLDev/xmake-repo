@@ -111,14 +111,14 @@ constexpr from_chars_result validate_identifiers(char const* first, char const* 
 
 } // namespace detail
 
-struct PreRelease {
+struct LL_TYPE_API PreRelease {
     std::vector<std::variant<std::string, std::uint16_t>> values;
 
-    constexpr PreRelease()  = default;
-    constexpr ~PreRelease() = default;
-    constexpr explicit PreRelease(std::string_view str) { from_string(str); }
+    PreRelease()  = default;
+    ~PreRelease() = default;
+    explicit PreRelease(std::string_view str) { from_string(str); }
 
-    constexpr std::strong_ordering operator<=>(PreRelease const& other) const noexcept {
+    std::strong_ordering operator<=>(PreRelease const& other) const noexcept {
         for (std::size_t i = 0; i < std::min(values.size(), other.values.size()); ++i) {
             if (std::holds_alternative<std::string>(values[i])) {
                 if (std::holds_alternative<std::string>(other.values[i])) {
@@ -137,9 +137,9 @@ struct PreRelease {
         return values.size() <=> other.values.size();
     }
 
-    constexpr bool operator==(PreRelease const& other) const noexcept = default;
+    bool operator==(PreRelease const& other) const noexcept = default;
 
-    constexpr detail::from_chars_result from_chars(char const* first, char const* last) noexcept {
+    detail::from_chars_result from_chars(char const* first, char const* last) noexcept {
         if (first == nullptr || last == nullptr || first >= last) {
             return {first, std::errc::invalid_argument};
         }
@@ -182,7 +182,7 @@ struct PreRelease {
         return {current, std::errc{}};
     }
 
-    [[nodiscard]] constexpr detail::from_chars_result from_string_noexcept(std::string_view str) noexcept {
+    [[nodiscard]] detail::from_chars_result from_string_noexcept(std::string_view str) noexcept {
         auto result = from_chars(str.data(), str.data() + str.length());
         if (result && result.ptr != str.data() + str.length()) {
             return {result.ptr, std::errc::invalid_argument};
@@ -190,12 +190,12 @@ struct PreRelease {
         return result;
     }
 
-    constexpr PreRelease& from_string(std::string_view str) {
+    PreRelease& from_string(std::string_view str) {
         from_string_noexcept(str).value();
         return *this;
     }
 
-    [[nodiscard]] constexpr std::string to_string() const {
+    [[nodiscard]] std::string to_string() const {
         std::string str;
         for (auto const& value : values) {
             if (!str.empty()) {
@@ -211,17 +211,17 @@ struct PreRelease {
     }
 };
 
-struct Version {
+struct LL_TYPE_API Version {
     std::uint16_t              major = 0;
     std::uint16_t              minor = 1;
     std::uint16_t              patch = 0;
     std::optional<PreRelease>  preRelease;
     std::optional<std::string> build;
 
-    constexpr Version()  = default;
-    constexpr ~Version() = default;
+    Version()  = default;
+    ~Version() = default;
 
-    constexpr Version(
+    Version(
         std::uint16_t              mj,
         std::uint16_t              mn,
         std::uint16_t              pt,
@@ -234,7 +234,7 @@ struct Version {
       preRelease{std::move(prt)},
       build{std::move(bu)} {}
 
-    constexpr Version(
+    Version(
         std::uint16_t              mj,
         std::uint16_t              mn,
         std::uint16_t              pt,
@@ -247,9 +247,9 @@ struct Version {
       preRelease{PreRelease{prt}},
       build{std::move(bu)} {}
 
-    explicit constexpr Version(std::string_view str) : Version() { from_string(str); }
+    explicit Version(std::string_view str) : Version() { from_string(str); }
 
-    [[nodiscard]] constexpr detail::from_chars_result from_chars(char const* first, char const* last) noexcept {
+    [[nodiscard]] detail::from_chars_result from_chars(char const* first, char const* last) noexcept {
         if (first == nullptr || last == nullptr || first >= last
             || (last - first) < detail::min_version_string_length) {
             return {first, std::errc::invalid_argument};
@@ -323,16 +323,16 @@ struct Version {
         return {current, std::errc{}};
     }
 
-    [[nodiscard]] constexpr detail::from_chars_result from_string_noexcept(std::string_view str) noexcept {
+    [[nodiscard]] detail::from_chars_result from_string_noexcept(std::string_view str) noexcept {
         return from_chars(str.data(), str.data() + str.length());
     }
 
-    constexpr Version& from_string(std::string_view str) {
+    Version& from_string(std::string_view str) {
         from_string_noexcept(str).value();
         return *this;
     }
 
-    [[nodiscard]] constexpr std::string to_string() const {
+    [[nodiscard]] std::string to_string() const {
         std::string str;
         detail::append_number(str, major);
         str += '.';
@@ -350,7 +350,7 @@ struct Version {
         return str;
     }
 
-    [[nodiscard]] constexpr std::strong_ordering operator<=>(Version const& other) const noexcept {
+    [[nodiscard]] std::strong_ordering operator<=>(Version const& other) const noexcept {
         if (major != other.major) {
             return major <=> other.major;
         }
@@ -372,15 +372,15 @@ struct Version {
         return std::strong_ordering::equal;
     }
 
-    [[nodiscard]] constexpr bool operator==(Version const& other) const noexcept {
+    [[nodiscard]] bool operator==(Version const& other) const noexcept {
         return *this <=> other == std::strong_ordering::equal;
     }
 
-    [[nodiscard]] constexpr bool isIdenticalTo(Version const& other) const noexcept {
+    [[nodiscard]] bool isIdenticalTo(Version const& other) const noexcept {
         return *this == other && build == other.build;
     }
 
-    [[nodiscard]] [[maybe_unused]] static constexpr bool valid(std::string_view str) noexcept {
+    [[nodiscard]] [[maybe_unused]] static bool valid(std::string_view str) noexcept {
         return Version{}.from_string_noexcept(str);
     }
 };
@@ -409,7 +409,7 @@ template <class T, class J>
 }
 
 namespace literals {
-[[nodiscard]] constexpr Version operator""_version(char const* str, std::size_t length) {
+[[nodiscard]] inline Version operator""_version(char const* str, std::size_t length) {
     return Version{
         std::string_view{str, length}
     };

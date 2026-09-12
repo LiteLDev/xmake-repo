@@ -20,6 +20,16 @@
 #define LLNDAPI [[nodiscard]] LLAPI
 #endif
 
+// Share ELF vtables/RTTI across LL and Mods without exporting methods that
+// are not marked LLAPI.
+#ifndef LL_TYPE_API
+#if defined(LL_PLAT_A)
+#define LL_TYPE_API __attribute__((type_visibility("default")))
+#else
+#define LL_TYPE_API
+#endif
+#endif
+
 #ifndef LL_MAY_CONSTEXPR
 #ifdef __clang__
 #define LL_MAY_CONSTEXPR inline

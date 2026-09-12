@@ -26,7 +26,7 @@
 
 namespace ll::io {
 class LoggerRegistry;
-class Logger : public std::enable_shared_from_this<Logger> {
+class LL_TYPE_API Logger : public std::enable_shared_from_this<Logger> {
     LLAPI void printStr(LogLevel, std::string&&) const noexcept;
 
     friend LoggerRegistry;

@@ -19,7 +19,7 @@ using Expected = ::nonstd::expected<T, ::ll::Error>;
 
 using Unexpected = ::nonstd::unexpected_type<::ll::Error>;
 
-class ErrorInfoBase {
+class LL_TYPE_API ErrorInfoBase {
     friend Error;
     struct Impl;
     std::unique_ptr<Impl> impl;
@@ -31,7 +31,7 @@ public:
     virtual std::string message() const noexcept { return message({}); }
     virtual std::string message(std::string_view locale) const noexcept = 0;
 };
-class Error {
+class LL_TYPE_API Error {
     mutable std::unique_ptr<ErrorInfoBase> mInfo;
 
 public:
@@ -84,12 +84,12 @@ public:
     log(brstd::function_ref<void(std::string_view msg)> out, std::string_view locale = {}) const noexcept;
 };
 
-struct StringError : ErrorInfoBase {
+struct LL_TYPE_API StringError : ErrorInfoBase {
     std::string str;
     StringError(std::string str) : str(std::move(str)) {}
     std::string message(std::string_view) const noexcept override { return str; }
 };
-struct ErrorCodeError : ErrorInfoBase {
+struct LL_TYPE_API ErrorCodeError : ErrorInfoBase {
     std::error_code ec;
     ErrorCodeError(std::error_code ec) : ec(ec) {}
     std::string message(std::string_view) const noexcept override { return ec.message(); }

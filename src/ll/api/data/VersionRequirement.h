@@ -33,7 +33,7 @@ struct VersionRequirement {
         Operator operation;
         Version  version;
 
-        [[nodiscard]] constexpr bool operator==(Comparator const&) const noexcept = default;
+        [[nodiscard]] bool operator==(Comparator const&) const noexcept = default;
     };
 
     using ComparatorSet = std::vector<Comparator>;
@@ -73,7 +73,7 @@ private:
         return parsed && parsed.ptr == value.data() + value.size();
     }
 
-    static constexpr bool parsePartial(std::string_view value, PartialVersion& result) noexcept {
+    static bool parsePartial(std::string_view value, PartialVersion& result) noexcept {
         value = trim(value);
         if (value.empty()) {
             return false;
@@ -140,43 +140,43 @@ private:
         return true;
     }
 
-    static constexpr Version floor(PartialVersion const& partial) noexcept {
+    static Version floor(PartialVersion const& partial) noexcept {
         return Version{partial.major.value_or(0), partial.minor.value_or(0), partial.patch.value_or(0)};
     }
 
-    static constexpr std::optional<Version> nextMajor(Version const& version) noexcept {
+    static std::optional<Version> nextMajor(Version const& version) noexcept {
         if (version.major == (std::numeric_limits<std::uint16_t>::max)()) {
             return std::nullopt;
         }
         return Version{static_cast<std::uint16_t>(version.major + 1), 0, 0};
     }
 
-    static constexpr std::optional<Version> nextMinor(Version const& version) noexcept {
+    static std::optional<Version> nextMinor(Version const& version) noexcept {
         if (version.minor != (std::numeric_limits<std::uint16_t>::max)()) {
             return Version{version.major, static_cast<std::uint16_t>(version.minor + 1), 0};
         }
         return nextMajor(version);
     }
 
-    static constexpr std::optional<Version> nextPatch(Version const& version) noexcept {
+    static std::optional<Version> nextPatch(Version const& version) noexcept {
         if (version.patch != (std::numeric_limits<std::uint16_t>::max)()) {
             return Version{version.major, version.minor, static_cast<std::uint16_t>(version.patch + 1)};
         }
         return nextMinor(version);
     }
 
-    static constexpr void addComparator(ComparatorSet& set, Operator operation, Version version) {
+    static void addComparator(ComparatorSet& set, Operator operation, Version version) {
         version.build.reset();
         set.emplace_back(operation, std::move(version));
     }
 
-    static constexpr void addUpperBound(ComparatorSet& set, std::optional<Version> upper) {
+    static void addUpperBound(ComparatorSet& set, std::optional<Version> upper) {
         if (upper) {
             addComparator(set, Operator::Less, std::move(*upper));
         }
     }
 
-    static constexpr bool expandPartial(ComparatorSet& set, PartialVersion const& partial) {
+    static bool expandPartial(ComparatorSet& set, PartialVersion const& partial) {
         if (!partial.major) {
             return true;
         }
@@ -194,7 +194,7 @@ private:
         return true;
     }
 
-    static constexpr bool expandComparator(ComparatorSet& set, std::string_view token) noexcept try {
+    static bool expandComparator(ComparatorSet& set, std::string_view token) noexcept try {
         enum class Prefix {
             Bare,
             Equal,
@@ -306,7 +306,7 @@ private:
         return false;
     }
 
-    static constexpr bool
+    static bool
     expandHyphen(ComparatorSet& set, std::string_view lowerText, std::string_view upperText) noexcept try {
         PartialVersion lowerPartial;
         PartialVersion upperPartial;
@@ -348,14 +348,14 @@ private:
         return result;
     }
 
-    static constexpr bool comparatorLess(Comparator const& lhs, Comparator const& rhs) noexcept {
+    static bool comparatorLess(Comparator const& lhs, Comparator const& rhs) noexcept {
         if (lhs.operation != rhs.operation) {
             return lhs.operation < rhs.operation;
         }
         return lhs.version < rhs.version;
     }
 
-    constexpr void normalize() {
+    void normalize() {
         for (auto& set : alternatives) {
             std::ranges::sort(set, comparatorLess);
             set.erase(std::unique(set.begin(), set.end()), set.end());
@@ -366,7 +366,7 @@ private:
         alternatives.erase(std::unique(alternatives.begin(), alternatives.end()), alternatives.end());
     }
 
-    [[nodiscard]] static constexpr bool compare(Version const& candidate, Comparator const& comparator) noexcept {
+    [[nodiscard]] static bool compare(Version const& candidate, Comparator const& comparator) noexcept {
         switch (comparator.operation) {
         case Operator::Equal:
             return candidate == comparator.version;
@@ -382,7 +382,7 @@ private:
         return false;
     }
 
-    [[nodiscard]] static constexpr bool allowsPreRelease(ComparatorSet const& set, Version const& candidate) noexcept {
+    [[nodiscard]] static bool allowsPreRelease(ComparatorSet const& set, Version const& candidate) noexcept {
         if (!candidate.preRelease) {
             return true;
         }
@@ -394,11 +394,11 @@ private:
     }
 
 public:
-    constexpr VersionRequirement()  = default;
-    constexpr ~VersionRequirement() = default;
-    explicit constexpr VersionRequirement(std::string_view str) { from_string(str); }
+    VersionRequirement()  = default;
+    ~VersionRequirement() = default;
+    explicit VersionRequirement(std::string_view str) { from_string(str); }
 
-    [[nodiscard]] constexpr detail::from_chars_result from_chars(char const* first, char const* last) noexcept {
+    [[nodiscard]] detail::from_chars_result from_chars(char const* first, char const* last) noexcept {
         if (first == nullptr || last == nullptr || first > last) {
             return {first, std::errc::invalid_argument};
         }
@@ -460,25 +460,25 @@ public:
         }
     }
 
-    [[nodiscard]] constexpr detail::from_chars_result from_string_noexcept(std::string_view str) noexcept {
+    [[nodiscard]] detail::from_chars_result from_string_noexcept(std::string_view str) noexcept {
         return from_chars(str.data(), str.data() + str.size());
     }
 
-    constexpr VersionRequirement& from_string(std::string_view str) {
+    VersionRequirement& from_string(std::string_view str) {
         from_string_noexcept(str).value();
         return *this;
     }
 
-    [[nodiscard]] constexpr bool matches(Version const& version) const noexcept {
+    [[nodiscard]] bool matches(Version const& version) const noexcept {
         return std::ranges::any_of(alternatives, [&](ComparatorSet const& set) {
             return allowsPreRelease(set, version)
                 && std::ranges::all_of(set, [&](Comparator const& comparator) { return compare(version, comparator); });
         });
     }
 
-    [[nodiscard]] constexpr std::vector<ComparatorSet> const& comparatorSets() const noexcept { return alternatives; }
+    [[nodiscard]] std::vector<ComparatorSet> const& comparatorSets() const noexcept { return alternatives; }
 
-    [[nodiscard]] constexpr std::string to_string() const {
+    [[nodiscard]] std::string to_string() const {
         auto operatorString = [](Operator operation) -> std::string_view {
             switch (operation) {
             case Operator::Equal:
@@ -515,11 +515,11 @@ public:
         return result;
     }
 
-    [[nodiscard]] constexpr bool operator==(VersionRequirement const& other) const noexcept {
+    [[nodiscard]] bool operator==(VersionRequirement const& other) const noexcept {
         return alternatives == other.alternatives;
     }
 
-    [[nodiscard]] static constexpr bool valid(std::string_view str) noexcept {
+    [[nodiscard]] static bool valid(std::string_view str) noexcept {
         return VersionRequirement{}.from_string_noexcept(str);
     }
 };

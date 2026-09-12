@@ -6,7 +6,7 @@
 #include "ll/api/io/Formatter.h"
 
 namespace ll::io {
-class SinkBase : public std::enable_shared_from_this<SinkBase> {
+class LL_TYPE_API SinkBase : public std::enable_shared_from_this<SinkBase> {
 public:
     virtual ~SinkBase() = default;
 

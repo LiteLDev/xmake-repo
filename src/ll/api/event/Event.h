@@ -14,7 +14,7 @@ template <class T>
 class Cancellable;
 class CallbackStream;
 
-class Event {
+class LL_TYPE_API Event {
 private:
     template <class T>
     friend class ::ll::event::Cancellable;

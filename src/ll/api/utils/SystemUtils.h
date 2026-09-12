@@ -6,6 +6,7 @@
 #include <optional>
 #include <span>
 #include <string>
+#include <utility>
 
 #include "ll/api/base/CompilerPredefine.h"
 #include "ll/api/base/Macro.h"
@@ -58,8 +59,16 @@ public:
         if (lib) free();
     }
 
-    DynamicLibrary(DynamicLibrary&&) noexcept            = default;
-    DynamicLibrary& operator=(DynamicLibrary&&) noexcept = default;
+    DynamicLibrary(DynamicLibrary&& other) noexcept : lib(std::exchange(other.lib, nullptr)) {}
+    DynamicLibrary& operator=(DynamicLibrary&& other) {
+        if (this != &other) {
+            if (lib) {
+                if (auto error = free()) throw *error;
+            }
+            lib = std::exchange(other.lib, nullptr);
+        }
+        return *this;
+    }
     DynamicLibrary(DynamicLibrary const&)                = delete;
     DynamicLibrary& operator=(DynamicLibrary const&)     = delete;
 

@@ -7,7 +7,7 @@
 #include "ll/api/reflection/TypeName.h"
 
 #ifndef LL_CC_V
-#if defined(_MSC_VER) || defined(__clang__)
+#if !defined(LL_PLAT_A) && (defined(_MSC_VER) || defined(__clang__))
 #define LL_CC_V __vectorcall
 #else
 #define LL_CC_V
@@ -31,7 +31,7 @@
 #endif
 
 #ifndef LL_CC_R
-#if defined(__clang__)
+#if defined(__clang__) && !defined(LL_PLAT_A)
 #define LL_CC_R __regcall
 #else
 #define LL_CC_R
@@ -317,6 +317,10 @@ using FileHandleT = void*;
 #define LL_ALLOCATOR
 #endif
 
+#ifndef LL_NOTHROW_ALLOCATOR
+#define LL_NOTHROW_ALLOCATOR
+#endif
+
 #ifndef LL_FORCEINLINE
 #define LL_FORCEINLINE inline __attribute__((always_inline))
 #endif
@@ -365,9 +369,22 @@ using FileHandleT = void*;
 #define LL_CURRENT_FUNCSIG __builtin_FUNCTION()
 #endif
 
+#if defined(__ANDROID__)
+#include <dlfcn.h>
+// Each ELF's CRT supplies this hidden anchor, including during constructors.
+extern "C" __attribute__((visibility("hidden"))) void* __dso_handle;
+#endif
+
 namespace ll::internal {
 
+#if defined(__ANDROID__)
+[[nodiscard]] LL_FORCEINLINE __attribute__((visibility("hidden"))) void* getCurrentModuleHandle() noexcept {
+    Dl_info info{};
+    return ::dladdr(&__dso_handle, &info) ? info.dli_fbase : nullptr;
+}
+#else
 [[nodiscard]] void* getCurrentModuleHandle() noexcept; // Implemented in SystemUtils_linux.cpp
+#endif
 
 using FileHandleT = int;
 

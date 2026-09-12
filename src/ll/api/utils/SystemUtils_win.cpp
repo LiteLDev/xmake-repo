@@ -216,9 +216,11 @@ std::optional<std::system_error> DynamicLibrary::load(std::filesystem::path cons
     return {};
 }
 std::optional<std::system_error> DynamicLibrary::free() noexcept {
+    if (!lib) return {};
     if (!FreeLibrary((HMODULE)lib)) {
         return error_utils::getLastSystemError();
     }
+    lib = nullptr;
     return {};
 }
 void* DynamicLibrary::getAddress(char const* name) noexcept { return GetProcAddress((HMODULE)lib, name); }

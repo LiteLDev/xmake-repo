@@ -8,7 +8,7 @@
 #include "fmt/color.h"
 
 namespace ll::io {
-class PatternFormatter : public Formatter {
+class LL_TYPE_API PatternFormatter : public Formatter {
 public:
     std::string                                   pattern;
     std::bitset<4>                                bracketed;

@@ -1,4 +1,5 @@
 #include "ll/api/event/Event.h"
+#include "ll/api/base/Containers.h"
 #include "ll/api/reflection/TypeName.h"
 
 #include "mc/deps/nbt/CompoundTag.h"

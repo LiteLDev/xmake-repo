@@ -19,7 +19,13 @@ namespace detail {
 //! Compile-time constant that is upper bound on cache line/sector size.
 // It should be used only in situations where having a compile-time upper
 // bound is more useful than a run-time exact answer.
+#if defined(__cpp_lib_hardware_interference_size)
 constexpr size_t max_nfs_size = std::hardware_destructive_interference_size;
+#else
+// NDK libc++ does not expose the interference-size facility. Keep the
+// queue's padding fixed in the Android SDK rather than changing it by CPU.
+constexpr size_t max_nfs_size = 64;
+#endif
 
 //! Class that implements exponential backoff.
 class atomic_backoff {

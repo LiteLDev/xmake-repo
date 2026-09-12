@@ -21,7 +21,7 @@ enum class EventPriority {
 
 using ListenerId = uint64;
 
-class ListenerBase {
+class LL_TYPE_API ListenerBase {
     friend CallbackStream;
     friend EventBus;
     ListenerId    id;

@@ -107,7 +107,7 @@ end
 
 target("LeviLamina")
     add_rules("@levibuildscript/linkrule")
-    set_languages("c++20")
+    set_languages("c++23")
     set_kind("shared")
     set_symbols("debug")
     add_files("src/**.cpp")

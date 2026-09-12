@@ -3,6 +3,7 @@
 #include <atomic>
 #include <optional>
 #include <string>
+#include <thread>
 #include <vector>
 
 #include "ll/api/base/Macro.h"
@@ -25,7 +26,7 @@ public:
 };
 class Stacktrace {
     std::vector<StacktraceEntry> entries;
-    uint64                       hash;
+    uint64                       hash{};
 
 public:
     LLNDAPI static Stacktrace current(size_t skip = 0, size_t maxDepth = ~0ull);

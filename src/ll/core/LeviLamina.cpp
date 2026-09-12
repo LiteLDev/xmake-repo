@@ -6,8 +6,6 @@
 #include "ll/api/utils/StringUtils.h"
 #include "ll/core/Version.h"
 
-#include "mc/platform/UUID.h"
-
 #include "nlohmann/json.hpp"
 
 namespace ll {
@@ -28,18 +26,6 @@ std::shared_ptr<mod::NativeMod> const& getSelfModIns() {
     return llSelf;
 }
 io::Logger& getLogger() { return getSelfModIns()->getLogger(); }
-
-std::string_view getServiceUuid() {
-    static std::string serverUuid = [] {
-        auto uuidPath = getSelfModIns()->getDataDir() / u8"statisticsUuid";
-        return *file_utils::readFile(uuidPath).or_else([&] {
-            std::string uuid = mce::UUID::random().asString();
-            file_utils::writeFile(uuidPath, uuid);
-            return std::optional{std::move(uuid)};
-        });
-    }();
-    return serverUuid;
-}
 
 data::Version getLoaderVersion() { return getSelfModIns()->getManifest().version.value(); }
 

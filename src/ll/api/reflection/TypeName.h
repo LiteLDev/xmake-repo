@@ -5,10 +5,15 @@
 
 namespace ll::reflection {
 
+#if defined(__cpp_rtti)
 template <class T>
 inline std::string_view getDynamicRawName(T const& value) noexcept {
     return typeid(value).name();
 }
+#else
+template <class T>
+std::string_view getDynamicRawName(T const&) noexcept = delete;
+#endif
 
 template <auto f>
 consteval std::string_view getRawName() noexcept {
