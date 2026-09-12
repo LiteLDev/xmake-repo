@@ -15,5 +15,6 @@ directories were archived outside discovery and the formal release restored.
 
 Post-commit debug/release compilation, P5 linking, stripping and visibility checks
 passed. The final FileSink/type-visibility device receipt remains pending because
-the user paused device work on 2026-09-12. G3-G8 remain unpassed; see
+the user paused device work on 2026-09-12. All five implementation branches have
+now been published with ordinary pushes. G3-G8 remain unpassed; see
 `docs/android-p7-validation.md`.

@@ -129,8 +129,7 @@ were archived outside Mod discovery, and the formal release was restored.
 
 Evidence is retained under `device-g2`, `launcher-apk-inputs`, `pl-expected-abi`,
 `p5-sdk`, and `shared-runtime-debug` in the external validation directory.
-Local PL/P5/Header commits exist; recent GitHub pushes timed out, so remote
-publication remains pending.
+PL, P5 and Header branches have now been published with ordinary pushes; LL and Launcher branches were also pushed after updating the Launcher gitlink to the hardened PL commit.
 
 ## Gates still open
 
@@ -140,7 +139,7 @@ runtime and fixtures), and `f227daa338` (post-review input binding and hardening
 `1f3d8c48b1ca44cbdb458d19839a4512ae63419f`. Post-commit debug/release builds,
 P5 linking, stripping and visibility checks passed. The final FileSink/type-
 visibility example still needs its device receipt; the user paused device work
-on 2026-09-12. First-batch closure and remote publication remain pending.
+on 2026-09-12. First-batch closure remains pending.
 The compact record is `validation/p7/g0-g2-summary.json`.
 
 The first batch supports the normal root-level native entry and the fixed LL/

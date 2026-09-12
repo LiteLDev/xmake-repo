@@ -196,8 +196,7 @@
     }
   },
   "pending": [
-    "Final FileSink example device receipt (device work paused by user)",
-    "Remote publication (GitHub connectivity)"
+    "Final FileSink example device receipt (device work paused by user)"
   ],
   "later_gates": {
     "G3": "unpassed",
@@ -271,5 +270,12 @@
   "protected_inputs_final": {
     "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260910\\protected-inputs-final.json",
     "sha256": "46fcb3bd1fa39f55e22c01964842dac06791f5c17940deff7232b155b981d2ee"
+  },
+  "remote_publication": {
+    "PL": "pushed",
+    "Header": "pushed",
+    "P5": "pushed",
+    "LL": "pushed",
+    "Launcher": "pushed"
   }
 }
