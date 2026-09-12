@@ -86,7 +86,7 @@ The selected HeaderVerifier classes report zero issues. Windows Header receipts
 reuse the previous validated compile only after checking exact effective-header
 and build-rule equality; these are not new Windows compiler runs.
 
-PL now points to `8ebd46fcd8914dc7f5ae8c63abbdb78347097fd3`, including failed-parent
+PL now points to `8a25b051e77b1eec1a04276a7e860a548d142dde`, including failed-parent
 retention, explicit close-failure ownership, callback exception containment and the expected ABI correction. The Launcher gitlink matches it.
 Launcher APK assembly and the existing Java unit suite passed. The corrected
 APK was installed with application data preserved on vivo `10AF6D0YNL00439`.
