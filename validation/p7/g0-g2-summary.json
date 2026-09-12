@@ -21,7 +21,7 @@
     "LL_foundations": "c4921d7eae33f6275d31cfce93885c9a564da132",
     "LL_runtime": "38eaa99793dc39ca2c10ced6a226087f9711d5d3",
     "Launcher": "9af3e0dfc15980d02ca8e8f6de5f26cfff2f72b7",
-    "PL": "d35d119b720d9e036912d54b420e98334f9833e6",
+    "PL": "8ebd46fcd8914dc7f5ae8c63abbdb78347097fd3",
     "Header": "2ae3e432d1e4b003e89194979c13e7e437685056",
     "P5": "b46b8ee62f27c0f7337b0d454fd10999366c0107"
   },
@@ -171,6 +171,17 @@
       "debug": true,
       "release": true,
       "kind": "ELF public symbol inspection"
+    },
+    "post_lock_relink": {
+      "debug": [
+        "kernel",
+        "example"
+      ],
+      "release": [
+        "kernel",
+        "example"
+      ],
+      "evidence": "C:/Users/ROG/levilamina-p7-validation-20260910/post-lock-*-*.log"
     }
   },
   "pending": [
