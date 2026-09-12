@@ -1,0 +1,227 @@
+{
+  "scope": "P7-G0-G2",
+  "source_commit": "38eaa99793dc39ca2c10ced6a226087f9711d5d3",
+  "first_batch_closed": false,
+  "P7_complete": false,
+  "baseline": {
+    "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260910\\baseline.json",
+    "sha256": "7a3def61fef545bf75197b4c3b32e686409198b666b1c6d5c6c8cc625a5785db",
+    "bytes": 10687
+  },
+  "protected_prelink_diff": {
+    "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260910\\protected-prelink.patch",
+    "sha256": "7b90e2e0cda2d41989ed6c3923979502b0a62d2ea0a88551a9f3a1138d1e9832",
+    "bytes": 3043
+  },
+  "input_lock": {
+    "repository_path": "config/android-kernel-inputs.lock.json",
+    "sha256": "f05f5dcdb648a67a6d315dab083edfe1a0aaf4048ff9314e702b70efe594b3e4"
+  },
+  "commits": {
+    "LL_foundations": "c4921d7eae33f6275d31cfce93885c9a564da132",
+    "LL_runtime": "38eaa99793dc39ca2c10ced6a226087f9711d5d3",
+    "Launcher": "9af3e0dfc15980d02ca8e8f6de5f26cfff2f72b7",
+    "PL": "9be84a2b22b4bd7726caf5104a6796918d45c2a4",
+    "Header": "2ae3e432d1e4b003e89194979c13e7e437685056",
+    "P5": "b46b8ee62f27c0f7337b0d454fd10999366c0107"
+  },
+  "decisions": {
+    "cxx": "c++23",
+    "exceptions": true,
+    "rtti": true,
+    "runtime": "c++_shared",
+    "allocator_tu_rtti": false,
+    "version_prerelease": "std::variant<std::string, std::uint16_t>",
+    "version_constant_evaluation_required": false
+  },
+  "results": {
+    "windows_shared_units": {
+      "passed": 62,
+      "kind": "compile",
+      "evidence": {
+        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260910\\windows-shared-compile\\results.json",
+        "sha256": "55332efe72ed55987f63c9225f6f74ec5c2158247100695e8f3b48388753445b",
+        "bytes": 222453
+      }
+    },
+    "windows_rollback_units": {
+      "passed": 4,
+      "kind": "compile",
+      "evidence": {
+        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260910\\windows-rollback-compile\\results.json",
+        "sha256": "4ded73b23d82d22bbccf63f75d7fa028162de39153d3d7983daa98974a2e28d7",
+        "bytes": 14363
+      }
+    },
+    "windows_final_units": {
+      "passed": 4,
+      "kind": "compile",
+      "evidence": {
+        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260910\\windows-final-compile\\results.json",
+        "sha256": "761fde8aaadbbe841b73db78f49bc3424f6a70129da5fa4ecb19946c8d2157cf",
+        "bytes": 14317
+      }
+    },
+    "native_manager": {
+      "passed": 31,
+      "kind": "device fixture using original core objects plus test-only adapter",
+      "evidence": {
+        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260910\\native-manager-fixtures\\device-result.json",
+        "sha256": "1cf4d5eff7add2eefd85e9b622a939b22a2f0e37667275d12fb40c6f8def1204",
+        "bytes": 3000
+      }
+    },
+    "private_copy_io": {
+      "passed": 10,
+      "kind": "device fault injection",
+      "evidence": {
+        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260910\\device-g2\\module-files-io-final.json",
+        "sha256": "517dc60e1132eb3aa81df5dfa9c85180ce89113d6518314e5b7f6aaafc89c442",
+        "bytes": 1455
+      }
+    },
+    "floating_parser": {
+      "passed": 6,
+      "kind": "device",
+      "evidence": {
+        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260910\\string-fixtures\\device-tests.log",
+        "sha256": "356baf4e079d707c19f641c9a653b6be35a5b28355137aefb7d28376017f1f34",
+        "bytes": 1242
+      }
+    },
+    "launcher_unit_tests": {
+      "passed": 69,
+      "failures": 0,
+      "errors": 0
+    },
+    "python_source_validator": {
+      "passed": 16,
+      "source": "test/python/test_android_kernel.py"
+    },
+    "original_version": {
+      "windows_passed": 11,
+      "android_passed": 11
+    },
+    "original_planner": {
+      "android_passed": 13
+    },
+    "main_example": {
+      "constructor_identity": true,
+      "worker_identity": true,
+      "native_nbt_round_trip": true,
+      "evidence": {
+        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260910\\device-g2\\release-main-result.json",
+        "sha256": "6e05fc973e22368eefd1ba93fd3bd25d706b596ff6e1170b398773b5c7838a6d",
+        "bytes": 1929
+      }
+    },
+    "final_type_visibility": {
+      "private_getter_hidden": true,
+      "required_formatter_vtable_exported": true,
+      "no_fixture_exports": true,
+      "verified_modes": [
+        "debug",
+        "release"
+      ],
+      "evidence": {
+        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260910\\post-commit-artifacts.json",
+        "sha256": "56a9fc3e580182eef753eecf6bd4e57a534a1c62c96f1e4d13894d8005f5ec91",
+        "bytes": 1845
+      }
+    },
+    "post_commit_builds": {
+      "passed": [
+        "debug",
+        "release"
+      ],
+      "source_commit": "38eaa99793dc39ca2c10ced6a226087f9711d5d3",
+      "evidence": {
+        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260910\\post-commit-builds.json",
+        "sha256": "4a00956ff038413d970d441840dab9ac56ab0931543db6e3314df16999ecbbfd",
+        "bytes": 233
+      },
+      "artifacts": {
+        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260910\\post-commit-artifacts.json",
+        "sha256": "56a9fc3e580182eef753eecf6bd4e57a534a1c62c96f1e4d13894d8005f5ec91",
+        "bytes": 1845
+      }
+    }
+  },
+  "pending": [
+    "Final FileSink/type-visibility example device receipt (user paused device work on 2026-09-12)",
+    "Remote publication (GitHub connectivity)"
+  ],
+  "later_gates": {
+    "G3": "unpassed",
+    "G4": "unpassed",
+    "G5": "unpassed",
+    "G6": "unpassed",
+    "G7": "unpassed",
+    "G8": "unpassed"
+  },
+  "limits": [
+    "No game Ready evidence from PL enable or menu",
+    "No full child/parent unload proof; Android unload remains refused",
+    "Logger::flush is sink-only, no queue-drain claim",
+    "Native loader currently supports root-level entry and fixed LL/platform dependency scope",
+    "No G6 published SDK/package or G7 full Windows/game regression"
+  ],
+  "device_fixture_archive": "/sdcard/Android/media/org.levimc.launcher/p7-fixture-evidence/20260911-g2",
+  "source_baselines": {
+    "LeviLamina": {
+      "head": "1bc96d524a5245a6ce28af8c13f31c281241c8fa",
+      "branch": "header",
+      "initial_clean": true
+    },
+    "LeviLaminaWithAndroid": {
+      "head": "6d5f02513384b051436fa0a26902894d10f6205a",
+      "branch": "main",
+      "initial_clean": true
+    },
+    "LeviLaminaWithAndroid-android-kernel": {
+      "head": "5bcf0f4a1907f75bf02691fe15993d00f8fefa5e",
+      "branch": "feat/android-minimal-kernel",
+      "initial_clean": true
+    },
+    "LeviLaminaWithAndroid-headers": {
+      "head": "6d5f02513384b051436fa0a26902894d10f6205a",
+      "branch": "",
+      "initial_clean": true
+    },
+    "preloader-source-p6": {
+      "head": "d12886b33ff46364efcc42252ea2e124fff051d9",
+      "branch": "codex/p6-guarded-hooks",
+      "initial_clean": true
+    },
+    "LeviLaunchroid-Test-p6": {
+      "head": "4c4c68ba6862a21e2409f35670c09572531f11f8",
+      "branch": "codex/p6-guarded-hooks",
+      "initial_clean": true
+    },
+    "prelink": {
+      "head": "ec038c771c92708dec1718b643f89eeb4992f0e9",
+      "branch": "main",
+      "initial_clean": false
+    },
+    "prelink-p5": {
+      "head": "1ab96df1790e2cd8082c4c72b656b0996ae4c311",
+      "branch": "feat/android-elf-prelink",
+      "initial_clean": true
+    },
+    "bedrock-magic-blob": {
+      "head": "194310d7fb9c3c9712618c9776cd7db1e5b521dd",
+      "branch": "feat/android-runtime-hook-data",
+      "initial_clean": true
+    },
+    "bedrock-magic-blob-p6-rebind": {
+      "head": "17cb32a11e8f86e5ef380c277575584e3f5584dc",
+      "branch": "codex/p6-provider-rebind",
+      "initial_clean": true
+    }
+  },
+  "device_work_paused_by_user": "2026-09-12; temporarily unavailable",
+  "protected_inputs_final": {
+    "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260910\\protected-inputs-final.json",
+    "sha256": "46fcb3bd1fa39f55e22c01964842dac06791f5c17940deff7232b155b981d2ee"
+  }
+}
