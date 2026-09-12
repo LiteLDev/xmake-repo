@@ -1,6 +1,6 @@
 {
   "scope": "P7-G0-G2",
-  "source_commit": "38eaa99793dc39ca2c10ced6a226087f9711d5d3",
+  "source_commit": "f227daa338",
   "first_batch_closed": false,
   "P7_complete": false,
   "baseline": {
@@ -19,7 +19,7 @@
   },
   "commits": {
     "LL_foundations": "c4921d7eae33f6275d31cfce93885c9a564da132",
-    "LL_runtime": "38eaa99793dc39ca2c10ced6a226087f9711d5d3",
+    "LL_runtime": "f227daa338",
     "Launcher": "9af3e0dfc15980d02ca8e8f6de5f26cfff2f72b7",
     "PL": "8ebd46fcd8914dc7f5ae8c63abbdb78347097fd3",
     "Header": "2ae3e432d1e4b003e89194979c13e7e437685056",
