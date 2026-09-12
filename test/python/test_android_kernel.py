@@ -33,25 +33,32 @@ class KernelInputTests(unittest.TestCase):
 
 class IncludeTraceTests(unittest.TestCase):
     def setUp(self):
-        self.tmp = tempfile.TemporaryDirectory(prefix="p6-include-")
+        self.tmp = tempfile.TemporaryDirectory(prefix="p7-include-")
         self.addCleanup(self.tmp.cleanup)
         root = Path(self.tmp.name)
-        self.repo, self.header, self.sdk, self.traces = (root / n for n in ("core", "headers", "sdk", "traces"))
-        for path in (self.repo, self.header, self.sdk, self.traces):
+        self.repo, self.header, self.sdk, self.traces, self.view = (root / n for n in ("core", "headers", "sdk", "traces", "include"))
+        for path in (self.repo, self.header, self.sdk, self.traces, self.view):
             path.mkdir()
         self.mc_names = ("mc/world/actor/Actor.h", "mc/client/game/ClientInstance.h", "mc/client/player/LocalPlayer.h")
         for name in self.mc_names:
             self.write(self.header / "src-android" / name, "// frozen " + name + "\n")
         self.pl = self.sdk / "src-android/pl/android/Mod.h"
         self.write(self.pl, "// frozen public SDK\n")
-        self.ll = self.repo / "src-android/ll/core/CompilationContract.h"
-        self.write(self.ll, "// project contract\n")
+        self.backend = self.repo / "src-android/ll/core/CompilationContract.h"
+        self.shared = self.repo / "src/ll/api/Global.h"
+        self.write(self.backend, "// platform implementation\n")
+        self.write(self.shared, "// original shared interface\n")
+        self.write(self.view / "ll/api/Global.h", self.shared.read_text(encoding="utf-8"))
         self.s, self.pl_commit = (self.commit(path) for path in (self.header, self.sdk))
         self.config = {"repository": str(self.repo), "inputs": {"header_root": str(self.header), "preloader_root": str(self.sdk)},
-                       "commits": {"S": self.s, "PL": self.pl_commit}}
-        for name in binary.SOURCE_NAMES:
-            lines = [self.ll, self.pl]
-            if name == "HeaderSmoke":
+                       "commits": {"S": self.s, "PL": self.pl_commit}, "phase": "P7-G0-G2", "source_layout": "shared-v1",
+                       "role": "kernel", "sources": ["src/ll/api/event/Event.cpp", "src-android/ll/core/main_android.cpp"],
+                       "include_roots": [str(self.view)],
+                       "ll_headers": {"ll/api/Global.h": {"source": "src/ll/api/Global.h", "sha256": inputs.sha(self.shared)}}}
+        self.first_trace = next(iter(sorted(binary.source_names(self.config))))
+        for name in binary.source_names(self.config):
+            lines = [self.view / "ll/api/Global.h", self.backend, self.pl]
+            if name == self.first_trace:
                 lines += [self.header / "src-android" / n for n in self.mc_names]
             self.write(self.traces / (name + ".txt"), "\n".join(map(str, lines)) + "\n")
 
@@ -63,101 +70,99 @@ class IncludeTraceTests(unittest.TestCase):
     @staticmethod
     def commit(path):
         for args in (("init",), ("config", "user.name", "Fixture"), ("config", "user.email", "fixture@example.invalid"),
-                     ("config", "core.autocrlf", "false"), ("add", "."), ("commit", "-m", "frozen input")):
+                     ("config", "core.autocrlf", "false"), ("config", "commit.gpgsign", "false"),
+                     ("add", "."), ("commit", "-m", "frozen input")):
             inputs.git(path, *args)
         return inputs.git(path, "rev-parse", "HEAD")
 
     def append(self, path):
-        with (self.traces / "HeaderSmoke.txt").open("a", encoding="utf-8") as stream:
+        with (self.traces / (self.first_trace + ".txt")).open("a", encoding="utf-8") as stream:
             stream.write(str(path) + "\n")
 
-    def test_exact_git_sources_are_accepted(self):
+    def test_exact_shared_backend_and_git_sources_are_accepted(self):
         result = binary.verify_traces(self.config, self.traces)
         self.assertEqual(result["mc_unique_count"], 3)
         self.assertTrue(result["all_mc_from_S"])
+        self.assertEqual(len(result["units"]), 2)
 
     def test_byte_identical_project_mc_shadow_is_rejected(self):
         shadow = self.repo / "src-android/ll/core/mc/world/actor/Actor.h"
-        self.write(shadow, (self.header / "src-android" / self.mc_names[0]).read_text())
+        self.write(shadow, (self.header / "src-android" / self.mc_names[0]).read_text(encoding="utf-8"))
         self.append(shadow)
         with self.assertRaisesRegex(inputs.InputError, "outside Header S"):
             binary.verify_traces(self.config, self.traces)
 
     def test_changed_mc_blob_is_rejected(self):
-        self.write(self.header / "src-android" / self.mc_names[0], "// same checkout, changed bytes\n")
+        self.write(self.header / "src-android" / self.mc_names[0], "// changed Header bytes\n")
         with self.assertRaisesRegex(inputs.InputError, "Git blob"):
             binary.verify_traces(self.config, self.traces)
 
-    def test_windows_layer_cannot_enter_android(self):
+    def test_windows_mc_layer_cannot_enter_android(self):
         path = self.header / "src-client" / self.mc_names[0]
         self.write(path, "// Windows Header\n")
         self.append(path)
         with self.assertRaisesRegex(inputs.InputError, "wrong platform"):
             binary.verify_traces(self.config, self.traces)
 
-    def test_desktop_ll_header_is_rejected(self):
-        path = self.repo / "src/ll/api/Global.h"
-        self.write(path, "// desktop PCH\n")
-        self.append(path)
+    def test_shared_ll_requires_controlled_view(self):
+        self.append(self.shared)
         with self.assertRaisesRegex(inputs.InputError, "unapproved LL"):
             binary.verify_traces(self.config, self.traces)
 
-    def test_missing_trace_is_rejected(self):
-        (self.traces / "KernelEntry.txt").unlink()
-        with self.assertRaisesRegex(inputs.InputError, "include traces"):
+    def test_changed_shared_source_or_view_is_rejected(self):
+        for path in (self.shared, self.view / "ll/api/Global.h"):
+            with self.subTest(path=path):
+                original = path.read_text(encoding="utf-8")
+                self.write(path, "// changed shared header\n")
+                with self.assertRaisesRegex(inputs.InputError, "changed after configuration"):
+                    binary.verify_traces(self.config, self.traces)
+                self.write(path, original)
+
+    def test_android_backend_cannot_shadow_original_interface(self):
+        shadow = self.repo / "src-android/ll/api/Global.h"
+        self.write(shadow, self.shared.read_text(encoding="utf-8"))
+        self.append(shadow)
+        with self.assertRaisesRegex(inputs.InputError, "shadows"):
             binary.verify_traces(self.config, self.traces)
 
-    def test_g3_requires_every_new_translation_unit(self):
-        self.config["phase"] = "G3"
-        with self.assertRaisesRegex(inputs.InputError, "include traces"):
-            binary.verify_traces(self.config, self.traces)
-        for name in binary.SOURCE_NAMES_G3 - binary.SOURCE_NAMES:
-            self.write(self.traces / (name + ".txt"), str(self.ll) + "\n")
+    def test_applicable_client_ll_header_is_accepted_in_view(self):
+        source = self.repo / "src-client/ll/core/Client.h"
+        self.write(source, "// original client interface\n")
+        view = self.view / "ll/core/Client.h"
+        self.write(view, source.read_text(encoding="utf-8"))
+        self.config["ll_headers"]["ll/core/Client.h"] = {"source": "src-client/ll/core/Client.h", "sha256": inputs.sha(source)}
+        self.append(view)
         result = binary.verify_traces(self.config, self.traces)
-        self.assertEqual(len(result["units"]), 7)
-        (self.traces / "KernelApi.txt").unlink()
+        self.assertIn("src-client/ll/core/Client.h", result["units"][self.first_trace]["authenticated_headers"])
+
+    def test_missing_trace_is_rejected(self):
+        (self.traces / (self.first_trace + ".txt")).unlink()
         with self.assertRaisesRegex(inputs.InputError, "include traces"):
             binary.verify_traces(self.config, self.traces)
 
-    def test_unknown_phase_cannot_relax_the_source_contract(self):
-        self.config["phase"] = "unknown"
-        with self.assertRaisesRegex(inputs.InputError, "unsupported kernel phase"):
-            binary.verify_traces(self.config, self.traces)
-
-    def test_platform_layout_requires_entry_and_output_units(self):
-        self.config.update(phase="G3", source_layout="platform-v1")
-        (self.traces / "KernelEntry.txt").unlink()
-        for name in binary.SOURCE_NAMES_G3_PLATFORM - {"KernelLifecycle", "HeaderSmoke"}:
-            self.write(self.traces / (name + ".txt"), str(self.ll) + "\n")
-        self.assertEqual(len(binary.verify_traces(self.config, self.traces)["units"]), 8)
-        (self.traces / "Output_android.txt").unlink()
+    def test_every_added_source_requires_its_compilation_trace(self):
+        self.config["sources"].append("src/ll/api/io/Logger.cpp")
         with self.assertRaisesRegex(inputs.InputError, "include traces"):
             binary.verify_traces(self.config, self.traces)
+        self.write(self.traces / "src_ll_api_io_Logger_cpp.txt", str(self.view / "ll/api/Global.h") + "\n")
+        self.assertEqual(len(binary.verify_traces(self.config, self.traces)["units"]), 3)
+        self.write(self.traces / "Unlisted_cpp.txt", str(self.backend) + "\n")
+        with self.assertRaisesRegex(inputs.InputError, "include traces"):
+            binary.verify_traces(self.config, self.traces)
+
+    def test_old_or_unknown_source_formats_are_rejected(self):
+        for phase, layout in (("G5", "platform-v1"), ("P7-G0-G2", "platform-v1"), ("unknown", "shared-v1")):
+            with self.subTest(phase=phase, layout=layout), self.assertRaisesRegex(inputs.InputError, "unsupported shared-core"):
+                binary.verify_traces(dict(self.config, phase=phase, source_layout=layout), self.traces)
 
     def test_changed_pl_sdk_is_rejected(self):
         self.write(self.pl, "// changed SDK\n")
         with self.assertRaisesRegex(inputs.InputError, "Git blob"):
             binary.verify_traces(self.config, self.traces)
 
-    def test_g5_requires_all_explicit_modules_and_rejects_extra_units(self):
-        self.config.update(phase="G5", source_layout="platform-v1", role="kernel")
-        (self.traces / "KernelEntry.txt").unlink()
-        for name in binary.SOURCE_NAMES_G5 - {"KernelLifecycle", "HeaderSmoke"}:
-            self.write(self.traces / (name + ".txt"), str(self.ll) + "\n")
-        self.assertEqual(len(binary.verify_traces(self.config, self.traces)["units"]), 17)
-        self.write(self.traces / "Unlisted.txt", str(self.ll) + "\n")
-        with self.assertRaisesRegex(inputs.InputError, "include traces"):
-            binary.verify_traces(self.config, self.traces)
-
-    def test_example_has_no_mc_and_cannot_use_kernel_source_set(self):
-        self.config.update(phase="G5", source_layout="platform-v1", role="example")
-        for path in self.traces.iterdir():
-            path.unlink()
-        self.write(self.traces / "main.txt", str(self.ll) + "\n")
-        self.assertEqual(binary.verify_traces(self.config, self.traces)["mc_unique_count"], 0)
-        self.write(self.traces / "main.txt", str(self.header / "src-android" / self.mc_names[0]) + "\n")
-        with self.assertRaises(inputs.InputError):
-            binary.verify_traces(self.config, self.traces)
+    def test_original_api_example_can_use_frozen_mc_header(self):
+        self.config["role"] = "example"
+        self.assertEqual(binary.verify_traces(self.config, self.traces)["mc_unique_count"], 3)
 
 
 if __name__ == "__main__":

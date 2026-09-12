@@ -1,10 +1,10 @@
 {
-    global:
-        PLGetModRegistration;
-        LLAndroidKernel_GetApiVersion;
-        LLAndroidKernel_GetState;
-        LLAndroidKernel_Log;
-        LLAndroidKernel_Subscribe;
-        LLAndroidKernel_Unsubscribe;
-    local: *;
+    local:
+        _ZN3fmt*;
+        _ZNK3fmt*;
+        _ZT*N3fmt*;
+        _Znw*;
+        _Zna*;
+        _Zdl*;
+        _Zda*;
 };

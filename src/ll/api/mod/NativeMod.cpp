@@ -8,7 +8,7 @@
 namespace ll::mod {
 
 struct NativeMod::Impl {
-    sys_utils::HandleT        handle; // for ll self
+    sys_utils::HandleT        handle{}; // for ll self
     sys_utils::DynamicLibrary lib;
 };
 
@@ -20,7 +20,15 @@ NativeMod::~NativeMod() { release(); }
 
 sys_utils::DynamicLibrary& NativeMod::getDynamicLibrary() { return mImpl->lib; }
 
-sys_utils::HandleT NativeMod::getHandle() const { return mImpl->handle ? mImpl->handle : (mImpl->lib.handle()); }
+sys_utils::HandleT NativeMod::getHandle() const {
+    if (mImpl->handle) return mImpl->handle;
+#if defined(LL_PLAT_A)
+    // dlopen handles are opaque and cannot be used as ELF module identities.
+    return sys_utils::getModuleHandle(mImpl->lib.getAddress("ll_mod_load"));
+#else
+    return mImpl->lib.handle();
+#endif
+}
 
 std::shared_ptr<NativeMod> NativeMod::getByHandle(sys_utils::HandleT handle) {
     if (handle == sys_utils::getCurrentModuleHandle()) {

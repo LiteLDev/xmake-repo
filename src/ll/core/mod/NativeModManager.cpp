@@ -7,7 +7,9 @@
 #include <string_view>
 #include <utility>
 
+#if defined(_WIN32)
 #include "pl/dependency/DependencyWalker.h"
+#endif
 
 #include "ll/api/base/ScopedValue.h"
 #include "ll/api/i18n/I18n.h"
@@ -20,6 +22,9 @@
 #include "ll/api/utils/StringUtils.h"
 #include "ll/api/utils/SystemUtils.h"
 #include "ll/core/LeviLamina.h"
+#if defined(LL_PLAT_A)
+#include "ll/core/mod/NativeModPlatform.h"
+#endif
 
 namespace ll::mod {
 NativeModManager::NativeModManager() : ModManager(NativeModManagerName) {
@@ -27,10 +32,10 @@ NativeModManager::NativeModManager() : ModManager(NativeModManagerName) {
 }
 NativeModManager::~NativeModManager() = default;
 
-static std::shared_ptr<NativeMod> currentLoadingMod;
+static thread_local std::shared_ptr<NativeMod> currentLoadingMod;
 
 std::shared_ptr<NativeMod> NativeModManager::getModByHandle(Handle handle) {
-    auto l(lock());
+    std::lock_guard l(mHandleMutex);
     if (handleMap.contains(handle)) {
         return handleMap.at(handle);
     }
@@ -39,6 +44,7 @@ std::shared_ptr<NativeMod> NativeModManager::getModByHandle(Handle handle) {
     }
     return {};
 }
+#if defined(_WIN32)
 static Error diagnosticDependency(pl::dependency_walker::DependencyIssueItem const& item, size_t depth = 0) {
     Error       error;
     std::string indent(depth * 3 + 3, ' ');
@@ -77,9 +83,13 @@ static Error diagnosticDependency(std::filesystem::path const& path) {
     error.join(diagnosticDependency(*result));
     return error;
 }
+#endif
 
 Expected<> NativeModManager::load(Manifest manifest) {
-    auto            l(lock());
+    auto l(lock());
+    if (hasMod(manifest.name)) {
+        return makeI18nStringError<"Mod {0} is already owned by the native manager">(manifest.name);
+    }
     ScopedValue     currentLoadingScope{currentLoadingMod, std::make_shared<NativeMod>(std::move(manifest))};
     std::error_code ec;
     auto            modDir = getModsRoot() / string_utils::sv2u8sv(currentLoadingMod->getName());
@@ -88,18 +98,30 @@ Expected<> NativeModManager::load(Manifest manifest) {
     } else {
         modDir = modDir.lexically_normal();
     }
+#if defined(_WIN32)
     sys_utils::addOrSetEnvironmentVariable("PATH", string_utils::u8sv2sv(modDir.u8string()));
+#endif
 
     auto entry = modDir / string_utils::sv2u8sv(currentLoadingMod->getManifest().entry);
+#if defined(LL_PLAT_A)
+    auto prepared = prepareNativeMod(currentLoadingMod->getManifest(), modDir);
+    if (!prepared) return forwardError(prepared.error());
+    entry = std::move(*prepared);
+#endif
     if (auto e = currentLoadingMod->getDynamicLibrary().load(entry); e) {
         Expected<> error{makeExceptionError(std::make_exception_ptr(e.value()))};
+#if defined(_WIN32)
         if (e->code().value() == 126 || e->code().value() == 127) {
             error.error().join(diagnosticDependency(entry));
         }
+#endif
         return error;
     }
     auto& lib = currentLoadingMod->getDynamicLibrary();
     if (!lib.getAddress("ll_memory_operator_overrided")) {
+        // Static initialization may already have published objects. Keep the
+        // original Mod/library owner until cleanup can actually be established.
+        addMod(currentLoadingMod->getName(), currentLoadingMod);
         return makeI18nStringError<
             "{0} will not be loaded because it isn't using the unified memory allocation operator">(
             currentLoadingMod->getName()
@@ -110,13 +132,50 @@ Expected<> NativeModManager::load(Manifest manifest) {
     currentLoadingMod->onEnable(lib.getAddress<Mod::callback_t*>("ll_mod_enable"));
     currentLoadingMod->onDisable(lib.getAddress<Mod::callback_t*>("ll_mod_disable"));
 
-    return currentLoadingMod->onLoad().transform([&, this] {
+    {
+        std::lock_guard handleLock(mHandleMutex);
+        handleMap[currentLoadingMod->getHandle()] = currentLoadingMod;
+    }
+    auto result = currentLoadingMod->onLoad();
+    if (!result) {
+        auto error = std::move(result.error());
+        if (currentLoadingMod->hasOnUnload()) {
+            if (auto cleanup = currentLoadingMod->onUnload(); !cleanup) error.join(std::move(cleanup.error()));
+        }
+#if defined(LL_PLAT_A)
+        error.join(makeI18nStringError<"Native owner retained until shared callback drain is available">());
+#endif
+        auto reported = makeStringError(error.message());
+        mFailures.insert_or_assign(currentLoadingMod->getName(), std::move(error));
         addMod(currentLoadingMod->getName(), currentLoadingMod);
-        handleMap[lib.handle()] = currentLoadingMod;
-    });
+        return reported;
+    }
+    addMod(currentLoadingMod->getName(), currentLoadingMod);
+    return {};
 }
 
+#if defined(LL_PLAT_A)
+Expected<> NativeModManager::enable(std::string_view name) {
+    auto guard(lock());
+    auto result = ModManager::enable(name);
+    if (result) {
+        mFailures.erase(std::string{name});
+        return result;
+    }
+    auto error    = std::move(result.error());
+    auto reported = makeStringError(error.message());
+    // Preserve the original exception/error while this manager owns the SO.
+    mFailures.insert_or_assign(std::string{name}, std::move(error));
+    return reported;
+}
+#endif
+
 Expected<> NativeModManager::unload(std::string_view name) {
+#if defined(LL_PLAT_A)
+    // G0-G2 can load original Mods; G3 must establish callback/type/task drain
+    // before this platform can release a general Mod SO.
+    return makeI18nStringError<"Cannot unload {0}: shared Android callback drain is not yet available">(name);
+#else
     auto l(lock());
     auto ptr = std::static_pointer_cast<NativeMod>(getMod(name));
     if (!ptr->hasOnUnload()) {
@@ -125,11 +184,16 @@ Expected<> NativeModManager::unload(std::string_view name) {
     if (auto res = ptr->onUnload(); !res) {
         return res;
     }
+    auto const oldHandle = ptr->getHandle();
     if (auto err = ptr->getDynamicLibrary().free(); err) {
         return makeExceptionError(std::make_exception_ptr(*err));
     }
-    handleMap.erase(ptr->getHandle());
+    {
+        std::lock_guard handleLock(mHandleMutex);
+        handleMap.erase(oldHandle);
+    }
     eraseMod(name);
     return {};
+#endif
 }
 } // namespace ll::mod

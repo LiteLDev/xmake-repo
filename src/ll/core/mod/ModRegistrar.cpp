@@ -15,6 +15,7 @@
 #include "ll/api/Expected.h"
 #include "ll/api/Versions.h"
 #include "ll/api/base/Containers.h"
+#include "ll/api/base/ToString.h"
 #include "ll/api/data/DependencyGraph.h"
 #include "ll/api/data/Version.h"
 #include "ll/api/i18n/I18n.h"

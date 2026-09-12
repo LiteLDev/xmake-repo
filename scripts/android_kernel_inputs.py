@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Authenticate explicit P6 inputs without downloading or changing producer trees."""
+"""Authenticate explicit P7 inputs without downloading or changing producer trees."""
 from __future__ import annotations
 
 import argparse
@@ -7,6 +7,7 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
+import shutil
 from typing import Any
 
 import materialize_android_dependencies as dependencies
@@ -146,20 +147,20 @@ def validate_dependencies(root: Path, runtime: dict, ndk: Path, lock: dict) -> l
     return roots
 
 
-def authenticate(repo: Path, inputs: dict[str, str], api: int = 28, arch: str = "arm64-v8a", role: str = "kernel") -> dict[str, Any]:
+def authenticate(repo: Path, inputs: dict[str, str], api: int = 28, arch: str = "arm64-v8a", role: str = "kernel", destination: Path | None = None) -> dict[str, Any]:
     repo = repo.resolve()
     lock_path = repo / "config/android-kernel-inputs.lock.json"
     lock = read_json(lock_path)
     phase = lock.get("phase", "")
-    if phase not in ("P6-G2", "P6-G3", "P6-G5"):
+    if phase != "P7-G0-G2":
         raise InputError("unsupported kernel validation phase")
-    if role not in ("kernel", "example") or (role == "example" and phase != "P6-G5"):
+    if role not in ("kernel", "example"):
         raise InputError("unsupported binary role")
-    layout = lock.get("source_layout", "legacy")
-    if layout not in ("legacy", "platform-v1") or (phase == "P6-G2" and layout != "legacy"):
+    layout = lock.get("source_layout")
+    if layout != "shared-v1":
         raise InputError("unsupported kernel source layout")
     if api != lock["binary"]["api_level"] or arch != lock["binary"]["architecture"]:
-        raise InputError("P6 binary requires API 28 and arm64-v8a")
+        raise InputError("P7 binary requires API 28 and arm64-v8a")
     folders = {"header_root", "preloader_root", "ndk"}
     names = (*folders, "dependency_lock", "prelink", "runtime_manifest", "bmb", "provider", "target")
     resolved = {name: required_path(inputs.get(name, ""), name, name in folders) for name in names}
@@ -179,40 +180,95 @@ def authenticate(repo: Path, inputs: dict[str, str], api: int = 28, arch: str = 
     clean_checkout(resolved["preloader_root"], lock["commits"]["PL"], "PL SDK")
     metadata = validate_header_snapshot(resolved["header_root"], lock)
     roots = validate_dependencies(resolved["header_root"], read_json(resolved["dependency_lock"]), ndk, lock)
-    direct = [resolved["header_root"] / "src-android", resolved["header_root"] / "src", repo / "src-android", repo / "src"]
+    if destination is None:
+        raise InputError("shared include destination is required")
+    view = prepare_shared_view(repo, resolved["header_root"], resolved["dependency_lock"], ndk, destination)
     sdk = [resolved["preloader_root"] / "src-android", resolved["preloader_root"] / "src"]
     for path in sdk:
-        if (path / "mc").exists():
-            raise InputError("PL SDK include root would shadow Minecraft Headers")
-    return {"schema_version": 1, "phase": phase.removeprefix("P6-"), "role": role, "source_layout": layout, "repository": str(repo),
+        if (path / "mc").exists() or (path / "ll").exists():
+            raise InputError("PL SDK include root would shadow LL or Minecraft Headers")
+    return {"schema_version": 2, "phase": phase, "role": role, "source_layout": layout, "repository": str(repo),
             "lock_sha256": sha(lock_path), "inputs": {k: str(v) for k, v in resolved.items()},
-            "commits": lock["commits"], "binary": lock["binary"],
-            "include_roots": [str(v) for v in direct], "system_include_roots": [str(v) for v in sdk + roots],
-            "header_manifest_sha256": metadata["manifest"]["sha256"], "package": lock["package"] if role == "kernel" else lock["example"]}
+            "commits": lock["commits"], "binary": lock["binary"], "sdk": lock["sdk"], "sources": lock["sources"][role],
+            "include_roots": view["include_roots"], "system_include_roots": [str(v) for v in sdk] + view["dependency_roots"],
+            "ll_headers": view["ll_headers"], "header_manifest_sha256": metadata["manifest"]["sha256"],
+            "package": lock["package"] if role == "kernel" else lock["example"]}
+
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--prepare-shared-view", action="store_true")
     parser.add_argument("--repo", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--api", type=int, required=True)
-    parser.add_argument("--arch", required=True)
+    parser.add_argument("--api", type=int, default=28)
+    parser.add_argument("--arch", default="arm64-v8a")
     parser.add_argument("--role", choices=("kernel", "example"), default="kernel")
     for name in ("header-root", "dependency-lock", "preloader-root", "prelink", "runtime-manifest", "bmb", "provider", "target", "ndk"):
-        parser.add_argument("--" + name, required=True)
+        parser.add_argument("--" + name)
     args = parser.parse_args()
     try:
         output = args.output.resolve()
         if output.is_relative_to(args.repo.resolve()):
             raise InputError("validation output must be outside the source worktree")
-        result = authenticate(args.repo, vars(args), args.api, args.arch, args.role)
+        if args.prepare_shared_view:
+            result = prepare_shared_view(args.repo.resolve(), required_path(args.header_root, "Header S", True),
+                                         required_path(args.dependency_lock, "dependency lock"),
+                                         required_path(args.ndk, "NDK", True), output.parent / "include")
+        else:
+            result = authenticate(args.repo, vars(args), args.api, args.arch, args.role, output.parent / "include")
         output.parent.mkdir(parents=True, exist_ok=True)
         staged = output.with_suffix(output.suffix + ".tmp")
         staged.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
         staged.replace(output)
-        print("P6 inputs authenticated; Header API21 is unchanged; binary API28 is selected.")
+        print("P7 shared include view authenticated; C++23." if args.prepare_shared_view else
+              "P7 runtime inputs authenticated; Header API21 and binary API28.")
     except (InputError, OSError, ValueError, KeyError, dependencies.MaterializationError, headers.ValidationError) as exc:
-        parser.exit(1, f"P6 input rejected: {exc}\n")
+        parser.exit(1, f"P7 input rejected: {exc}\n")
+
+
+def prepare_shared_view(repo: Path, header: Path, dependency_lock: Path, ndk: Path, destination: Path) -> dict:
+    """Compile original LL headers without admitting the desktop mc overlays.
+
+    This is a G1 compile/fixture input, not a runtime-package release receipt.
+    """
+    if destination.is_relative_to(repo):
+        raise InputError("shared include view must be outside the source worktree")
+    lock = read_json(repo / "config/android-kernel-inputs.lock.json")
+    validate_header_snapshot(header, lock)
+    runtime = read_json(dependency_lock)
+    roots = validate_dependencies(header, runtime, ndk, lock)
+    # The shared LL code requires its original patched expected-lite and fmt.
+    # xmake resolves those explicit packages; do not let the Header-only P1
+    # include roots silently override them in this compile/fixture target.
+    replaced = {entry["name"]: Path(entry["path"]).resolve() for entry in runtime["sources"]
+                if entry["name"] in ("expected-lite", "fmt")}
+    roots = [path for path in roots if not any(path.is_relative_to(root) for root in replaced.values())]
+    if dependencies.read_ndk_revision(ndk) != lock["ndk"]["revision"]:
+        raise InputError("shared core requires NDK r28c")
+    for name, fingerprint in lock["ndk"]["files"].items():
+        check_file(ndk / name, {"sha256": fingerprint}, "NDK " + name)
+    selected = {}
+    for layer in ("src", "src-client"):
+        for source in sorted((repo / layer / "ll").rglob("*")):
+            if source.is_file() and source.suffix in (".h", ".hpp", ".inl"):
+                selected[source.relative_to(repo / layer).as_posix()] = source
+    destination.mkdir(parents=True, exist_ok=True)
+    # Only this generated view is pruned; never alter a source or Header tree.
+    for previous in destination.rglob("*"):
+        if previous.is_file() and previous.relative_to(destination).as_posix() not in selected:
+            previous.unlink()
+    files = {}
+    for relative, source in sorted(selected.items()):
+        target = destination / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source, target)
+        files[relative] = {"source": source.relative_to(repo).as_posix(), "sha256": sha(source)}
+    return {"phase": "P7-G1-fixture", "cxx": "c++23", "exceptions": True, "rtti": True,
+            "header_commit": lock["commits"]["S"], "ll_headers": files,
+            "include_roots": [str(destination), str(header / "src-android"), str(header / "src")],
+            "dependency_roots": [str(path) for path in roots],
+            "ll_package_overrides": sorted(replaced)}
 
 
 if __name__ == "__main__":

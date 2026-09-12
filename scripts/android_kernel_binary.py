@@ -12,29 +12,10 @@ import subprocess
 
 from android_kernel_inputs import InputError, git, read_json, sha
 
-SOURCE_NAMES = {"KernelEntry", "KernelLifecycle", "HeaderSmoke"}
-SOURCE_NAMES_G3 = SOURCE_NAMES | {"KernelApi", "KernelContext", "KernelLogger", "KernelRuntime"}
-SOURCE_NAMES_G3_PLATFORM = (SOURCE_NAMES_G3 - {"KernelEntry"}) | {"main_android", "Output_android"}
-SOURCE_NAMES_G5 = SOURCE_NAMES_G3_PLATFORM | {"RuntimeSymbols", "HookTransaction", "EventRegistry", "ModOwner",
-    "ModManifest", "ElfModule", "ModuleFiles", "NativeModRegistry", "NativeModManager"}
-EXPORTS_G3 = {"PLGetModRegistration", "LLAndroidKernel_GetApiVersion", "LLAndroidKernel_GetState",
-              "LLAndroidKernel_Log", "LLAndroidKernel_Subscribe", "LLAndroidKernel_Unsubscribe"}
-
-
 def source_names(config: dict) -> set[str]:
-    phase = config.get("phase", "G2")
-    if phase not in ("G2", "G3", "G5"):
-        raise InputError("unsupported kernel phase")
-    if phase == "G5":
-        if config.get("source_layout") != "platform-v1" or config.get("role", "kernel") not in ("kernel", "example"):
-            raise InputError("unsupported G5 layout or role")
-        return {"main"} if config.get("role") == "example" else SOURCE_NAMES_G5
-    layout = config.get("source_layout", "legacy")
-    if layout not in ("legacy", "platform-v1") or (phase == "G2" and layout != "legacy"):
-        raise InputError("unsupported kernel source layout")
-    if layout == "platform-v1":
-        return SOURCE_NAMES_G3_PLATFORM
-    return SOURCE_NAMES_G3 if phase == "G3" else SOURCE_NAMES
+    if config.get("phase") != "P7-G0-G2" or config.get("source_layout") != "shared-v1":
+        raise InputError("unsupported shared-core input format")
+    return {name.replace("/", "_").replace(".", "_") for name in config["sources"]}
 
 
 def write_json(path: Path, value: dict) -> None:
@@ -90,9 +71,22 @@ def verify_traces(config: dict, directory: Path) -> dict:
                 files[relative] = check_blob(path, relative, h_ids, "Minecraft Header")
                 all_mc.add(relative.split("/", 1)[1])
             elif "ll" in path.parts:
-                if not path.is_relative_to(repo / "src-android/ll"):
+                view = Path(config["include_roots"][0]).resolve()
+                if path.is_relative_to(view):
+                    relative = path.relative_to(view).as_posix()
+                    selected = config["ll_headers"].get(relative)
+                    if not selected or sha(path) != selected["sha256"] or sha(repo / selected["source"]) != selected["sha256"]:
+                        raise InputError("shared/client Header view changed after configuration: " + relative)
+                    files[selected["source"]] = selected["sha256"]
+                elif path.is_relative_to(repo / "src-android/ll"):
+                    relative = path.relative_to(repo / "src-android").as_posix()
+                    if relative in config["ll_headers"]:
+                        raise InputError("Android Header shadows a shared/client interface: " + relative)
+                    files[path.relative_to(repo).as_posix()] = sha(path)
+                elif path.name == "Version.h" and path.parent.name == "core" and "config" in path.parts:
+                    files["generated/ll/core/Version.h"] = sha(path)
+                else:
                     raise InputError("unapproved LL include: " + str(path))
-                files[path.relative_to(repo).as_posix()] = sha(path)
             elif "pl" in path.parts:
                 if not path.is_relative_to(sdk):
                     raise InputError("PL include is outside the frozen SDK")
@@ -103,42 +97,11 @@ def verify_traces(config: dict, directory: Path) -> dict:
         if not files:
             raise InputError("compiler trace contains no project or SDK Headers")
         units[name] = {"trace_sha256": sha(trace), "authenticated_headers": files}
-    required = {"mc/world/actor/Actor.h", "mc/client/game/ClientInstance.h", "mc/client/player/LocalPlayer.h"}
-    if config.get("role") == "example" and all_mc:
-        raise InputError("example must not compile Minecraft Headers")
-    if config.get("role") != "example" and not required <= all_mc:
-        raise InputError("the actual compiler trace does not contain the required MC smoke Headers")
     return {"units": units, "mc_unique_count": len(all_mc), "all_mc_from_S": True}
 
 
-def verify_objects(config: dict, traces: Path, objects: list[Path], output: Path) -> None:
-    count = len(source_names(config))
-    if len(objects) != count or not all(p.is_file() for p in objects):
-        raise InputError("all explicit compiled objects are required")
-    coverage = verify_traces(config, traces)
-    inputs = config["inputs"]
-    dry_output = output / "p5-dry-run-unused"
-    if dry_output.exists():
-        raise InputError("dry-run destination unexpectedly contains artifacts")
-    args = [inputs["prelink"], "android", "generate", "--runtime-manifest", inputs["runtime_manifest"],
-            "--bmb", inputs["bmb"], "--provider-elf", inputs["provider"], "--target-elf", inputs["target"],
-            "--ndk", inputs["ndk"], "--output", str(dry_output), "--dry-run", "--",
-            *[str(p.resolve()) for p in sorted(objects)]]
-    run = subprocess.run(args, capture_output=True, text=True, encoding="utf-8", errors="replace")
-    log = output / "p5-input-authentication.log"
-    log.write_text(run.stdout + run.stderr, encoding="utf-8")
-    if run.returncode or not re.search(rf"android dry-run ok: inputs={count} functions=0 external=\d+", run.stdout):
-        raise InputError("P5 input authentication or zero-MC-import classification failed: " + run.stdout + run.stderr)
-    if dry_output.exists():
-        raise InputError("P5 dry-run unexpectedly wrote output")
-    write_json(output / "objects.json", {"phase": config.get("phase", "G2"), "passed": True, "header_coverage": coverage,
-               "p5_command": args, "p5_log_sha256": sha(log), "function_imports": 0,
-               "objects": [{"path": str(p), "sha256": sha(p)} for p in objects], "G6_complete": False})
-    print("Kernel object checks passed: actual MC includes are S; P5 functionImports=0.")
-
-
-def elf_contract(path: Path, phase: str = "G2", role: str = "kernel") -> dict:
-    if phase not in ("G2", "G3", "G5") or role not in ("kernel", "example"):
+def elf_contract(path: Path, phase: str = "P7-G0-G2", role: str = "kernel", expected_soname: str | None = None) -> dict:
+    if phase != "P7-G0-G2" or role not in ("kernel", "example"):
         raise InputError("unsupported kernel phase")
     data = path.read_bytes()
 
@@ -226,20 +189,22 @@ def elf_contract(path: Path, phase: str = "G2", role: str = "kernel") -> dict:
                 offset += (desc_size + 3) & ~3
                 if name == b"Android" and len(desc) >= 4:
                     api_notes.append(struct.unpack_from("<I", desc)[0])
-    expected_exports = {"LLGetModRegistration"} if role == "example" else EXPORTS_G3 if phase != "G2" else {"PLGetModRegistration"}
-    if len(exports) != len(expected_exports) or set(exports) != expected_exports:
-        raise InputError(f"{phase} dynamic export set mismatch")
-    if any(export_details[name] != (2, 1, 0) for name in expected_exports):
-        raise InputError("kernel exports must be global functions with default visibility")
-    expected_soname = "libLeviLaminaP6Example.so" if role == "example" else "libLeviLamina.so"
+    registration = "ll_mod_load" if role == "example" else "PLGetModRegistration"
+    if registration not in exports or "ll_memory_operator_overrided" not in exports:
+        raise InputError("missing original registration or memory ABI marker")
+    if export_details[registration] != (2, 1, 0) or export_details["ll_memory_operator_overrided"][0] != 1:
+        raise InputError("invalid registration/marker symbol kind")
+    if any(name.startswith(("_ZN3fmt", "_ZNK3fmt", "_Znw", "_Zna", "_Zdl", "_Zda")) for name in exports):
+        raise InputError("private formatter or allocation operators escaped the module")
+    expected_soname = expected_soname or ("libLeviLaminaP7Example.so" if role == "example" else "libLeviLamina.so")
     if soname != expected_soname or api_notes != [28]:
         raise InputError("kernel SONAME or Android API note mismatch")
-    allowed = {"libc++_shared.so", "libc.so", "libm.so", "libdl.so", "liblog.so", "libpreloader.so"}
+    allowed = {"libc++_shared.so", "libc.so", "libm.so", "libdl.so", "liblog.so", "libpreloader.so", "libandroid.so"}
     if role == "example":
         allowed.add("libLeviLamina.so")
         if "libLeviLamina.so" not in needed:
             raise InputError("example must depend on the kernel")
-    if phase == "G5" and "libpreloader.so" not in needed:
+    if "libpreloader.so" not in needed:
         raise InputError("formal binary must retain its provider dependency")
     if not set(needed) <= allowed or "libc++_shared.so" not in needed:
         raise InputError("unexpected shared-library dependencies or missing c++_shared")
@@ -249,7 +214,7 @@ def elf_contract(path: Path, phase: str = "G2", role: str = "kernel") -> dict:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("mode", choices=("objects", "elf"))
+    parser.add_argument("mode", choices=("elf",))
     parser.add_argument("--inputs", type=Path, required=True)
     parser.add_argument("--traces", type=Path)
     parser.add_argument("--object", type=Path, action="append", default=[])
@@ -259,19 +224,14 @@ def main() -> None:
         config = read_json(args.inputs)
         if sha(Path(config["repository"]) / "config/android-kernel-inputs.lock.json") != config["lock_sha256"]:
             raise InputError("inputs changed after configuration")
-        if args.mode == "objects":
-            if not args.traces:
-                raise InputError("actual compiler traces are required")
-            verify_objects(config, args.traces, args.object, args.inputs.parent)
-        else:
-            if not args.elf:
-                raise InputError("kernel ELF is required")
-            result = elf_contract(args.elf, config["phase"], config.get("role", "kernel"))
-            result.update(phase=config["phase"], passed=True, G6_complete=False)
-            write_json(args.inputs.parent / "elf.json", result)
-            print("Kernel ELF checks passed: API28/AArch64, SONAME, exact exports and 16 KiB alignment.")
+        if not args.elf:
+            raise InputError("kernel ELF is required")
+        result = elf_contract(args.elf, config["phase"], config.get("role", "kernel"))
+        result.update(phase=config["phase"], passed=True, G6_complete=False)
+        write_json(args.inputs.parent / "elf.json", result)
+        print("P7 ELF checks passed: registration, SDK visibility, API28/AArch64 and 16 KiB alignment.")
     except (InputError, OSError, ValueError, KeyError, struct.error, IndexError) as exc:
-        parser.exit(1, f"P6 binary rejected: {exc}\n")
+        parser.exit(1, f"P7 binary rejected: {exc}\n")
 
 
 if __name__ == "__main__":

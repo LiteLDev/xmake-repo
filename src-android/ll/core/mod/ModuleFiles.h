@@ -27,6 +27,7 @@ bool copyModToCache(
     std::string_view   canonicalId,
     std::string_view   manifest,
     std::string const& generation,
-    std::string&       copied
+    std::string&       copied,
+    std::string*       error = nullptr
 ) noexcept;
 } // namespace ll::android

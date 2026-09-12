@@ -1,4 +1,4 @@
-#include "ll/core/mod/ElfModule.h"
+#include "ElfModule.h"
 #include <array>
 #include <cstring>
 #include <rapidjson/document.h>
@@ -58,11 +58,6 @@ public:
     }
     std::span<uint8_t const> bytes;
 };
-bool standardCxx(std::string_view name) noexcept {
-    for (auto prefix : {"_ZNSt", "_ZNKSt", "_ZSt", "_Zn", "_Zd", "_ZTINSt", "_ZTSNSt", "_ZTVNSt"})
-        if (name.starts_with(prefix)) return true;
-    return false;
-}
 bool validNote(std::string_view note) noexcept {
     if (note.size() < 20 || note.size() > 2048) return false;
     uint32_t names{}, size{}, type{};
@@ -74,10 +69,10 @@ bool validNote(std::string_view note) noexcept {
         return false;
     rapidjson::Document doc;
     doc.Parse<rapidjson::kParseValidateEncodingFlag>(note.data() + 20, size);
-    if (doc.HasParseError() || !doc.IsObject() || doc.MemberCount() != 5) return false;
+    if (doc.HasParseError() || !doc.IsObject() || doc.MemberCount() != 6) return false;
     auto version = doc.FindMember("schemaVersion");
-    if (version == doc.MemberEnd() || !version->value.IsUint() || version->value.GetUint() != 1) return false;
-    for (auto key : {"targetBuildId", "providerBuildId", "semanticSha256", "importSetSha256"}) {
+    if (version == doc.MemberEnd() || !version->value.IsUint() || version->value.GetUint() != 2) return false;
+    for (auto key : {"targetBuildId", "providerBuildId", "semanticSha256", "importSetSha256", "ndkLibcxxSha256"}) {
         auto value = doc.FindMember(key);
         if (value == doc.MemberEnd() || !value->value.IsString()) return false;
         auto length = value->value.GetStringLength();
@@ -88,9 +83,22 @@ bool validNote(std::string_view note) noexcept {
             if (!((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f'))) return false;
         }
     }
-    // SHA-256 of the canonical empty functionImports array "[]".
-    return std::string_view(doc["importSetSha256"].GetString())
-        == "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945";
+    return true;
+}
+bool sameRuntime(std::string_view note, std::string_view expected) {
+    if (expected.empty()) return true;
+    if (!validNote(expected)) return false;
+    uint32_t length{}, expectedLength{};
+    std::memcpy(&length, note.data() + 4, sizeof(length));
+    std::memcpy(&expectedLength, expected.data() + 4, sizeof(expectedLength));
+    rapidjson::Document current, parent;
+    current.Parse(note.data() + 20, length);
+    parent.Parse(expected.data() + 20, expectedLength);
+    for (auto key : {"targetBuildId", "providerBuildId", "semanticSha256", "ndkLibcxxSha256"}) {
+        if (std::string_view(current[key].GetString(), current[key].GetStringLength())
+            != std::string_view(parent[key].GetString(), parent[key].GetStringLength())) return false;
+    }
+    return true;
 }
 } // namespace
 
@@ -178,7 +186,7 @@ bool inspectElfModule(
                     if (d.tag == 14) {
                         if (!result.soname.empty()) return false;
                         result.soname = value;
-                    } else if (!needed.insert(value).second || needed.size() > 7) return false;
+                    } else if (!needed.insert(value).second || needed.size() > 8) return false;
                 }
             }
             if (!terminated) return false;
@@ -194,36 +202,36 @@ bool inspectElfModule(
                 std::string_view value;
                 if (!reader.string(sections[section.link], symbol.name, value)) return false;
                 if (!symbol.section) {
-                    if ((value.starts_with("_Z") && !standardCxx(value)) || value.starts_with("Java_com_mojang"))
-                        return false;
-                    if (!kernel && (value.starts_with("pl_") || value == "PLGetModRegistration")) return false;
+                    // P5 verifies MC imports at production time. Ordinary LL C++
+                    // imports and the current provider ABI are resolved by the loader.
+                    if (value.starts_with("Java_com_mojang")) return false;
                     if (value.size() > 16384 || result.imports.size() > 8192) return false;
                     if (!value.empty()) result.imports.push_back({std::string(value), (symbol.info >> 4) == 2});
                 } else if ((symbol.info >> 4) != 0 && (symbol.other & 3) != 2) {
-                    if (symbol.info != 0x12 || (symbol.other & 3) != 0 || !exports.insert(value).second) return false;
-                    if (exports.size() > (kernel ? 6U : 1U)) return false;
+                    auto binding = symbol.info >> 4;
+                    auto type = symbol.info & 15;
+                    if ((binding != 1 && binding != 2) || (symbol.other & 3) == 1
+                        || (type != 1 && type != 2 && type != 6) || !exports.insert(value).second) return false;
+                    if ((value == "ll_mod_load" || value == "PLGetModRegistration") && type != 2) return false;
+                    if (value == "ll_memory_operator_overrided" && (type != 1 || symbol.size != sizeof(int))) return false;
                 }
             }
         }
     }
     if (dynamicCount != 1 || symbolCount != 1 || apiNotes != 1 || result.soname != expectedSoname
-        || !validNote(result.prelinkNote) || (!expectedNote.empty() && result.prelinkNote != expectedNote))
+        || !validNote(result.prelinkNote) || !sameRuntime(result.prelinkNote, expectedNote))
         return false;
     std::set<std::string_view>
-        allowed{"libpreloader.so", "libc++_shared.so", "libc.so", "libm.so", "libdl.so", "liblog.so"};
+        allowed{"libpreloader.so", "libc++_shared.so", "libc.so", "libm.so", "libdl.so", "liblog.so", "libandroid.so"};
     if (!kernel) allowed.insert("libLeviLamina.so");
     for (auto library : needed)
         if (!allowed.contains(library)) return false;
     if (!needed.contains("libpreloader.so") || !needed.contains("libc++_shared.so")
         || (!kernel && !needed.contains("libLeviLamina.so")))
         return false;
-    std::set<std::string_view> required =
-        kernel
-            ? std::set<
-                  std::
-                      string_view>{"PLGetModRegistration", "LLAndroidKernel_GetApiVersion", "LLAndroidKernel_GetState", "LLAndroidKernel_Log", "LLAndroidKernel_Subscribe", "LLAndroidKernel_Unsubscribe"}
-            : std::set<std::string_view>{"LLGetModRegistration"};
-    if (exports != required) return false;
+    if (!exports.contains("ll_memory_operator_overrided")
+        || !exports.contains(kernel ? "PLGetModRegistration" : "ll_mod_load")) return false;
+    if (!kernel && exports.contains("PLGetModRegistration")) return false;
     for (auto library : needed) result.needed.emplace_back(library);
     error = nullptr;
     return true;

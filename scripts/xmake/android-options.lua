@@ -6,6 +6,6 @@ for _, name in ipairs({
 }) do
     option(name)
         set_showmenu(true)
-        set_description("Required frozen P6 Android input")
+        set_description("Required frozen P7 Android input")
     option_end()
 end

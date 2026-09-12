@@ -3,6 +3,8 @@
 
 #include "ll/core/LeviLamina.h"
 
+#include <shared_mutex>
+
 namespace ll::mod {
 struct ModCallbackRecord {
     std::weak_ptr<Mod>                    owner;
@@ -12,6 +14,7 @@ struct ModCallbackRecord {
 
 struct ModManagerRegistry::Impl {
     std::recursive_mutex                   modMtx;
+    mutable std::shared_mutex               mManagerMutex;
     StringMap<std::shared_ptr<ModManager>> managers;
     StringMap<std::string>                 loadedMods; // k, v: name, type
 
@@ -104,6 +107,7 @@ Expected<> ModManagerRegistry::disableMod(std::string_view name) const noexcept 
 
 bool ModManagerRegistry::addManager(std::shared_ptr<ModManager> const& manager) {
     std::lock_guard lock(impl->modMtx);
+    std::unique_lock managerLock(impl->mManagerMutex);
     if (!manager) {
         return false;
     }
@@ -111,15 +115,13 @@ bool ModManagerRegistry::addManager(std::shared_ptr<ModManager> const& manager) 
 }
 
 bool ModManagerRegistry::hasManager(std::string_view type) const {
-    std::lock_guard lock(impl->modMtx);
+    std::shared_lock lock(impl->mManagerMutex);
     return impl->managers.contains(type);
 }
 
 std::shared_ptr<ModManager> ModManagerRegistry::getManager(std::string_view type) const {
-    std::lock_guard lock(impl->modMtx);
-    if (hasManager(type)) {
-        return impl->managers.find(type)->second;
-    }
+    std::shared_lock lock(impl->mManagerMutex);
+    if (auto found = impl->managers.find(type); found != impl->managers.end()) return found->second;
     return {};
 }
 
@@ -133,7 +135,9 @@ std::shared_ptr<ModManager> ModManagerRegistry::getManagerForMod(std::string_vie
 
 bool ModManagerRegistry::eraseManager(std::string_view type) {
     std::lock_guard lock(impl->modMtx);
+    std::unique_lock managerLock(impl->mManagerMutex);
     if (auto i = impl->managers.find(type); i != impl->managers.end()) {
+        if (i->second->getModCount() != 0) return false;
         erase_if(impl->loadedMods, [type](auto& item) { return item.second == type; });
         impl->managers.erase(i);
         return true;
@@ -143,9 +147,12 @@ bool ModManagerRegistry::eraseManager(std::string_view type) {
 
 coro::Generator<ModManager&> ModManagerRegistry::managers() const {
     std::lock_guard lock(impl->modMtx);
-    for (auto& p : impl->managers) {
-        co_yield *p.second;
+    std::vector<std::shared_ptr<ModManager>> snapshot;
+    {
+        std::shared_lock managerLock(impl->mManagerMutex);
+        for (auto const& entry : impl->managers) snapshot.push_back(entry.second);
     }
+    for (auto& manager : snapshot) co_yield *manager;
 }
 
 coro::Generator<Mod&> ModManagerRegistry::mods() const {

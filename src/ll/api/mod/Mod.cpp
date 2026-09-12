@@ -4,7 +4,6 @@
 #include "ll/api/io/LoggerRegistry.h"
 #include "ll/api/mod/ModManagerRegistry.h"
 #include "ll/api/service/GamingStatus.h"
-#include "ll/api/service/ServerInfo.h"
 #include "ll/api/utils/StringUtils.h"
 
 #include "pl/Config.h"
@@ -65,22 +64,6 @@ std::filesystem::path const& Mod::getDataDir() const { return mImpl->dataDir; }
 
 std::filesystem::path const& Mod::getConfigDir() const { return mImpl->configDir; }
 
-std::optional<std::filesystem::path> Mod::getWorldDataDir() const {
-    auto dataRoot = ll::getWorldDataRoot();
-    if (dataRoot) {
-        return dataRoot.value() / string_utils::str2u8str(getName());
-    }
-    return std::nullopt;
-}
-
-std::optional<std::filesystem::path> Mod::getWorldConfigDir() const {
-    auto configRoot = ll::getWorldConfigRoot();
-    if (configRoot) {
-        return configRoot.value() / string_utils::str2u8str(getName());
-    }
-    return std::nullopt;
-}
-
 std::filesystem::path const& Mod::getLangDir() const { return mImpl->langDir; }
 
 std::filesystem::path const& Mod::getResourceDir() const { return mImpl->resourceDir; }
@@ -129,22 +112,37 @@ Expected<> Mod::onUnload() noexcept {
 }
 
 Expected<> Mod::onEnable() noexcept {
-    try {
-        if (getState() == State::Enabled) {
-            return {};
-        }
-        if (!mImpl->onEnable || mImpl->onEnable(*this)) {
-            if (auto res = ModManagerRegistry::getInstance().onModEnable(getName()); !res) {
-                return res;
+    auto result = [this]() -> Expected<> {
+        try {
+            if (getState() == State::Enabled) {
+                return {};
             }
-            setState(State::Enabled);
-            return {};
-        } else {
-            return makeI18nStringError<"The mod cannot be enabled">();
+            if (!mImpl->onEnable || mImpl->onEnable(*this)) {
+                if (auto res = ModManagerRegistry::getInstance().onModEnable(getName()); !res) {
+                    return res;
+                }
+                setState(State::Enabled);
+                return {};
+            } else {
+                return makeI18nStringError<"The mod cannot be enabled">();
+            }
+        } catch (...) {
+            return makeExceptionError();
+        }
+    }();
+    if (result) return result;
+    // A failed enable has not set Enabled, but its callback may already own
+    // resources. Run rollback directly instead of the Disabled-state shortcut.
+    try {
+        if (mImpl->onDisable && !mImpl->onDisable(*this)) {
+            result.error().join(makeI18nStringError<"The mod cannot roll back its failed enable">().error());
+        } else if (auto cleanup = ModManagerRegistry::getInstance().onModDisable(getName()); !cleanup) {
+            result.error().join(std::move(cleanup.error()));
         }
     } catch (...) {
-        return makeExceptionError();
+        result.error().join(makeExceptionError().error());
     }
+    return result;
 }
 
 Expected<> Mod::onDisable() noexcept {

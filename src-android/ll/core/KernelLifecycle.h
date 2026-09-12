@@ -1,36 +1,23 @@
 #pragma once
 
-#include "ll/core/KernelContext.h"
-#include "ll/core/RuntimeOperations.h"
-#include "ll/core/io/KernelLogger.h"
-
-#include <atomic>
-#include <cstdint>
+#include "pl/android/Mod.hpp"
 #include <mutex>
+#include <optional>
 
 namespace ll::android {
 
+// The PL parent connection owns no ordinary-Mod registry or event system.
 class KernelLifecycle {
 public:
-    KernelLifecycle(KernelContext& context, KernelLogger& logger, RuntimeOperations& operations) noexcept
-    : context(context),
-      logger(logger),
-      operations(operations) {}
-    bool     load(pl::android::ModContext const& context) noexcept;
-    bool     enable(pl::android::ModContext const& context) noexcept;
-    bool     disable(pl::android::ModContext const& context) noexcept;
-    bool     unload(pl::android::ModContext const& context) noexcept;
-    int32_t  getState() const noexcept { return state.load(std::memory_order_acquire); }
-    void     log(int32_t level, char const* message, size_t size) noexcept { logger.write(level, message, size); }
-    uint64_t subscribe(uint32_t kind, LLAndroidEventCallback callback, void* userData) noexcept;
-    bool     unsubscribe(uint64_t token) noexcept;
+    bool load(pl::android::ModContext const&) noexcept;
+    bool enable(pl::android::ModContext const&) noexcept;
+    bool disable(pl::android::ModContext const&) noexcept;
+    bool unload(pl::android::ModContext const&) noexcept;
 
 private:
-    KernelContext&       context;
-    KernelLogger&        logger;
-    RuntimeOperations&   operations;
-    std::mutex           lifecycleMutex;
-    std::atomic<int32_t> state{LLAndroidKernel_Unloaded};
+    std::mutex mMutex;
+    bool mLoaded{};
+    std::optional<bool> mStopResult;
 };
 
 KernelLifecycle& kernel() noexcept;

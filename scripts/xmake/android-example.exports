@@ -1,4 +1,10 @@
 {
-    global: LLGetModRegistration;
-    local: *;
+    local:
+        _ZN3fmt*;
+        _ZNK3fmt*;
+        _ZT*N3fmt*;
+        _Znw*;
+        _Zna*;
+        _Zdl*;
+        _Zda*;
 };

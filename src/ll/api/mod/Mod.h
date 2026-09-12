@@ -14,7 +14,7 @@ namespace ll::mod {
 LLNDAPI std::filesystem::path const& getModsRoot();
 
 class ModManager;
-class Mod {
+class LL_TYPE_API Mod {
 public:
     enum class State {
         Enabled,

@@ -1,89 +1,56 @@
-#include "ll/core/KernelLifecycle.h"
+#include "KernelLifecycle.h"
+
+#include "ll/core/LeviLamina.h"
+#include "ll/core/mod/ModRegistrar.h"
+#include "ll/api/i18n/I18n.h"
+#include "ll/api/utils/ErrorUtils.h"
+#include "pl/Config.h"
 
 namespace ll::android {
 
-bool KernelLifecycle::load(pl::android::ModContext const& source) noexcept {
-    if (operations.inCallback()) return false;
-    std::lock_guard lock(lifecycleMutex);
-    if (getState() != LLAndroidKernel_Unloaded || !operations.clean() || !context.initialize(source)) return false;
-    state.store(LLAndroidKernel_Loaded, std::memory_order_release);
-    logger.write(LLAndroidLog_Info, "LeviLamina: Loaded");
+KernelLifecycle& kernel() noexcept {
+    static KernelLifecycle instance;
+    return instance;
+}
+
+bool KernelLifecycle::load(pl::android::ModContext const& source) noexcept try {
+    std::lock_guard lock(mMutex);
+    if (mLoaded || mStopResult || source.id() != selfModName || !source.javaVm()
+        || !pl::pl_mods_path || !*pl::pl_mods_path || !pl::pl_log_path || !*pl::pl_log_path) return false;
+    if (getSelfModIns()->getModDir().lexically_normal() != std::filesystem::path(source.rootPath()).lexically_normal())
+        return false;
+    // Follow the applicable client startup sequence through the original APIs.
+    if (auto result = i18n::getInstance().load(getSelfModIns()->getLangDir()); !result)
+        result.error().log(getLogger());
+    printWelcomeMsg();
+    mod::ModRegistrar::getInstance().loadAllMods();
+    mLoaded = true;
+    getLogger().info("LeviLamina shared client core loaded");
     return true;
+} catch (...) {
+    source.log(3, "LeviLamina shared initialization failed");
+    return false;
 }
 
 bool KernelLifecycle::enable(pl::android::ModContext const&) noexcept {
-    if (operations.inCallback()) return false;
-    std::lock_guard lock(lifecycleMutex);
-    if (getState() != LLAndroidKernel_Loaded) return false;
-    state.store(LLAndroidKernel_Enabling, std::memory_order_release);
-    if (!operations.enable()) {
-        state.store(LLAndroidKernel_Failed, std::memory_order_release);
-        logger.write(
-            LLAndroidLog_Error,
-            operations.clean() ? "LeviLamina: Failed; activation refused, no retained resources"
-                               : "LeviLamina: Failed; activation left retained resources"
-        );
-        return false;
-    }
-    state.store(LLAndroidKernel_Enabled, std::memory_order_release);
-    logger.write(LLAndroidLog_Info, "LeviLamina: Enabled");
-    if (!operations.enableChildren()) {
-        state.store(LLAndroidKernel_Disabling, std::memory_order_release);
-        operations.disable(); // one rollback; failed child callbacks are never retried
-        state.store(LLAndroidKernel_Failed, std::memory_order_release);
-        logger.write(
-            LLAndroidLog_Error,
-            operations.clean() ? "LeviLamina: Failed; child startup rolled back cleanly"
-                               : "LeviLamina: Failed; child cleanup retained resources"
-        );
-        return false;
-    }
-    return true;
+    std::lock_guard lock(mMutex);
+    // PL activation is a host phase. Game Ready will be connected at G4.
+    return mLoaded && !mStopResult;
 }
 
 bool KernelLifecycle::disable(pl::android::ModContext const&) noexcept {
-    if (operations.inCallback()) return false;
-    std::lock_guard lock(lifecycleMutex);
-    if (getState() == LLAndroidKernel_Loaded) return true;
-    if (getState() != LLAndroidKernel_Enabled) return false;
-    state.store(LLAndroidKernel_Disabling, std::memory_order_release);
-    bool disabled = operations.disable();
-    bool clean    = operations.clean();
-    if (!disabled || !clean) {
-        state.store(LLAndroidKernel_Failed, std::memory_order_release);
-        logger.write(
-            LLAndroidLog_Error,
-            clean ? "LeviLamina: Failed; cleanup refused, no retained resources"
-                  : "LeviLamina: Failed; cleanup left retained resources"
-        );
-        return false;
-    }
-    state.store(LLAndroidKernel_Loaded, std::memory_order_release);
-    logger.write(LLAndroidLog_Info, "LeviLamina: Loaded; disabled");
-    return true;
+    std::lock_guard lock(mMutex);
+    return mLoaded && !mStopResult;
 }
 
-bool KernelLifecycle::unload(pl::android::ModContext const&) noexcept {
-    if (operations.inCallback()) return false;
-    std::lock_guard lock(lifecycleMutex);
-    auto            current = getState();
-    if (current == LLAndroidKernel_Unloaded) return true;
-    if ((current != LLAndroidKernel_Loaded && current != LLAndroidKernel_Failed) || !operations.clean()) return false;
-    logger.write(LLAndroidLog_Info, "LeviLamina: Unloaded");
-    operations.reset();
-    context.reset();
-    state.store(LLAndroidKernel_Unloaded, std::memory_order_release);
-    return true;
+bool KernelLifecycle::unload(pl::android::ModContext const& source) noexcept {
+    std::lock_guard lock(mMutex);
+    if (mStopResult) return *mStopResult;
+    // G0-G2 cannot yet prove shared event/task/log quiescence. Keep PL's parent
+    // reference, including after a partially failed load, until G3-G4 supply it.
+    source.log(3, "LeviLamina retained: shared client shutdown is not yet available");
+    mStopResult = false;
+    return false;
 }
-
-uint64_t KernelLifecycle::subscribe(uint32_t kind, LLAndroidEventCallback callback, void* userData) noexcept {
-    if (getState() != LLAndroidKernel_Enabled || !callback
-        || (kind != LLAndroidEvent_ActorNormalTickAfter && kind != LLAndroidEvent_ClientInstanceLocalPlayerAfter))
-        return 0;
-    // The backend atomically checks publishing/owner eligibility with insertion.
-    return operations.subscribe(kind, callback, userData);
-}
-
-bool KernelLifecycle::unsubscribe(uint64_t token) noexcept { return token != 0 && operations.unsubscribe(token); }
 
 } // namespace ll::android

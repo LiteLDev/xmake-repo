@@ -13,7 +13,7 @@ namespace ll::mod {
 class NativeModManager;
 [[maybe_unused]] constexpr std::string_view NativeModManagerName = "native";
 
-class NativeMod : public Mod {
+class LL_TYPE_API NativeMod : public Mod {
     friend NativeModManager;
     struct Impl;
     std::unique_ptr<Impl> mImpl;

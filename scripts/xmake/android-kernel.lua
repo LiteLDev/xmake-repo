@@ -6,95 +6,173 @@ set_toolchains("ndk")
 set_runtimes("c++_shared")
 set_policy("build.ccache", false)
 set_policy("check.auto_ignore_flags", false)
-includes("../../xmake/rules/android_prelink.lua")
+add_repositories("levimc-repo " .. (get_config("levimc_repo") or "https://github.com/LiteLDev/xmake-repo.git"))
+add_requires("expected-lite v0.8.0", "fmt 11.2.0", "parallel-hashmap v2.0.0", "pfr 2.1.1",
+             "magic_enum v0.9.7", "nlohmann_json v3.12.0", "ctre 3.8.1")
+add_requires("gtest v1.17.0", {configs = {main = true, gmock = false}})
 
-local inputs = {
+local input_options = {
     {"android_header_root", "header-root"}, {"android_dependency_lock", "dependency-lock"},
     {"preloader_android_root", "preloader-root"}, {"android_prelink_executable", "prelink"},
     {"android_runtime_manifest", "runtime-manifest"}, {"android_bmb", "bmb"},
     {"android_provider_elf", "provider"}, {"android_target_elf", "target"}, {"ndk", "ndk"}
 }
-local kernel_sources = {
-    "core/main_android.cpp", "core/KernelLifecycle.cpp", "core/HeaderSmoke.cpp",
-    "api/android/KernelApi.cpp", "core/KernelContext.cpp", "core/io/KernelLogger.cpp",
-    "core/KernelRuntime.cpp", "core/io/Output_android.cpp", "core/memory/RuntimeSymbols.cpp",
-    "core/memory/HookTransaction.cpp", "core/event/EventRegistry.cpp", "core/mod/ModOwner.cpp",
-    "core/mod/ModManifest.cpp", "core/mod/ElfModule.cpp", "core/mod/ModuleFiles.cpp",
-    "core/mod/NativeModRegistry.cpp", "core/mod/NativeModManager.cpp"
-}
 
-local function define_kernel_target(name, role)
-    target(name)
-        set_kind("shared")
-        set_basename(role == "kernel" and "LeviLamina" or "LeviLaminaP6Example")
-        set_languages("c++20")
-        set_symbols("debug")
-        set_exceptions("none")
-        add_rules("ll.android.prelink")
-        if role == "example" then add_deps("LeviLaminaAndroidKernel") end
-        add_defines("LL_PLAT_A", role == "kernel" and "LL_ANDROID_KERNEL_EXPORTS" or "LL_ANDROID_MOD_EXPORTS")
-        add_cxxflags("-include", path.join(os.projectdir(), "src-android/ll/core/CompilationContract.h"), {force = true})
-        add_cxxflags("-fPIC", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-fno-exceptions",
-                     "-fno-rtti", "-fno-lto", "-fdebug-compilation-dir=.", "-Werror=date-time", {force = true})
-        add_cxxflags("-Wall", "-Wextra", "-Wpedantic", "-Werror", "--system-header-prefix=mc/", {force = true})
-        on_load(function(target)
-            import("core.project.config")
-            import("core.base.json")
-            local output = path.absolute(path.join(config.builddir(), "android-kernel", role, "inputs.json"))
-            assert(tonumber(get_config("ndk_sdkver")) == 28, "P6 requires --ndk_sdkver=28")
-            assert(get_config("runtimes") == "c++_shared", "P6 requires --runtimes=c++_shared")
-            local args = {path.join(os.projectdir(), "scripts/android_kernel_inputs.py"),
-                "--repo", os.projectdir(), "--output", output, "--api", "28",
-                "--arch", tostring(get_config("arch")), "--role", role}
-            for _, entry in ipairs(inputs) do
-                local value = get_config(entry[1])
-                assert(value and #tostring(value) > 0, "Missing required P6 input: " .. entry[1])
+local function shared_options(role)
+    set_default(false)
+    set_languages("c++23")
+    set_exceptions("cxx")
+    add_defines("LL_PLAT_A", "nsel_CONFIG_SELECT_EXPECTED=1", "FMT_USE_FULL_CACHE_DRAGONBOX=1", {public = true})
+    add_cxxflags("-fexceptions", "-frtti", "-fPIC", "-fno-lto", "-fvisibility=hidden", "-fvisibility-inlines-hidden", {force = true})
+    add_packages("expected-lite", "fmt", "parallel-hashmap", "pfr", "magic_enum", "nlohmann_json", "ctre", {public = true})
+    on_load(function(target)
+        import("core.project.config")
+        import("core.base.json")
+        assert(tonumber(get_config("ndk_sdkver")) == 28, "P7 requires Android API28")
+        assert(get_config("runtimes") == "c++_shared", "P7 requires shared libc++")
+        local evidence = path.absolute(path.join(config.builddir(), "android-kernel", role or "fixtures"))
+        local receipt = path.join(evidence, "inputs.json")
+        local args = {"-X", "utf8", path.join(os.projectdir(), "scripts/android_kernel_inputs.py"),
+            "--repo", os.projectdir(), "--output", receipt}
+        if role then
+            table.insert(args, "--role")
+            table.insert(args, role)
+            for _, entry in ipairs(input_options) do
                 table.insert(args, "--" .. entry[2])
-                table.insert(args, value)
+                table.insert(args, assert(get_config(entry[1]), "Missing P7 input: " .. entry[1]))
+            end
+        else
+            table.insert(args, "--prepare-shared-view")
+            for _, entry in ipairs({{"android_header_root", "header-root"}, {"android_dependency_lock", "dependency-lock"}, {"ndk", "ndk"}}) do
+                table.insert(args, "--" .. entry[2])
+                table.insert(args, assert(get_config(entry[1]), "Missing fixture input: " .. entry[1]))
+            end
+        end
+        os.vrunv("python", args)
+        local inputs = json.loadfile(receipt)
+        for _, root in ipairs(inputs.include_roots) do target:add("includedirs", root) end
+        for _, root in ipairs(inputs.system_include_roots or inputs.dependency_roots) do target:add("sysincludedirs", root) end
+        target:add("syslinks", "dl")
+        if not role and target:kind() ~= "static" then
+            target:add("ldflags", "-Wl,-z,defs", "-Wl,-z,max-page-size=16384", {force = true})
+            target:add("shflags", "-Wl,-z,defs", "-Wl,-z,max-page-size=16384", {force = true})
+        end
+        if role then
+            local traces = path.join(evidence, "includes")
+            os.mkdir(traces)
+            target:data_set("p7.inputs", receipt)
+            target:data_set("p7.traces", traces)
+            target:data_set("p7.prelink", path.join(evidence, "prelink"))
+            for _, source in ipairs(inputs.sources) do
+                local name = source:gsub("/", "_"):gsub("%.", "_")
+                local flags = {"-H", "-Xclang=-header-include-file", "-Xclang=" .. path.join(traces, name .. ".txt")}
+                if source:endswith("MemoryOperators_android.cpp") then table.insert(flags, "-fno-rtti") end
+                target:add("files", path.join(os.projectdir(), source), {cxxflags = flags})
+            end
+            local tag = os.iorunv("git", {"describe", "--tags", "--abbrev=0", "--always"}):trim()
+            local major, minor, patch, suffix = tag:match("v(%d+)%.(%d+)%.(%d+)(.*)")
+            if not major then
+                major, minor, patch, suffix = json.loadfile(path.join(os.projectdir(), "tooth.json")).version:match("(%d+)%.(%d+)%.(%d+)(.*)")
+            end
+            target:set("configvar", "LL_VERSION_MAJOR", major)
+            target:set("configvar", "LL_VERSION_MINOR", minor)
+            target:set("configvar", "LL_VERSION_PATCH", patch)
+            target:set("configvar", "LL_WORKSPACE_FOLDER", os.projectdir())
+            target:set("configvar", "GIT_COMMIT", os.iorunv("git", {"rev-parse", "--short", "HEAD"}):trim())
+            local prerelease = suffix and suffix:match("^%-(.*)")
+            if prerelease then target:set("configvar", "LL_VERSION_PRERELEASE", prerelease) end
+        end
+    end)
+end
+
+for _, role in ipairs({"kernel", "example"}) do
+    target(role == "kernel" and "LeviLamina" or "LeviLaminaP7Example")
+        set_kind("shared")
+        shared_options(role)
+        if role == "kernel" then add_defines("LL_EXPORT") else add_deps("LeviLamina", {inherit = false}) end
+        if is_mode("debug") then add_defines("LL_DEBUG") end
+        set_symbols("debug")
+        set_configdir("$(builddir)/config")
+        add_configfiles(path.join(os.projectdir(), "src/(ll/core/Version.h.in)"))
+        add_includedirs("$(builddir)/config")
+        on_link(function(target)
+            local args = {"-X", "utf8", path.join(os.projectdir(), "scripts/android_kernel_link.py"),
+                "--inputs", target:data("p7.inputs"), "--traces", target:data("p7.traces"),
+                "--prelink-dir", target:data("p7.prelink"), "--elf", path.absolute(target:targetfile())}
+            for _, object in ipairs(target:objectfiles()) do
+                table.insert(args, "--object")
+                table.insert(args, path.absolute(object))
+            end
+            for _, archive in ipairs(table.wrap(target:pkg("fmt"):get("libfiles"))) do
+                table.insert(args, "--archive")
+                table.insert(args, archive)
+            end
+            if role == "example" then
+                table.insert(args, "--kernel-elf")
+                table.insert(args, path.absolute(target:dep("LeviLamina"):targetfile()))
             end
             os.vrunv("python", args)
-            local resolved = json.loadfile(output)
-            assert(resolved.phase == "G5" and resolved.source_layout == "platform-v1", "P6 source phase mismatch")
-            target:data_set("p6.inputs", output)
-            target:data_set("p6.authenticate", args)
-            target:data_set("p6.role", role)
-            target:data_set("p6.prelink", path.absolute(path.join(config.builddir(), ".prelink/android", name)))
-            for _, root in ipairs(resolved.include_roots) do target:add("includedirs", root) end
-            for _, root in ipairs(resolved.system_include_roots) do target:add("sysincludedirs", root) end
-            local mappings = {
-                {os.projectdir(), "/ll"}, {path.absolute(config.builddir()), "/build"},
-                {resolved.inputs.header_root, "/header"}, {resolved.inputs.preloader_root, "/preloader"},
-                {resolved.inputs.ndk, "/ndk"}
-            }
-            for index, root in ipairs(resolved.system_include_roots) do
-                table.insert(mappings, {root, "/dependency/" .. tostring(index)})
-            end
-            for _, mapping in ipairs(mappings) do
-                for _, spelling in ipairs({mapping[1], mapping[1]:gsub(string.char(92), "/")}) do
-                    target:add("cxxflags", "-ffile-prefix-map=" .. spelling .. "=" .. mapping[2], {force = true})
-                end
-            end
-            local traces = path.join(path.directory(output), "includes")
-            os.mkdir(traces)
-            target:data_set("p6.traces", traces)
-            local sources = {}
-            if role == "kernel" then
-                for _, source in ipairs(kernel_sources) do table.insert(sources, path.join(os.projectdir(), "src-android/ll", source)) end
-            else
-                table.insert(sources, path.join(os.projectdir(), "examples/android-minimal-mod/src/main.cpp"))
-            end
-            for _, source in ipairs(sources) do
-                target:add("files", source, {cxxflags = {"-H", "-Xclang=-header-include-file",
-                    "-Xclang=" .. path.join(traces, path.basename(source) .. ".txt")}})
-            end
-        end)
-        before_build(function(target)
-            os.vrunv("python", target:data("p6.authenticate"))
-            -- Every link re-authenticates runtime inputs, even if source objects
-            -- were reusable. Only this target's disposable build output is removed.
-            if os.isfile(target:targetfile()) then os.rm(target:targetfile()) end
         end)
     target_end()
 end
-define_kernel_target("LeviLaminaAndroidKernel", "kernel")
-define_kernel_target("LeviLaminaP6Example", "example")
+
+target("LeviLaminaAndroidFoundation")
+    set_kind("static")
+    shared_options()
+    add_defines("LL_EXPORT")
+    for _, source in ipairs({"src/ll/core/mod/ModLoadPlanner.cpp", "src/ll/api/service/GamingStatus.cpp",
+        "src/ll/api/Expected.cpp", "src/ll/api/i18n/I18n.cpp", "src/ll/api/reflection/ReflectionError.cpp",
+        "src-android/ll/api/utils/ErrorUtils_android.cpp", "src-android/ll/api/utils/SystemUtils_android.cpp",
+        "src-android/ll/api/utils/FromChars_android.cpp"}) do
+        add_files(path.join(os.projectdir(), source))
+    end
+target_end()
+
+for _, name in ipairs({"A", "B"}) do
+    target("P7Module" .. name)
+        set_kind("shared")
+        shared_options()
+        add_defines("P7_MODULE_NAME=\"" .. name .. "\"")
+        add_files(path.join(os.projectdir(), "test/android/shared_core/module.cpp"))
+    target_end()
+end
+
+target("P7StringTests")
+    set_kind("binary")
+    shared_options()
+    add_deps("LeviLaminaAndroidFoundation")
+    add_packages("gtest")
+    add_files(path.join(os.projectdir(), "test/android/shared_core/string_tests.cpp"))
+target_end()
+
+target("P7ModuleFileTests")
+    set_default(false)
+    set_kind("binary")
+    set_languages("c++23")
+    set_exceptions("cxx")
+    add_includedirs(path.join(os.projectdir(), "src-android"))
+    add_files(path.join(os.projectdir(), "test/android/shared_core/module_files_io_tests.cpp"),
+              path.join(os.projectdir(), "src-android/ll/core/mod/ModuleFiles.cpp"))
+    add_syslinks("dl")
+    add_ldflags("-Wl,-z,defs", "-Wl,-z,max-page-size=16384",
+                "-Wl,--wrap=read,--wrap=pread,--wrap=fstat,--wrap=fsync", {force = true})
+target_end()
+
+target("P7ModuleTests")
+    set_kind("binary")
+    shared_options()
+    add_deps("LeviLaminaAndroidFoundation")
+    add_deps("P7ModuleA", "P7ModuleB", {inherit = false})
+    add_files(path.join(os.projectdir(), "test/android/shared_core/module_tests.cpp"))
+    add_ldflags("-Wl,--wrap=dlclose", {force = true})
+target_end()
+
+for name, source in pairs({P7PlannerTests = "ModLoadPlannerTest.cpp", P7VersionTests = "VersionTest.cpp"}) do
+    target(name)
+        set_kind("binary")
+        shared_options()
+        add_deps("LeviLaminaAndroidFoundation")
+        add_packages("gtest")
+        add_files(path.join(os.projectdir(), "src-test/common", source))
+    target_end()
+end
