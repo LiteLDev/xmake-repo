@@ -2,7 +2,8 @@
 
 Status: G0–G2 implementation in progress. This is not a P7 completion record.
 G3–G8 have not passed. Full inputs and logs are outside the repository under
-`levilamina-p7-validation-20260910`.
+`C:/Users/ROG/levilamina-p7-validation-20260910` (historical device evidence) and
+`C:/Users/ROG/levilamina-p7-validation-20260913` (reviewed candidate and host evidence).
 
 ## Fixed inputs and decisions
 
@@ -17,8 +18,10 @@ G3–G8 have not passed. Full inputs and logs are outside the repository under
   Necessary Header corrections were accepted at
   `2ae3e432d1e4b003e89194979c13e7e437685056` on `codex/p7-header-compat`
   and are consumed from a clean detached worktree. The validated-sync checker
-  passed on that actual checkout. Header `main` and the original upstream
-  checkout remain unchanged.
+  passed on that actual checkout. Header `main` remains unchanged. A September 13
+  read-only check found the upstream reference checkout clean at `2faa4f21e6`,
+  ahead of the historical `1bc96d524a`; this was not a P7 operation and does not
+  change the frozen Header input. No reference branch was switched or reset.
 - MC `1.26.40.5`; NDK `28.2.13676358`; arm64-v8a; API28; shared libc++;
   16 KiB ELF alignment. BMB creator `17cb32a1` and reader `194310d7` are unchanged.
   The separately authorized P5 public-dependency attribution correction is
@@ -64,9 +67,33 @@ workspace; P6 inputs and ten-run evidence remain available.
 | Mod enable failure | State remained Disabled, so normal onDisable skipped rollback after a failed enable | Original Mod runs its registered disable callback on failure and aggregates cleanup errors; native manager retains the original Error while it owns the SO |
 | C++ type exports | Method visibility did not export the vtable used by inline PatternFormatter constructors | Type visibility exports required vtables/RTTI, while unmarked methods stay hidden; post-commit debug/release link checks passed; required vtable public and unmarked internal getter hidden |
 
-The follow-up PL review fixed four concrete issues: lifecycle callbacks now catch exceptions in exception-enabled Mod wrappers; the loader closes a library if registration discovery or registry insertion throws; failed loads always attempt their unload callback even when guarded resources are present; and a failed close keeps the Entry and handle resident. The registry releases its mutex during load/unload callbacks and rejects same-id concurrent loads. Seven host CMake tests pass, and the Android PL target builds with the exception-enabled ModLoader/JNI boundary.
+The September 13 review corrected the previous PL hardening: publish the existing
+Entry before entering load, reserve both id and SO path through Loading state,
+and retain a close failure even when registration/duplicate validation rejects the
+Mod. There is no post-callback container insertion or separate loading-id set.
+Failed-load cleanup now uses the same guarded-resource check as shutdown; it
+must not destroy context/origin slots while provider leases still reach them.
+Registration-discovery exceptions are destroyed before their SO can be closed.
+This retains the registry's existing allocation contract; allocation exhaustion
+and full shutdown callback draining are not newly supported capabilities.
 
-The LL follow-up review also added an Android `createExceptionPtr` definition with explicit unsupported semantics (it returns empty because Android has no Windows SEH record), and KernelLifecycle marks a load in progress before releasing its mutex around ModRegistrar callbacks. The post-fix Android debug build and ELF link/strip verification passed; release verification is recorded separately after completion.
+All eight PL host test groups passed, including throwing callback wrappers,
+optional lifecycle callbacks, worker queries during load, nested/duplicate-path
+loading, rejected-close retention and guarded failed-load retention. The Android
+provider and throwing-wrapper executable compiled. The common public PL headers
+remain shared; the detailed platform contract is recorded in PL's
+`docs/android-p7-environment.md`. Deprecated reverse symbol lookup and unsupported
+register-save options are not counted as working Android capabilities.
+
+KernelLifecycle now refuses to publish a successful load after a stop result and
+does not call the host logger under its mutex. A host fixture compiled the actual
+state implementation with isolated collaborators and passed load/stop races,
+exception/log reentry and repeated-close receipt checks. This is not MC or Android
+runtime evidence. The empty Android `createExceptionPtr` implementation was removed:
+the SEH record converter is declared only for the existing Windows platforms.
+Affected client/server Expected.cpp and SEH declaration compilation passed (two
+units). Six new Android backend files were formatted with this project's rules;
+functions moved unchanged from original shared/Windows files retained their bodies.
 
 ## Build and device evidence in progress
 
@@ -86,17 +113,30 @@ The selected HeaderVerifier classes report zero issues. Windows Header receipts
 reuse the previous validated compile only after checking exact effective-header
 and build-rule equality; these are not new Windows compiler runs.
 
-PL now points to `8a25b051e77b1eec1a04276a7e860a548d142dde`, including failed-parent
-retention, explicit close-failure ownership, callback exception containment and the expected ABI correction. The Launcher gitlink matches it.
-Launcher APK assembly and the existing Java unit suite passed. The corrected
-APK was installed with application data preserved on vivo `10AF6D0YNL00439`.
-Its SHA256 is `acb0d22b19cd9a5033702e0776b03a81ea78816d8aeebdf618829f9ff8a41c37`.
-The APK-derived provider build ID is `72b625c27d3418cba132be0ad460e4e0990df549`;
-the rebound BMB SHA256 is
-`7d88b516ad36f9eec5379b31f9b157a4705a0fb79b3cfc2ca2c3bf4b2c341cf7`.
-The fixed creator preserved the original dataset/whitelist identities.
+The reviewed candidate uses LL `0b9fadd2395a9f575849482cbec56327419e5e43`, PL
+`7cf14db14f13cf87a408ecaf09fc9dce9c6cc7ed`, and Launcher
+`ecc602a0360802678e0a14c04fd058077f91b98d`. The Launcher gitlink matches PL.
+A fresh Launcher output directory produced the APK and passed all 69 Java tests.
+The applicationId and signing certificate match the existing installation, and
+the APK's libc++ is byte-identical to the fixed NDK library. APK-extracted libraries
+passed AArch64, SONAME, dependency and 16 KiB checks; the provider targets API28.
 
-The first APK crashed in PL's Expected<void> return before LL loaded. The
+Current APK SHA256:
+`6a9f8cbfbf2c1565819b20cf31fd90f581d9ffcc980526659b6d7ac909ac6c54`.
+Provider build ID: `8e451cefa4d4d2efbd3d19c74abfe3c9597396cd`.
+Rebound BMB SHA256:
+`84d39a93fd28250898ba2706f6de4ee265bce6d1caec4989ce6f6f88c2022b22`.
+The fixed creator authenticated all stored records/reverse indexes and preserved
+dataset provenance, semantic identity and whitelist counts. Both LL modes were
+rebuilt after the source commit, so the embedded version is `0b9fadd239`; their
+P5 link, strip, public visibility and source/include checks passed on these inputs.
+
+This corrects a source/artifact mismatch in the previous record: September 12
+commits were listed alongside the September 11 APK/provider. That older APK
+(`acb0d22b…`) and its device results remain historical evidence. The current
+candidate has not been installed or run on the device.
+
+In the September 11 device runs, the first APK crashed in PL's Expected<void> return before LL loaded. The
 corrected APK reached shared LL initialization and the game menu. Actual process
 maps contain one app `libc++_shared.so`, loaded from the APK's native library
 directory. This does not count as Game Ready evidence.
@@ -129,17 +169,17 @@ were archived outside Mod discovery, and the formal release was restored.
 
 Evidence is retained under `device-g2`, `launcher-apk-inputs`, `pl-expected-abi`,
 `p5-sdk`, and `shared-runtime-debug` in the external validation directory.
-PL, P5 and Header branches have now been published with ordinary pushes; LL and Launcher branches were also pushed after updating the Launcher gitlink to the hardened PL commit.
+The reviewed PL, Launcher and LL source commits were published with ordinary
+pushes on September 13. No force push or Header-main merge was performed.
 
 ## Gates still open
 
-Implementation source is committed as `c4921d7eae33f6275d31cfce93885c9a564da132`
-(shared foundations), `38eaa99793dc39ca2c10ced6a226087f9711d5d3` (Android
-runtime and fixtures), and `f227daa338` (post-review input binding and hardening receipt). Launcher is committed as
-`1f3d8c48b1ca44cbdb458d19839a4512ae63419f`. Post-commit debug/release builds,
-P5 linking, stripping and visibility checks passed. The final FileSink/type-
-visibility example still needs its device receipt; the user paused device work
-on 2026-09-12. First-batch closure remains pending.
+The current matching APK/provider/BMB/LL/example requires installation and final
+device validation, including FileSink logs, the original-manager/A-B fixtures,
+and the reviewed PL failure/reentry/callback paths. The user paused device work
+on September 12; no device was operated during this review. First-batch closure
+remains pending. Local `candidate/index.json` describes the G2 test inputs; it is
+not a G6 SDK release or proof that the old P6 package publisher supports P7.
 The compact record is `validation/p7/g0-g2-summary.json`.
 
 The first batch supports the normal root-level native entry and the fixed LL/

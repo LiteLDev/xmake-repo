@@ -1,203 +1,30 @@
 {
-  "scope": "P7-G0-G2",
-  "source_commit": "f227daa338",
-  "first_batch_closed": false,
+  "APK_provider_binding": {
+    "bytes": 1506,
+    "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260913\\launcher-apk-inputs\\source-binding.json",
+    "sha256": "a1826d5607283ff07bb1b94d0c9631f92993cc09609470a0b9f190a9db9279f8"
+  },
   "P7_complete": false,
-  "baseline": {
-    "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260910\\baseline.json",
-    "sha256": "7a3def61fef545bf75197b4c3b32e686409198b666b1c6d5c6c8cc625a5785db",
-    "bytes": 10687
-  },
-  "protected_prelink_diff": {
-    "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260910\\protected-prelink.patch",
-    "sha256": "7b90e2e0cda2d41989ed6c3923979502b0a62d2ea0a88551a9f3a1138d1e9832",
-    "bytes": 3043
-  },
-  "input_lock": {
-    "repository_path": "config/android-kernel-inputs.lock.json",
-    "sha256": "f05f5dcdb648a67a6d315dab083edfe1a0aaf4048ff9314e702b70efe594b3e4"
+  "candidate": {
+    "bytes": 6174,
+    "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260913\\candidate\\index.json",
+    "sha256": "be9110aa1015516a67a1f0b90bf9ebd8bf71ad03ae53495ebb5acbc1f126a566"
   },
   "commits": {
-    "LL_foundations": "c4921d7eae33f6275d31cfce93885c9a564da132",
-    "LL_runtime": "f227daa338",
-    "Launcher": "1f3d8c48b1ca44cbdb458d19839a4512ae63419f",
-    "PL": "8a25b051e77b1eec1a04276a7e860a548d142dde",
+    "BMB_creator": "17cb32a11e8f86e5ef380c277575584e3f5584dc",
+    "BMB_reader": "194310d7fb9c3c9712618c9776cd7db1e5b521dd",
     "Header": "2ae3e432d1e4b003e89194979c13e7e437685056",
-    "P5": "b46b8ee62f27c0f7337b0d454fd10999366c0107"
+    "LL": "0b9fadd2395a9f575849482cbec56327419e5e43",
+    "Launcher": "ecc602a0360802678e0a14c04fd058077f91b98d",
+    "P5": "b46b8ee62f27c0f7337b0d454fd10999366c0107",
+    "PL": "7cf14db14f13cf87a408ecaf09fc9dce9c6cc7ed"
   },
-  "decisions": {
-    "cxx": "c++23",
-    "exceptions": true,
-    "rtti": true,
-    "runtime": "c++_shared",
-    "allocator_tu_rtti": false,
-    "version_prerelease": "std::variant<std::string, std::uint16_t>",
-    "version_constant_evaluation_required": false
+  "device_work_paused_by_user": "2026-09-12; no device operations in this review",
+  "first_batch_closed": false,
+  "input_lock": {
+    "repository_path": "config/android-kernel-inputs.lock.json",
+    "sha256": "4d0de0440b1f278477520909953f7fb6a322d5b92aff18628b5c797cb6583adf"
   },
-  "results": {
-    "windows_shared_units": {
-      "passed": 62,
-      "kind": "compile",
-      "evidence": {
-        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260910\\windows-shared-compile\\results.json",
-        "sha256": "55332efe72ed55987f63c9225f6f74ec5c2158247100695e8f3b48388753445b",
-        "bytes": 222453
-      }
-    },
-    "windows_rollback_units": {
-      "passed": 4,
-      "kind": "compile",
-      "evidence": {
-        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260910\\windows-rollback-compile\\results.json",
-        "sha256": "4ded73b23d82d22bbccf63f75d7fa028162de39153d3d7983daa98974a2e28d7",
-        "bytes": 14363
-      }
-    },
-    "windows_final_units": {
-      "passed": 4,
-      "kind": "compile",
-      "evidence": {
-        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260910\\windows-final-compile\\results.json",
-        "sha256": "761fde8aaadbbe841b73db78f49bc3424f6a70129da5fa4ecb19946c8d2157cf",
-        "bytes": 14317
-      }
-    },
-    "native_manager": {
-      "passed": 31,
-      "kind": "device fixture using original core objects plus test-only adapter",
-      "evidence": {
-        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260910\\native-manager-fixtures\\device-result.json",
-        "sha256": "1cf4d5eff7add2eefd85e9b622a939b22a2f0e37667275d12fb40c6f8def1204",
-        "bytes": 3000
-      }
-    },
-    "private_copy_io": {
-      "passed": 10,
-      "kind": "device fault injection",
-      "evidence": {
-        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260910\\device-g2\\module-files-io-final.json",
-        "sha256": "517dc60e1132eb3aa81df5dfa9c85180ce89113d6518314e5b7f6aaafc89c442",
-        "bytes": 1455
-      }
-    },
-    "floating_parser": {
-      "passed": 6,
-      "kind": "device",
-      "evidence": {
-        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260910\\string-fixtures\\device-tests.log",
-        "sha256": "356baf4e079d707c19f641c9a653b6be35a5b28355137aefb7d28376017f1f34",
-        "bytes": 1242
-      }
-    },
-    "launcher_unit_tests": {
-      "passed": 69,
-      "failures": 0,
-      "errors": 0
-    },
-    "python_source_validator": {
-      "passed": 16,
-      "source": "test/python/test_android_kernel.py"
-    },
-    "original_version": {
-      "windows_passed": 11,
-      "android_passed": 11
-    },
-    "original_planner": {
-      "android_passed": 13
-    },
-    "main_example": {
-      "constructor_identity": true,
-      "worker_identity": true,
-      "native_nbt_round_trip": true,
-      "evidence": {
-        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260910\\device-g2\\release-main-result.json",
-        "sha256": "6e05fc973e22368eefd1ba93fd3bd25d706b596ff6e1170b398773b5c7838a6d",
-        "bytes": 1929
-      }
-    },
-    "final_type_visibility": {
-      "private_getter_hidden": true,
-      "required_formatter_vtable_exported": true,
-      "no_fixture_exports": true,
-      "verified_modes": [
-        "debug",
-        "release"
-      ],
-      "evidence": {
-        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260910\\post-commit-artifacts.json",
-        "sha256": "56a9fc3e580182eef753eecf6bd4e57a534a1c62c96f1e4d13894d8005f5ec91",
-        "bytes": 1845
-      }
-    },
-    "post_commit_builds": {
-      "passed": [
-        "debug",
-        "release"
-      ],
-      "source_commit": "38eaa99793dc39ca2c10ced6a226087f9711d5d3",
-      "evidence": {
-        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260910\\post-commit-builds.json",
-        "sha256": "4a00956ff038413d970d441840dab9ac56ab0931543db6e3314df16999ecbbfd",
-        "bytes": 233
-      },
-      "artifacts": {
-        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260910\\post-commit-artifacts.json",
-        "sha256": "56a9fc3e580182eef753eecf6bd4e57a534a1c62c96f1e4d13894d8005f5ec91",
-        "bytes": 1845
-      }
-    },
-    "pl_host_tests": {
-      "passed": 7,
-      "failed": 0,
-      "kind": "clean CMake rebuild and ctest",
-      "evidence": "C:/Users/ROG/levilamina-p7-validation-20260910/pl-host"
-    },
-    "pl_android_build": {
-      "passed": true,
-      "kind": "CMake Android target build",
-      "evidence": "C:/Users/ROG/levilamina-p7-validation-20260910/pl-android"
-    },
-    "post_fix_ll_debug_build": {
-      "passed": true,
-      "kind": "full Android debug build/P5 link/strip",
-      "evidence": "C:/Users/ROG/levilamina-p7-validation-20260910/shared-runtime-debug"
-    },
-    "post_fix_ll_release_build": {
-      "passed": true,
-      "kind": "full Android release build/P5 link/strip",
-      "evidence": "C:/Users/ROG/levilamina-p7-validation-20260910/shared-runtime-release"
-    },
-    "createExceptionPtr_export": {
-      "debug": true,
-      "release": true,
-      "kind": "ELF public symbol inspection"
-    },
-    "post_lock_relink": {
-      "debug": [
-        "kernel",
-        "example"
-      ],
-      "release": [
-        "kernel",
-        "example"
-      ],
-      "evidence": "C:/Users/ROG/levilamina-p7-validation-20260910/post-lock-*-*.log"
-    },
-    "post_lock_relink_latest": {
-      "debug": [
-        "kernel",
-        "example"
-      ],
-      "release": [
-        "kernel",
-        "example"
-      ],
-      "evidence": "C:/Users/ROG/levilamina-p7-validation-20260910/post-lock-*-*.log"
-    }
-  },
-  "pending": [
-    "Final FileSink example device receipt (device work paused by user)"
-  ],
   "later_gates": {
     "G3": "unpassed",
     "G4": "unpassed",
@@ -207,75 +34,144 @@
     "G8": "unpassed"
   },
   "limits": [
-    "No game Ready evidence from PL enable or menu",
-    "No full child/parent unload proof; Android unload remains refused",
-    "Logger::flush is sink-only, no queue-drain claim",
-    "Native loader currently supports root-level entry and fixed LL/platform dependency scope",
-    "No G6 published SDK/package or G7 full Windows/game regression"
+    "PL enable/menu is not Game Ready",
+    "No shared event/task/log drain or complete parent/child unload proof",
+    "Logger::flush is sink-only",
+    "G2 candidate staging is not the G6 published SDK/package workflow",
+    "Historical 31 device assertions are not final-candidate runtime evidence"
   ],
-  "device_fixture_archive": "/sdcard/Android/media/org.levimc.launcher/p7-fixture-evidence/20260911-g2",
-  "source_baselines": {
-    "LeviLamina": {
-      "head": "1bc96d524a5245a6ce28af8c13f31c281241c8fa",
-      "branch": "header",
-      "initial_clean": true
-    },
-    "LeviLaminaWithAndroid": {
-      "head": "6d5f02513384b051436fa0a26902894d10f6205a",
-      "branch": "main",
-      "initial_clean": true
-    },
-    "LeviLaminaWithAndroid-android-kernel": {
-      "head": "5bcf0f4a1907f75bf02691fe15993d00f8fefa5e",
-      "branch": "feat/android-minimal-kernel",
-      "initial_clean": true
-    },
-    "LeviLaminaWithAndroid-headers": {
-      "head": "6d5f02513384b051436fa0a26902894d10f6205a",
-      "branch": "",
-      "initial_clean": true
-    },
-    "preloader-source-p6": {
-      "head": "d12886b33ff46364efcc42252ea2e124fff051d9",
-      "branch": "codex/p6-guarded-hooks",
-      "initial_clean": true
-    },
-    "LeviLaunchroid-Test-p6": {
-      "head": "4c4c68ba6862a21e2409f35670c09572531f11f8",
-      "branch": "codex/p6-guarded-hooks",
-      "initial_clean": true
-    },
-    "prelink": {
-      "head": "ec038c771c92708dec1718b643f89eeb4992f0e9",
-      "branch": "main",
-      "initial_clean": false
-    },
-    "prelink-p5": {
-      "head": "1ab96df1790e2cd8082c4c72b656b0996ae4c311",
-      "branch": "feat/android-elf-prelink",
-      "initial_clean": true
-    },
-    "bedrock-magic-blob": {
-      "head": "194310d7fb9c3c9712618c9776cd7db1e5b521dd",
-      "branch": "feat/android-runtime-hook-data",
-      "initial_clean": true
-    },
-    "bedrock-magic-blob-p6-rebind": {
-      "head": "17cb32a11e8f86e5ef380c277575584e3f5584dc",
-      "branch": "codex/p6-provider-rebind",
-      "initial_clean": true
-    }
-  },
-  "device_work_paused_by_user": "2026-09-12; temporarily unavailable",
-  "protected_inputs_final": {
-    "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260910\\protected-inputs-final.json",
-    "sha256": "46fcb3bd1fa39f55e22c01964842dac06791f5c17940deff7232b155b981d2ee"
+  "pending": [
+    "Install and run the matching final APK/provider/BMB/LL/example on vivo when the user resumes device work",
+    "FileSink file log and final candidate original-manager/A-B fixture receipts",
+    "Android runtime evidence for the reviewed PL failure, reentry and callback wrapper paths"
+  ],
+  "protected_inputs": {
+    "bytes": 942,
+    "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260913\\protected-inputs.json",
+    "sha256": "cb5111a70dab3943772c2273afa3668822b6262e60976a03c7141ceb4f85dcae"
   },
   "remote_publication": {
-    "PL": "pushed",
-    "Header": "pushed",
-    "P5": "pushed",
-    "LL": "pushed",
-    "Launcher": "pushed"
+    "LL_source": "pushed",
+    "Launcher": "pushed",
+    "PL": "pushed"
+  },
+  "review": [
+    "PL existing Entry owns load-in-progress id/path and close failures; removed parallel loading-id set",
+    "Failed-load unload follows the existing guarded owner-resource check",
+    "SEH-only exception conversion is unavailable in Android declarations instead of returning empty",
+    "Kernel stop result wins over late load publication; host logging is outside its lock",
+    "New Android backend formatting follows project clang-format; original moved function bodies preserved",
+    "PL public Config/SymbolProvider/Hook/MemoryResource headers remain common; unsupported behavior is recorded, not marked passed"
+  ],
+  "scope": "P7-G0-G2",
+  "source_commit": "0b9fadd2395a9f575849482cbec56327419e5e43",
+  "source_files": {
+    "bytes": 30253,
+    "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260913\\source-files.json",
+    "sha256": "21cf4a6cc992690b6f564962c4076983addd2c57f3ab7b75e5f9f1c9150264dd"
+  },
+  "superseded_summary": {
+    "evidence": {
+      "bytes": 9345,
+      "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260913\\superseded-g0-g2-summary.json",
+      "sha256": "7849ee8d5ace66a8b94ddaf474e15bfc0c9c8e931ed52f87de9835da148d03cb"
+    },
+    "reason": "September 12 source ids and September 11 APK/provider evidence were mixed; old device results are historical, not acceptance of this candidate."
+  },
+  "validation": {
+    "BMB_rebind": {
+      "dataset_and_whitelist_unchanged": true,
+      "evidence": {
+        "bytes": 1312,
+        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260913\\launcher-apk-inputs\\rebind-report.json",
+        "sha256": "fb4a59029bc4f6ecdcc92993ab2b80781ea539520272281234b02fdc115bbce9"
+      }
+    },
+    "KernelLifecycle_host": {
+      "evidence": {
+        "bytes": 86,
+        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260913\\kernel-lifecycle-host\\run.log",
+        "sha256": "0e5f52c0e89f68ccc03fe96d85f7736c605d23fdc386675ef3c0307e6ec58191"
+      },
+      "passed": true,
+      "runner": {
+        "bytes": 5551,
+        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260913\\test-kernel-lifecycle.py",
+        "sha256": "fbcab3bb84d474b86d0b4d1546d6eb9bd95f0fbd8b31fc4e1d06313fdffd451a"
+      },
+      "scope": "real state implementation with isolated host collaborators; not MC or Android runtime"
+    },
+    "LL_Android": {
+      "evidence": {
+        "bytes": 3717,
+        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260913\\ll-build-results.json",
+        "sha256": "35c47eee1da4543deedbf4149be82ba05130af562de97972e60cc59d8aaa49cc"
+      },
+      "kind": "post-commit compile, P5 link, source/include authentication and pre/post-strip verification",
+      "modes": [
+        "debug",
+        "release"
+      ]
+    },
+    "Launcher": {
+      "counts": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 69
+      },
+      "evidence": {
+        "bytes": 14397,
+        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260913\\launcher-build.log",
+        "sha256": "4fe3ef7baa1324288208248f59d7ad87f709e19f47ba420efd62013c276ffd90"
+      },
+      "kind": "fresh output directory APK assembly and Java unit tests; APK not installed"
+    },
+    "PL_Android": {
+      "evidence": {
+        "bytes": 1437,
+        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260913\\pl-android-build.log",
+        "sha256": "484821277a15241ab5580c00d875ad553167fa230593b415697788b859312e19"
+      },
+      "kind": "provider and throwing wrapper executable compiled; new device tests pending"
+    },
+    "PL_host": {
+      "evidence": {
+        "bytes": 4342,
+        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260913\\pl-host-tests.log",
+        "sha256": "4f2600d011cfe0d36dbb9a738755c94f9842aab369333ff37cff7b11f21f82d2"
+      },
+      "failed": 0,
+      "kind": "incremental CMake build and ctest",
+      "passed": 8
+    },
+    "Windows_affected": {
+      "evidence": {
+        "bytes": 7263,
+        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260913\\windows-api-compile\\results.json",
+        "sha256": "e74836dcb58eb50eab639653b762bcdf8f523b925a26ae151df8aba2e0822f2d"
+      },
+      "kind": "Expected.cpp and SEH declaration compilation for client/server; not full G7 targets",
+      "passed": 2
+    },
+    "native_manager_fixture_build": {
+      "build_log": {
+        "bytes": 270,
+        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260913\\native-fixtures-build.log",
+        "sha256": "670964e841ec19ec64572d052ece877678536dd0584186060b9ea5875d276808"
+      },
+      "compiled_linked_stripped": 6,
+      "evidence": {
+        "bytes": 61852,
+        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260913\\native-manager-fixtures\\results.json",
+        "sha256": "768ca5197d628eefba9e593793ca1389be66442105a338e5a1b3a74561d2aef7"
+      },
+      "runtime_tested": false
+    },
+    "source_validator": {
+      "command": "python -X utf8 -m unittest discover -s test/python -p test_android_kernel.py",
+      "failed": 0,
+      "passed": 16
+    }
   }
 }
