@@ -10,7 +10,7 @@ void requireUtf8(uint codePage) {
         throw std::system_error(std::make_error_code(std::errc::not_supported), "Android uses UTF-8 code pages");
     }
 }
-}
+} // namespace
 
 std::wstring str2wstr(std::string_view value, uint codePage) {
     requireUtf8(codePage);

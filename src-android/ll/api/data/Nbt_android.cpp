@@ -10,11 +10,11 @@ static_assert(sizeof(Variant) == sizeof(CompoundTagVariant));
 static_assert(alignof(Variant) == alignof(CompoundTagVariant));
 
 Variant const& storage(CompoundTagVariant const& value) { return value.mTagStorage.as<Variant>(); }
-}
+} // namespace
 
 CompoundTagVariant& CompoundTag::operator[](std::string_view key) {
     auto const& values = rawView();
-    auto found = values.find(key);
+    auto        found  = values.find(key);
     if (found == values.end()) {
         // Preserve the original operator[]'s missing-key EndTag semantics.
         auto tag = Tag::newTag(Tag::Type::End);
@@ -28,7 +28,7 @@ CompoundTagVariant& CompoundTag::operator[](std::string_view key) {
 
 CompoundTagVariant const& CompoundTag::operator[](std::string_view key) const {
     auto const& values = rawView();
-    auto found = values.find(key);
+    auto        found  = values.find(key);
     if (found == values.end()) throw std::out_of_range("invalid nbt key");
     return found->second;
 }

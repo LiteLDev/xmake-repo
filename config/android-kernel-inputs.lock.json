@@ -11,13 +11,13 @@
   },
   "bmb": {
     "bytes": 17626204,
-    "sha256": "7D88B516AD36F9EEC5379B31F9B157A4705A0FB79B3CFC2CA2C3BF4B2C341CF7"
+    "sha256": "84D39A93FD28250898BA2706F6DE4EE265BCE6D1CAEC4989CE6F6F88C2022B22"
   },
   "commits": {
     "H": "48f5fbfc2cbd539c08316d855555ce084478a678",
     "M": "c9a3b9cb0507cfb072f3d33be4324d1642c24889",
     "P5": "b46b8ee62f27c0f7337b0d454fd10999366c0107",
-    "PL": "8a25b051e77b1eec1a04276a7e860a548d142dde",
+    "PL": "7cf14db14f13cf87a408ecaf09fc9dce9c6cc7ed",
     "S": "2ae3e432d1e4b003e89194979c13e7e437685056"
   },
   "dependency_header_api": 21,
@@ -64,25 +64,25 @@
   "phase": "P7-G0-G2",
   "prelink_executable_sha256": "54183E74B22100489D95430DAC7618F47927F9282F7C0DF88DEE697ED9FDDF9F",
   "provider": {
-    "bytes": 5038560,
-    "sha256": "9C14ACB7579B32E042EC2EF7FD1B5C05E46B52555DF126F6BCC328C194347942"
+    "bytes": 5059824,
+    "sha256": "CA474DBFED307C090EB6614D403BE9E820EDF2E26625FAE0D8FF4B0EDF2372A0"
   },
   "runtime_manifest": {
     "bmbBytes": "17626204",
-    "bmbSha256": "7d88b516ad36f9eec5379b31f9b157a4705a0fb79b3cfc2ca2c3bf4b2c341cf7",
+    "bmbSha256": "84d39a93fd28250898ba2706f6de4ee265bce6d1caec4989ce6f6f88c2022b22",
     "functionReverseIndexCount": 25667,
     "membershipCount": 540340,
     "minecraftVersion": "1.26.40.5",
-    "providerBuildId": "72b625c27d3418cba132be0ad460e4e0990df549",
-    "providerFileSha256": "9c14acb7579b32e042ec2ef7fd1b5c05e46b52555df126f6bcc328c194347942",
-    "providerTextSha256": "259bd39f7b2268af264b5b18a06fd704505360d243fe160e4441859a5c54d164",
+    "providerBuildId": "8e451cefa4d4d2efbd3d19c74abfe3c9597396cd",
+    "providerFileSha256": "ca474dbfed307c090eb6614d403be9e820edf2e26625fae0d8ff4b0edf2372a0",
+    "providerTextSha256": "190830f929a14e8cf738cbe4269359290b1e9ae64f55c26b56b9c59b79fd6caa",
     "schemaVersion": 1,
     "semanticSha256": "b1f905519c0b7dfb709ed23e475ed48eb3705b525e924e20116cde6ebec6a82c",
     "targetBuildId": "5893edc8d56c93cbdb50e0f9436320236b78c89d",
     "targetTextSha256": "f17aa60a840a88fc1212abfa92e362fec86b871126f30ae03000de8d90f3b0aa",
     "whitelistValueCount": 26092
   },
-  "runtime_manifest_sha256": "8C9900D2B2DCBF90D2F203D0ED22679B1EE915891C07CF43C62914C182E34F31",
+  "runtime_manifest_sha256": "C21B39A4995C190633CF0D4645584BA7E4D6BF16A63B69D0BB214AD33E58F15F",
   "schema_version": 1,
   "sdk": {
     "cxx": "c++23",

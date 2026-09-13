@@ -50,10 +50,10 @@ std::string const& getSystemName() {
 }
 
 data::Version getSystemVersion() {
-    auto release = property("ro.build.version.release");
+    auto          release = property("ro.build.version.release");
     std::uint16_t major{}, minor{}, patch{};
-    char const* first = release.data();
-    auto last = first + release.size();
+    char const*   first = release.data();
+    auto          last  = first + release.size();
     for (auto* part : {&major, &minor, &patch}) {
         auto result = std::from_chars(first, last, *part);
         if (result.ec != std::errc{} || result.ptr == last || *result.ptr != '.') break;
@@ -63,11 +63,13 @@ data::Version getSystemVersion() {
 }
 
 data::TmWithMs getLocalTime() {
-    auto now = std::chrono::system_clock::now();
-    auto time = std::chrono::system_clock::to_time_t(now);
+    auto           now  = std::chrono::system_clock::now();
+    auto           time = std::chrono::system_clock::to_time_t(now);
     data::TmWithMs result{};
     ::localtime_r(&time, &result);
-    result.ms = static_cast<ushort>(std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()).count() % 1000);
+    result.ms = static_cast<ushort>(
+        std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()).count() % 1000
+    );
     return result;
 }
 
@@ -79,7 +81,8 @@ std::string getEnvironmentVariable(std::string_view name) {
 
 bool setEnvironmentVariable(std::string_view name, std::string_view value) {
     if (name.empty() || name.find_first_of("=\0", 0, 2) != std::string_view::npos
-        || value.find('\0') != std::string_view::npos) return false;
+        || value.find('\0') != std::string_view::npos)
+        return false;
     return ::setenv(std::string(name).c_str(), std::string(value).c_str(), 1) == 0;
 }
 

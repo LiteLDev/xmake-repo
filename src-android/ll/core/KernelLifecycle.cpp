@@ -1,7 +1,6 @@
 #include "KernelLifecycle.h"
 
 #include "ll/api/i18n/I18n.h"
-#include "ll/api/utils/ErrorUtils.h"
 #include "ll/core/LeviLamina.h"
 #include "ll/core/mod/ModRegistrar.h"
 #include "pl/Config.h"
@@ -31,13 +30,16 @@ bool KernelLifecycle::load(pl::android::ModContext const& source) noexcept try {
     {
         std::lock_guard lock(mMutex);
         mLoading = false;
-        mLoaded  = true;
+        if (mStopResult) return false;
+        mLoaded = true;
     }
     getLogger().info("LeviLamina shared client core loaded");
     return true;
 } catch (...) {
-    std::lock_guard lock(mMutex);
-    mLoading = false;
+    {
+        std::lock_guard lock(mMutex);
+        mLoading = false;
+    }
     source.log(3, "LeviLamina shared initialization failed");
     return false;
 }
@@ -54,12 +56,14 @@ bool KernelLifecycle::disable(pl::android::ModContext const&) noexcept {
 }
 
 bool KernelLifecycle::unload(pl::android::ModContext const& source) noexcept {
-    std::lock_guard lock(mMutex);
-    if (mStopResult) return *mStopResult;
+    {
+        std::lock_guard lock(mMutex);
+        if (mStopResult) return *mStopResult;
+        mStopResult = false;
+    }
     // G0-G2 cannot yet prove shared event/task/log quiescence. Keep PL's parent
     // reference, including after a partially failed load, until G3-G4 supply it.
     source.log(3, "LeviLamina retained: shared client shutdown is not yet available");
-    mStopResult = false;
     return false;
 }
 

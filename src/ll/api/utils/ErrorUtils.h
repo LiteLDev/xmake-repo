@@ -56,7 +56,10 @@ public:
 
 LLNDAPI std::system_error getLastSystemError() noexcept;
 
+#if !defined(LL_PLAT_A)
+// Converts a Windows SEH exception record; Android has no corresponding record.
 LLNDAPI std::exception_ptr createExceptionPtr(void*) noexcept;
+#endif
 
 LLNDAPI Stacktrace stacktraceFromCurrentException(size_t skip = 0, size_t maxDepth = ~0ull);
 
