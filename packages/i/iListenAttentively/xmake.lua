@@ -1,5 +1,6 @@
 package("ilistenattentively")
     add_urls("https://github.com/LiteLDev/iListenAttentively.git")
+    add_versions("v0.14.0", "babf8f656ae768ef833d4ce2a3da5a559c434c32")
 
     add_configs("target_type", {default = "server", values = {"server", "client"}})
 
