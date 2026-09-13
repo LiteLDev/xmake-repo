@@ -1,9 +1,9 @@
 # Android P7 validation
 
-Status: G0–G2 implementation in progress. This is not a P7 completion record.
+Status: G0–G2 first-batch acceptance completed on 2026-09-13. P7 is not complete.
 G3–G8 have not passed. Full inputs and logs are outside the repository under
 `C:/Users/ROG/levilamina-p7-validation-20260910` (historical device evidence) and
-`C:/Users/ROG/levilamina-p7-validation-20260913` (reviewed candidate and host evidence).
+`C:/Users/ROG/levilamina-p7-validation-20260913` (reviewed candidate and host/device evidence).
 
 ## Fixed inputs and decisions
 
@@ -134,7 +134,7 @@ P5 link, strip, public visibility and source/include checks passed on these inpu
 This corrects a source/artifact mismatch in the previous record: September 12
 commits were listed alongside the September 11 APK/provider. That older APK
 (`acb0d22b…`) and its device results remain historical evidence. The current
-candidate has not been installed or run on the device.
+candidate subsequently passed the device acceptance recorded below.
 
 In the September 11 device runs, the first APK crashed in PL's Expected<void> return before LL loaded. The
 corrected APK reached shared LL initialization and the game menu. Actual process
@@ -150,7 +150,7 @@ The original DefaultSink wrote the configured `LeviLamina/data/logs/latest.log`
 and Android console output. Its file is buffered: process force-stop can lose the
 last buffer. A final example update adds the original FileSink at
 `LeviLaminaP7Example/data/p7-example.log`, with Info-level sink flushing. Its final
-runtime receipt is still pending. `Logger::flush()` remains sink-only and does
+runtime receipt now passes in both final debug and release. `Logger::flush()` remains sink-only and does
 not prove queue drain.
 
 The original-manager fixture passed 31 device assertions, covering reentrant A/B
@@ -172,15 +172,44 @@ Evidence is retained under `device-g2`, `launcher-apk-inputs`, `pl-expected-abi`
 The reviewed PL, Launcher and LL source commits were published with ordinary
 pushes on September 13. No force push or Header-main merge was performed.
 
-## Gates still open
+## Final first-batch device acceptance, September 13
 
-The current matching APK/provider/BMB/LL/example requires installation and final
-device validation, including FileSink logs, the original-manager/A-B fixtures,
-and the reviewed PL failure/reentry/callback paths. The user paused device work
-on September 12; no device was operated during this review. First-batch closure
-remains pending. Local `candidate/index.json` describes the G2 test inputs; it is
-not a G6 SDK release or proof that the old P6 package publisher supports P7.
-The compact record is `validation/p7/g0-g2-summary.json`.
+The user resumed device work on vivo `10AF6D0YNL00439` (V2454A, Android API36).
+The matching APK was installed with `adb install -r`; the previous APK, Mod
+binaries/manifests and runtime package were backed up. The installed APK SHA256
+matches the candidate. No application data was cleared and no world was entered.
+
+- Formal debug (PID20928) and release (PID28810) both passed the original Mod
+  registration, constructor/worker identity, directory and native NBT round trip.
+  The original FileSink wrote its flushed Info message in both modes. Release
+  receipt/log mtimes are newer than that launch, so an older log is not the proof.
+- Each run's process maps and on-device hashes bind the actual PL, shared libc++,
+  LL and example to their exact candidate files. There is one app libc++ image;
+  private cached SO paths remain separate from the canonical user-data paths.
+- The original-manager fixture host (PID26495), rebuilt from the same release
+  objects, passed all 31 assertions. Startup logs independently confirm malformed
+  manifest, missing dependency, invalid ELF and each OS/architecture/SDK rejection.
+  Original error-lifetime markers and failed-resource ownership records were saved.
+- Three PL suites ran successfully on Android: lifecycle registry, guarded
+  ownership and throwing/optional C++ callback wrappers. Registry tests use owned
+  fake close/hook backends to inject failures; this is not new MC-hook evidence.
+- The cross-SO fixture links the final production SystemUtils object. Actual
+  Android dlopen/dlclose, A/B constructor/thread identities, containers, exceptions,
+  move ownership, injected close failure retention and loader diagnostics passed.
+
+The eleven owned fixture directories and their data were archived outside
+discovery at `p7-fixture-evidence/20260913-final-g2`. The formal release was restored
+and verified at the Minecraft menu. The pre-existing Mod configuration hash is
+unchanged. The final evidence entry is `device-final/acceptance.json`; the compact
+repository record is `validation/p7/g0-g2-summary.json`.
+
+This closes the bounded G0–G2 delivery. Local `candidate/index.json` describes its
+accepted test inputs; it is not a G6 SDK release or proof that the old P6 package
+publisher supports P7. The code and public ABI inputs did not change during the
+device session. Earlier build-only receipts, including the frozen PL documentation,
+describe their state before this device acceptance.
+
+## Gates still open
 
 The first batch supports the normal root-level native entry and the fixed LL/
 platform shared dependency scope. Arbitrary inter-Mod DT_NEEDED libraries and

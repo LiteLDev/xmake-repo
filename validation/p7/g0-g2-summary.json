@@ -6,9 +6,9 @@
   },
   "P7_complete": false,
   "candidate": {
-    "bytes": 6174,
+    "bytes": 6399,
     "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260913\\candidate\\index.json",
-    "sha256": "be9110aa1015516a67a1f0b90bf9ebd8bf71ad03ae53495ebb5acbc1f126a566"
+    "sha256": "89181696f923826495df764db61abdf333879bb5999381d8f36015eda38dc3af"
   },
   "commits": {
     "BMB_creator": "17cb32a11e8f86e5ef380c277575584e3f5584dc",
@@ -19,8 +19,13 @@
     "P5": "b46b8ee62f27c0f7337b0d454fd10999366c0107",
     "PL": "7cf14db14f13cf87a408ecaf09fc9dce9c6cc7ed"
   },
-  "device_work_paused_by_user": "2026-09-12; no device operations in this review",
-  "first_batch_closed": false,
+  "device_acceptance": {
+    "bytes": 3152,
+    "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260913\\device-final\\acceptance.json",
+    "sha256": "6f969e7eeb37e3727a12cbf88f69ca2a4e84ec76ea5c35fecb49f7e174dc1ab6"
+  },
+  "device_work_paused_by_user": "Resumed by user on 2026-09-13; final candidate device acceptance completed",
+  "first_batch_closed": true,
   "input_lock": {
     "repository_path": "config/android-kernel-inputs.lock.json",
     "sha256": "4d0de0440b1f278477520909953f7fb6a322d5b92aff18628b5c797cb6583adf"
@@ -38,13 +43,9 @@
     "No shared event/task/log drain or complete parent/child unload proof",
     "Logger::flush is sink-only",
     "G2 candidate staging is not the G6 published SDK/package workflow",
-    "Historical 31 device assertions are not final-candidate runtime evidence"
+    "PL standalone device suites exercise owned backends, not new game-hook targets"
   ],
-  "pending": [
-    "Install and run the matching final APK/provider/BMB/LL/example on vivo when the user resumes device work",
-    "FileSink file log and final candidate original-manager/A-B fixture receipts",
-    "Android runtime evidence for the reviewed PL failure, reentry and callback wrapper paths"
-  ],
+  "pending": [],
   "protected_inputs": {
     "bytes": 942,
     "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260913\\protected-inputs.json",
@@ -79,6 +80,18 @@
     "reason": "September 12 source ids and September 11 APK/provider evidence were mixed; old device results are historical, not acceptance of this candidate."
   },
   "validation": {
+    "Android_device": {
+      "evidence": {
+        "bytes": 3152,
+        "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260913\\device-final\\acceptance.json",
+        "sha256": "6f969e7eeb37e3727a12cbf88f69ca2a4e84ec76ea5c35fecb49f7e174dc1ab6"
+      },
+      "main_modes": [
+        "debug",
+        "release"
+      ],
+      "passed": true
+    },
     "BMB_rebind": {
       "dataset_and_whitelist_unchanged": true,
       "evidence": {
@@ -125,7 +138,7 @@
         "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260913\\launcher-build.log",
         "sha256": "4fe3ef7baa1324288208248f59d7ad87f709e19f47ba420efd62013c276ffd90"
       },
-      "kind": "fresh output directory APK assembly and Java unit tests; APK not installed"
+      "kind": "Fresh APK assembly, 69 Java tests, matching APK installed with data preserved; actual APK/provider hashes verified"
     },
     "PL_Android": {
       "evidence": {
@@ -133,7 +146,7 @@
         "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260913\\pl-android-build.log",
         "sha256": "484821277a15241ab5580c00d875ad553167fa230593b415697788b859312e19"
       },
-      "kind": "provider and throwing wrapper executable compiled; new device tests pending"
+      "kind": "Provider/fixture compilation followed by three owned Android suite passes; see device acceptance for backend scope"
     },
     "PL_host": {
       "evidence": {
@@ -161,12 +174,13 @@
         "sha256": "670964e841ec19ec64572d052ece877678536dd0584186060b9ea5875d276808"
       },
       "compiled_linked_stripped": 6,
+      "device_assertions_passed": 31,
       "evidence": {
         "bytes": 61852,
         "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260913\\native-manager-fixtures\\results.json",
         "sha256": "768ca5197d628eefba9e593793ca1389be66442105a338e5a1b3a74561d2aef7"
       },
-      "runtime_tested": false
+      "runtime_tested": true
     },
     "source_validator": {
       "command": "python -X utf8 -m unittest discover -s test/python -p test_android_kernel.py",
