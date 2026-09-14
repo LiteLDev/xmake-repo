@@ -1,14 +1,47 @@
 package("ilistenattentively")
-    add_urls("https://github.com/LiteLDev/iListenAttentively.git")
-    add_versions("v0.14.0", "babf8f656ae768ef833d4ce2a3da5a559c434c32")
-    add_versions("v0.14.1", "be8a7f34d3587ebc849534408ac92f3ac11f3273")
+    add_urls("https://github.com/LiteLDev/iListenAttentively.git", {alias = "open"})
+    add_urls("https://github.com/MiracleForest/iListenAttentively-Release.git", {alias = "old"})
+    add_versions("old:0.1.0", "e825dbb88bfc597c2a6be3a49ee7555df5dee42d")
+    add_versions("old:0.2.0", "fde7876a2b1c83dbfc9bdebc1037c54c9f424a72")
+    add_versions("old:0.2.1", "0642bfc51b7dba18e73736d7d1c7e3efcd526443")
+
+    add_urls("https://github.com/MiracleForest/iListenAttentively-Release/releases/download/v$(version)/SDK.zip", {alias = "closed-1"})
+    add_versions("closed-1:0.2.2", "f6dcd82cb247cb62b916ccf4ba847668adc39d83b43917f3da84803bee47d99f")
+    add_versions("closed-1:0.2.3", "2e18bae7372e49c4cc1fc332282417241ef3570bc488da55eb74676415e9ab8d")
+
+    add_urls("https://github.com/MiracleForest/iListenAttentively-Release/releases/download/v$(version)/iListenAttentively-SDK.zip", {alias = "closed-2"})
+    add_versions("closed-2:0.3.0", "dde5c1089eab55d3accf54562f584a13d98194299bb20124cbe72af653368a28")
+    add_versions("closed-2:0.3.1", "64d548e1048de13e15a6be699729f189901baa36aa5b2f474a3b8bca6a796f61")
+    add_versions("closed-2:0.4.0", "c4bb92c228b30a08f0b80d16566cd1f48443eddcb3aa0d51ea744da1ca2ae38d")
+    add_versions("closed-2:0.4.1", "a28f2900846f35506a64e6a1ff774931a5a948e10b603cb775e0f6a7717ec29a")
+    add_versions("closed-2:0.4.2", "37e8ba870ea55d515dc2291c4b76e4b8dfba40a30c562a77ffbb5236b6942851")
+    add_versions("closed-2:0.5.0-rc.1", "ec86be823f00bd420ba177995980989c8e0592b1db0179d28616fb833ac55f5b")
+    add_versions("closed-2:0.5.0", "2fe3b3588bc9beeb16b558562e838dbd99a26cdcf69494ecc07249230fa3b1ce")
+    add_versions("closed-2:0.6.0", "2c8082f91d0e81cd7745ca43e3b5aebe28722ddc09ed7f512dcacce635dfe5b4")
+    add_versions("closed-2:0.7.0", "ec8d53a84c8debd86eeabe880c2ac5eae4ee5eda10a808f7a877ab349b43a144")
+    add_versions("closed-2:0.8.0", "3660cb2a771d847cb46fe05ad0f40d5c155acf6706bfaad4ea94065b139663cd")
+    add_versions("closed-2:0.8.1", "9dffda248aa73cab8ba54d3caee880111aeaa1b00f7bd2e662a08be18709fdb2")
+    add_versions("closed-2:0.9.0", "bd339f664b509052b706d11aff27be8019b2712fbeac69ff40f5742a5e553885")
+    add_versions("closed-2:0.10.0", "4d09d326f424d285c9a59b7b5628815850ab069a89ef26257658d4a0d628a631")
+    add_versions("closed-2:0.11.0", "a43fae84ce881882f1532f9089892df2a206b82ae0705211d3bffc1249d64018")
+    add_versions("closed-2:0.11.1", "b1f2197779cf748a61f290e07f69510939966308d02e1afa3bc9b5635e4b8339")
+    add_versions("closed-2:0.11.2", "855e378a0f051ca4c5b230394c527991cefbed17c6a5b526e9a5d794fe229528")
+    add_versions("closed-2:0.11.3", "fd2b0e257b4dd5fe0fa4356e8ff3cc2e91cb6c1b8bdd0f08fd23c399c666a487")
+    add_versions("closed-2:0.12.0", "405cf6056934d4b2225706b2ac023790eccb29bab19aebab3dd5b272ca5eec1e")
+    add_versions("closed-2:0.13.0", "6e02f12f8b61e3b16f916a44eb85ac12c0a780888061219c70a846f1b19b15e0")
+    add_versions("open:0.14.0", "babf8f656ae768ef833d4ce2a3da5a559c434c32")
+    add_versions("open:0.14.1", "be8a7f34d3587ebc849534408ac92f3ac11f3273")
 
     add_configs("target_type", {default = "server", values = {"server", "client"}})
 
     on_install(function (package)
-        if package:config("target_type") == "server" then
-            import("package.tools.xmake").install(package)
+        if package:version():le("0.2.1") or package:version():ge("0.14.0") then
+            if package:config("target_type") == "server" then
+                import("package.tools.xmake").install(package)
+            else
+                import("package.tools.xmake").install(package, {"--target_type=client"})
+            end
         else
-            import("package.tools.xmake").install(package, {"--target_type=client"})
+            os.cp("*", package:installdir())
         end
     end)
