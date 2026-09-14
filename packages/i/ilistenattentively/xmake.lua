@@ -38,7 +38,7 @@ package("ilistenattentively")
     add_configs("target_type", {default = "server", values = {"server", "client"}})
 
     on_install(function (package)
-        if package:version():le("0.2.1") or package:version():ge("0.14.0") then
+        if not package:version_str():find(".", 1, true) or package:version():le("0.2.1") or package:version():ge("0.14.0") then
             if package:config("target_type") == "server" then
                 import("package.tools.xmake").install(package)
             else
