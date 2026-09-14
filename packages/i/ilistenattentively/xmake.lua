@@ -36,6 +36,7 @@ package("ilistenattentively")
     add_versions("open:0.14.1", "be8a7f34d3587ebc849534408ac92f3ac11f3273")
     add_versions("open:0.14.2", "e0d336866715b55e173ced76812b79682133d4ab")
     add_versions("open:0.15.0", "8ad9294a92e74059a6ad561c152142a62996e807")
+    add_versions("open:0.16.0", "8824ea624a1f276d36a16401a8bbc0912942da0c")
 
     add_configs("target_type", {default = "server", values = {"server", "client"}})
 
