@@ -1,4 +1,7 @@
 package("ilistenattentively")
+    set_homepage("https://github.com/LiteLDev/iListenAttentively")
+    set_description("iListenAttentively is a rich and modern LeviLamina Minecraft event library!")
+
     add_urls("https://github.com/LiteLDev/iListenAttentively.git", {alias = "open"})
     add_urls("https://github.com/MiracleForest/iListenAttentively-Release.git", {alias = "old"})
     add_versions("old:0.1.0", "e825dbb88bfc597c2a6be3a49ee7555df5dee42d")
