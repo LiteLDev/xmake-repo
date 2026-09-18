@@ -1,5 +1,5 @@
 local deps_common = {
-    "entt v3.15.0",
+    "entt v4.0.0",
     "expected-lite v0.8.0",
     "fmt 11.2.0",
     "gsl v4.2.0",
@@ -17,10 +17,10 @@ local deps_common = {
     "stb 2025.03.14"
 }
 local deps_server = {
-    "bedrockdata v26.40.8-server.9"
+    "bedrockdata v26.51.1-server.1"
 }
 local deps_client = {
-    "bedrockdata v26.40.5-client.9"
+    "bedrockdata v26.51.1-client.1"
 }
 
 function load(package)
