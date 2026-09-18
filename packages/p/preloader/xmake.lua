@@ -31,6 +31,7 @@ package("preloader")
     add_versions("release:v1.15.7", "e600c9c2e43cff700b17f319ecb3258ec7f3c6b8ab2dfbb36ec00bdf8ae7d094")
     add_versions("release:v1.16.1", "45d511dca0e7f7d6ce4c871b735bc62487df7d7159679d160120a452b4f35cef")
     add_versions("release:v1.16.2", "7f833f7b5664eba074a725a1d79e5bc0cec242764dbf63098116aefcc26f0d76")
+    add_versions("release:v1.16.3", "31dc9419d4a8c1c382d6c2629243757a28141c878b636d17b92b1b2fd0c3af1a")
 
     on_install(function(package)
         if package:version():le("1.10.0") then

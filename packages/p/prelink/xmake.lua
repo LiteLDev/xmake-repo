@@ -12,6 +12,7 @@ package("prelink")
        add_versions("v0.7.1", "186a6539b0602e386554acc66422b2daf4a587ae514ccf73fb4238df86a134f1")
        add_versions("v0.8.4", "134fa0dd0a9f82b8e65dc91aa84519d68b1f1e0f4c3f7cf2842b5b404c3f20eb")
        add_versions("v0.8.5", "189974b8c672e44dfca6d9e218281789d881eb6388c9989f97a57f4d2ceb272c")
+       add_versions("v0.8.6", "56c01d9e50bcdfb74ffc27550b45644fa18c564f6dc816f2fceafb17e87ab71b")
     end
 
     on_install(function (package)
