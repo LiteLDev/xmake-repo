@@ -44,14 +44,14 @@ class IncludeTraceTests(unittest.TestCase):
             self.write(self.header / "src-android" / name, "// frozen " + name + "\n")
         self.pl = self.sdk / "src-android/pl/android/Mod.h"
         self.write(self.pl, "// frozen public SDK\n")
-        self.backend = self.repo / "src-android/ll/core/CompilationContract.h"
+        self.backend = self.repo / "src-android/ll/core/KernelLifecycle.h"
         self.shared = self.repo / "src/ll/api/Global.h"
         self.write(self.backend, "// platform implementation\n")
         self.write(self.shared, "// original shared interface\n")
         self.write(self.view / "ll/api/Global.h", self.shared.read_text(encoding="utf-8"))
         self.s, self.pl_commit = (self.commit(path) for path in (self.header, self.sdk))
         self.config = {"repository": str(self.repo), "inputs": {"header_root": str(self.header), "preloader_root": str(self.sdk)},
-                       "commits": {"S": self.s, "PL": self.pl_commit}, "phase": "P7-G0-G2", "source_layout": "shared-v1",
+                       "commits": {"S": self.s, "PL": self.pl_commit}, "phase": "P7-G3", "source_layout": "shared-v1",
                        "role": "kernel", "sources": ["src/ll/api/event/Event.cpp", "src-android/ll/core/main_android.cpp"],
                        "include_roots": [str(self.view)],
                        "ll_headers": {"ll/api/Global.h": {"source": "src/ll/api/Global.h", "sha256": inputs.sha(self.shared)}}}
@@ -151,7 +151,7 @@ class IncludeTraceTests(unittest.TestCase):
             binary.verify_traces(self.config, self.traces)
 
     def test_old_or_unknown_source_formats_are_rejected(self):
-        for phase, layout in (("G5", "platform-v1"), ("P7-G0-G2", "platform-v1"), ("unknown", "shared-v1")):
+        for phase, layout in (("G5", "platform-v1"), ("P7-G3", "platform-v1"), ("P7-G0-G2", "shared-v1"), ("unknown", "shared-v1")):
             with self.subTest(phase=phase, layout=layout), self.assertRaisesRegex(inputs.InputError, "unsupported shared-core"):
                 binary.verify_traces(dict(self.config, phase=phase, source_layout=layout), self.traces)
 

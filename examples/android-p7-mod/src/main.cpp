@@ -1,4 +1,6 @@
 #define LL_MEMORY_OPERATORS
+#include "ll/api/event/EventBus.h"
+#include "ll/api/event/io/ConsoleOutputEvent.h"
 #include "ll/api/io/FileSink.h"
 #include "ll/api/io/FileUtils.h"
 #include "ll/api/io/PatternFormatter.h"
@@ -10,12 +12,15 @@
 
 #include <filesystem>
 #include <thread>
+#include <unistd.h>
 
 namespace {
 std::weak_ptr<ll::mod::NativeMod> constructorMod = ll::mod::NativeMod::current();
 }
 
 class Example {
+    ll::event::ListenerPtr mConsoleListener;
+
 public:
     static Example& getInstance() {
         static Example instance;
@@ -46,17 +51,50 @@ public:
         );
         fileSink->setFlushLevel(ll::io::LogLevel::Info);
         self->getLogger().addSink(std::move(fileSink));
+
+        // Consume the original LL output event. The Android backend already
+        // feeds core/io/Output; no additional event bus or game hook is needed.
+        auto           eventReceipt = self->getDataDir() / "p7-events.json";
+        auto           processId    = ::getpid();
+        auto           loadThread   = std::this_thread::get_id();
+        nlohmann::json initialEventReceipt{
+            {           "processId",               processId},
+            {               "event", "ConsoleOutputtedEvent"},
+            {"loggerOutputObserved",                   false}
+        };
+        if (!ll::file_utils::writeFile(eventReceipt, initialEventReceipt.dump(2))) return false;
+        mConsoleListener = ll::event::EventBus::getInstance().emplaceListener<ll::event::ConsoleOutputtedEvent>(
+            [eventReceipt, processId, loadThread](ll::event::ConsoleOutputtedEvent& event) {
+                if (event.isCancelled()
+                    || event.message().find("P7 original EventBus console marker") == std::string::npos)
+                    return;
+                nlohmann::json receipt{
+                    {            "processId",                                processId},
+                    {                "event",                  "ConsoleOutputtedEvent"},
+                    { "loggerOutputObserved",                                     true},
+                    {"callbackOffLoadThread", std::this_thread::get_id() != loadThread}
+                };
+                // Do not log from a console-output listener: that would produce
+                // another console-output event. The ordinary file API suffices.
+                (void)ll::file_utils::writeFile(eventReceipt, receipt.dump(2));
+            },
+            ll::event::EventPriority::Normal,
+            self
+        );
+        if (!mConsoleListener) return false;
         nlohmann::json result{
-            {               "name",               self->getName()},
-            {"constructorIdentity",                          true},
-            {     "workerIdentity",                 workerMatches},
-            {       "nbtRoundTrip",                          true},
-            {       "modDirectory",    self->getModDir().string()},
-            {      "dataDirectory",   self->getDataDir().string()},
-            {    "configDirectory", self->getConfigDir().string()}
+            {                           "name",               self->getName()},
+            {            "constructorIdentity",                          true},
+            {                 "workerIdentity",                 workerMatches},
+            {                   "nbtRoundTrip",                          true},
+            {"originalEventListenerRegistered",                          true},
+            {                   "modDirectory",    self->getModDir().string()},
+            {                  "dataDirectory",   self->getDataDir().string()},
+            {                "configDirectory", self->getConfigDir().string()}
         };
         if (!ll::file_utils::writeFile(self->getDataDir() / "p7-load.json", result.dump(2))) return false;
         self->getLogger().info("Original LL registration, identity, paths and NBT round-trip passed");
+        self->getLogger().info("P7 original EventBus console marker");
         return true;
     }
 };

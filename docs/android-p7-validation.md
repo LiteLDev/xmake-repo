@@ -225,3 +225,101 @@ the shared callback/task/log drain is established.
 G3–G8 remain unpassed: event drain, client Ready/world/exit integration, remaining
 applicable modules, formal SDK/package, final regression and removal of the P6
 parallel implementation. No full-client unload guarantee is claimed here.
+
+## September 14: Android-only adaptation candidate
+
+The user narrowed the work to Android adaptation and excluded repairs to existing
+LL defects. The attempted generic EventBus cancellation/locking changes, thread
+pool rewrite and Logger shutdown APIs were withdrawn before any commit or push.
+Their earlier September 14 test results are not evidence for this candidate.
+The current shared `src/ll`, client and server implementations match the accepted
+P7 source baseline. Existing LL semantics and limitations are inherited.
+
+The unused P6 Android implementation tree and its standalone fixture/packaging
+scripts have now been removed from the working tree. The formal target is defined
+only by `config/android-kernel-inputs.lock.json`; historical P6 documents and
+receipts remain for provenance and are not current build inputs.
+
+The Android PL parent now calls the original `ModRegistrar::disableAllMods()`
+with the client sequence `Stopping -> disableAllMods -> Default`. It summarizes
+the original public Mod states and saves its success/failure receipt. Repeated
+host callbacks do not rerun disable; host diagnostics run outside the adapter
+mutex. This is platform lifecycle wiring, not a replacement Mod manager or a
+change to original LL cleanup. Android child/parent SO release remains refused.
+
+The original-API Android example subscribes to `ConsoleOutputtedEvent` using
+the existing EventBus. Its ordinary Logger emits a marker; the output listener
+writes `data/p7-events.json` with the process ID, observed-event flag and whether
+the callback ran off the load thread. The file starts with an unobserved receipt
+for each load, so an earlier process is not proof. No log is emitted by the output
+listener itself. This uses the existing Android output backend and introduces no
+new game Hook or parallel event protocol. The example remains load-only.
+
+The input-validation phase is now `P7-G3`; this labels the development candidate,
+not a passed gate. Producer commits, frozen Header, MC/NDK/ABI and provider/BMB
+identities remain unchanged. Current validators reject old phase receipts instead
+of interpreting them as current evidence. This is still not a G6 SDK package.
+
+Evidence is under `C:/Users/ROG/levilamina-p7-validation-20260914`. The old
+uncommitted G4 experiment is preserved in `g4-experiment.patch` and is absent from
+the target. The user chose to connect the vivo later; this run does not install
+an APK, manipulate a world or count device acceptance. Current results and
+remaining gates are summarized in `validation/p7/g3-android-adaptation.json`.
+
+Both current Android modes passed compilation, P5 linking, pre/post-strip ELF
+checks and Header/source validation for LL and the example. All 16 Python
+source-format tests passed. The host test compiles the actual Android parent
+adapter with isolated collaborators and passed phase ordering, disable-result
+aggregation, exception/reentry handling and repeated receipts. It does not test
+original manager internals or game shutdown. The candidate remains an uncommitted
+worktree based on `0f63ac23c0`; source-file hashes and generated inputs identify
+the built content. G3–G8 remain unpassed.
+
+## September 18: Android client Ready adapter
+
+The remaining unused P6 `api/android/Kernel.h`, `KernelApi.cpp` and platform
+`core/io/Output.h` were removed. All remaining Android implementation units are
+listed in the formal source table. Original shared/client/server LL sources
+remain unchanged.
+
+`ClientLifecycle.cpp` resolves the fixed Android `_initFinish` symbol through
+the original PL SymbolProvider and installs a High-priority PL Hook during the
+parent enable phase. The current Launcher performs this phase before creating
+MinecraftActivity (`MinecraftLoadingActivity.transitionToGame`). The frozen P5
+dry-run classified an owned object referencing that exact symbol as one allowed
+function import, with no external import; no whitelist or producer was changed.
+
+The adapter checks the member signature against the frozen Android Header and
+forwards the real game pointer, InitContext reference and WorkResult. It uses a
+free function with the AArch64 explicit-this calling shape instead of writing
+an origin address into a desktop member-function-pointer representation. On the
+first Ready callback the Android parent invokes original `enableAllMods`, sets
+Running and returns to the original function, preserving client order. Parent
+enable itself does not enable ordinary Mods. Repeated Ready notifications do not
+repeat activation. A missing symbol or failed installation rejects parent enable.
+
+This is a startup-only, process-resident binding. It is not the P6 two-shape
+guarded API and claims no runtime installation, global thread suspension,
+ordinary unhook/drain or physical SO unload. Existing parent/native unload
+refusal remains effective, including installation failures. Original manager,
+EventBus, Logger and thread-pool behavior has not been repaired or redesigned.
+
+Host fixtures exercise the actual adapter with owned PL callbacks and minimal
+MC type declarations; they test argument/return forwarding, original-pointer
+updates, priority, duplicate installation and missing/backend/null-origin
+failures. The separate host lifecycle test uses actual KernelLifecycle with
+isolated manager/logger collaborators to cover Ready-only activation, repeated
+callbacks, failed installation, disable and stop/load races. These tests do not
+establish actual Minecraft Ready timing. The Android fixture target
+`P7ClientReadyHookTests` compiles the production adapter against real frozen
+Headers; device execution remains pending. September 14 receipts are historical
+and cannot validate the changed candidate. Current inputs and test results are
+in `validation/p7/g4-ready-adaptation.json` and the external September 18 directory.
+
+The September 18 debug/release LL and original-API example both passed formal
+P5 linking, Header/source checks and ELF verification before/after strip.
+`P7ClientReadyHookTests` compiled for AArch64 using the frozen MC Headers;
+four owned Hook host cases and the separate lifecycle host test passed, as did
+all 16 Python source/input tests. The host Hook runner uses minimal MC types
+because it is a control-flow fixture, not a Windows game build. No device run,
+deployment, commit or push was performed. All G3–G8 completion flags remain false.

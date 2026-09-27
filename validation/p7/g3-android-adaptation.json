@@ -1,0 +1,188 @@
+{
+  "date": "2026-09-14",
+  "scope": "Android adaptation only; no repairs to existing shared LL defects",
+  "base_commit": "0f63ac23c07455b7f0d6c0ff9492343f9a1d7b63",
+  "branch": "codex/p7-android-shared-core",
+  "uncommitted_worktree": true,
+  "shared_ll_unchanged": true,
+  "shared_ll_tree": "764aa294465824d315f96dd285a7609c724a6ec5",
+  "producer_commits": {
+    "H": "48f5fbfc2cbd539c08316d855555ce084478a678",
+    "M": "c9a3b9cb0507cfb072f3d33be4324d1642c24889",
+    "P5": "b46b8ee62f27c0f7337b0d454fd10999366c0107",
+    "PL": "7cf14db14f13cf87a408ecaf09fc9dce9c6cc7ed",
+    "S": "2ae3e432d1e4b003e89194979c13e7e437685056"
+  },
+  "source_files": {
+    "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260914\\current-source-files.json",
+    "bytes": 5697,
+    "sha256": "bbd87e6b08933848c4cb7d9035f14f7098ade98a9e8b28c7db0e69105501c004"
+  },
+  "changes": [
+    "Android parent calls original disableAllMods in client phase order and caches public-state result",
+    "Original Android example subscribes to ConsoleOutputtedEvent and records PID-bound Logger output receipt",
+    "Current Android validation phase is P7-G3; old phase receipts are rejected"
+  ],
+  "android_builds": {
+    "debug": {
+      "kernel": {
+        "elf": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260914\\android-original-debug\\android-kernel\\kernel\\stripped\\libLeviLamina.so",
+          "bytes": 2614720,
+          "sha256": "6cf0f8eb796754418e887bd52d2f8f2d3cb25795a0647c1301e1faa7c59cfb85"
+        },
+        "inputs": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260914\\android-original-debug\\android-kernel\\kernel\\inputs.json",
+          "bytes": 46268,
+          "sha256": "5118f80d3fb6863a488b2c402cc175f8dd3df1655208a32652f7ed8341559600"
+        },
+        "link_report": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260914\\android-original-debug\\android-kernel\\kernel\\linked.json",
+          "bytes": 174509,
+          "sha256": "23870a7ca62fc1f508c3d733b6eb8abf5c6cd54620519e0d825b27fa39a85703"
+        },
+        "commands": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260914\\android-original-debug\\android-kernel\\kernel\\link-commands.json",
+          "bytes": 13876,
+          "sha256": "a2d1a87b52d0503402f3114407778577f7a77ffe9443db98ee6c723e74da1478"
+        }
+      },
+      "example": {
+        "elf": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260914\\android-original-debug\\android-kernel\\example\\stripped\\libLeviLaminaP7Example.so",
+          "bytes": 307504,
+          "sha256": "b78053cad50cbdab15446dff59341c5b202c438f09933c777ef42a47f6b9b052"
+        },
+        "inputs": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260914\\android-original-debug\\android-kernel\\example\\inputs.json",
+          "bytes": 44439,
+          "sha256": "a8066a2f67415558ec94ec5fa0fb9dbb8e726a5d52889fb0301820d6dcb823ce"
+        },
+        "link_report": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260914\\android-original-debug\\android-kernel\\example\\linked.json",
+          "bytes": 10628,
+          "sha256": "d8ee3eb9600aad49079bc3a9d217e11671bb736fbbb784d5eda268ceb1541cbf"
+        },
+        "commands": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260914\\android-original-debug\\android-kernel\\example\\link-commands.json",
+          "bytes": 6455,
+          "sha256": "ba6e7f6478bc2cf7b231aaa7de69f6b7060763d5dbbb8b83068113f9948274d2"
+        }
+      }
+    },
+    "release": {
+      "kernel": {
+        "elf": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260914\\android-original-release\\android-kernel\\kernel\\stripped\\libLeviLamina.so",
+          "bytes": 850248,
+          "sha256": "ef191f260609e4bd5082c03056430ace187e20ef4cf81eb1df3a7b655f20e075"
+        },
+        "inputs": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260914\\android-original-release\\android-kernel\\kernel\\inputs.json",
+          "bytes": 46270,
+          "sha256": "b554a36e6c3cda5794b7250ae186a4c330108948b0b7a1d488236b5755f09984"
+        },
+        "link_report": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260914\\android-original-release\\android-kernel\\kernel\\linked.json",
+          "bytes": 173378,
+          "sha256": "5ca6b77e36c39139474b824742a80b7a6c971ae52741a0f4402df04e56bc528a"
+        },
+        "commands": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260914\\android-original-release\\android-kernel\\kernel\\link-commands.json",
+          "bytes": 14084,
+          "sha256": "8b010dc8ffe44f431b11e934a97d6c039a0632d4c385cc8b54916ad8bb29c490"
+        }
+      },
+      "example": {
+        "elf": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260914\\android-original-release\\android-kernel\\example\\stripped\\libLeviLaminaP7Example.so",
+          "bytes": 105824,
+          "sha256": "41aca1dcbf6676f11b213a7ba26eb88bd318d6bf7e7c0509879308e65b8501e0"
+        },
+        "inputs": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260914\\android-original-release\\android-kernel\\example\\inputs.json",
+          "bytes": 44441,
+          "sha256": "97d47efc50292434b30ec73b50bbcafa8c337e330f84dfe06bbfccf3c4f09253"
+        },
+        "link_report": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260914\\android-original-release\\android-kernel\\example\\linked.json",
+          "bytes": 10432,
+          "sha256": "09931263d7c84720f1303bb9efe7608cf0a2a6aa40bd864aaf74ae0ebe2f36c8"
+        },
+        "commands": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260914\\android-original-release\\android-kernel\\example\\link-commands.json",
+          "bytes": 6491,
+          "sha256": "963a9614c450921ecc0130d72a1606b0738e90f991d45b2a49a03ee128576cab"
+        }
+      }
+    }
+  },
+  "python": {
+    "tests": 16,
+    "log": {
+      "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260914\\original-python-tests.log",
+      "bytes": 2320,
+      "sha256": "ca8e316ae16ab03f6b73c4550d14a7d477f77db7dddfd9cbeaef29c2b94bed5b"
+    }
+  },
+  "android_lifecycle_host": {
+    "source": "src-android/ll/core/KernelLifecycle.cpp",
+    "collaborators": "isolated host Mod/Logger interfaces; not original manager or MC runtime evidence",
+    "runner": {
+      "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260914\\test-android-lifecycle.py",
+      "bytes": 7981,
+      "sha256": "6ea390a6d285c083fc5aa041dc6eadfa5b1e3baf69f96d03bb3975c39978b6b0"
+    },
+    "compile_log": {
+      "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260914\\android-lifecycle-host\\build.log",
+      "bytes": 241,
+      "sha256": "190e793f7dc7ee89e5f8732396a459d538b81e30cdf47f419a6f873850780fa3"
+    },
+    "run_log": {
+      "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260914\\android-lifecycle-host\\run.log",
+      "bytes": 128,
+      "sha256": "d30d701f9d3de3cf9d4a6daf43b2fa9fe5fb1ea6785297ec4742b80343aaa2ec"
+    }
+  },
+  "device_tested": false,
+  "device_work": "User chose to connect the existing vivo later; no APK or device data was changed",
+  "gates": {
+    "G3": "unpassed",
+    "G4": "unpassed",
+    "G5": "unpassed",
+    "G6": "unpassed",
+    "G7": "unpassed",
+    "G8": "unpassed"
+  },
+  "P7_complete": false,
+  "limits": [
+    "Original event cancellation/lock behavior and thread pool/logger behavior are unchanged",
+    "Parent and general native Mod SO unload remain refused",
+    "PL enable and menu are not game Ready",
+    "No world/normal-close/new cross-SO runtime acceptance",
+    "No G6 SDK release or complete Windows game matrix"
+  ],
+  "withdrawn_generic_changes": "Earlier September 14 generic fixes and their test evidence were withdrawn; not part of this candidate",
+  "g4_experiment": {
+    "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260914\\g4-experiment.patch",
+    "bytes": 3959,
+    "sha256": "479f7c1ab1be5bb4ed0c7d899341cf61f101e669d59990f98a114cf225ec9ff8"
+  },
+  "cleanup": {
+    "removed_count": 46,
+    "formal_lock_sources_present": 46,
+    "formal_android_target_rebuilt": true,
+    "current_source_reference_scan": "passed",
+    "removed_groups": [
+      "P6 Android Mod ABI",
+      "KernelContext/KernelRuntime/RuntimeOperations",
+      "P6 EventRegistry and KernelLogger",
+      "P6 HookTransaction/RuntimeSymbols",
+      "P6 ModManifest/ModOwner/NativeModManager/NativeModRegistry",
+      "obsolete Android example",
+      "obsolete Android fixtures",
+      "obsolete P6 validator/package scripts"
+    ],
+    "historical_docs_and_validation_preserved": true
+  }
+}

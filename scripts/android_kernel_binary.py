@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check actual include traces, P5 classification, and the G2 ELF contract."""
+"""Check actual include traces, P5 classification, and the P7 ELF contract."""
 from __future__ import annotations
 
 import argparse
@@ -13,7 +13,7 @@ import subprocess
 from android_kernel_inputs import InputError, git, read_json, sha
 
 def source_names(config: dict) -> set[str]:
-    if config.get("phase") != "P7-G0-G2" or config.get("source_layout") != "shared-v1":
+    if config.get("phase") != "P7-G3" or config.get("source_layout") != "shared-v1":
         raise InputError("unsupported shared-core input format")
     return {name.replace("/", "_").replace(".", "_") for name in config["sources"]}
 
@@ -100,8 +100,8 @@ def verify_traces(config: dict, directory: Path) -> dict:
     return {"units": units, "mc_unique_count": len(all_mc), "all_mc_from_S": True}
 
 
-def elf_contract(path: Path, phase: str = "P7-G0-G2", role: str = "kernel", expected_soname: str | None = None) -> dict:
-    if phase != "P7-G0-G2" or role not in ("kernel", "example"):
+def elf_contract(path: Path, phase: str = "P7-G3", role: str = "kernel", expected_soname: str | None = None) -> dict:
+    if phase != "P7-G3" or role not in ("kernel", "example"):
         raise InputError("unsupported kernel phase")
     data = path.read_bytes()
 

@@ -152,7 +152,7 @@ def authenticate(repo: Path, inputs: dict[str, str], api: int = 28, arch: str = 
     lock_path = repo / "config/android-kernel-inputs.lock.json"
     lock = read_json(lock_path)
     phase = lock.get("phase", "")
-    if phase != "P7-G0-G2":
+    if phase != "P7-G3":
         raise InputError("unsupported kernel validation phase")
     if role not in ("kernel", "example"):
         raise InputError("unsupported binary role")

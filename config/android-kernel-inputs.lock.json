@@ -59,9 +59,9 @@
     "name": "LeviLamina",
     "platform": "client",
     "type": "preload-native",
-    "version": "26.40.0-android.p7.g2"
+    "version": "26.40.0-android.p7.g3"
   },
-  "phase": "P7-G0-G2",
+  "phase": "P7-G3",
   "prelink_executable_sha256": "54183E74B22100489D95430DAC7618F47927F9282F7C0DF88DEE697ED9FDDF9F",
   "provider": {
     "bytes": 5059824,
@@ -107,6 +107,7 @@
       "src-android/ll/api/utils/StringUtils_android.cpp",
       "src-android/ll/api/utils/SystemUtils_android.cpp",
       "src-android/ll/core/KernelLifecycle.cpp",
+      "src-android/ll/core/ClientLifecycle.cpp",
       "src-android/ll/core/io/DefaultOutput_android.cpp",
       "src-android/ll/core/main_android.cpp",
       "src-android/ll/core/mod/ElfModule.cpp",

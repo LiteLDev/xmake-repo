@@ -1,0 +1,204 @@
+{
+  "date": "2026-09-18",
+  "base_commit": "0f63ac23c07455b7f0d6c0ff9492343f9a1d7b63",
+  "uncommitted_worktree": true,
+  "scope": "Android platform adaptation only; original shared/client/server LL unchanged",
+  "source_files": {
+    "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260918\\source-files.json",
+    "bytes": 6050,
+    "sha256": "5f1e8c19e45e4beaca8f6f9b7ee8d3e3d9e83dcbf2487d75354fe1564ae1157d"
+  },
+  "producers": {
+    "H": "48f5fbfc2cbd539c08316d855555ce084478a678",
+    "M": "c9a3b9cb0507cfb072f3d33be4324d1642c24889",
+    "P5": "b46b8ee62f27c0f7337b0d454fd10999366c0107",
+    "PL": "7cf14db14f13cf87a408ecaf09fc9dce9c6cc7ed",
+    "S": "2ae3e432d1e4b003e89194979c13e7e437685056"
+  },
+  "cleanup": {
+    "deleted_files_total": 49,
+    "remaining_unlisted_android_cpp": []
+  },
+  "ready_symbol": {
+    "name": "_ZN13MinecraftGame11_initFinishERNSt6__ndk110shared_ptrINS_11InitContextEEE",
+    "frozen_whitelist_check": {
+      "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260918\\ready-import.log",
+      "bytes": 53,
+      "sha256": "5284db7e8ac2ec141aaba6a9a0624f617567600c88ac35b35f2aa847fe39b5ab"
+    },
+    "classification": "1 function; 0 external; dry-run only"
+  },
+  "behavior": {
+    "installation": "PL enable before MinecraftActivity creation",
+    "activation": "first actual _initFinish invokes original enableAllMods then Running, before calling origin",
+    "return": "original WorkResult and InitContext reference preserved",
+    "lifetime": "process resident; parent and general child SO unload refusal unchanged"
+  },
+  "android_builds": {
+    "debug": {
+      "kernel": {
+        "elf": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260918\\android-original-debug\\android-kernel\\kernel\\stripped\\libLeviLamina.so",
+          "bytes": 2616832,
+          "sha256": "ad7b776b6189eae720577a120099f1112bf19bfb3d8301ff1075afca65cf3acb"
+        },
+        "inputs": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260918\\android-original-debug\\android-kernel\\kernel\\inputs.json",
+          "bytes": 46315,
+          "sha256": "2a429dcaa283bd839496debf0fa4423b58efda4bd381b0548ebed4ace5cbe15d"
+        },
+        "link_report": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260918\\android-original-debug\\android-kernel\\kernel\\linked.json",
+          "bytes": 200706,
+          "sha256": "36267436bfc552f4ca7c2958535bd615732707fbb9d8fa9898a7229a5ce14af0"
+        },
+        "commands": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260918\\android-original-debug\\android-kernel\\kernel\\link-commands.json",
+          "bytes": 14053,
+          "sha256": "d348ab98322903f37fa37ce6c1a9acd1dd6ed232c3f24fc0fe66c89462e67971"
+        }
+      },
+      "example": {
+        "elf": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260918\\android-original-debug\\android-kernel\\example\\stripped\\libLeviLaminaP7Example.so",
+          "bytes": 307504,
+          "sha256": "9a047ada4c122dc519a98e4ac900822478a8c53802db6df102d39cc9a10a398d"
+        },
+        "inputs": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260918\\android-original-debug\\android-kernel\\example\\inputs.json",
+          "bytes": 44439,
+          "sha256": "6b786b48752edd3ec908abdd821aee90fafa511eeb35c6006a97a4fa9467050b"
+        },
+        "link_report": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260918\\android-original-debug\\android-kernel\\example\\linked.json",
+          "bytes": 10628,
+          "sha256": "f2e2851f50d8e197c0436768a34236e690111fc113e7a5e25a6616a66f470e03"
+        },
+        "commands": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260918\\android-original-debug\\android-kernel\\example\\link-commands.json",
+          "bytes": 6455,
+          "sha256": "d4709c7ab7e8de0aef881a96f1347b00ce9e86e070f9efda330020cbb9215ce9"
+        }
+      }
+    },
+    "release": {
+      "kernel": {
+        "elf": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260918\\android-original-release\\android-kernel\\kernel\\stripped\\libLeviLamina.so",
+          "bytes": 851280,
+          "sha256": "56ad975f8227560a5d38e567b8df8f548620aef34f48f47d501d38fe6e72f8d6"
+        },
+        "inputs": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260918\\android-original-release\\android-kernel\\kernel\\inputs.json",
+          "bytes": 46317,
+          "sha256": "f998adbca29ea6371ac2640a590463deccaaed8363758caa4414318e474a9f38"
+        },
+        "link_report": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260918\\android-original-release\\android-kernel\\kernel\\linked.json",
+          "bytes": 199575,
+          "sha256": "0f532d00a2bf26f03aedd797f9baf0d4dc7461245509825bba921a52097f73e7"
+        },
+        "commands": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260918\\android-original-release\\android-kernel\\kernel\\link-commands.json",
+          "bytes": 14265,
+          "sha256": "d08d2c85c8143e7d0bf9241a6c68a4403401e5afe293f476c6bc3a4bfe71d8e4"
+        }
+      },
+      "example": {
+        "elf": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260918\\android-original-release\\android-kernel\\example\\stripped\\libLeviLaminaP7Example.so",
+          "bytes": 105824,
+          "sha256": "4e303d4951a9518cb92a4e15b71b765c05cfd45babc401c9d8de44fe3d229c17"
+        },
+        "inputs": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260918\\android-original-release\\android-kernel\\example\\inputs.json",
+          "bytes": 44441,
+          "sha256": "7eb62ac4161d8acebc3917285b7bf1c362af11430ddd7dcb7ffc4d52949752c7"
+        },
+        "link_report": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260918\\android-original-release\\android-kernel\\example\\linked.json",
+          "bytes": 10432,
+          "sha256": "bab4407369e9820aea23ecdde7d055377343a2ec7abf3a0258e92e3962960c45"
+        },
+        "commands": {
+          "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260918\\android-original-release\\android-kernel\\example\\link-commands.json",
+          "bytes": 6491,
+          "sha256": "96688fccf12acfb7cf271175c0e49932922b13cefae2135bd27c45b785ada92b"
+        }
+      }
+    }
+  },
+  "owned_hook_host": {
+    "passed": true,
+    "cases": [
+      "success",
+      "missing",
+      "backend-failure",
+      "null-origin"
+    ],
+    "report": {
+      "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260918\\ready-host-results.json",
+      "bytes": 4175,
+      "sha256": "afa124247e09d4f1b5b0a12fce7ec715192eb1ae8060964e607f83606f38f4e7"
+    },
+    "runner": {
+      "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260918\\build-ready-host.py",
+      "bytes": 3360,
+      "sha256": "522d1d1640cd3f9a674e177caddd1a797bfd75d39e6da6d6fe017ac9a4080544"
+    },
+    "limits": "Production ClientLifecycle with owned PL callbacks and minimal MC type declarations; not game or Android execution"
+  },
+  "lifecycle_host": {
+    "passed": true,
+    "runner": {
+      "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260918\\test-ready-lifecycle.py",
+      "bytes": 10008,
+      "sha256": "395a69a60ec862ad5a129f5545ea022f278dc451aab03cfbfae3edda69c2d2aa"
+    },
+    "run": {
+      "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260918\\ready-lifecycle-host\\run.log",
+      "bytes": 179,
+      "sha256": "502030f12e55bb9bc82a42949831de71d9c743dd7b9905f9928e9113b6b61175"
+    },
+    "limits": "Actual Android KernelLifecycle with isolated manager/logger collaborators"
+  },
+  "android_owned_hook_fixture": {
+    "build_passed": true,
+    "runtime_tested": false,
+    "binary": {
+      "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260918\\android-original-release\\android\\arm64-v8a\\release\\P7ClientReadyHookTests",
+      "bytes": 37688,
+      "sha256": "d3102608240cd5a909fa4425a1c3b570c7bdf3bf7917f1da4abe10c0235be98c"
+    },
+    "log": {
+      "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260918\\android-ready-fixture-build.log",
+      "bytes": 17150,
+      "sha256": "264348d560dbf9a6d2dc144ae5a4f16700fd62609bf9b118c40571bbdae4ade2"
+    }
+  },
+  "python": {
+    "tests": 16,
+    "passed": true,
+    "log": {
+      "path": "C:\\Users\\ROG\\levilamina-p7-validation-20260918\\python-tests.log",
+      "bytes": 2320,
+      "sha256": "809b90e52fb29875faeb91243cb029087755952c0b555c84f5277c81fc0093cc"
+    }
+  },
+  "device_tested": false,
+  "G3_G8_complete": false,
+  "P7_complete": false,
+  "pending": [
+    "Actual MC Ready timing and Mod activation on vivo",
+    "World lifecycle adaptation",
+    "Normal close and existing SO retention behavior",
+    "G5 applicable modules and G6 SDK/package delivery"
+  ],
+  "not_claimed": [
+    "Global thread suspension",
+    "Runtime Hook installation/unhook quiescence",
+    "Physical SO unload",
+    "Repairs to shared LL defects",
+    "New Windows game execution"
+  ]
+}
