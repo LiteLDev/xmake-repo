@@ -58,5 +58,5 @@ package("more-dimensions")
     end)
 
     on_install(function (package)
-        import("package.tools.*make").install(package)
+        import("package.tools.xmake").install(package)
     end)
