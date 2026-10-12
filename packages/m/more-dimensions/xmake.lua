@@ -23,6 +23,7 @@ package("more-dimensions")
     add_versions("0.12.2", "2bdbfa3ef2d319c93c2216f8f760bbf8bc6c3461")
     add_versions("0.13.0", "3d89965e0b5208aff1462a2bb09f97bb6034cfb0")
     add_versions("0.14.1", "beb13e4346c7779b01b238902a4e8a28ded6f7be")
+    add_versions("0.15.0", "65a4531c9d924c783d671c2aedfc69d13d8daff9")
 
     local dependencies = {
         ["0.1.*"] = {"levilamina 0.9.*"},
@@ -41,7 +42,8 @@ package("more-dimensions")
         ["0.12.0"] = {"levilamina >=1.7.0 <=1.7.5"},
         [">=0.12.1 <0.13.0"] = {"levilamina >=1.7.6 <1.8.0"},
         ["0.13.*"] = {"levilamina >=1.9.2 <1.10.0"},
-        ["0.14.*"] = {"levilamina 26.20.*"}
+        ["0.14.*"] = {"levilamina 26.20.*"},
+        ["0.15.*"] = {"levilamina 26.51.*"}
     }
 
     on_load(function (package)
