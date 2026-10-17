@@ -252,7 +252,17 @@ def prepare_shared_view(repo: Path, header: Path, dependency_lock: Path, ndk: Pa
     for layer in ("src", "src-client"):
         for source in sorted((repo / layer / "ll").rglob("*")):
             if source.is_file() and source.suffix in (".h", ".hpp", ".inl"):
-                selected[source.relative_to(repo / layer).as_posix()] = source
+                relative = source.relative_to(repo / layer).as_posix()
+                if layer == "src-client" and relative.startswith("ll/api/event/"):
+                    continue
+                selected[relative] = source
+    for source in sorted((repo / "src-android/ll/api/event").rglob("*")):
+        if source.is_file() and source.suffix in (".h", ".hpp", ".inl"):
+            selected[source.relative_to(repo / "src-android").as_posix()] = source
+    # LL owns these value helpers, just as it owns its Windows NBT extensions.
+    for name in ("Tag.h", "EndTag.h", "CompoundTag.h", "CompoundTagVariant.h"):
+        relative = "mc/deps/nbt/" + name
+        selected[relative] = repo / "src-android" / relative
     destination.mkdir(parents=True, exist_ok=True)
     # Only this generated view is pruned; never alter a source or Header tree.
     for previous in destination.rglob("*"):
@@ -262,8 +272,10 @@ def prepare_shared_view(repo: Path, header: Path, dependency_lock: Path, ndk: Pa
     for relative, source in sorted(selected.items()):
         target = destination / relative
         target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(source, target)
-        files[relative] = {"source": source.relative_to(repo).as_posix(), "sha256": sha(source)}
+        fingerprint = sha(source)
+        if not target.is_file() or sha(target) != fingerprint:
+            shutil.copyfile(source, target)
+        files[relative] = {"source": source.relative_to(repo).as_posix(), "sha256": fingerprint}
     return {"phase": "P7-G1-fixture", "cxx": "c++23", "exceptions": True, "rtti": True,
             "header_commit": lock["commits"]["S"], "ll_headers": files,
             "include_roots": [str(destination), str(header / "src-android"), str(header / "src")],

@@ -10,8 +10,8 @@
     "soname": "libLeviLamina.so"
   },
   "bmb": {
-    "bytes": 17626204,
-    "sha256": "84D39A93FD28250898BA2706F6DE4EE265BCE6D1CAEC4989CE6F6F88C2022B22"
+    "bytes": 17634332,
+    "sha256": "5F9D38DDD10DC7E34875240F69534D3B65BB0C08A8CD272B7A97DCC30C69DC92"
   },
   "commits": {
     "H": "48f5fbfc2cbd539c08316d855555ce084478a678",
@@ -51,7 +51,6 @@
     "revision": "28.2.13676358"
   },
   "package": {
-    "android_mod_abi": 1,
     "entry": "libLeviLamina.so",
     "minecraft_versions": [
       "1.26.40.5"
@@ -62,27 +61,27 @@
     "version": "26.40.0-android.p7.g3"
   },
   "phase": "P7-G3",
-  "prelink_executable_sha256": "54183E74B22100489D95430DAC7618F47927F9282F7C0DF88DEE697ED9FDDF9F",
+  "prelink_executable_sha256": "9BA757919A2869593D813BBB166CFFA8843554BB7A105AE8B7E9CDF4443400B7",
   "provider": {
-    "bytes": 5059824,
-    "sha256": "CA474DBFED307C090EB6614D403BE9E820EDF2E26625FAE0D8FF4B0EDF2372A0"
+    "bytes": 4591584,
+    "sha256": "FF24F8357022A3F29B88516D120860B7FDB2682D8EC28E05864B78819A5F99E0"
   },
   "runtime_manifest": {
-    "bmbBytes": "17626204",
-    "bmbSha256": "84d39a93fd28250898ba2706f6de4ee265bce6d1caec4989ce6f6f88c2022b22",
-    "functionReverseIndexCount": 25667,
-    "membershipCount": 540340,
+    "bmbBytes": "17634332",
+    "bmbSha256": "5f9d38ddd10dc7e34875240f69534d3b65bb0c08a8cd272b7a97dcc30c69dc92",
+    "functionReverseIndexCount": 465190,
+    "membershipCount": 540453,
     "minecraftVersion": "1.26.40.5",
-    "providerBuildId": "8e451cefa4d4d2efbd3d19c74abfe3c9597396cd",
-    "providerFileSha256": "ca474dbfed307c090eb6614d403be9e820edf2e26625fae0d8ff4b0edf2372a0",
-    "providerTextSha256": "190830f929a14e8cf738cbe4269359290b1e9ae64f55c26b56b9c59b79fd6caa",
+    "providerBuildId": "0b53c8fb7321d344f86d8a5d6e1e69ee5c63ad90",
+    "providerFileSha256": "ff24f8357022a3f29b88516d120860b7fdb2682d8ec28e05864b78819a5f99e0",
+    "providerTextSha256": "cffb52c428e36a5b8b14d913f8c564486b40292490d6c2369138bb9de0328a5d",
     "schemaVersion": 1,
-    "semanticSha256": "b1f905519c0b7dfb709ed23e475ed48eb3705b525e924e20116cde6ebec6a82c",
+    "semanticSha256": "24de49e07d047470edbf642578a9d4b448465cadde3569d11040a31e634929be",
     "targetBuildId": "5893edc8d56c93cbdb50e0f9436320236b78c89d",
     "targetTextSha256": "f17aa60a840a88fc1212abfa92e362fec86b871126f30ae03000de8d90f3b0aa",
-    "whitelistValueCount": 26092
+    "whitelistValueCount": 528148
   },
-  "runtime_manifest_sha256": "C21B39A4995C190633CF0D4645584BA7E4D6BF16A63B69D0BB214AD33E58F15F",
+  "runtime_manifest_sha256": "7B11A536961BA8476B16C9522A4CF321F17600A8D540762629E9351784A35C8A",
   "schema_version": 1,
   "sdk": {
     "cxx": "c++23",
@@ -101,15 +100,16 @@
     "kernel": [
       "src-android/ll/api/data/Nbt_android.cpp",
       "src-android/ll/api/thread/ThreadName_android.cpp",
+      "src/ll/api/thread/GlobalThreadPauser_android.cpp",
       "src-android/ll/api/utils/ErrorUtils_android.cpp",
       "src-android/ll/api/utils/FromChars_android.cpp",
       "src-android/ll/api/utils/StacktraceUtils_android.cpp",
       "src-android/ll/api/utils/StringUtils_android.cpp",
       "src-android/ll/api/utils/SystemUtils_android.cpp",
-      "src-android/ll/core/KernelLifecycle.cpp",
-      "src-android/ll/core/ClientLifecycle.cpp",
+      "src-android/ll/api/event/client/ClientEvent.cpp",
+      "src-android/ll/api/event/client/ClientExitLevelEvent.cpp",
+      "src-android/ll/api/event/client/ClientJoinLevelEvent.cpp",
       "src-android/ll/core/io/DefaultOutput_android.cpp",
-      "src-android/ll/core/main_android.cpp",
       "src-android/ll/core/mod/ElfModule.cpp",
       "src-android/ll/core/mod/ModuleFiles.cpp",
       "src-android/ll/core/mod/NativeModPlatform.cpp",
@@ -131,6 +131,8 @@
       "src/ll/api/io/PatternFormatter.cpp",
       "src/ll/api/io/Sink.cpp",
       "src/ll/api/memory/Allocator.cpp",
+      "src/ll/api/memory/Hook.cpp",
+      "src/ll/api/memory/Symbol.cpp",
       "src/ll/api/mod/Mod.cpp",
       "src/ll/api/mod/ModManager.cpp",
       "src/ll/api/mod/ModManagerRegistry.cpp",
@@ -144,11 +146,36 @@
       "src/ll/core/io/Output.cpp",
       "src/ll/core/mod/ModLoadPlanner.cpp",
       "src/ll/core/mod/ModRegistrar.cpp",
-      "src/ll/core/mod/NativeModManager.cpp"
+      "src/ll/core/mod/NativeModManager.cpp",
+      "src-android/ll/core/main_android.cpp"
     ]
   },
   "target": {
     "bytes": 1583570128,
     "sha256": "1CCBC128196E1A522B0000E81CBDCCF6CA3E7025F2D99E1640877D35B860665F"
+  },
+  "prelink_executable_binding": {
+    "source_repo": "A:/CuteKitten/Project/LeviMC/prelink-p7",
+    "source_commit": "b46b8ee62f27c0f7337b0d454fd10999366c0107",
+    "rebuild": "2026-10-17",
+    "source_state": "uncommitted-candidate",
+    "tracked_diff_sha256": "71BD199DA68E1E5F02621A7B666087CE510405EB2167C7AAFC56873C6F7FD2D8",
+    "old_binary_unavailable": true
+  },
+  "all_symbols_test_input": {
+    "runtime_symbols_records": 528160,
+    "whitelist_lines": 528148,
+    "ambiguous_excluded": 5,
+    "bypass_lines": 0,
+    "sidecar_sha256": "C596DD19E1EBBBA5A57746C6EDCDA4DBA5D98CE23DEECF1CD7DC8C15692EFA77",
+    "allowlist_sha256": "90506D8C861F964BE79879F63571D2D3EF8564F6F61059D878AC252B4797D978",
+    "membership_count": 540453,
+    "lookup_names": 540453
+  },
+  "provider_source_binding": {
+    "source_repo": "A:/CuteKitten/Project/LeviMC/preloader-source-p6",
+    "source_commit": "7cf14db14f13cf87a408ecaf09fc9dce9c6cc7ed",
+    "source_state": "uncommitted-candidate",
+    "sdk_headers_unchanged": true
   }
 }

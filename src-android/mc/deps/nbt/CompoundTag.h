@@ -29,6 +29,23 @@ class CompoundTag : public ::Tag {
 public:
     // CompoundTag inner types define
     using StringView = std::string_view;
+    using TagMap     = std::map<std::string, CompoundTagVariant, std::less<void>>;
+
+    CompoundTag();
+    CompoundTag(TagMap tags);
+    CompoundTag(std::initializer_list<TagMap::value_type> tagPairs);
+    CompoundTag(CompoundTag const& other);
+    CompoundTag(CompoundTag&& other);
+    CompoundTag& operator=(CompoundTag const& other);
+    CompoundTag& operator=(CompoundTag&& other);
+
+    CompoundTagVariant&       operator[](std::string_view key);
+    CompoundTagVariant const& operator[](std::string_view key) const;
+
+    [[nodiscard]] CompoundTagVariant& at(std::string_view key) {
+        return const_cast<CompoundTagVariant&>(std::as_const(*this).operator[](key));
+    }
+    [[nodiscard]] CompoundTagVariant const& at(std::string_view key) const { return operator[](key); }
 
 public:
     // member variables
@@ -129,8 +146,6 @@ public:
 
     MCNAPI ::Bedrock::Result<void, std::error_code> load(::IDataInput&, int);
 
-    MCNAPI ::CompoundTag& operator=(::CompoundTag&&);
-
     MCNAPI bool operator==(::CompoundTag const&) const;
 
     MCNAPI ::Tag& put(std::string, ::Tag&&);
@@ -161,7 +176,7 @@ public:
         std::string,
         CompoundTagVariant,
         std::less<void>,
-        std::allocator<std::pair<const std::string, CompoundTagVariant>>> const&
+        std::allocator<std::pair<std::string const, CompoundTagVariant>>> const&
     rawView() const;
 
     MCNAPI bool remove(std::string_view);
@@ -205,3 +220,5 @@ public:
     MCNAPI static void** $vftable();
     // NOLINTEND
 };
+
+#include "mc/deps/nbt/CompoundTagVariant.h"

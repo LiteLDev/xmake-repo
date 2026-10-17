@@ -370,17 +370,15 @@ using FileHandleT = void*;
 #endif
 
 #if defined(__ANDROID__)
-#include <dlfcn.h>
-// Each ELF's CRT supplies this hidden anchor, including during constructors.
-extern "C" __attribute__((visibility("hidden"))) void* __dso_handle;
+// Like Windows' __ImageBase, this linker anchor needs no loader lookup or lock.
+extern "C" __attribute__((visibility("hidden"))) char __ehdr_start;
 #endif
 
 namespace ll::internal {
 
 #if defined(__ANDROID__)
 [[nodiscard]] LL_FORCEINLINE __attribute__((visibility("hidden"))) void* getCurrentModuleHandle() noexcept {
-    Dl_info info{};
-    return ::dladdr(&__dso_handle, &info) ? info.dli_fbase : nullptr;
+    return &__ehdr_start;
 }
 #else
 [[nodiscard]] void* getCurrentModuleHandle() noexcept; // Implemented in SystemUtils_linux.cpp

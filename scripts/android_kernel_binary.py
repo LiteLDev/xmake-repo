@@ -48,6 +48,7 @@ def verify_traces(config: dict, directory: Path) -> dict:
         raise InputError("missing or unexpected compilation include traces")
     units = {}
     all_mc = set()
+    ll_mc_helpers = set()
     for name in sorted(expected_sources):
         trace = directory / (name + ".txt")
         files = {}
@@ -63,6 +64,21 @@ def verify_traces(config: dict, directory: Path) -> dict:
             if not path.is_file():
                 raise InputError("a compiler include no longer exists")
             if "mc" in path.parts:
+                view = Path(config["include_roots"][0]).resolve()
+                if path.is_relative_to(view):
+                    relative = path.relative_to(view).as_posix()
+                    selected = config["ll_headers"].get(relative)
+                    if relative not in ("mc/deps/nbt/Tag.h", "mc/deps/nbt/EndTag.h",
+                                        "mc/deps/nbt/CompoundTag.h", "mc/deps/nbt/CompoundTagVariant.h"):
+                        raise InputError("Minecraft include is outside Header S: " + str(path))
+                    if (not selected or selected["source"] != "src-android/" + relative
+                            or sha(path) != selected["sha256"]
+                            or sha(repo / selected["source"]) != selected["sha256"]):
+                        raise InputError("LL NBT helper changed after configuration: " + relative)
+                    files[selected["source"]] = selected["sha256"]
+                    all_mc.add(relative)
+                    ll_mc_helpers.add(relative)
+                    continue
                 if not path.is_relative_to(header):
                     raise InputError("Minecraft include is outside Header S: " + str(path))
                 relative = path.relative_to(header).as_posix()
@@ -75,6 +91,13 @@ def verify_traces(config: dict, directory: Path) -> dict:
                 if path.is_relative_to(view):
                     relative = path.relative_to(view).as_posix()
                     selected = config["ll_headers"].get(relative)
+                    if relative.startswith("ll/api/event/"):
+                        android_source = "src-android/" + relative
+                        if (selected and selected["source"].startswith("src-client/")) or (
+                            (repo / android_source).is_file()
+                            and (not selected or selected["source"] != android_source)
+                        ):
+                            raise InputError("event Header must use its Android platform source: " + relative)
                     if not selected or sha(path) != selected["sha256"] or sha(repo / selected["source"]) != selected["sha256"]:
                         raise InputError("shared/client Header view changed after configuration: " + relative)
                     files[selected["source"]] = selected["sha256"]
@@ -97,7 +120,8 @@ def verify_traces(config: dict, directory: Path) -> dict:
         if not files:
             raise InputError("compiler trace contains no project or SDK Headers")
         units[name] = {"trace_sha256": sha(trace), "authenticated_headers": files}
-    return {"units": units, "mc_unique_count": len(all_mc), "all_mc_from_S": True}
+    return {"units": units, "mc_unique_count": len(all_mc), "all_mc_from_S": not ll_mc_helpers,
+            "ll_mc_helpers": sorted(ll_mc_helpers)}
 
 
 def elf_contract(path: Path, phase: str = "P7-G3", role: str = "kernel", expected_soname: str | None = None) -> dict:
@@ -189,11 +213,13 @@ def elf_contract(path: Path, phase: str = "P7-G3", role: str = "kernel", expecte
                 offset += (desc_size + 3) & ~3
                 if name == b"Android" and len(desc) >= 4:
                     api_notes.append(struct.unpack_from("<I", desc)[0])
-    registration = "ll_mod_load" if role == "example" else "PLGetModRegistration"
-    if registration not in exports or "ll_memory_operator_overrided" not in exports:
-        raise InputError("missing original registration or memory ABI marker")
-    if export_details[registration] != (2, 1, 0) or export_details["ll_memory_operator_overrided"][0] != 1:
-        raise InputError("invalid registration/marker symbol kind")
+    if "ll_memory_operator_overrided" not in exports or export_details["ll_memory_operator_overrided"][0] != 1:
+        raise InputError("missing or invalid memory ABI marker")
+    if role == "example":
+        if export_details.get("ll_mod_load") != (2, 1, 0):
+            raise InputError("missing or invalid original Mod registration")
+    elif "PLGetModRegistration" in exports or not any(sec[1] == 14 and sec[5] for sec in sections):
+        raise InputError("kernel must use its native constructor entry without a PL Mod table")
     if any(name.startswith(("_ZN3fmt", "_ZNK3fmt", "_Znw", "_Zna", "_Zdl", "_Zda")) for name in exports):
         raise InputError("private formatter or allocation operators escaped the module")
     expected_soname = expected_soname or ("libLeviLaminaP7Example.so" if role == "example" else "libLeviLamina.so")

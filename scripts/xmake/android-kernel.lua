@@ -89,29 +89,54 @@ for _, role in ipairs({"kernel", "example"}) do
     target(role == "kernel" and "LeviLamina" or "LeviLaminaP7Example")
         set_kind("shared")
         shared_options(role)
-        if role == "kernel" then add_defines("LL_EXPORT") else add_deps("LeviLamina", {inherit = false}) end
+        if role == "kernel" then add_defines("LL_EXPORT") else add_deps("LeviLamina") end
         if is_mode("debug") then add_defines("LL_DEBUG") end
         set_symbols("debug")
+        set_strip("none")
         set_configdir("$(builddir)/config")
         add_configfiles(path.join(os.projectdir(), "src/(ll/core/Version.h.in)"))
         add_includedirs("$(builddir)/config")
-        on_link(function(target)
+        add_syslinks("log", "preloader")
+        before_link(function(target)
+            import("core.base.json")
             local args = {"-X", "utf8", path.join(os.projectdir(), "scripts/android_kernel_link.py"),
+                "--stage", "prepare",
                 "--inputs", target:data("p7.inputs"), "--traces", target:data("p7.traces"),
                 "--prelink-dir", target:data("p7.prelink"), "--elf", path.absolute(target:targetfile())}
             for _, object in ipairs(target:objectfiles()) do
                 table.insert(args, "--object")
                 table.insert(args, path.absolute(object))
             end
-            for _, archive in ipairs(table.wrap(target:pkg("fmt"):get("libfiles"))) do
-                table.insert(args, "--archive")
-                table.insert(args, archive)
+            local archives = {}
+            for _, dep in ipairs(target:orderdeps()) do
+                if dep:kind() == "static" then table.insert(archives, dep:targetfile()) end
             end
-            if role == "example" then
-                table.insert(args, "--kernel-elf")
-                table.insert(args, path.absolute(target:dep("LeviLamina"):targetfile()))
+            for _, pkg in ipairs(target:orderpkgs()) do
+                for _, archive in ipairs(table.wrap(pkg:get("libfiles"))) do
+                    if archive:endswith(".a") then table.insert(archives, archive) end
+                end
+            end
+            for _, archive in ipairs(table.unique(archives)) do
+                table.insert(args, "--archive")
+                table.insert(args, path.absolute(archive))
             end
             os.vrunv("python", args)
+            local inputs = json.loadfile(target:data("p7.inputs"))
+            local generated = path.join(target:data("p7.prelink"), "generated")
+            local exports = path.join(os.projectdir(), "scripts/xmake",
+                role == "kernel" and "android-kernel.exports" or "android-example.exports")
+            target:add("linkdirs", path.directory(inputs.inputs.provider))
+            target:add("shflags", "-Wl,-z,defs", "-Wl,-z,max-page-size=16384",
+                "-Wl,-z,common-page-size=16384", "-Wl,--build-id=sha1",
+                "-Wl,-soname," .. inputs.package.entry, "-Wl,--version-script=" .. exports,
+                "-Wl,--whole-archive", path.join(generated, "libbedrock_runtime_thunks.a"),
+                "-Wl,--no-whole-archive", "-Wl,--no-as-needed", {force = true})
+        end)
+        after_link(function(target)
+            os.vrunv("python", {"-X", "utf8", path.join(os.projectdir(), "scripts/android_kernel_link.py"),
+                "--stage", "verify", "--inputs", target:data("p7.inputs"),
+                "--traces", target:data("p7.traces"), "--prelink-dir", target:data("p7.prelink"),
+                "--elf", path.absolute(target:targetfile())})
         end)
     target_end()
 end
@@ -158,17 +183,11 @@ target("P7ModuleFileTests")
                 "-Wl,--wrap=read,--wrap=pread,--wrap=fstat,--wrap=fsync", {force = true})
 target_end()
 
-target("P7ClientReadyHookTests")
+target("P7ElfModuleTests")
     set_kind("binary")
     shared_options()
-    add_defines("PRELOADER_EXPORT")
-    add_includedirs(path.join(os.projectdir(), "src-android/ll/core"))
-    on_config(function(target)
-        local root = assert(get_config("preloader_android_root"), "Missing PL SDK")
-        target:add("sysincludedirs", path.join(root, "src-android"), path.join(root, "src"))
-    end)
-    add_files(path.join(os.projectdir(), "src-android/ll/core/ClientLifecycle.cpp"),
-              path.join(os.projectdir(), "test/android/shared_core/client_ready_hook_tests.cpp"))
+    add_files(path.join(os.projectdir(), "test/android/shared_core/elf_module_tests.cpp"),
+              path.join(os.projectdir(), "src-android/ll/core/mod/ElfModule.cpp"))
 target_end()
 
 target("P7ModuleTests")

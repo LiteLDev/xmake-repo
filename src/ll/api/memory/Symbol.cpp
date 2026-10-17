@@ -1,9 +1,15 @@
 #include "ll/api/memory/Symbol.h"
+#include "ll/api/base/Containers.h"
 
 #include "ll/api/utils/SystemUtils.h"
 #include "ll/core/LeviLamina.h"
 
+#if defined(__ANDROID__)
+#include <cstdlib>
+#include <cxxabi.h>
+#else
 #include "demangler/Demangle.h"
+#endif
 #include "pl/SymbolProvider.h"
 
 namespace ll::memory {
@@ -27,6 +33,15 @@ void* SymbolView::resolve(bool disableErrorOutput) const {
     return res;
 }
 std::string SymbolView::toString() const {
+#if defined(__ANDROID__)
+    std::string symbol(sym);
+    int         status{};
+    char*       text = abi::__cxa_demangle(symbol.c_str(), nullptr, nullptr, &status);
+    if (!text) return symbol;
+    std::string result(text);
+    std::free(text);
+    return result;
+#else
     std::string res;
     if (demangler::nonMicrosoftDemangle(sym, res)) return res;
     else if (sym.starts_with("_")) { // some platform's external sym style...
@@ -45,5 +60,6 @@ std::string SymbolView::toString() const {
         }
     }
     return res;
+#endif
 }
 } // namespace ll::memory

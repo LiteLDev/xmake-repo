@@ -44,7 +44,7 @@ class IncludeTraceTests(unittest.TestCase):
             self.write(self.header / "src-android" / name, "// frozen " + name + "\n")
         self.pl = self.sdk / "src-android/pl/android/Mod.h"
         self.write(self.pl, "// frozen public SDK\n")
-        self.backend = self.repo / "src-android/ll/core/KernelLifecycle.h"
+        self.backend = self.repo / "src-android/ll/core/main_android.cpp"
         self.shared = self.repo / "src/ll/api/Global.h"
         self.write(self.backend, "// platform implementation\n")
         self.write(self.shared, "// original shared interface\n")
@@ -138,6 +138,54 @@ class IncludeTraceTests(unittest.TestCase):
     def test_missing_trace_is_rejected(self):
         (self.traces / (self.first_trace + ".txt")).unlink()
         with self.assertRaisesRegex(inputs.InputError, "include traces"):
+            binary.verify_traces(self.config, self.traces)
+
+    def test_android_event_header_is_authenticated(self):
+        relative = "ll/api/event/client/ClientEvent.h"
+        source = self.repo / "src-android" / relative
+        target = self.view / relative
+        self.write(source, "// Android event interface\n")
+        self.write(target, source.read_text(encoding="utf-8"))
+        self.config["ll_headers"][relative] = {"source": "src-android/" + relative, "sha256": inputs.sha(source)}
+        self.append(target)
+        result = binary.verify_traces(self.config, self.traces)
+        self.assertIn("src-android/" + relative, result["units"][self.first_trace]["authenticated_headers"])
+        self.write(source, "// changed Android event\n")
+        with self.assertRaisesRegex(inputs.InputError, "changed after configuration"):
+            binary.verify_traces(self.config, self.traces)
+
+    def test_client_event_header_cannot_replace_android_event(self):
+        relative = "ll/api/event/client/ClientEvent.h"
+        source = self.repo / "src-client" / relative
+        target = self.view / relative
+        self.write(source, "// identical event interface\n")
+        self.write(target, source.read_text(encoding="utf-8"))
+        self.config["ll_headers"][relative] = {"source": "src-client/" + relative, "sha256": inputs.sha(source)}
+        self.append(target)
+        with self.assertRaisesRegex(inputs.InputError, "Android platform source"):
+            binary.verify_traces(self.config, self.traces)
+
+    def test_ll_nbt_helper_is_authenticated_and_reported(self):
+        relative = "mc/deps/nbt/CompoundTag.h"
+        source = self.repo / "src-android" / relative
+        target = self.view / relative
+        self.write(source, "// LL NBT value helpers\n")
+        self.write(target, source.read_text(encoding="utf-8"))
+        self.config["ll_headers"][relative] = {"source": "src-android/" + relative, "sha256": inputs.sha(source)}
+        self.append(target)
+        result = binary.verify_traces(self.config, self.traces)
+        self.assertFalse(result["all_mc_from_S"])
+        self.assertEqual(result["ll_mc_helpers"], [relative])
+        self.write(source, "// changed implementation\n")
+        with self.assertRaisesRegex(inputs.InputError, "NBT helper changed"):
+            binary.verify_traces(self.config, self.traces)
+
+    def test_ll_mc_view_cannot_replace_other_minecraft_headers(self):
+        target = self.view / self.mc_names[0]
+        self.write(target, "// unapproved local Minecraft header\n")
+        self.config["ll_headers"][self.mc_names[0]] = {"source": "src-android/" + self.mc_names[0], "sha256": inputs.sha(target)}
+        self.append(target)
+        with self.assertRaisesRegex(inputs.InputError, "outside Header S"):
             binary.verify_traces(self.config, self.traces)
 
     def test_every_added_source_requires_its_compilation_trace(self):

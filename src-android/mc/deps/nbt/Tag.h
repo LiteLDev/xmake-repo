@@ -60,7 +60,7 @@ public:
 public:
     // member functions
     // NOLINTBEGIN
-    MCNAPI Tag();
+    Tag() = default;
     // NOLINTEND
 
 public:
@@ -107,3 +107,6 @@ public:
     MCNAPI static void** $vftable();
     // NOLINTEND
 };
+
+// Keep the first virtual destructor as the AArch64 ABI key function.
+inline Tag::~Tag() = default;

@@ -67,3 +67,5 @@ public:
     MCNAPI static void** $vftable();
     // NOLINTEND
 };
+
+inline EndTag::~EndTag() = default;

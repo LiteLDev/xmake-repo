@@ -34,6 +34,8 @@ int main(int argc, char** argv) try {
     require(a && b && a != b && a != sys::getCurrentModuleHandle(), "distinct module identity");
     require(a == first.getAddress<void* (*)()>("constructor_identity")(), "constructor identity A");
     require(b == second.getAddress<void* (*)()>("constructor_identity")(), "constructor identity B");
+    require(a == first.getAddress<void* (*)()>("constructor_worker_identity")(), "constructor worker identity A");
+    require(b == second.getAddress<void* (*)()>("constructor_worker_identity")(), "constructor worker identity B");
     require(sys::getModuleHandle(first.getAddress("module_identity")) == a, "address lookup");
     require(sys::getModulePath(a)->filename() == std::filesystem::path(argv[1]).filename(), "module path");
     std::thread worker([&] {

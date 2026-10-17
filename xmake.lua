@@ -293,6 +293,9 @@ target("LeviLamina")
         remove_files("./**/linux/**.*")
         remove_headerfiles("./**/linux/**.*")
     end
+    if not is_plat("android") then
+        remove_files("./**/*_android.*")
+    end
 
     on_config(function (target)
         -- vs_runtime can not be set to MDd or MTd.

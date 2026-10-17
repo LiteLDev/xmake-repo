@@ -1,5 +1,31 @@
 # Android P7 validation
 
+Current October 17 candidate: see android-p7-g0-reconvergence.md. The sections
+below retain their historical source/input boundaries; the former PL lifecycle
+adapter, guarded Hook layer and unload/drain candidate are absent from current
+production sources. Their historical receipts do not validate the new candidate.
+
+Final Android debug kernel/example and two clean release builds passed. All 14
+release import/compiler/strip artifacts are byte-identical at the same canonical
+path. Actual .debug_info/.symtab retention/removal and the production C++ runtime
+reader were checked on debug/release plain/stripped files. Six PL host tests,
+16 Python checks, current-pair P5 cases and 64 Launcher app tests passed.
+Windows client debug/release passed; the corrected Windows prelink dependency
+profile consumed 224 real objects and 13 archives and produced exactly the
+original tool's import-library bytes. The default BMB requirement now matches
+the actual v0.8.5 Windows tag's v0.8.2 requirement, not the stale 0.8.0 pin.
+
+Earlier device own-target P5 ABI and PL Hook tests passed, including SIGTRAP=133
+for the empty IFUNC resolver. They retain their earlier provider identities.
+The first APK installed, but native runtime-symbol setup failed; a stale PL BMB
+dataset pin was proven in source, without proving it was the only device failure.
+The current runtime-v2 pair, constructor-based runtime reader and corrected APK
+are not yet installed: the vivo disconnected. Actual game Ready/world/close
+tests, full SO unload and runtime thread pause are not accepted.
+Current artifacts are on A: under WORKTEMP/p7-windows-reconvergence-20261017;
+the current short build directories are A:/p7finald17 and A:/p7final17. Earlier
+A:/p7adf17, A:/p7arf17 and A:/p7arf217 retain their original provider bindings.
+
 Status: G0–G2 first-batch acceptance completed on 2026-09-13. P7 is not complete.
 G3–G8 have not passed. Full inputs and logs are outside the repository under
 `C:/Users/ROG/levilamina-p7-validation-20260910` (historical device evidence) and
@@ -275,51 +301,171 @@ original manager internals or game shutdown. The candidate remains an uncommitte
 worktree based on `0f63ac23c0`; source-file hashes and generated inputs identify
 the built content. G3–G8 remain unpassed.
 
-## September 18: Android client Ready adapter
+## October 16: client lifecycle reconvergence
 
-The remaining unused P6 `api/android/Kernel.h`, `KernelApi.cpp` and platform
-`core/io/Output.h` were removed. All remaining Android implementation units are
-listed in the formal source table. Original shared/client/server LL sources
-remain unchanged.
+The Android-only `KernelLifecycle` and `ClientLifecycle` adapters were removed
+from the formal target. `main_android.cpp` now retains only the PL parent
+registration boundary, validates the original paths, installs a direct
+`MinecraftGame::_initFinish` hook, and loads ordinary Mods through the original
+`ModRegistrar`. PL enable/disable do not activate ordinary Mods. The first
+Minecraft Ready callback performs `enableAllMods`, sets `GamingStatus::Running`,
+and forwards to the original function; repeated Ready callbacks only forward.
 
-`ClientLifecycle.cpp` resolves the fixed Android `_initFinish` symbol through
-the original PL SymbolProvider and installs a High-priority PL Hook during the
-parent enable phase. The current Launcher performs this phase before creating
-MinecraftActivity (`MinecraftLoadingActivity.transitionToGame`). The frozen P5
-dry-run classified an owned object referencing that exact symbol as one allowed
-function import, with no external import; no whitelist or producer was changed.
+At that stage the Android source table used the original
+`src-client/ll/api/event/client/Client*.cpp` implementations. The former
+Android event copies, lifecycle host fixture and `P7ClientReadyHookTests` target
+were removed so the build cannot silently compile a second client event or
+lifecycle implementation.
 
-The adapter checks the member signature against the frozen Android Header and
-forwards the real game pointer, InitContext reference and WorkResult. It uses a
-free function with the AArch64 explicit-this calling shape instead of writing
-an origin address into a desktop member-function-pointer representation. On the
-first Ready callback the Android parent invokes original `enableAllMods`, sets
-Running and returns to the original function, preserving client order. Parent
-enable itself does not enable ordinary Mods. Repeated Ready notifications do not
-repeat activation. A missing symbol or failed installation rejects parent enable.
+Final parent unload uses the original registrar, EventBus state cleanup and
+active-publication drain before removing the Ready hook. A concrete Android
+normal-close target has not been added without frozen symbol evidence; device
+Ready, world, normal-close and complete-unload gates remain open.
 
-This is a startup-only, process-resident binding. It is not the P6 two-shape
-guarded API and claims no runtime installation, global thread suspension,
-ordinary unhook/drain or physical SO unload. Existing parent/native unload
-refusal remains effective, including installation failures. Original manager,
-EventBus, Logger and thread-pool behavior has not been repaired or redesigned.
+## October 17: NBT value helpers and original event serialization
 
-Host fixtures exercise the actual adapter with owned PL callbacks and minimal
-MC type declarations; they test argument/return forwarding, original-pointer
-updates, priority, duplicate installation and missing/backend/null-origin
-failures. The separate host lifecycle test uses actual KernelLifecycle with
-isolated manager/logger collaborators to cover Ready-only activation, repeated
-callbacks, failed installation, disable and stop/load races. These tests do not
-establish actual Minecraft Ready timing. The Android fixture target
-`P7ClientReadyHookTests` compiles the production adapter against real frozen
-Headers; device execution remains pending. September 14 receipts are historical
-and cannot validate the changed candidate. Current inputs and test results are
-in `validation/p7/g4-ready-adaptation.json` and the external September 18 directory.
+NBT extensions now live only in this LL worktree's `src-android/mc/deps/nbt`.
+The four LL-owned headers are `Tag.h`, `EndTag.h`, `CompoundTag.h` and
+`CompoundTagVariant.h`; all Header producer worktrees and the frozen S input
+remain unchanged. The controlled include view records these four overrides
+and verifies their source and compiled hashes. Other MC headers still require S.
 
-The September 18 debug/release LL and original-API example both passed formal
-P5 linking, Header/source checks and ELF verification before/after strip.
-`P7ClientReadyHookTests` compiled for AArch64 using the frozen MC Headers;
-four owned Hook host cases and the separate lifecycle host test passed, as did
-all 16 Python source/input tests. The host Hook runner uses minimal MC types
-because it is a control-flow fixture, not a Windows game build. No device run,
-deployment, commit or push was performed. All G3–G8 completion flags remain false.
+The original client events use `serializeRefObj` again, with no Android branch.
+Value helpers follow the existing Windows custom headers: initializer lists,
+scalar/string and nested compound assignment, copy/move, `at`, `get<T>`, type
+predicates, `contains` and string access. Android's real map/variant storage and
+virtual order remain intact. The previous out-of-line helpers were inlined so
+prelink cannot misclassify LL value constructors as native MC imports.
+
+Verification in `WORKTEMP/p7-nbt-helpers-20261017`:
+
+- All 18 Python input/include-origin checks passed.
+- Android kernel/example debug and release passed real object/archive prelink,
+  ordinary xmake linking and both unstripped/stripped ELF checks. Each new
+  `linked.json` lists the four LL headers explicitly. Old binary receipts do
+  not certify this candidate; Windows-only Header files were not changed.
+- The example's load check now exercises nested initialization, scalar reads,
+  deep copy/move and string mutation, plus missing-key and wrong-type failures.
+  These cases passed on vivo in process 24725, including the native NBT
+  round-trip; its fresh event receipts are written only after these assertions.
+- The current vivo APK, Mods and metadata were backed up on A:. The matching
+  dataset-v2 APK, BMB and new release kernel/example were deployed with data
+  retained; device library/BMB SHA-256 matched. Launch crashed before LL's
+  constructor, in an IFUNC resolver reached during `.rela.dyn` processing.
+  Its `bl pl_resolve_symbol_n@plt` reached the still-unrelocated PLT0 value
+  `0xd6190`. The tombstone and disassembly are saved, not counted as an NBT pass.
+- `ifunc-before-after.json` shows the pre-NBT release already had data IFUNC
+  relocations while the resolver dependency used `.rela.plt`. This is static
+  comparison evidence, not a successful old-candidate device run. Resolving
+  that prelink ordering blocker required the follow-up below.
+
+Ready, join/exit, background recovery, normal close and complete unload remain
+unverified for these new binaries. No previous receipt or source identity was
+rebound to manufacture a pass.
+
+### October 17 follow-up: loader and initialization ordering
+
+The IFUNC resolver now calls `pl_resolve_symbol_n` through its GLOB_DAT GOT
+entry, avoiding a call through an unrelocated PLT. The final verifier requires
+that relocation. On vivo the same external-provider fixture crashes with the
+old generator (139), passes pointer/call checks with the fixed generator, and
+traps on a null resolver (133). Five generated artifacts are deterministic;
+the Windows real object/archive import-library byte oracle remains unchanged.
+The fixed prelink SHA-256 is
+`9BA757919A2869593D813BBB166CFFA8843554BB7A105AE8B7E9CDF4443400B7`.
+
+LLDB then identified a loader-lock deadlock: Mod load joined a worker whose
+module-identity query used `dladdr`. Android now uses the hidden linker symbol
+`&__ehdr_start`, following Windows' `&__ImageBase` accessor. Actual constructor
+worker fixtures pass on vivo. VS2022 before/after Windows accessor objects are
+byte-identical. No PL lifecycle wrapper was added.
+
+The next failure was Console listener registration. The old release ELF's
+`.init_array` relocation order is preserved in `init-array-before.json`:
+`leviLaminaEntry` at slot `0xdd870` precedes Console emitter initialization at
+`0xdd878`. Windows invokes DllMain after C++ initialization. The Android entry
+translation unit is now linked last, and its entry uses the final ordinary
+static initializer after the existing Hook registrations in that unit.
+The shared EventBus/emitter implementation remains unchanged. This ordering
+candidate passed debug/release and device checks before the directory change
+below; final directory-candidate results are recorded separately.
+
+All evidence above is in `WORKTEMP/p7-nbt-helpers-20261017`. Earlier failure
+records describe their original candidates, not the current execution stage.
+
+### Android event file ownership
+
+Following the user's directory correction, all 24 files under
+`src-client/ll/api/event` are copied byte-for-byte to `src-android/ll/api/event`.
+The current kernel source table compiles the Android ClientEvent,
+ClientJoinLevelEvent and ClientExitLevelEvent copies. It no longer compiles any
+`src-client` source. Other copied events retain their existing implementation;
+copying them does not certify their Android ABI or activate additional Hooks.
+The controlled include view selects the Android event headers, and its verifier
+rejects an event header sourced from `src-client`. All 20 focused input/source
+tests pass. The four LL-owned NBT extensions and original `serializeRefObj`
+implementation remain unchanged.
+
+Before that path change, release process 27311 passed full example load,
+constructor/worker identity, NBT helpers, Ready/enable, Console output, world
+join/exit reference serialization and background/resume. Separate join and exit
+receipts are preserved. These earlier results are not rebound to the directory
+candidate; its fresh builds and device receipts follow below.
+
+The Android thread backend is now at
+`src/ll/api/thread/GlobalThreadPauser_android.cpp`, beside `_win.cpp`, following
+the user's requested ownership. Its implementation is unchanged. The Android
+source table uses the new path. The desktop glob excludes `_android` files;
+actual Windows source enumeration selects only GlobalThreadPauser_win.cpp and
+rejects every `_android.cpp` input. That check passed using the existing Windows
+configuration; it is not a full Windows DLL rebuild or proof of runtime thread
+pausing support.
+
+### Final directory-candidate verification
+
+`build-debug-android-layout.log` and `build-release-android-layout.log` passed
+kernel/example compilation, actual object/archive prelink, normal xmake linking,
+source/include authentication and unstripped/stripped ELF verification. Both
+ELFs retain the entry as their final static initializer. Android inputs select
+the three Android event copies and the relocated thread backend; no src-client
+source is compiled. The Windows source-selection check and 20 Python tests pass.
+
+The final stripped release kernel SHA-256 is
+`4B7D450C897C37B5B951204CD19AB3680FA5ADD8ECBD77E1AEEDEE23F64710BF`;
+the example is
+`DBCF2864F60D07292FD781CE203E4D380534191DA75D31B84CCBF9558350E349`.
+Both actual private-cache modules mapped by process 24193 match those hashes.
+That process passed load, constructor/worker identity, NBT ownership/value/error
+checks, native round-trip, Ready/enable, original Console output, world join and
+exit reference serialization, and Home/background/resume to live gameplay.
+The game's own quit dialog produced its disabled receipt, then the process ended.
+No force-stop was used. A fresh manual launcher/game start, process 30390,
+passed load/NBT/Ready/enable again with the same kernel hash.
+
+Process 21519 is excluded from this final matrix: source replacement retained
+the old modification time and size, so the Launcher's metadata fingerprint
+reused the previous kernel cache. Updating the deployed file's modification
+time invalidated that cache through its existing path. No Launcher cache
+implementation was changed. The final matrix uses actual mapped module hashes,
+not just the external source hashes.
+
+`final-android-layout-results.json` verifies the build artifacts and each
+process-scoped receipt. Separate ready/join/exit/close/restart data directories
+preserve the original observations. Temporary stay-awake was restored to 0 and
+the LLDB forward/server removed. The game is left at its restarted main menu.
+
+These results close this NBT/event/directory follow-up, not P7 as a whole.
+The current source's final clean-build determinism, remaining applicable modules,
+full Windows PL rebuild and SDK/package delivery gates remain separate.
+Runtime thread pausing and complete SO unload are not certified by this run.
+
+### Local source commits
+
+The user requested local commits of this batch. The corresponding source
+snapshots are prelink `21e6c34d30e06a50508eeb846583d1c173c983d2`, preloader
+`c8e6074235d234c4dce661bc59c1ed96a91e5554`, and Launcher
+`60fc1c7d3c255592c0d893a24e05d5ee94f42169`. The Launcher's preloader submodule
+records that same preloader commit. The enclosing LL commit contains this
+document and the tested LL source changes. These commits do not rebind the
+frozen SDK inputs or rebuild/relabel the existing tested binaries. Nothing was
+pushed, and the remaining P7 gates above stay open.

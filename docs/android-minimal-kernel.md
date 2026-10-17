@@ -1,6 +1,6 @@
 # Android P6 kernel
 
-Android platform code lives under `src-android/ll/core`, following the client/server platform entry structure. `main_android.cpp` registers the parent with PL. The `io`, `memory`, `event` and `mod` modules handle logging, guarded Hook transactions, synchronous events and native child ownership. `src/ll` is not part of this port and remains unchanged.
+Android platform code lives under `src-android/ll`, following the client/server platform structure. `main_android.cpp` uses the original ModRegistrar and connects the client lifecycle to Minecraft's Ready and normal-close entries. Android events live under `src-android/ll/api/event`; the corresponding Windows client files are copied there with the same implementation. The Android source table compiles the enabled event copies without compiling `src-client` event sources. The `io`, `memory`, `event` and `mod` modules provide the original LL behavior with only necessary Android backends.
 
 The kernel exports the six API v1 symbols in `scripts/xmake/android-kernel.exports`. A child exports only `LLGetModRegistration` through `LL_REGISTER_MOD` in `ll/api/android/Mod.hpp`; it does not register with PL or Java. Both child context and registration are 56 bytes on AArch64. Context paths remain valid until successful unload. Payloads are borrowed, read-only and valid only during the synchronous callback.
 

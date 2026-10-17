@@ -71,7 +71,7 @@ bool validNote(std::string_view note) noexcept {
     doc.Parse<rapidjson::kParseValidateEncodingFlag>(note.data() + 20, size);
     if (doc.HasParseError() || !doc.IsObject() || doc.MemberCount() != 6) return false;
     auto version = doc.FindMember("schemaVersion");
-    if (version == doc.MemberEnd() || !version->value.IsUint() || version->value.GetUint() != 2) return false;
+    if (version == doc.MemberEnd() || !version->value.IsUint() || version->value.GetUint() != 3) return false;
     for (auto key : {"targetBuildId", "providerBuildId", "semanticSha256", "importSetSha256", "ndkLibcxxSha256"}) {
         auto value = doc.FindMember(key);
         if (value == doc.MemberEnd() || !value->value.IsString()) return false;
@@ -150,7 +150,9 @@ bool inspectElfModule(
     }
     std::set<std::string_view> needed, exports;
     size_t                     dynamicCount{}, symbolCount{}, apiNotes{};
+    bool                       constructorEntry{};
     for (auto const& section : sections) {
+        if (section.type == 14 && section.size) constructorEntry = true;
         std::string_view name;
         if (!reader.string(sections[h.shnames], section.name, name)) return false;
         if (name == ".note.levimc.prelink") {
@@ -212,7 +214,7 @@ bool inspectElfModule(
                     auto type = symbol.info & 15;
                     if ((binding != 1 && binding != 2) || (symbol.other & 3) == 1
                         || (type != 1 && type != 2 && type != 6) || !exports.insert(value).second) return false;
-                    if ((value == "ll_mod_load" || value == "PLGetModRegistration") && type != 2) return false;
+                    if (value == "PLGetModRegistration" || (value == "ll_mod_load" && type != 2)) return false;
                     if (value == "ll_memory_operator_overrided" && (type != 1 || symbol.size != sizeof(int))) return false;
                 }
             }
@@ -230,8 +232,7 @@ bool inspectElfModule(
         || (!kernel && !needed.contains("libLeviLamina.so")))
         return false;
     if (!exports.contains("ll_memory_operator_overrided")
-        || !exports.contains(kernel ? "PLGetModRegistration" : "ll_mod_load")) return false;
-    if (!kernel && exports.contains("PLGetModRegistration")) return false;
+        || (kernel ? !constructorEntry : !exports.contains("ll_mod_load"))) return false;
     for (auto library : needed) result.needed.emplace_back(library);
     error = nullptr;
     return true;
