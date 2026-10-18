@@ -1,5 +1,6 @@
 #include "ll/api/io/Logger.h"
 
+#include <future>
 #include <mutex>
 
 #include "ll/api/io/DefaultSink.h"
@@ -90,6 +91,11 @@ void Logger::setFormatter(Polymorphic<Formatter> formatter) {
     }
 }
 void Logger::flush() const {
+    auto barrier  = std::make_shared<std::promise<void>>();
+    auto complete = barrier->get_future();
+    impl->pool.execute([barrier] { barrier->set_value(); });
+    complete.wait();
+
     std::lock_guard lock{impl->sinkMutex};
     for (auto& sink : impl->sinks) {
         sink->flush();

@@ -192,6 +192,10 @@ EventBus listener count and empty-state reads now take the CallbackStream mutex,
 the global listener count takes `infoMutex`. This closes the data race used by
 drain-status checks without changing the public event API.
 
+`Logger::flush()` now queues and waits for a barrier on the logger executor before
+flushing sinks, so a successful flush also establishes completion of earlier async
+log tasks. It does not change the public Logger API or claim complete Mod/SO unload.
+
 Validation for this batch: clang-format and `git diff --check` pass; the Android
 release kernel was rebuilt incrementally with authenticated inputs and passed P7
 link/strip/source verification twice. The Windows host rebuild was attempted once
