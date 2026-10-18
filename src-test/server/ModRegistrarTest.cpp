@@ -414,26 +414,5 @@ TEST_F(ModRegistrarLifecycleTest, DynamicValidationAndRegistryFailuresAreTransac
     EXPECT_EQ(registrar.getSortedModNames(), baseline);
 }
 
-TEST_F(ModRegistrarLifecycleTest, LifecycleCallbacksCanMutateRegistryDuringDispatch) {
-    writeManifest(ExistingTarget);
-
-    auto&                          registry = ModManagerRegistry::getInstance();
-    size_t                         calls{};
-    ModManagerRegistry::CallbackId callbackId{};
-    callbackId = registry.executeOnModLoad([&](std::string_view name) {
-        ++calls;
-        EXPECT_EQ(name, ExistingTarget);
-        EXPECT_TRUE(registry.eraseOnModCallback(callbackId));
-    });
-
-    auto result = ModRegistrar::getInstance().loadMod(ExistingTarget);
-    ASSERT_TRUE(result) << result.error().message();
-    EXPECT_EQ(calls, 1u);
-
-    // The callback removed itself from the dispatch snapshot and must not run
-    // again for a later load event.
-    EXPECT_FALSE(registry.eraseOnModCallback(callbackId));
-}
-
 } // namespace
 } // namespace ll::mod

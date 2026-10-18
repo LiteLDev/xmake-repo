@@ -3,9 +3,7 @@
 
 #include "ll/core/LeviLamina.h"
 
-#include <functional>
 #include <shared_mutex>
-#include <vector>
 
 namespace ll::mod {
 struct ModCallbackRecord {
@@ -16,7 +14,7 @@ struct ModCallbackRecord {
 
 struct ModManagerRegistry::Impl {
     std::recursive_mutex                   modMtx;
-    mutable std::shared_mutex              mManagerMutex;
+    mutable std::shared_mutex               mManagerMutex;
     StringMap<std::shared_ptr<ModManager>> managers;
     StringMap<std::string>                 loadedMods; // k, v: name, type
 
@@ -108,7 +106,7 @@ Expected<> ModManagerRegistry::disableMod(std::string_view name) const noexcept 
 }
 
 bool ModManagerRegistry::addManager(std::shared_ptr<ModManager> const& manager) {
-    std::lock_guard  lock(impl->modMtx);
+    std::lock_guard lock(impl->modMtx);
     std::unique_lock managerLock(impl->mManagerMutex);
     if (!manager) {
         return false;
@@ -136,7 +134,7 @@ std::shared_ptr<ModManager> ModManagerRegistry::getManagerForMod(std::string_vie
 }
 
 bool ModManagerRegistry::eraseManager(std::string_view type) {
-    std::lock_guard  lock(impl->modMtx);
+    std::lock_guard lock(impl->modMtx);
     std::unique_lock managerLock(impl->mManagerMutex);
     if (auto i = impl->managers.find(type); i != impl->managers.end()) {
         if (i->second->getModCount() != 0) return false;
@@ -148,7 +146,7 @@ bool ModManagerRegistry::eraseManager(std::string_view type) {
 }
 
 coro::Generator<ModManager&> ModManagerRegistry::managers() const {
-    std::lock_guard                          lock(impl->modMtx);
+    std::lock_guard lock(impl->modMtx);
     std::vector<std::shared_ptr<ModManager>> snapshot;
     {
         std::shared_lock managerLock(impl->mManagerMutex);
@@ -228,16 +226,9 @@ size_t ModManagerRegistry::eraseOnModCallback(std::weak_ptr<Mod> mod, ModCallbac
 }
 
 Expected<> ModManagerRegistry::onModLoad(std::string_view name) const noexcept try {
-    std::vector<std::function<void(std::string_view)>> callbacks;
-    {
-        std::lock_guard lock(impl->fnMtx);
-        callbacks.reserve(impl->onModLoad.size());
-        for (auto const& rec : impl->onModLoad) {
-            callbacks.emplace_back(rec.fn);
-        }
-    }
-    for (auto& callback : callbacks) {
-        callback(name);
+    std::lock_guard lock(impl->fnMtx);
+    for (auto& rec : impl->onModLoad) {
+        rec.fn(name);
     }
     return {};
 } catch (...) {
@@ -245,29 +236,22 @@ Expected<> ModManagerRegistry::onModLoad(std::string_view name) const noexcept t
 }
 
 Expected<> ModManagerRegistry::onModUnload(std::string_view name) const noexcept try {
-    std::vector<std::function<void(std::string_view)>> callbacks;
-    {
-        std::lock_guard lock(impl->fnMtx);
+    std::lock_guard lock(impl->fnMtx);
 
-        auto eraser = [&](ModCallbackRecord const& callback) {
-            if (auto ptr = callback.owner.lock()) {
-                return ptr->getName() == name;
-            }
-            return true;
-        };
-
-        std::erase_if(impl->onModEnable, eraser);
-        std::erase_if(impl->onModDisable, eraser);
-        std::erase_if(impl->onModLoad, eraser);
-        std::erase_if(impl->onModUnload, eraser);
-
-        callbacks.reserve(impl->onModUnload.size());
-        for (auto const& rec : impl->onModUnload) {
-            callbacks.emplace_back(rec.fn);
+    auto eraser = [&](ModCallbackRecord const& callback) {
+        if (auto ptr = callback.owner.lock()) {
+            return ptr->getName() == name;
         }
-    }
-    for (auto& callback : callbacks) {
-        callback(name);
+        return true;
+    };
+
+    std::erase_if(impl->onModEnable, eraser);
+    std::erase_if(impl->onModDisable, eraser);
+    std::erase_if(impl->onModLoad, eraser);
+    std::erase_if(impl->onModUnload, eraser);
+
+    for (auto& rec : impl->onModUnload) {
+        rec.fn(name);
     }
     return {};
 } catch (...) {
@@ -275,16 +259,9 @@ Expected<> ModManagerRegistry::onModUnload(std::string_view name) const noexcept
 }
 
 Expected<> ModManagerRegistry::onModEnable(std::string_view name) const noexcept try {
-    std::vector<std::function<void(std::string_view)>> callbacks;
-    {
-        std::lock_guard lock(impl->fnMtx);
-        callbacks.reserve(impl->onModEnable.size());
-        for (auto const& rec : impl->onModEnable) {
-            callbacks.emplace_back(rec.fn);
-        }
-    }
-    for (auto& callback : callbacks) {
-        callback(name);
+    std::lock_guard lock(impl->fnMtx);
+    for (auto& rec : impl->onModEnable) {
+        rec.fn(name);
     }
     return {};
 } catch (...) {
@@ -292,16 +269,9 @@ Expected<> ModManagerRegistry::onModEnable(std::string_view name) const noexcept
 }
 
 Expected<> ModManagerRegistry::onModDisable(std::string_view name) const noexcept try {
-    std::vector<std::function<void(std::string_view)>> callbacks;
-    {
-        std::lock_guard lock(impl->fnMtx);
-        callbacks.reserve(impl->onModDisable.size());
-        for (auto const& rec : impl->onModDisable) {
-            callbacks.emplace_back(rec.fn);
-        }
-    }
-    for (auto& callback : callbacks) {
-        callback(name);
+    std::lock_guard lock(impl->fnMtx);
+    for (auto& rec : impl->onModDisable) {
+        rec.fn(name);
     }
     return {};
 } catch (...) {

@@ -6,7 +6,6 @@
 #include <string>
 #include <string_view>
 #include <type_traits>
-#include <utility>
 
 #include "ll/api/base/CompilerPredefine.h"
 #include "ll/api/base/Concepts.h" // IWYU pragma: keep
@@ -115,67 +114,32 @@ using ::ll::internal::virtualDetector;
 
 template <class... Ts>
 class HookRegistrar {
-    bool active = false;
-
 public:
-    static bool hook() {
-#if defined(__ANDROID__)
-        if (shouldHookSuspendThreads()) {
-            return false;
-        }
-#endif
+    static void hook() {
         std::optional<thread::GlobalThreadPauser> pauser;
         if (shouldHookSuspendThreads()) {
             pauser.emplace();
         }
         (((++Ts::_AutoHookCount == 1) ? Ts::hook(false) : 0), ...);
-        return true;
     }
-    static bool unhook() {
-#if defined(__ANDROID__)
-        if (shouldHookSuspendThreads()) {
-            return false;
-        }
-#endif
+    static void unhook() {
         std::optional<thread::GlobalThreadPauser> pauser;
         if (shouldHookSuspendThreads()) {
             pauser.emplace();
         }
         (((--Ts::_AutoHookCount == 0) ? Ts::unhook(false) : 0), ...);
-        return true;
     }
-    HookRegistrar() noexcept : active(hook()) {}
-    ~HookRegistrar() noexcept {
-        if (active) {
-            (void)unhook();
-        }
-    }
-    HookRegistrar(HookRegistrar const& other) noexcept : active(other.active) {
-        if (active) {
-            ((++Ts::_AutoHookCount), ...);
-        }
-    }
+    HookRegistrar() noexcept { hook(); }
+    ~HookRegistrar() noexcept { unhook(); }
+    HookRegistrar(HookRegistrar const&) noexcept { ((++Ts::_AutoHookCount), ...); }
     HookRegistrar& operator=(HookRegistrar const& other) noexcept {
         if (this != std::addressof(other)) {
-            if (active && !other.active) {
-                (void)unhook();
-            } else if (other.active) {
-                ((++Ts::_AutoHookCount), ...);
-            }
-            active = other.active;
+            ((++Ts::_AutoHookCount), ...);
         }
         return *this;
     }
-    HookRegistrar(HookRegistrar&& other) noexcept : active(std::exchange(other.active, false)) {}
-    HookRegistrar& operator=(HookRegistrar&& other) noexcept {
-        if (this != std::addressof(other)) {
-            if (active) {
-                (void)unhook();
-            }
-            active = std::exchange(other.active, false);
-        }
-        return *this;
-    }
+    HookRegistrar(HookRegistrar&&) noexcept            = default;
+    HookRegistrar& operator=(HookRegistrar&&) noexcept = default;
 };
 
 struct LL_EBO Hook {};
