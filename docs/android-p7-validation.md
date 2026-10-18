@@ -59,6 +59,13 @@ SDK install and SDK-only compile remain valid for that candidate; they do not
 close G6 for the current source commit. No LevelDB source, warning policy or
 fallback package was changed.
 
+For delivery review, a reference staging receipt was produced from the already
+verified stripped ELF pair bound to source commit d632211a98. It records the
+SDK installation by reference and the exact kernel/example hashes under
+WORK-TEMP/validation/p7-remaining-20261018/android-package-d632211a98-v3.
+This is a candidate receipt, not a claim that the failed clean rebuild or
+device deployment has passed.
+
 ## Fixed inputs and decisions
 
 - LL base: `5bcf0f4a1907f75bf02691fe15993d00f8fefa5e`, branch
