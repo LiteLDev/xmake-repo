@@ -202,3 +202,11 @@ link/strip/source verification twice. The Windows host rebuild was attempted onc
 but its isolated configuration attempted a missing remote repository and lacked the
 local `concurrentqueue` package; no host-pass claim is made from the previous
 five-test receipt.
+
+The LL Android implementation remains on the single existing branch
+`codex/p7-android-shared-core`; no additional Android implementation branches or
+worktrees are created. PL, Launcher and Header checkouts remain fixed external
+inputs. A trial source-table expansion for `Bedrock.cpp`, `PlayerInfo.cpp` and
+`ServerInfo.cpp` was rejected and reverted: the current Android target lacks the
+required DBStorage, UUID, CompoundTag, Player UUID and PathBuffer contracts. No
+stub or fallback implementation was added.
