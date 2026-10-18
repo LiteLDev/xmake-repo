@@ -1,10 +1,11 @@
 # Remaining Android P7 work
 
-Implementation baseline, October 18, 2026: LL bb5df16320, Header S7
-84f07b53a3, generator 7760b5d, prelink 21e6c34, preloader c8e6074,
-Launcher 60fc1c7. The producer preloader commit is deliberately different
-from the frozen public SDK commit 7cf14db1. Existing P7.24 and version-binding
-receipts certify their own candidates, not the work below.
+Implementation baseline, October 18, 2026: LL is the current clean
+codex/p7-android-shared-core candidate, Header S7 is 84f07b53a3,
+generator 7760b5d, prelink 21e6c34, producer preloader c8e6074 and Launcher
+60fc1c7. The producer preloader commit is deliberately different from the
+frozen public SDK commit 7cf14db1. Earlier P7.24 and P7-G3 receipts certify
+their own candidates and are not rebound to this source tree.
 
 ## Module inventory
 
@@ -18,20 +19,26 @@ not establish that out-of-line implementations are linked or operational.
 | utils, memory allocation, modules, NBT | Selected original implementations linked | Add only called platform functions; preserve existing ABI tests |
 | Mod discovery/registration, Logger/i18n | Original implementations linked | Callback/task/sink drain and ordinary Mod unload remain open |
 | EventBus, Console, client join/exit | Original implementations linked | In-flight snapshots, emitter/type ownership and remaining event sources |
-| ServiceManager and ServiceEvents | Not in Android source list | Link the original registry and events; test identities and invalidation |
-| InplaceExecutor | Not in Android source list | Link original implementation and test inline execution/exception semantics |
-| KeyValueDB | Headers only | Build the exact Header dependency source, link original wrapper, test persistence |
+| ServiceManager and ServiceEvents | Original registry/events are in the authenticated source list | P7ServiceTests builds and links against the formal Android kernel; device execution and world-lifetime invalidation remain open |
+| InplaceExecutor | Original implementation is in the authenticated source list | Host and Android test targets cover inline execution and exception semantics |
+| KeyValueDB | Original wrapper and locked LevelDB source are linked | Host and Android test targets cover batches, reopen, binary values and lock failures; Windows Unicode-path limitation remains |
 | Bedrock services, PlayerInfo/ServerInfo | Not linked | Verify MC hooks, object lifetimes and world/menu invalidation |
 | chrono, client/server executors, coro consumers | Only ThreadPoolExecutor linked | Tick hooks, timers, cancellation and no-tick shutdown |
 | Config, language-change, commands | Core Config and command implementations not linked | Respect Dispatcher dependencies; original permissions, registration and closures |
 | GameVersion | Not linked | Frozen BMB lacks getBuildInfo/destructor records; independent input correction required |
 | forms/UI, packets/network | Not linked | Original APIs, session/callback lifetimes, authenticated imports and TLS dependencies |
 | input/render, resource/behavior packs | Not enabled on Android | Existing client implementation only; verify target ABI and safe hook lifecycle |
-| Memory/Closure and Hook concurrency | Selected Symbol/Hook functions linked | Architecture-specific code and safe mutation proof below |
+| Memory/Closure and Hook capability | Selected Symbol/Hook functions linked | Preserve the existing single-thread/startup behavior; concurrent mutation and physical trampoline reclamation are explicitly unsupported |
 | Windows crash reporting, AppManifestFix, server statistics | Not applicable | Do not port Windows process/UI machinery or add telemetry |
 | applicable tweaks | Not enabled | Only concrete compatibility dependencies, not unrelated original bug fixes |
 
-## Hook concurrency design and review gate
+## Hook concurrency design (historical, not a P7 gate)
+
+The user-selected P7 boundary is to keep the current Hook implementation and
+not add concurrent Hook support. The Android GlobalThreadPauser remains an
+optional empty capability; its absence does not change the existing PL call
+path. The requirements below are retained as future design notes only and do
+not block P7 closure.
 
 Current facts: LL Hook.cpp creates GlobalThreadPauser after Default; its Android
 constructor does nothing. PL FuncProxy serializes writers with a mutex, but
@@ -57,9 +64,9 @@ Required contract, retaining the existing LL/PL interfaces:
 4. Failure before publication leaves the old chain usable; failure after
    publication retains resources and reports failure. Unsupported register options
    remain explicit failures. Never turn the empty pauser into evidence of safety.
-5. Review the concrete selected backend and race tests before implementation.
-   Until this proof passes, do not enable new runtime physical hooks or certify
-   general runtime hook mutation. Windows behavior remains the reference.
+5. Review the concrete selected backend and race tests before any future
+   concurrent Hook work. P7 does not certify concurrent mutation, in-flight
+   trampoline reclamation, or arbitrary runtime Hook replacement.
 
 ## Shared drain and unload design and review gate
 
@@ -155,7 +162,8 @@ persistence check without deleting the test database or user data.
 
 1. Freeze inputs and dependency access; link/test the dependency-closed non-Hook
    foundation batch. Header-only APIs are exercised through actual consumers.
-2. Review/implement proven Hook and drain backends with own-function/cross-SO tests.
+2. Preserve the current Hook capability boundary and validate only startup /
+   single-thread behavior. Do not add a concurrent backend.
 3. Bedrock services -> tick/event/executor/coro -> Config/language/commands ->
    UI/network/input/packs -> integrate each owner into the same unload boundary.
 4. Install the final SDK, compile the original API example using only that SDK,
@@ -164,8 +172,10 @@ persistence check without deleting the test database or user data.
    debug/release, Android debug/release and strip/provenance/P5 checks. After build
    rule changes, run the existing canonical-path two-clean-build comparison.
 6. Bind actual mapped hashes on vivo; test Ready/world round trips/background/
-   normal quit/restart. Test SO reclamation separately. G3-G8 stay open on any
-   critical gap. P5R stays deferred; local commits only, no push or main merge.
+   normal quit/restart. Test ordinary Mod resource drain separately. Parent and
+   child SO physical reclamation, concurrent Hook mutation and runtime trampoline
+   retirement remain unsupported. P5R stays deferred; local commits only, no
+   push or main merge.
 
 The first dependency-access probe timed out connecting to GitHub; it does not
 establish authentication failure or missing recipes. ADB initially has no device.
@@ -174,9 +184,17 @@ These are external gates, not substitutes for implementation acceptance.
 ## Service consumer test batch
 
 The Android kernel now has a `P7ServiceTests` consumer target linked against the
-formal `LeviLamina` shared library. It exercises the existing ServiceManager API
+formal LeviLamina shared library. It exercises the existing ServiceManager API
 through real Android headers and the exported kernel: registration, duplicate
-rejection, lookup, same-name version ordering, unregister and `invalidate()`.
-The target builds successfully with the authenticated P7 inputs. The binary has
-not been executed on a device, so this closes only the compile/link consumer gate,
-not runtime service or world-lifetime acceptance.
+rejection, lookup, same-name version ordering, unregister and invalidate().
+With the current candidate source table, Header S7, locked dependencies and NDK
+r28c, the target completed Android compile/link, prelink and ELF verification in
+the p7-remaining-20261018 build directory. The binary has not been executed
+on a device because no ADB device is currently connected, so this closes only
+the compile/link consumer gate, not runtime service or world-lifetime acceptance.
+
+Config.cpp was probed against the same candidate but is not part of the source
+table. Its Dispatcher instantiates ForceEnableCheatCommands, whose original
+CommandRegistry hooks fail the current Android compile contract with two real
+errors. The source was removed from the candidate after the failed build; no
+stub, signature change or fallback was added.

@@ -7,6 +7,13 @@ remain tied to their original binaries. The current batch must obtain a new
 frozen Header input, LL build/strip/determinism receipts and loaded-hash device
 matrix before acceptance. No preloader or runtime data format changes are made.
 
+P7 Hook scope is deliberately limited to the existing startup/single-thread
+behavior. Android GlobalThreadPauser is an optional empty capability and
+does not add concurrent Hook safety. Concurrent Hook mutation, in-flight
+trampoline reclamation and arbitrary runtime Hook replacement are unsupported
+and are reported as capability limits, not treated as failed implementation
+work.
+
 Current October 17 candidate: see android-p7-g0-reconvergence.md. The sections
 below retain their historical source/input boundaries; the former PL lifecycle
 adapter, guarded Hook layer and unload/drain candidate are absent from current
@@ -28,13 +35,19 @@ The first APK installed, but native runtime-symbol setup failed; a stale PL BMB
 dataset pin was proven in source, without proving it was the only device failure.
 The current runtime-v2 pair, constructor-based runtime reader and corrected APK
 are not yet installed: the vivo disconnected. Actual game Ready/world/close
-tests, full SO unload and runtime thread pause are not accepted.
+tests, full SO unload and runtime thread pause are not accepted by the
+historical receipts. Full SO physical reclamation, concurrent Hook mutation and
+runtime thread pause remain unsupported P7 capabilities.
 Current artifacts are on A: under WORKTEMP/p7-windows-reconvergence-20261017;
 the current short build directories are A:/p7finald17 and A:/p7final17. Earlier
 A:/p7adf17, A:/p7arf17 and A:/p7arf217 retain their original provider bindings.
 
 Status: G0–G2 first-batch acceptance completed on 2026-09-13. P7 is not complete.
-G3–G8 have not passed. Full inputs and logs are outside the repository under
+The current candidate has the non-device foundation, Android Debug/Release, P5,
+SDK-only compile and canonical clean-build gates recorded in
+WORK-TEMP/validation/p7-remaining-20261018; P7ServiceTests also compiles and
+links through the formal Android kernel. G3–G8 are not closed. Full inputs and
+logs are outside the repository under
 `C:/Users/ROG/levilamina-p7-validation-20260910` (historical device evidence) and
 `C:/Users/ROG/levilamina-p7-validation-20260913` (reviewed candidate and host/device evidence).
 
