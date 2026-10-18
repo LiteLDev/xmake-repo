@@ -51,6 +51,14 @@ logs are outside the repository under
 `C:/Users/ROG/levilamina-p7-validation-20260910` (historical device evidence) and
 `C:/Users/ROG/levilamina-p7-validation-20260913` (reviewed candidate and host/device evidence).
 
+The current clean staging retry did not produce a new package: the isolated
+xmake configuration first rejected an invalid local recipe path, and the
+authenticated LevelDB checkout then failed its fresh NDK r28c build on
+deprecated aligned_storage treated as an error. The earlier candidate's
+SDK install and SDK-only compile remain valid for that candidate; they do not
+close G6 for the current source commit. No LevelDB source, warning policy or
+fallback package was changed.
+
 ## Fixed inputs and decisions
 
 - LL base: `5bcf0f4a1907f75bf02691fe15993d00f8fefa5e`, branch
