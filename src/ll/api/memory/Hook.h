@@ -118,14 +118,22 @@ public:
     static void hook() {
         std::optional<thread::GlobalThreadPauser> pauser;
         if (shouldHookSuspendThreads()) {
+#if defined(__ANDROID__)
+            return;
+#else
             pauser.emplace();
+#endif
         }
         (((++Ts::_AutoHookCount == 1) ? Ts::hook(false) : 0), ...);
     }
     static void unhook() {
         std::optional<thread::GlobalThreadPauser> pauser;
         if (shouldHookSuspendThreads()) {
+#if defined(__ANDROID__)
+            return;
+#else
             pauser.emplace();
+#endif
         }
         (((--Ts::_AutoHookCount == 0) ? Ts::unhook(false) : 0), ...);
     }

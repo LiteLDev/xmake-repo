@@ -1,5 +1,7 @@
 #include "ll/api/memory/Hook.h"
 
+#include <cerrno>
+
 #include "pl/Hook.h"
 
 #include "ll/api/memory/Memory.h"
@@ -14,6 +16,11 @@ int hook(FuncPtr target, FuncPtr detour, FuncPtr* originalFunc, HookPriority pri
     if (target == nullptr) {
         return -1;
     }
+#if defined(__ANDROID__)
+    if (suspendThreads && shouldHookSuspendThreads()) {
+        return ENOTSUP;
+    }
+#endif
     std::optional<thread::GlobalThreadPauser> pauser;
     if (suspendThreads && shouldHookSuspendThreads()) {
         pauser.emplace();
@@ -31,6 +38,11 @@ int hookEx(
     if (target == nullptr) {
         return -1;
     }
+#if defined(__ANDROID__)
+    if (suspendThreads && shouldHookSuspendThreads()) {
+        return ENOTSUP;
+    }
+#endif
     std::optional<thread::GlobalThreadPauser> pauser;
     if (suspendThreads && shouldHookSuspendThreads()) {
         pauser.emplace();
@@ -44,6 +56,11 @@ int hookEx(
     );
 }
 bool unhook(FuncPtr target, FuncPtr detour, bool suspendThreads) {
+#if defined(__ANDROID__)
+    if (suspendThreads && shouldHookSuspendThreads()) {
+        return false;
+    }
+#endif
     std::optional<thread::GlobalThreadPauser> pauser;
     if (suspendThreads && shouldHookSuspendThreads()) {
         pauser.emplace();
@@ -54,6 +71,11 @@ bool hookOptions(FuncPtr target, RegisterSaveOptions options, bool replace, bool
     if (target == nullptr) {
         return false;
     }
+#if defined(__ANDROID__)
+    if (suspendThreads && shouldHookSuspendThreads()) {
+        return false;
+    }
+#endif
     std::optional<thread::GlobalThreadPauser> pauser;
     if (suspendThreads && shouldHookSuspendThreads()) {
         pauser.emplace();
