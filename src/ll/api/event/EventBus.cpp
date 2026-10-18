@@ -15,7 +15,7 @@ class CallbackStream {
     struct ListenerComparator {
         bool operator()(ListenerPtr const& lhs, ListenerPtr const& rhs) const { return *lhs < *rhs; }
     };
-    std::mutex                                  mutex;
+    mutable std::mutex                          mutex;
     OrderedSet<ListenerPtr, ListenerComparator> listeners;
 
 public:
@@ -89,8 +89,14 @@ public:
         std::lock_guard lock(mutex);
         return std::move(listeners);
     }
-    [[nodiscard]] size_t count() const { return listeners.size(); }
-    [[nodiscard]] bool   empty() const { return listeners.empty(); }
+    [[nodiscard]] size_t count() const {
+        std::lock_guard lock(mutex);
+        return listeners.size();
+    }
+    [[nodiscard]] bool empty() const {
+        std::lock_guard lock(mutex);
+        return listeners.empty();
+    }
 };
 
 class EventStorage {
@@ -211,6 +217,7 @@ bool EventBus::hasEvent(EventIdView const& eventId) const { return impl->events.
 
 size_t EventBus::getListenerCount(EventIdView const& eventId) {
     if (eventId == EmptyEventId) {
+        std::lock_guard lock(impl->infoMutex);
         return impl->listenerInfos.size();
     }
     size_t result{0};

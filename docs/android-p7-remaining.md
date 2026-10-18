@@ -170,3 +170,27 @@ persistence check without deleting the test database or user data.
 The first dependency-access probe timed out connecting to GitHub; it does not
 establish authentication failure or missing recipes. ADB initially has no device.
 These are external gates, not substitutes for implementation acceptance.
+
+## 2026-10-18 accelerated foundation hardening
+
+The first implementation batch keeps the Android physical-hook boundary fail-closed
+because the current GlobalThreadPauser/GlossHook backend still has no concurrent
+patch and trampoline reclamation proof. It does not advertise runtime hook safety.
+
+The original ModManagerRegistry lifecycle callbacks now copy callback functions under
+`fnMtx` and invoke the snapshot after releasing the mutex. This preserves callback
+order while allowing a callback to register or erase callbacks without re-entering
+the registry lock. Mod unload pruning remains under the mutex before the unload
+snapshot is taken. `ModRegistrarTest.LifecycleCallbacksCanMutateRegistryDuringDispatch`
+covers self-erasure during load dispatch.
+
+EventBus listener count and empty-state reads now take the CallbackStream mutex, and
+the global listener count takes `infoMutex`. This closes the data race used by
+drain-status checks without changing the public event API.
+
+Validation for this batch: clang-format and `git diff --check` pass; the Android
+release kernel was rebuilt incrementally with authenticated inputs and passed P7
+link/strip/source verification twice. The Windows host rebuild was attempted once
+but its isolated configuration attempted a missing remote repository and lacked the
+local `concurrentqueue` package; no host-pass claim is made from the previous
+five-test receipt.
