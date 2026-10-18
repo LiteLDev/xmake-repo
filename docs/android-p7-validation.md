@@ -62,7 +62,7 @@ fallback package was changed.
 For delivery review, a reference staging receipt was produced from the already
 verified stripped ELF pair bound to source commit d632211a98. It records the
 SDK installation by reference and the exact kernel/example hashes under
-WORK-TEMP/validation/p7-remaining-20261018/android-package-d632211a98-v3.
+WORK-TEMP/validation/p7-remaining-20261018/android-package-d632-20261018-v3.
 This is a candidate receipt, not a claim that the failed clean rebuild or
 device deployment has passed.
 
