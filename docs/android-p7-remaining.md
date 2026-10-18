@@ -170,3 +170,13 @@ persistence check without deleting the test database or user data.
 The first dependency-access probe timed out connecting to GitHub; it does not
 establish authentication failure or missing recipes. ADB initially has no device.
 These are external gates, not substitutes for implementation acceptance.
+
+## Service consumer test batch
+
+The Android kernel now has a `P7ServiceTests` consumer target linked against the
+formal `LeviLamina` shared library. It exercises the existing ServiceManager API
+through real Android headers and the exported kernel: registration, duplicate
+rejection, lookup, same-name version ordering, unregister and `invalidate()`.
+The target builds successfully with the authenticated P7 inputs. The binary has
+not been executed on a device, so this closes only the compile/link consumer gate,
+not runtime service or world-lifetime acceptance.

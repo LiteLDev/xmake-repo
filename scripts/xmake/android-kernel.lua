@@ -294,3 +294,11 @@ target("P7InplaceExecutorTests")
     add_files(path.join(os.projectdir(), "src/ll/api/thread/InplaceExecutor.cpp"),
               path.join(os.projectdir(), "src-test/common/InplaceExecutorTest.cpp"))
 target_end()
+
+target("P7ServiceTests")
+    set_kind("binary")
+    shared_options()
+    add_deps("LeviLamina")
+    add_packages("gtest")
+    add_files(path.join(os.projectdir(), "test/android/shared_core/service_tests.cpp"))
+target_end()
