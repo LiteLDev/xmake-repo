@@ -1,4 +1,5 @@
 #define LL_MEMORY_OPERATORS
+#include "ll/api/data/KeyValueDB.h"
 #include "ll/api/event/EventBus.h"
 #include "ll/api/event/client/ClientExitLevelEvent.h"
 #include "ll/api/event/client/ClientJoinLevelEvent.h"
@@ -8,6 +9,8 @@
 #include "ll/api/io/PatternFormatter.h"
 #include "ll/api/memory/MemoryOperators.h"
 #include "ll/api/mod/RegisterHelper.h"
+#include "ll/api/service/ServiceManager.h"
+#include "ll/api/thread/InplaceExecutor.h"
 
 #include "mc/deps/nbt/CompoundTag.h"
 #include "nlohmann/json.hpp"
@@ -39,6 +42,52 @@ bool referenceFields(CompoundTag const& nbt, std::string_view key, void const* p
         && !object->getBoolean("_nullable_") && !object->getBoolean("_isconst_")
         && object->getInt64("_pointer_") == static_cast<int64_t>(reinterpret_cast<uintptr_t>(pointer))
         && object->getString("_type_") == type;
+}
+
+class FoundationService final : public ll::service::ServiceImpl<FoundationService, 1> {
+public:
+    bool invalidated{};
+    void invalidate() override { invalidated = true; }
+};
+
+std::string foundationHelpers(std::shared_ptr<ll::mod::NativeMod> const& self) {
+    ll::thread::InplaceExecutor executor("p7-inline");
+    auto const                 caller = std::this_thread::get_id();
+    bool                       inlineCall{};
+    executor.execute([&] { inlineCall = std::this_thread::get_id() == caller; });
+    if (!inlineCall) return "inplace executor thread";
+
+    auto path = self->getDataDir() / "p7-foundation-db";
+    bool reopened{};
+    {
+        ll::data::KeyValueDB db(path);
+        if (auto previous = db.get("p7-sentinel")) {
+            if (*previous != "persisted") return "database previous value";
+            reopened = true;
+        }
+        ll::data::KeyValueDB::WriteBatch batch;
+        batch.set("p7-sentinel", "persisted").set("p7-binary", std::string("a\0b", 3));
+        if (!db.write(batch)) return "database batch write";
+    }
+    {
+        ll::data::KeyValueDB db(path, false, false, 10);
+        if (db.get("p7-sentinel") != "persisted" || db.get("p7-binary") != std::string("a\0b", 3))
+            return "database reopen";
+    }
+
+    auto& manager = ll::service::ServiceManager::getInstance();
+    auto  service = std::make_shared<FoundationService>();
+    if (!manager.registerService(service, self)) return "service registration";
+    auto queried = manager.getService<FoundationService>();
+    bool valid = queried && *queried == service && manager.queryServices(FoundationService::ServiceId.name).size() == 1;
+    if (!manager.unregisterService(FoundationService::ServiceId)) return "service unregistration";
+    if (!valid || !service->invalidated || manager.getService<FoundationService>()) return "service identity/invalidation";
+    if (!ll::file_utils::writeFile(
+            self->getDataDir() / "p7-foundation.json",
+            nlohmann::json{{"processId", ::getpid()}, {"inplaceExecutor", true}, {"databaseReopen", true},
+                           {"databasePreviousRun", reopened}, {"serviceInvalidation", true}}.dump(2)
+        )) return "foundation receipt write";
+    return {};
 }
 
 std::string nbtValueHelpers() {
@@ -128,6 +177,7 @@ public:
         worker.join();
         if (!workerMatches) return fail("worker identity");
         try {
+            if (auto error = foundationHelpers(self); !error.empty()) return fail(error);
             if (auto error = nbtValueHelpers(); !error.empty()) return fail(error);
         } catch (std::exception const& error) {
             (void)fail(error.what());

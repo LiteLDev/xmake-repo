@@ -3,6 +3,7 @@
 #include <atomic>
 #include <chrono>
 #include <filesystem>
+#include <stdexcept>
 #include <string>
 #include <system_error>
 
@@ -74,4 +75,51 @@ TEST(KeyValueDBTest, WriteBatchAppliesMixedOperationsInOrder) {
         ASSERT_TRUE(ordered.has_value());
         EXPECT_EQ(*ordered, "last");
     }
+}
+
+TEST(KeyValueDBTest, PersistsAcrossReopen) {
+    TemporaryDirectory directory;
+    auto const path = directory.get() / "database";
+    {
+        ll::data::KeyValueDB db(path);
+        EXPECT_TRUE(db.empty());
+        ASSERT_TRUE(db.set("binary", std::string("a\0b", 3)));
+        ASSERT_TRUE(db.set("removed", "value"));
+        ASSERT_TRUE(db.del("removed"));
+    }
+    {
+        ll::data::KeyValueDB db(path, false, false, 10);
+        EXPECT_EQ(db.get("binary"), std::string("a\0b", 3));
+        EXPECT_FALSE(db.has("removed"));
+        EXPECT_FALSE(db.empty());
+        size_t count = 0;
+        for (auto [key, value] : db.iter()) {
+            EXPECT_EQ(key, "binary");
+            EXPECT_EQ(value, std::string_view("a\0b", 3));
+            ++count;
+        }
+        EXPECT_EQ(count, 1u);
+    }
+}
+
+#if defined(__ANDROID__)
+TEST(KeyValueDBTest, PersistsAtUnicodePath) {
+    TemporaryDirectory directory;
+    auto const path = directory.get() / std::filesystem::path(u8"\u6570\u636e\u5e93");
+    {
+        ll::data::KeyValueDB db(path);
+        ASSERT_TRUE(db.set("unicode-path", "persisted"));
+    }
+    {
+        ll::data::KeyValueDB db(path, false, false, 0);
+        EXPECT_EQ(db.get("unicode-path"), "persisted");
+    }
+}
+#endif
+
+TEST(KeyValueDBTest, RejectsMissingAndAlreadyLockedDatabase) {
+    TemporaryDirectory directory;
+    EXPECT_THROW((ll::data::KeyValueDB(directory.get(), false, false, 0)), std::runtime_error);
+    ll::data::KeyValueDB db(directory.get());
+    EXPECT_THROW((ll::data::KeyValueDB(directory.get(), false, false, 0)), std::runtime_error);
 }

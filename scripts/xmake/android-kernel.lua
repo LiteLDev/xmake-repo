@@ -11,6 +11,39 @@ add_requires("expected-lite v0.8.0", "fmt 11.2.0", "parallel-hashmap v2.0.0", "p
              "magic_enum v0.9.7", "nlohmann_json v3.12.0", "ctre 3.8.1")
 add_requires("gtest v1.17.0", {configs = {main = true, gmock = false}})
 
+package("levilamina-leveldb")
+    set_license("BSD-3-Clause")
+    set_description("LevelDB from the authenticated Android Header dependency lock")
+    on_load(function(package)
+        import("core.base.json")
+        import("core.project.config")
+        local runtime = json.loadfile(assert(config.get("android_dependency_lock")))
+        for _, source in ipairs(runtime.sources) do
+            if source.name == "LevelDB" then
+                package:set("sourcedir", source.path)
+                package:data_set("p7.source", source)
+                return
+            end
+        end
+        raise("Missing frozen LevelDB source")
+    end)
+    on_install(function(package)
+        local source = package:data("p7.source")
+        assert(source.commit == "3791effb6692e0c83da782210aa336a3dd436f30", "LevelDB source identity mismatch")
+        assert(os.iorunv("git", {"-C", source.path, "rev-parse", "HEAD"}):trim() == source.commit,
+               "LevelDB checkout identity mismatch")
+        assert(os.iorunv("git", {"-C", source.path, "status", "--porcelain"}):trim() == "",
+               "Frozen LevelDB source must be clean")
+        import("package.tools.cmake").install(package, {
+            "-DLEVELDB_BUILD_TESTS=OFF", "-DLEVELDB_BUILD_BENCHMARKS=OFF",
+            "-DLEVELDB_DISABLE_RTTI=OFF", "-DBUILD_SHARED_LIBS=OFF",
+            "-DCMAKE_POSITION_INDEPENDENT_CODE=ON", "-DCMAKE_CXX_STANDARD=23",
+            "-DCMAKE_CXX_FLAGS=-fvisibility=hidden -fvisibility-inlines-hidden -Wno-error=deprecated-declarations"
+        })
+    end)
+package_end()
+add_requires("levilamina-leveldb")
+
 local input_options = {
     {"android_header_root", "header-root"}, {"android_dependency_lock", "dependency-lock"},
     {"preloader_android_root", "preloader-root"}, {"android_prelink_executable", "prelink"},
@@ -114,7 +147,12 @@ for _, role in ipairs({"kernel", "example"}) do
     target(role == "kernel" and "LeviLamina" or "LeviLaminaP7Example")
         set_kind("shared")
         shared_options(role)
-        if role == "kernel" then add_defines("LL_EXPORT") else add_deps("LeviLamina") end
+        if role == "kernel" then
+            add_defines("LL_EXPORT")
+            add_packages("levilamina-leveldb")
+        else
+            add_deps("LeviLamina")
+        end
         if is_mode("debug") then add_defines("LL_DEBUG") end
         set_symbols("debug")
         set_strip("none")
@@ -240,3 +278,19 @@ for name, source in pairs({P7PlannerTests = "ModLoadPlannerTest.cpp", P7VersionT
         add_files(path.join(os.projectdir(), "src-test/common", source))
     target_end()
 end
+
+target("P7KeyValueDBTests")
+    set_kind("binary")
+    shared_options()
+    add_packages("levilamina-leveldb", "gtest")
+    add_files(path.join(os.projectdir(), "src/ll/api/data/KeyValueDB.cpp"),
+              path.join(os.projectdir(), "src-test/common/KeyValueDBTest.cpp"))
+target_end()
+
+target("P7InplaceExecutorTests")
+    set_kind("binary")
+    shared_options()
+    add_packages("gtest")
+    add_files(path.join(os.projectdir(), "src/ll/api/thread/InplaceExecutor.cpp"),
+              path.join(os.projectdir(), "src-test/common/InplaceExecutorTest.cpp"))
+target_end()

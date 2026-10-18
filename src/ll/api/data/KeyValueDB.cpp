@@ -15,8 +15,6 @@
 #include "leveldb/iterator.h"
 #include "leveldb/write_batch.h"
 
-#include "ll/api/utils/StringUtils.h"
-
 namespace ll::data {
 class KeyValueDB::WriteBatch::WriteBatchImpl {
 public:
@@ -41,11 +39,18 @@ public:
             filterPolicy.reset(leveldb::NewBloomFilterPolicy(bloomFilterBit));
             options.filter_policy = filterPolicy.get();
         }
-        auto status = leveldb::DB::Open(options, path, std::out_ptr(db));
+        auto open = [&] {
+            // NDK r28c's libc++ does not implement std::out_ptr.
+            leveldb::DB* result{};
+            auto        status = leveldb::DB::Open(options, path, &result);
+            db.reset(result);
+            return status;
+        };
+        auto status = open();
         if (fixIfError && status.IsCorruption()) {
             status = leveldb::RepairDB(path, options);
             if (status.ok()) {
-                status = leveldb::DB::Open(options, path, std::out_ptr(db));
+                status = open();
             }
         }
         if (!status.ok()) {
@@ -77,8 +82,9 @@ KeyValueDB::KeyValueDB(std::filesystem::path const& path, bool createIfMiss, boo
         std::error_code ec;
         std::filesystem::create_directories(path, ec);
     }
+    auto const utf8Path = path.u8string();
     impl = std::make_unique<KeyValueDBImpl>(
-        string_utils::wstr2str(path.wstring()),
+        std::string(utf8Path.begin(), utf8Path.end()),
         createIfMiss,
         fixIfError,
         bloomFilterBit
