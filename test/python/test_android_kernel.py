@@ -41,25 +41,25 @@ class IncludeTraceTests(unittest.TestCase):
             path.mkdir()
         self.mc_names = ("mc/world/actor/Actor.h", "mc/client/game/ClientInstance.h", "mc/client/player/LocalPlayer.h")
         for name in self.mc_names:
-            self.write(self.header / "src-android" / name, "// frozen " + name + "\n")
+            self.write(self.header / "src-client" / name, "// frozen " + name + "\n")
         self.pl = self.sdk / "src-android/pl/android/Mod.h"
         self.write(self.pl, "// frozen public SDK\n")
-        self.backend = self.repo / "src-android/ll/core/main_android.cpp"
+        self.backend = self.repo / "src-client/ll/core/main.cpp"
         self.shared = self.repo / "src/ll/api/Global.h"
         self.write(self.backend, "// platform implementation\n")
         self.write(self.shared, "// original shared interface\n")
         self.write(self.view / "ll/api/Global.h", self.shared.read_text(encoding="utf-8"))
         self.s, self.pl_commit = (self.commit(path) for path in (self.header, self.sdk))
         self.config = {"repository": str(self.repo), "inputs": {"header_root": str(self.header), "preloader_root": str(self.sdk)},
-                       "commits": {"S": self.s, "PL": self.pl_commit}, "phase": "P7-G3", "source_layout": "shared-v1",
-                       "role": "kernel", "sources": ["src/ll/api/event/Event.cpp", "src-android/ll/core/main_android.cpp"],
+                       "commits": {"S": self.s, "PL": self.pl_commit}, "phase": "P7-G3", "source_layout": "unified-client-v1",
+                       "role": "kernel", "sources": ["src/ll/api/event/Event.cpp", "src-client/ll/core/main.cpp"],
                        "include_roots": [str(self.view)],
                        "ll_headers": {"ll/api/Global.h": {"source": "src/ll/api/Global.h", "sha256": inputs.sha(self.shared)}}}
         self.first_trace = next(iter(sorted(binary.source_names(self.config))))
         for name in binary.source_names(self.config):
             lines = [self.view / "ll/api/Global.h", self.backend, self.pl]
             if name == self.first_trace:
-                lines += [self.header / "src-android" / n for n in self.mc_names]
+                lines += [self.header / "src-client" / n for n in self.mc_names]
             self.write(self.traces / (name + ".txt"), "\n".join(map(str, lines)) + "\n")
 
     @staticmethod
@@ -86,19 +86,19 @@ class IncludeTraceTests(unittest.TestCase):
         self.assertEqual(len(result["units"]), 2)
 
     def test_byte_identical_project_mc_shadow_is_rejected(self):
-        shadow = self.repo / "src-android/ll/core/mc/world/actor/Actor.h"
-        self.write(shadow, (self.header / "src-android" / self.mc_names[0]).read_text(encoding="utf-8"))
+        shadow = self.repo / "src-client/ll/core/mc/world/actor/Actor.h"
+        self.write(shadow, (self.header / "src-client" / self.mc_names[0]).read_text(encoding="utf-8"))
         self.append(shadow)
         with self.assertRaisesRegex(inputs.InputError, "outside Header S"):
             binary.verify_traces(self.config, self.traces)
 
     def test_changed_mc_blob_is_rejected(self):
-        self.write(self.header / "src-android" / self.mc_names[0], "// changed Header bytes\n")
+        self.write(self.header / "src-client" / self.mc_names[0], "// changed Header bytes\n")
         with self.assertRaisesRegex(inputs.InputError, "Git blob"):
             binary.verify_traces(self.config, self.traces)
 
-    def test_windows_mc_layer_cannot_enter_android(self):
-        path = self.header / "src-client" / self.mc_names[0]
+    def test_server_mc_layer_cannot_enter_android(self):
+        path = self.header / "src-server" / self.mc_names[0]
         self.write(path, "// Windows Header\n")
         self.append(path)
         with self.assertRaisesRegex(inputs.InputError, "wrong platform"):
@@ -119,7 +119,7 @@ class IncludeTraceTests(unittest.TestCase):
                 self.write(path, original)
 
     def test_android_backend_cannot_shadow_original_interface(self):
-        shadow = self.repo / "src-android/ll/api/Global.h"
+        shadow = self.repo / "src-client/ll/api/Global.h"
         self.write(shadow, self.shared.read_text(encoding="utf-8"))
         self.append(shadow)
         with self.assertRaisesRegex(inputs.InputError, "shadows"):
@@ -142,19 +142,19 @@ class IncludeTraceTests(unittest.TestCase):
 
     def test_android_event_header_is_authenticated(self):
         relative = "ll/api/event/client/ClientEvent.h"
-        source = self.repo / "src-android" / relative
+        source = self.repo / "src-client" / relative
         target = self.view / relative
         self.write(source, "// Android event interface\n")
         self.write(target, source.read_text(encoding="utf-8"))
-        self.config["ll_headers"][relative] = {"source": "src-android/" + relative, "sha256": inputs.sha(source)}
+        self.config["ll_headers"][relative] = {"source": "src-client/" + relative, "sha256": inputs.sha(source)}
         self.append(target)
         result = binary.verify_traces(self.config, self.traces)
-        self.assertIn("src-android/" + relative, result["units"][self.first_trace]["authenticated_headers"])
+        self.assertIn("src-client/" + relative, result["units"][self.first_trace]["authenticated_headers"])
         self.write(source, "// changed Android event\n")
         with self.assertRaisesRegex(inputs.InputError, "changed after configuration"):
             binary.verify_traces(self.config, self.traces)
 
-    def test_client_event_header_cannot_replace_android_event(self):
+    def test_client_event_header_is_shared_with_android(self):
         relative = "ll/api/event/client/ClientEvent.h"
         source = self.repo / "src-client" / relative
         target = self.view / relative
@@ -162,16 +162,16 @@ class IncludeTraceTests(unittest.TestCase):
         self.write(target, source.read_text(encoding="utf-8"))
         self.config["ll_headers"][relative] = {"source": "src-client/" + relative, "sha256": inputs.sha(source)}
         self.append(target)
-        with self.assertRaisesRegex(inputs.InputError, "Android platform source"):
-            binary.verify_traces(self.config, self.traces)
+        result = binary.verify_traces(self.config, self.traces)
+        self.assertIn("src-client/" + relative, result["units"][self.first_trace]["authenticated_headers"])
 
     def test_ll_nbt_helper_is_authenticated_and_reported(self):
         relative = "mc/deps/nbt/CompoundTag.h"
-        source = self.repo / "src-android" / relative
+        source = self.repo / "src" / relative
         target = self.view / relative
         self.write(source, "// LL NBT value helpers\n")
         self.write(target, source.read_text(encoding="utf-8"))
-        self.config["ll_headers"][relative] = {"source": "src-android/" + relative, "sha256": inputs.sha(source)}
+        self.config["ll_headers"][relative] = {"source": "src/" + relative, "sha256": inputs.sha(source)}
         self.append(target)
         result = binary.verify_traces(self.config, self.traces)
         self.assertFalse(result["all_mc_from_S"])
@@ -183,7 +183,7 @@ class IncludeTraceTests(unittest.TestCase):
     def test_ll_mc_view_cannot_replace_other_minecraft_headers(self):
         target = self.view / self.mc_names[0]
         self.write(target, "// unapproved local Minecraft header\n")
-        self.config["ll_headers"][self.mc_names[0]] = {"source": "src-android/" + self.mc_names[0], "sha256": inputs.sha(target)}
+        self.config["ll_headers"][self.mc_names[0]] = {"source": "src-client/" + self.mc_names[0], "sha256": inputs.sha(target)}
         self.append(target)
         with self.assertRaisesRegex(inputs.InputError, "outside Header S"):
             binary.verify_traces(self.config, self.traces)
@@ -199,7 +199,7 @@ class IncludeTraceTests(unittest.TestCase):
             binary.verify_traces(self.config, self.traces)
 
     def test_old_or_unknown_source_formats_are_rejected(self):
-        for phase, layout in (("G5", "platform-v1"), ("P7-G3", "platform-v1"), ("P7-G0-G2", "shared-v1"), ("unknown", "shared-v1")):
+        for phase, layout in (("G5", "platform-v1"), ("P7-G3", "platform-v1"), ("P7-G0-G2", "unified-client-v1"), ("unknown", "unified-client-v1")):
             with self.subTest(phase=phase, layout=layout), self.assertRaisesRegex(inputs.InputError, "unsupported shared-core"):
                 binary.verify_traces(dict(self.config, phase=phase, source_layout=layout), self.traces)
 

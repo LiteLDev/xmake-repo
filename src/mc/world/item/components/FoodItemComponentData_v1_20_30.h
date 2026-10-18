@@ -1,0 +1,27 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/world/item/ItemDescriptor.h"
+#if defined(LL_PLAT_A) // @header-generator platform
+#include "mc/world/level/storage/AllExperiments.h"
+
+// auto generated forward declare list
+// clang-format off
+class SemVersion;
+namespace cereal { struct ReflectionCtx; }
+// clang-format on
+#else // @header-generator platform
+#endif // @header-generator platform
+
+struct FoodItemComponentData_v1_20_30 {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<4, 4, int>               mNutrition;
+    ::ll::TypedStorage<4, 4, float>             mSaturationModifier;
+    ::ll::TypedStorage<8, 16, ::ItemDescriptor> mUsingConvertsTo;
+    ::ll::TypedStorage<1, 1, bool>              mCanAlwaysEat;
+    // NOLINTEND
+};

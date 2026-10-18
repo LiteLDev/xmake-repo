@@ -1,3 +1,6 @@
+#if defined(LL_PLAT_C) || defined(LL_PLAT_A) // @header-generator platform
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
 #pragma once
 
 #include "mc/_HeaderOutputPredefine.h"
@@ -17,3 +20,6 @@ extract(::BlockSource& region, ::BlockPos const& min, ::BlockPos const& max);
 // NOLINTEND
 
 } // namespace BlockTessellatorCustomExtraData
+#endif // @header-generator platform
+#else // @header-generator platform
+#endif // @header-generator platform

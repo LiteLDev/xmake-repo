@@ -1,0 +1,60 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+#if defined(LL_PLAT_A) // @header-generator platform
+
+// auto generated inclusion list
+#include "mc/deps/core/utility/CrashDumpLogStringID.h"
+#else // @header-generator platform
+#endif // @header-generator platform
+
+// auto generated forward declare list
+// clang-format off
+struct CrashDumpFormatEntryImpl;
+// clang-format on
+
+struct CrashDumpKeyValueData {
+public:
+    // member variables
+    // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    ::ll::TypedStorage<2, 2, ::CrashDumpLogStringID> mTag0;
+    ::ll::TypedStorage<2, 2, ::CrashDumpLogStringID> mTag1;
+    ::ll::TypedStorage<4, 4, int>                    mValue0;
+    ::ll::TypedStorage<8, 8, ulong>                  mValue1;
+#else // @header-generator platform
+    ::ll::UntypedStorage<2, 2> mUnk8f2373;
+    ::ll::UntypedStorage<2, 2> mUnkd42acf;
+    ::ll::UntypedStorage<4, 4> mUnkf48232;
+    ::ll::UntypedStorage<8, 8> mUnk280e33;
+#endif // @header-generator platform
+    // NOLINTEND
+
+public:
+#if defined(LL_PLAT_A) // @header-generator platform
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI CrashDumpKeyValueData(::CrashDumpLogStringID, ::CrashDumpLogStringID, int, ulong);
+    // NOLINTEND
+#else // @header-generator platform
+    // prevent constructor by default
+    CrashDumpKeyValueData& operator=(CrashDumpKeyValueData const&);
+    CrashDumpKeyValueData(CrashDumpKeyValueData const&);
+    CrashDumpKeyValueData();
+#endif // @header-generator platform
+
+public:
+    // static variables
+    // NOLINTBEGIN
+    MCNAPI static ::std::add_lvalue_reference_t<::CrashDumpFormatEntryImpl const[4]> kFormat();
+    // NOLINTEND
+#if defined(LL_PLAT_A) // @header-generator platform
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor(::CrashDumpLogStringID, ::CrashDumpLogStringID, int, ulong);
+    // NOLINTEND
+#else // @header-generator platform
+#endif // @header-generator platform
+};

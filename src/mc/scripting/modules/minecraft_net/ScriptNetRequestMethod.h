@@ -1,0 +1,23 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace Scripting { struct EnumBinding; }
+// clang-format on
+
+namespace ScriptModuleMinecraftNet {
+
+struct ScriptNetRequestMethod {
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCNAPI static ::Scripting::EnumBinding bind();
+    // NOLINTEND
+};
+
+} // namespace ScriptModuleMinecraftNet
+#endif // @header-generator platform

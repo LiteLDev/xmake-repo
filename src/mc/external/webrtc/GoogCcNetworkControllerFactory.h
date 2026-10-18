@@ -1,0 +1,74 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/external/webrtc/NetworkControllerFactoryInterface.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace webrtc { class NetworkControllerInterface; }
+namespace webrtc { class TimeDelta; }
+namespace webrtc { struct GoogCcFactoryConfig; }
+namespace webrtc { struct NetworkControllerConfig; }
+// clang-format on
+
+namespace webrtc {
+
+class GoogCcNetworkControllerFactory : public ::webrtc::NetworkControllerFactoryInterface {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::UntypedStorage<8, 16> mUnk8703af;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    GoogCcNetworkControllerFactory& operator=(GoogCcNetworkControllerFactory const&);
+    GoogCcNetworkControllerFactory(GoogCcNetworkControllerFactory const&);
+    GoogCcNetworkControllerFactory();
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ::std::unique_ptr<::webrtc::NetworkControllerInterface>
+    Create(::webrtc::NetworkControllerConfig config) /*override*/;
+
+    virtual ::webrtc::TimeDelta GetProcessInterval() const /*override*/;
+
+    virtual ~GoogCcNetworkControllerFactory() /*override*/ = default;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI explicit GoogCcNetworkControllerFactory(::webrtc::GoogCcFactoryConfig config);
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor(::webrtc::GoogCcFactoryConfig config);
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCNAPI ::std::unique_ptr<::webrtc::NetworkControllerInterface> $Create(::webrtc::NetworkControllerConfig config);
+
+    MCNAPI ::webrtc::TimeDelta $GetProcessInterval() const;
+
+
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+    // NOLINTEND
+};
+
+} // namespace webrtc
+#endif // @header-generator platform

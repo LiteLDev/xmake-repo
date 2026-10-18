@@ -1,0 +1,19 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+namespace webrtc::webrtc_function_impl {
+
+union VoidUnion {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::UntypedStorage<8, 32> mUnk501f56;
+    ::ll::UntypedStorage<1, 32> mUnk8cb534;
+    ::ll::UntypedStorage<8, 32> mUnka0d6b4;
+    // NOLINTEND
+};
+} // namespace webrtc::webrtc_function_impl
+#endif // @header-generator platform

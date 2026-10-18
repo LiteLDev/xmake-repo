@@ -1,0 +1,56 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/platform/Result.h"
+#include "mc/world/level/ActorValidationError.h"
+
+// auto generated forward declare list
+// clang-format off
+class Actor;
+// clang-format on
+
+class IActorManagerProxy {
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~IActorManagerProxy() = default;
+
+#if defined(LL_PLAT_A) // @header-generator platform
+    virtual void initializeActor(::Actor&) = 0;
+#else // @header-generator platform
+    virtual void initializeActor(::Actor& actor) = 0;
+#endif // @header-generator platform
+
+#if defined(LL_PLAT_A) // @header-generator platform
+    virtual ::Bedrock::Result<void, ActorValidationError> validate(::Actor const&) = 0;
+#else // @header-generator platform
+    virtual ::Bedrock::Result<void, ::ActorValidationError> validate(::Actor const& actor) = 0;
+#endif // @header-generator platform
+
+#if defined(LL_PLAT_A) // @header-generator platform
+    virtual void addActor(::Actor&) = 0;
+#else // @header-generator platform
+    virtual void addActor(::Actor& actor) = 0;
+#endif // @header-generator platform
+
+#if defined(LL_PLAT_A) // @header-generator platform
+    virtual void removeActor(::Actor&) = 0;
+#else // @header-generator platform
+    virtual void removeActor(::Actor& actor) = 0;
+#endif // @header-generator platform
+
+#if defined(LL_PLAT_A) // @header-generator platform
+    virtual void removeActorInLevelChunk(::Actor const&) = 0;
+#else // @header-generator platform
+    virtual void removeActorInLevelChunk(::Actor const& actor) = 0;
+#endif // @header-generator platform
+
+#if defined(LL_PLAT_A) // @header-generator platform
+    virtual void deleteActorFromWorldInLevelChunk(::Actor const&) = 0;
+#else // @header-generator platform
+    virtual void deleteActorFromWorldInLevelChunk(::Actor const& actor) = 0;
+#endif // @header-generator platform
+    // NOLINTEND
+};

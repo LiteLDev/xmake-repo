@@ -1,0 +1,26 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+namespace Editor::Services {
+
+class ServerRestartServiceProvider {
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~ServerRestartServiceProvider() = default;
+
+    virtual void requestReloadScriptsAndFunctions() = 0;
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+    // NOLINTEND
+};
+
+} // namespace Editor::Services
+#endif // @header-generator platform

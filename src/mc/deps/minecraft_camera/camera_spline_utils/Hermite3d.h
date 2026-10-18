@@ -1,0 +1,63 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/minecraft_camera/camera_spline_utils/Spline3d.h"
+#include "mc/deps/minecraft_camera/camera_spline_utils/SplineType.h"
+
+namespace CameraSplineUtils {
+
+struct Hermite3d : public ::CameraSplineUtils::Spline3d {
+public:
+    // member variables
+    // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    ::ll::TypedStorage<8, 24, std::vector<glm::vec<3, float, (glm::qualifier)0>>> mControlPoints;
+    ::ll::TypedStorage<8, 24, std::vector<glm::vec<3, float, (glm::qualifier)0>>> mVelocities;
+    ::ll::TypedStorage<8, 24, std::vector<float>>                                 mSegStart;
+    ::ll::TypedStorage<1, 1, ::CameraSplineUtils::SplineType const>               type;
+#else // @header-generator platform
+    ::ll::TypedStorage<8, 24, ::std::vector<::glm::vec3>>           mControlPoints;
+    ::ll::TypedStorage<8, 24, ::std::vector<::glm::vec3>>           mVelocities;
+    ::ll::TypedStorage<8, 24, ::std::vector<float>>                 mSegStart;
+    ::ll::TypedStorage<1, 1, ::CameraSplineUtils::SplineType const> type;
+    // NOLINTEND
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ::glm::vec3 eval(float t) const /*override*/;
+
+    virtual ::CameraSplineUtils::SplineType getType() const /*override*/;
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+#ifdef LL_PLAT_C
+    MCAPI void $dtor();
+#endif
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+#ifdef LL_PLAT_C
+    MCAPI ::glm::vec3 $eval(float t) const;
+
+    MCFOLD ::CameraSplineUtils::SplineType $getType() const;
+#endif
+
+
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+#endif // @header-generator platform
+    // NOLINTEND
+};
+
+} // namespace CameraSplineUtils

@@ -1,0 +1,32 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+#if defined(LL_PLAT_A) // @header-generator platform
+// auto generated inclusion list
+#include "mc/deps/ecs/strict/StrictEntityContext.h"
+#else // @header-generator platform
+// auto generated forward declare list
+// clang-format off
+class StrictEntityContext;
+// clang-format on
+#endif // @header-generator platform
+
+struct SpinAttackResultsComponent {
+public:
+    // member variables
+    // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    ::ll::TypedStorage<8, 24, std::vector<StrictEntityContext>> mEntities;
+#else // @header-generator platform
+    ::ll::TypedStorage<8, 24, ::std::vector<::StrictEntityContext>> mEntities;
+#endif // @header-generator platform
+    // NOLINTEND
+#if defined(LL_PLAT_A) // @header-generator platform
+
+public:
+    // prevent constructor by default
+    SpinAttackResultsComponent& operator=(SpinAttackResultsComponent const&);
+#else // @header-generator platform
+#endif // @header-generator platform
+};

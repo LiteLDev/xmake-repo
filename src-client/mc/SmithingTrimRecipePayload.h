@@ -1,0 +1,31 @@
+#if defined(LL_PLAT_C) || defined(LL_PLAT_A) // @header-generator platform
+#if defined(LL_PLAT_A) // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/world/inventory/network/TypedServerNetId.h"
+
+// auto generated forward declare list
+// clang-format off
+class RecipeIngredient;
+template<typename T0> class cerealizer;
+// clang-format on
+
+struct SmithingTrimRecipePayload {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 24, std::string> mRecipeId;
+    ::ll::UntypedStorage<8, 24>            mTemplateIngredient;
+    ::ll::UntypedStorage<8, 24>            mBaseIngredient;
+    ::ll::UntypedStorage<8, 24>            mAdditionIngredient;
+    ::ll::TypedStorage<8, 24, std::string> mTag;
+    ::ll::UntypedStorage<4, 8>             mNetId;
+    // NOLINTEND
+};
+#else // @header-generator platform
+#endif // @header-generator platform
+#else // @header-generator platform
+#endif // @header-generator platform

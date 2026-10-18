@@ -1,0 +1,107 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+#if defined(LL_PLAT_A) // @header-generator platform
+// auto generated inclusion list
+#include "mc/client/gui/oreui/binding/QueryBase.h"
+#include "mc/client/gui/oreui/binding/properties/Property.h"
+#include "mc/deps/core/utility/pub_sub/Subscription.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace OreUI { class GameDependencies; }
+// clang-format on
+
+#else // @header-generator platform
+#if defined(LL_PLAT_C) // @header-generator platform
+// auto generated inclusion list
+#include "mc/client/gui/oreui/binding/QueryBase.h"
+#include "mc/client/gui/oreui/binding/properties/Property.h"
+#include "mc/deps/core/utility/pub_sub/Subscription.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace OreUI { class GameDependencies; }
+// clang-format on
+
+#else // @header-generator platform
+#endif // @header-generator platform
+#endif // @header-generator platform
+namespace OreUI {
+
+#if defined(LL_PLAT_A) // @header-generator platform
+class FlightingToggleQuery : public ::OreUI::QueryBase<OreUI::FlightingToggleQuery> {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 16, ::Bedrock::PubSub::Subscription> mToken;
+    ::ll::UntypedStorage<8, 152>                               mEnabled;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    FlightingToggleQuery();
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~FlightingToggleQuery();
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI FlightingToggleQuery(::OreUI::GameDependencies const&, std::string const&);
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor(::OreUI::GameDependencies const&, std::string const&);
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+    // NOLINTEND
+};
+#else // @header-generator platform
+#if defined(LL_PLAT_C) // @header-generator platform
+class FlightingToggleQuery : public ::OreUI::QueryBase<::OreUI::FlightingToggleQuery> {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 16, ::Bedrock::PubSub::Subscription> mToken;
+    ::ll::TypedStorage<8, 176, ::OreUI::Property<bool>>        mEnabled;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    FlightingToggleQuery();
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCAPI FlightingToggleQuery(::OreUI::GameDependencies const& game, ::std::string const& tag);
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCAPI void* $ctor(::OreUI::GameDependencies const& game, ::std::string const& tag);
+    // NOLINTEND
+};
+#else // @header-generator platform
+class FlightingToggleQuery {};
+#endif // @header-generator platform
+#endif // @header-generator platform
+
+} // namespace OreUI

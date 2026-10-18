@@ -1,0 +1,37 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+namespace webrtc {
+
+struct GoogCcConfig {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::UntypedStorage<8, 8> mUnkc6f54a;
+    ::ll::UntypedStorage<8, 8> mUnkc4f670;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    GoogCcConfig& operator=(GoogCcConfig const&);
+    GoogCcConfig(GoogCcConfig const&);
+    GoogCcConfig();
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI ~GoogCcConfig();
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+};
+
+} // namespace webrtc
+#endif // @header-generator platform

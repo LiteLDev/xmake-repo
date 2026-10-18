@@ -1,0 +1,22 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/world/events/ItemChargeEvent.h"
+
+#if defined(LL_PLAT_A) // @header-generator platform
+// auto generated forward declare list
+// clang-format off
+class ItemInstance;
+class WeakEntityRef;
+// clang-format on
+
+struct ItemStopUseEvent : public ::ItemChargeEvent {
+public:
+    // prevent constructor by default
+    ItemStopUseEvent& operator=(ItemStopUseEvent const&);
+};
+#else // @header-generator platform
+struct ItemStopUseEvent : public ::ItemChargeEvent {};
+#endif // @header-generator platform

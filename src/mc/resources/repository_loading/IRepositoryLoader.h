@@ -1,0 +1,36 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+// auto generated forward declare list
+// clang-format off
+class RepositoryPacks;
+namespace RepositoryLoading { struct AllRefreshTaskData; }
+namespace RepositoryLoading { struct BuildTaskDataOptions; }
+// clang-format on
+
+#endif // @header-generator platform
+namespace RepositoryLoading {
+
+#if defined(LL_PLAT_A) // @header-generator platform
+class IRepositoryLoader {};
+#else // @header-generator platform
+class IRepositoryLoader {
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~IRepositoryLoader() = default;
+
+    virtual ::std::shared_ptr<::RepositoryLoading::AllRefreshTaskData>
+    buildTaskData(::RepositoryLoading::BuildTaskDataOptions const& ops) = 0;
+
+    virtual void applyTaskResults(::RepositoryLoading::AllRefreshTaskData&& taskData) = 0;
+
+    virtual ::std::shared_ptr<::RepositoryPacks const> getPacks() const = 0;
+    // NOLINTEND
+};
+#endif // @header-generator platform
+
+} // namespace RepositoryLoading

@@ -1,0 +1,28 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+#if defined(LL_PLAT_C) // @header-generator platform
+struct PersonaTextureResources {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::UntypedStorage<8, 24>  mUnk3ee7df;
+    ::ll::UntypedStorage<8, 64>  mUnkdbb7f6;
+    ::ll::UntypedStorage<8, 248> mUnk61a86e;
+    ::ll::UntypedStorage<8, 248> mUnk3e7b1d;
+    ::ll::UntypedStorage<8, 248> mUnk7b30c3;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    PersonaTextureResources& operator=(PersonaTextureResources const&);
+    PersonaTextureResources(PersonaTextureResources const&);
+    PersonaTextureResources();
+};
+#else // @header-generator platform
+struct PersonaTextureResources {};
+#endif // @header-generator platform
+#endif // @header-generator platform

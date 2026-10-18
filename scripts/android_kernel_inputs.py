@@ -86,10 +86,14 @@ def validate_header_snapshot(root: Path, lock: dict) -> dict:
     clean_checkout(root, lock["commits"]["S"], "Header S")
     if git(root, "branch", "--show-current"):
         raise InputError("Header input must be a detached S worktree")
-    for layer in ("src", "src-android", "src-client", "src-server"):
+    for layer in ("src", "src-client", "src-server"):
         if (root / layer / "ll").exists() or (root / layer / "pl").exists():
             raise InputError("Header input would shadow LL or PL interfaces")
     metadata = read_json(root / "header-release.json")
+    if ((root / "src-android").exists()
+            or set(metadata.get("layers", {})) != {"src", "src-client", "src-server"}
+            or metadata.get("provenance", {}).get("physical_layout") != "common-client-server"):
+        raise InputError("Header input must use the unified common/client/server layout")
     headers.require_sync_validation(metadata)
     if metadata["manifest"]["sha256"] != lock["header"]["manifest_sha256"]:
         raise InputError("Header publication manifest mismatch")
@@ -157,7 +161,7 @@ def authenticate(repo: Path, inputs: dict[str, str], api: int = 28, arch: str = 
     if role not in ("kernel", "example"):
         raise InputError("unsupported binary role")
     layout = lock.get("source_layout")
-    if layout != "shared-v1":
+    if layout != "unified-client-v1":
         raise InputError("unsupported kernel source layout")
     if api != lock["binary"]["api_level"] or arch != lock["binary"]["architecture"]:
         raise InputError("P7 binary requires API 28 and arm64-v8a")
@@ -228,7 +232,7 @@ def main() -> None:
 
 
 def prepare_shared_view(repo: Path, header: Path, dependency_lock: Path, ndk: Path, destination: Path) -> dict:
-    """Compile original LL headers without admitting the desktop mc overlays.
+    """Compile shared LL headers with the authenticated unified client MC view.
 
     This is a G1 compile/fixture input, not a runtime-package release receipt.
     """
@@ -253,16 +257,11 @@ def prepare_shared_view(repo: Path, header: Path, dependency_lock: Path, ndk: Pa
         for source in sorted((repo / layer / "ll").rglob("*")):
             if source.is_file() and source.suffix in (".h", ".hpp", ".inl"):
                 relative = source.relative_to(repo / layer).as_posix()
-                if layer == "src-client" and relative.startswith("ll/api/event/"):
-                    continue
                 selected[relative] = source
-    for source in sorted((repo / "src-android/ll/api/event").rglob("*")):
-        if source.is_file() and source.suffix in (".h", ".hpp", ".inl"):
-            selected[source.relative_to(repo / "src-android").as_posix()] = source
     # LL owns these value helpers, just as it owns its Windows NBT extensions.
     for name in ("Tag.h", "EndTag.h", "CompoundTag.h", "CompoundTagVariant.h"):
         relative = "mc/deps/nbt/" + name
-        selected[relative] = repo / "src-android" / relative
+        selected[relative] = repo / "src" / relative
     destination.mkdir(parents=True, exist_ok=True)
     # Only this generated view is pruned; never alter a source or Header tree.
     for previous in destination.rglob("*"):
@@ -278,7 +277,7 @@ def prepare_shared_view(repo: Path, header: Path, dependency_lock: Path, ndk: Pa
         files[relative] = {"source": source.relative_to(repo).as_posix(), "sha256": fingerprint}
     return {"phase": "P7-G1-fixture", "cxx": "c++23", "exceptions": True, "rtti": True,
             "header_commit": lock["commits"]["S"], "ll_headers": files,
-            "include_roots": [str(destination), str(header / "src-android"), str(header / "src")],
+            "include_roots": [str(destination), str(header / "src-client"), str(header / "src")],
             "dependency_roots": [str(path) for path in roots],
             "ll_package_overrides": sorted(replaced)}
 

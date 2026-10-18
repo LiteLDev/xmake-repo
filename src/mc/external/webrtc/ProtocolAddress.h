@@ -1,0 +1,37 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+namespace webrtc {
+
+struct ProtocolAddress {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::UntypedStorage<8, 80> mUnk2dd617;
+    ::ll::UntypedStorage<4, 4>  mUnkd1414a;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    ProtocolAddress& operator=(ProtocolAddress const&);
+    ProtocolAddress(ProtocolAddress const&);
+    ProtocolAddress();
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI ~ProtocolAddress();
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+};
+
+} // namespace webrtc
+#endif // @header-generator platform

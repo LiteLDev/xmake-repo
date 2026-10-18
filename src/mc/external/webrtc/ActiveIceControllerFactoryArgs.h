@@ -1,0 +1,37 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+namespace webrtc {
+
+struct ActiveIceControllerFactoryArgs {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::UntypedStorage<8, 232> mUnk8b7af2;
+    ::ll::UntypedStorage<8, 8>   mUnk80c6d1;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    ActiveIceControllerFactoryArgs& operator=(ActiveIceControllerFactoryArgs const&);
+    ActiveIceControllerFactoryArgs(ActiveIceControllerFactoryArgs const&);
+    ActiveIceControllerFactoryArgs();
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI ~ActiveIceControllerFactoryArgs();
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+};
+
+} // namespace webrtc
+#endif // @header-generator platform

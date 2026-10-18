@@ -1,0 +1,19 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace Scripting { class ModuleBindingBuilder; }
+// clang-format on
+
+namespace ScriptModuleDebugUtilities::ScriptDebugShapes {
+// functions
+// NOLINTBEGIN
+MCAPI void bind(::Scripting::ModuleBindingBuilder& moduleBuilder);
+// NOLINTEND
+
+} // namespace ScriptModuleDebugUtilities::ScriptDebugShapes
+#endif // @header-generator platform

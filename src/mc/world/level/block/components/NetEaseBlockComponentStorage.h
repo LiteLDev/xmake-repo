@@ -1,0 +1,29 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/world/level/block/components/BlockComponentStorage.h"
+
+class NetEaseBlockComponentStorage {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 96, ::BlockComponentStorage> mStorage;
+    // NOLINTEND
+#if defined(LL_PLAT_A) // @header-generator platform
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI ~NetEaseBlockComponentStorage();
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+#else // @header-generator platform
+#endif // @header-generator platform
+};

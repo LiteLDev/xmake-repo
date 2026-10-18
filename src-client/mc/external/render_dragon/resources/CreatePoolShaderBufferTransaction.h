@@ -1,0 +1,65 @@
+#if defined(LL_PLAT_C) || defined(LL_PLAT_A) // @header-generator platform
+#if defined(LL_PLAT_A) // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/external/render_dragon/resources/ResourcePointer.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace dragon { struct BufferDescription; }
+namespace dragon { struct DragonBufferResourceServiceContext; }
+namespace dragon { struct ResolvedShaderBufferResource; }
+// clang-format on
+
+namespace dragon {
+
+struct CreatePoolShaderBufferTransaction {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 24, std::vector<uchar>> mBufferData;
+    ::ll::TypedStorage<8, 24, std::string>        mDebugName;
+    ::ll::TypedStorage<4, 4, uint>                mBufferStride;
+    ::ll::TypedStorage<4, 4, uint>                mCount;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    CreatePoolShaderBufferTransaction& operator=(CreatePoolShaderBufferTransaction const&);
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI CreatePoolShaderBufferTransaction();
+
+    MCNAPI std::optional<dragon::BufferDescription> apply(
+        ::mce::ResourcePointer<dragon::ResolvedShaderBufferResource> const&,
+        ::dragon::DragonBufferResourceServiceContext&
+    );
+
+    MCNAPI void set(uint const, uint const, std::vector<uchar>&&, std::string&&);
+
+    MCNAPI ~CreatePoolShaderBufferTransaction();
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor();
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+};
+
+} // namespace dragon
+#else // @header-generator platform
+#endif // @header-generator platform
+#else // @header-generator platform
+#endif // @header-generator platform

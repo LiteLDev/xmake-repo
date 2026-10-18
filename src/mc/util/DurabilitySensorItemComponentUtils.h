@@ -1,0 +1,20 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+class Actor;
+class ItemStackBase;
+// clang-format on
+
+namespace DurabilitySensorItemComponentUtils {
+// functions
+// NOLINTBEGIN
+MCNAPI void onHurtAndBreak(::ItemStackBase const& item, ::Actor& owner, int oldDamage, int newDamage);
+// NOLINTEND
+
+} // namespace DurabilitySensorItemComponentUtils
+#endif // @header-generator platform

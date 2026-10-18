@@ -1,0 +1,80 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/shared_types/v1_26_20/block/BlockMenuCategory.h"
+#include "mc/deps/shared_types/v1_26_20/block/States.h"
+#include "mc/deps/shared_types/v1_26_20/block/Traits.h"
+#include "mc/deps/shared_types/v1_26_20/block/VanillaBlockData.h"
+
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+// auto generated forward declare list
+// clang-format off
+namespace cereal { struct ReflectionCtx; }
+// clang-format on
+
+#endif // @header-generator platform
+namespace SharedTypes::v1_26_20::BlockDefinition {
+
+struct Description {
+public:
+    // member variables
+    // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    // clang-format off
+    ::ll::TypedStorage<8, 24, std::string> mIdentifier;
+    ::ll::TypedStorage<8, 40, ::SharedTypes::v1_26_20::BlockDefinition::BlockMenuCategory> mMenuCategory;
+    ::ll::TypedStorage<8, 160, ::SharedTypes::v1_26_20::BlockDefinition::States> mStates;
+    ::ll::TypedStorage<8, 56, ::SharedTypes::v1_26_20::BlockDefinition::Traits> mTraits;
+    ::ll::TypedStorage<8, 80, std::optional<SharedTypes::v1_26_20::BlockDefinition::VanillaBlockData>> mVanillaBlockData;
+    // clang-format on
+#else // @header-generator platform
+    ::ll::TypedStorage<8, 32, ::std::string>                                               mIdentifier;
+    ::ll::TypedStorage<8, 48, ::SharedTypes::v1_26_20::BlockDefinition::BlockMenuCategory> mMenuCategory;
+    ::ll::TypedStorage<8, 256, ::SharedTypes::v1_26_20::BlockDefinition::States>           mStates;
+    ::ll::TypedStorage<8, 56, ::SharedTypes::v1_26_20::BlockDefinition::Traits>            mTraits;
+    ::ll::TypedStorage<8, 80, ::std::optional<::SharedTypes::v1_26_20::BlockDefinition::VanillaBlockData>>
+        mVanillaBlockData;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    Description();
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCAPI Description(::SharedTypes::v1_26_20::BlockDefinition::Description const&);
+
+    MCAPI ::SharedTypes::v1_26_20::BlockDefinition::Description&
+    operator=(::SharedTypes::v1_26_20::BlockDefinition::Description&&);
+
+    MCAPI ::SharedTypes::v1_26_20::BlockDefinition::Description&
+    operator=(::SharedTypes::v1_26_20::BlockDefinition::Description const&);
+
+    MCAPI ~Description();
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCAPI static void bindType(::cereal::ReflectionCtx& ctx);
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCAPI void* $ctor(::SharedTypes::v1_26_20::BlockDefinition::Description const&);
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCAPI void $dtor();
+#endif // @header-generator platform
+    // NOLINTEND
+};
+
+} // namespace SharedTypes::v1_26_20::BlockDefinition

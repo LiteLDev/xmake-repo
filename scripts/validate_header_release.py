@@ -11,11 +11,11 @@ import re
 from typing import Any, Iterable
 
 
-LAYERS = ("src", "src-client", "src-server", "src-android")
+LAYERS = ("src", "src-client", "src-server")
 PLATFORM_LAYERS = {
     "client": "src-client",
     "server": "src-server",
-    "android": "src-android",
+    "android": "src-client",
 }
 LISTS: tuple[str, ...] = ()
 HARD_DENY_ROOTS = {value.casefold() for value in ("Xal", "pplx", "web", "cll", "swappy", "gamesdk", "pgs")}
@@ -82,7 +82,20 @@ def build_effective(common: dict[str, Path], platform: dict[str, Path], platform
         if previous is not None and previous != relative:
             raise ValidationError(f"case-insensitive effective {platform_name} collision: {previous} vs {relative}")
         folded[key] = relative
-    return effective
+    try:
+        from .sync_upstream_headers import header_is_present
+    except ImportError:
+        from sync_upstream_headers import header_is_present
+    return {name: path for name, path in effective.items()
+            if header_is_present(path.read_bytes(), platform_name)}
+
+
+def projected_content(data: bytes, platform: str) -> bytes:
+    try:
+        from .sync_upstream_headers import project_declarations
+    except ImportError:
+        from sync_upstream_headers import project_declarations
+    return project_declarations(data.replace(b"\r\n", b"\n"), platform)
 
 
 def read_content(path: Path, content_cache: dict[Path, bytes] | None = None) -> bytes:
@@ -92,7 +105,7 @@ def read_content(path: Path, content_cache: dict[Path, bytes] | None = None) -> 
 def validate_includes(effective: dict[str, Path], platform_name: str, content_cache: dict[Path, bytes] | None = None) -> None:
     available = set(effective)
     for relative, path in effective.items():
-        text = read_content(path, content_cache).decode("utf-8-sig", errors="replace")
+        text = projected_content(read_content(path, content_cache), platform_name).decode("utf-8-sig", errors="replace")
         for include in INCLUDE.findall(text):
             if include not in available:
                 raise ValidationError(f"unresolved {platform_name} include in {relative}: {include}")
@@ -172,10 +185,12 @@ def validate_metadata(
     return metadata
 
 
-def effective_git_identity(paths: dict[str, Path], content_cache: dict[Path, bytes] | None = None) -> dict[str, Any]:
+def effective_git_identity(paths: dict[str, Path], content_cache: dict[Path, bytes] | None = None, platform: str | None = None) -> dict[str, Any]:
     digest = hashlib.sha256()
     for name, path in sorted(paths.items()):
         content = read_content(path, content_cache).replace(b"\r\n", b"\n")
+        if platform is not None:
+            content = projected_content(content, platform)
         if b"\r" in content:
             raise ValidationError(f"non-canonical Header newline: {name}")
         digest.update(name.encode("utf-8") + b"\0" + content + b"\0")
@@ -207,7 +222,7 @@ def validate_sync_metadata(
             raise ValidationError("Windows upstream source identity mismatch")
     for platform, layer in PLATFORM_LAYERS.items():
         paths = build_effective(layers["src"], layers[layer], platform)
-        if effective_git_identity(paths, content_cache) != provenance.get("effective_views", {}).get(platform):
+        if effective_git_identity(paths, content_cache, platform) != provenance.get("effective_views", {}).get(platform):
             raise ValidationError(f"{platform} Git content identity does not match provenance")
         originals: dict[str, bytes] = {}
         for adjustment in provenance.get("infrastructure_adjustments", []):
@@ -220,7 +235,7 @@ def validate_sync_metadata(
                 raise ValidationError("unapproved Header infrastructure adjustment")
             if name in originals or name not in paths:
                 raise ValidationError("duplicate or missing infrastructure adjustment")
-            published = read_content(paths[name], content_cache).replace(b"\r\n", b"\n")
+            published = projected_content(read_content(paths[name], content_cache), platform)
             line = b'#include "concurrentqueue.h"\n'
             if published.count(line) != 1:
                 raise ValidationError("unexpected infrastructure include")
@@ -232,7 +247,7 @@ def validate_sync_metadata(
             originals[name] = original
         source_digest = hashlib.sha256()
         for name, path in sorted(paths.items()):
-            content = originals[name] if name in originals else read_content(path, content_cache).replace(b"\r\n", b"\n")
+            content = originals[name] if name in originals else projected_content(read_content(path, content_cache), platform)
             source_digest.update(name.encode("utf-8") + b"\0" + content + b"\0")
         source_identity = {"headers": len(paths), "sha256": source_digest.hexdigest().upper()}
         if source_identity != provenance.get("source_effective_views", provenance["effective_views"]).get(platform):
@@ -292,6 +307,8 @@ def require_sync_validation(metadata: dict[str, Any]) -> None:
 
 def validate_release(root: Path) -> dict[str, Any]:
     root = root.resolve()
+    if (root / "src-android").exists():
+        raise ValidationError("Android Headers must be part of src/src-client")
     layers = {layer: collect_layer(root, layer) for layer in LAYERS}
     content_cache = {path: path.read_bytes() for _, path in release_entries(root, layers)}
     effective = {

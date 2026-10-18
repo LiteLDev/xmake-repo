@@ -1,0 +1,33 @@
+#if defined(LL_PLAT_C) || defined(LL_PLAT_A) // @header-generator platform
+#if defined(LL_PLAT_A) // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/cereal/schema/dynamic/DynamicValue.h"
+#include "mc/deps/shared_types/ActorDefinitions.h"
+#include "mc/deps/shared_types/v1_21_130/actor/brain/BrainDefinition.h"
+
+namespace SharedTypes::v1_26_40 {
+
+struct ActorDocument {
+public:
+    // member variables
+    // NOLINTBEGIN
+    // clang-format off
+    ::ll::TypedStorage<8, 48, ::cereal::DynamicValue> mDescription;
+    ::ll::TypedStorage<8, 104, std::optional<SharedTypes::v1_21_130::Brain::BrainDefinition>> mBrainDefinition;
+    ::ll::TypedStorage<8, 48, ::SharedTypes::v1_26_40::ActorDefinitions> mDefinitions;
+    ::ll::TypedStorage<8, 40, std::unordered_map<std::string, SharedTypes::v1_26_40::ActorDefinitions>> mDefinitionGroups;
+    ::ll::TypedStorage<8, 48, ::cereal::DynamicValue> mEvents;
+    ::ll::TypedStorage<8, 48, ::cereal::DynamicValue> mUpgrades;
+    // clang-format on
+    // NOLINTEND
+};
+
+} // namespace SharedTypes::v1_26_40
+#else // @header-generator platform
+#endif // @header-generator platform
+#else // @header-generator platform
+#endif // @header-generator platform

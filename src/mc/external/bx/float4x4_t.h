@@ -1,0 +1,22 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+namespace bx {
+
+#if defined(LL_PLAT_C) // @header-generator platform
+struct float4x4_t {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<4, 64, float[4][4]> col;
+    // NOLINTEND
+};
+#else // @header-generator platform
+struct float4x4_t {};
+#endif // @header-generator platform
+
+} // namespace bx
+#endif // @header-generator platform

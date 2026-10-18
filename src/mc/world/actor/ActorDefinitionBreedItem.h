@@ -1,0 +1,22 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/world/item/ItemDescriptor.h"
+
+struct ActorDefinitionBreedItem {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 16, ::ItemDescriptor> mItemDescriptor;
+    ::ll::TypedStorage<8, 16, ::ItemDescriptor> mResultItem;
+    // NOLINTEND
+#if defined(LL_PLAT_A) // @header-generator platform
+
+public:
+    // prevent constructor by default
+    ActorDefinitionBreedItem& operator=(ActorDefinitionBreedItem const&);
+#else // @header-generator platform
+#endif // @header-generator platform
+};

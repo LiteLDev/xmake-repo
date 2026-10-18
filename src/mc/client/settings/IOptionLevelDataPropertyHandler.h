@@ -1,0 +1,75 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+#if defined(LL_PLAT_A) // @header-generator platform
+// auto generated inclusion list
+#include "mc/client/settings/IOptionPropertyHandler.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace Settings::RegistryBuilder { class IBuilderContext; }
+// clang-format on
+
+#else // @header-generator platform
+#if defined(LL_PLAT_C) // @header-generator platform
+// auto generated inclusion list
+#include "mc/client/settings/IOptionPropertyHandler.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace Settings::RegistryBuilder { class IBuilderContext; }
+// clang-format on
+
+#else // @header-generator platform
+#endif // @header-generator platform
+#endif // @header-generator platform
+namespace Settings {
+
+#if defined(LL_PLAT_A) // @header-generator platform
+class IOptionLevelDataPropertyHandler : public ::Settings::IOptionPropertyHandler {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 8, ::Settings::RegistryBuilder::IBuilderContext&> mContext;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    IOptionLevelDataPropertyHandler& operator=(IOptionLevelDataPropertyHandler const&);
+    IOptionLevelDataPropertyHandler(IOptionLevelDataPropertyHandler const&);
+    IOptionLevelDataPropertyHandler();
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~IOptionLevelDataPropertyHandler() = default;
+    // NOLINTEND
+};
+#else // @header-generator platform
+#if defined(LL_PLAT_C) // @header-generator platform
+class IOptionLevelDataPropertyHandler : public ::Settings::IOptionPropertyHandler {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 8, ::Settings::RegistryBuilder::IBuilderContext&> mContext;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    IOptionLevelDataPropertyHandler& operator=(IOptionLevelDataPropertyHandler const&);
+    IOptionLevelDataPropertyHandler(IOptionLevelDataPropertyHandler const&);
+    IOptionLevelDataPropertyHandler();
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~IOptionLevelDataPropertyHandler() /*override*/ = default;
+    // NOLINTEND
+};
+#else // @header-generator platform
+class IOptionLevelDataPropertyHandler {};
+#endif // @header-generator platform
+#endif // @header-generator platform
+
+} // namespace Settings

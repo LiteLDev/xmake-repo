@@ -1,0 +1,68 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+#if defined(LL_PLAT_C) // @header-generator platform
+// auto generated inclusion list
+#include "mc/deps/input/interface/GameControllerButtonState.h"
+#include "mc/deps/input/interface/GameControllerErrorType.h"
+
+class GameControllerHandler {
+public:
+    // GameControllerHandler inner types define
+    using InputButton = uint;
+
+    using ButtonMap = ::std::unordered_map<uint, int>;
+
+    using ButtonStateMap = ::std::unordered_map<uint, ::GameControllerButtonState>;
+
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 64, ::std::unordered_map<uint, int>> mButtonMap;
+    ::ll::TypedStorage<8, 24, ::std::vector<float>>            mLeftTrigger;
+    ::ll::TypedStorage<8, 24, ::std::vector<float>>            mRightTrigger;
+    ::ll::TypedStorage<8, 32, ::std::vector<bool>>             mLeftStickTouched;
+    ::ll::TypedStorage<8, 32, ::std::vector<bool>>             mRightStickTouched;
+    ::ll::TypedStorage<8, 24, ::std::vector<::std::unordered_map<uint, ::GameControllerButtonState>>> mButtonState;
+    ::ll::TypedStorage<4, 16, uint[4]>            mInputProcessResult;
+    ::ll::TypedStorage<8, 16, ::std::thread>      mPollingThread;
+    ::ll::TypedStorage<1, 1, ::std::atomic<bool>> mJoinThreads;
+    // NOLINTEND
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~GameControllerHandler() = default;
+
+    virtual void refresh() = 0;
+
+    virtual void refresh(bool isInGame);
+
+    virtual void shutdown();
+
+    virtual ::GameControllerErrorType checkPlatformSpecificControllerError();
+
+    virtual float normalizeAxis(float raw, float deadzone);
+
+    virtual void normalizeAxes(float& ioX, float& ioY, float deadzone) = 0;
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCFOLD void $refresh(bool isInGame);
+
+    MCFOLD void $shutdown();
+
+    MCFOLD ::GameControllerErrorType $checkPlatformSpecificControllerError();
+
+    MCFOLD float $normalizeAxis(float raw, float deadzone);
+    // NOLINTEND
+};
+#else // @header-generator platform
+class GameControllerHandler {};
+#endif // @header-generator platform
+#endif // @header-generator platform

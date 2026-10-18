@@ -1,0 +1,29 @@
+#if defined(LL_PLAT_C) || defined(LL_PLAT_A) // @header-generator platform
+#if defined(LL_PLAT_A) // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+namespace StoreFilter {
+
+enum class FilterSectionType : uint {
+    MainMenu              = 0,
+    PackTypeSection       = 1,
+    MinecoinSection       = 2,
+    RatingSection         = 3,
+    CreatorSection        = 4,
+    InstalledState        = 5,
+    MainMenuFilterToggles = 6,
+    OfferTypeSection      = 7,
+    DressingRoomStyle     = 8,
+    DressingRoomBody      = 9,
+    DressingRoomEmote     = 10,
+    Graphics              = 11,
+    Unknown               = 12,
+};
+
+}
+#else // @header-generator platform
+#endif // @header-generator platform
+#else // @header-generator platform
+#endif // @header-generator platform

@@ -1,0 +1,20 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+#if defined(LL_PLAT_A) // @header-generator platform
+enum class DlcPerformanceTier : int {
+    None      = 0,
+    Sunset    = 1,
+    SuperLow  = 2,
+    Low       = 3,
+    Mid       = 4,
+    High      = 5,
+    SuperHigh = 6,
+    TopTier   = 6,
+    COUNT     = 7,
+    _Unknown  = 8,
+};
+#else // @header-generator platform
+enum class DlcPerformanceTier : int {};
+#endif // @header-generator platform

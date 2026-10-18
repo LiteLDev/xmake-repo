@@ -1,0 +1,70 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/legacy/ActorUniqueID.h"
+#include "mc/server/commands/PlayerPermissionLevel.h"
+#if defined(LL_PLAT_A) // @header-generator platform
+#include "mc/world/actor/player/AbilitiesIndex.h"
+#else // @header-generator platform
+#endif // @header-generator platform
+
+// auto generated forward declare list
+// clang-format off
+class Abilities;
+// clang-format on
+
+struct RequestPermissionsPacketPayload {
+public:
+    // RequestPermissionsPacketPayload inner types define
+    enum class CustomPermissions : ushort {
+        // bitfield representation
+        Build            = 1 << 0,
+        Mine             = 1 << 1,
+        DoorsAndSwitches = 1 << 2,
+        OpenContainers   = 1 << 3,
+        AttackPlayers    = 1 << 4,
+        AttackMobs       = 1 << 5,
+        OperatorCommands = 1 << 6,
+        Teleport         = 1 << 7,
+    };
+
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 8, ::ActorUniqueID>         mTargetPlayerId;
+    ::ll::TypedStorage<1, 1, ::PlayerPermissionLevel> mPlayerPermissions;
+    ::ll::TypedStorage<2, 2, ushort>                  mCustomPermissionFlags;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    MCNAPI explicit RequestPermissionsPacketPayload(::PlayerPermissionLevel);
+
+    MCNAPI RequestPermissionsPacketPayload(::ActorUniqueID, ::PlayerPermissionLevel, ::Abilities const&);
+
+    MCNAPI void _setFromAbilities(::Abilities const&);
+
+    MCNAPI bool getCustomAbilityValue(::AbilitiesIndex) const;
+
+    MCNAPI ::PlayerPermissionLevel getPlayerPermissions() const;
+
+    MCNAPI ::ActorUniqueID getTargetPlayerId() const;
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor(::PlayerPermissionLevel);
+
+    MCNAPI void* $ctor(::ActorUniqueID, ::PlayerPermissionLevel, ::Abilities const&);
+#else // @header-generator platform
+#ifdef LL_PLAT_C
+    MCAPI void _setFromAbilities(::Abilities const& abilities);
+#endif
+#endif // @header-generator platform
+    // NOLINTEND
+};

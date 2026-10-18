@@ -13,7 +13,7 @@ import subprocess
 from android_kernel_inputs import InputError, git, read_json, sha
 
 def source_names(config: dict) -> set[str]:
-    if config.get("phase") != "P7-G3" or config.get("source_layout") != "shared-v1":
+    if config.get("phase") != "P7-G3" or config.get("source_layout") != "unified-client-v1":
         raise InputError("unsupported shared-core input format")
     return {name.replace("/", "_").replace(".", "_") for name in config["sources"]}
 
@@ -71,7 +71,7 @@ def verify_traces(config: dict, directory: Path) -> dict:
                     if relative not in ("mc/deps/nbt/Tag.h", "mc/deps/nbt/EndTag.h",
                                         "mc/deps/nbt/CompoundTag.h", "mc/deps/nbt/CompoundTagVariant.h"):
                         raise InputError("Minecraft include is outside Header S: " + str(path))
-                    if (not selected or selected["source"] != "src-android/" + relative
+                    if (not selected or selected["source"] != "src/" + relative
                             or sha(path) != selected["sha256"]
                             or sha(repo / selected["source"]) != selected["sha256"]):
                         raise InputError("LL NBT helper changed after configuration: " + relative)
@@ -82,7 +82,7 @@ def verify_traces(config: dict, directory: Path) -> dict:
                 if not path.is_relative_to(header):
                     raise InputError("Minecraft include is outside Header S: " + str(path))
                 relative = path.relative_to(header).as_posix()
-                if not relative.startswith(("src/mc/", "src-android/mc/")):
+                if not relative.startswith(("src/mc/", "src-client/mc/")):
                     raise InputError("Minecraft include uses the wrong platform layer")
                 files[relative] = check_blob(path, relative, h_ids, "Minecraft Header")
                 all_mc.add(relative.split("/", 1)[1])
@@ -91,21 +91,23 @@ def verify_traces(config: dict, directory: Path) -> dict:
                 if path.is_relative_to(view):
                     relative = path.relative_to(view).as_posix()
                     selected = config["ll_headers"].get(relative)
-                    if relative.startswith("ll/api/event/"):
-                        android_source = "src-android/" + relative
-                        if (selected and selected["source"].startswith("src-client/")) or (
-                            (repo / android_source).is_file()
-                            and (not selected or selected["source"] != android_source)
-                        ):
-                            raise InputError("event Header must use its Android platform source: " + relative)
                     if not selected or sha(path) != selected["sha256"] or sha(repo / selected["source"]) != selected["sha256"]:
                         raise InputError("shared/client Header view changed after configuration: " + relative)
                     files[selected["source"]] = selected["sha256"]
-                elif path.is_relative_to(repo / "src-android/ll"):
-                    relative = path.relative_to(repo / "src-android").as_posix()
-                    if relative in config["ll_headers"]:
-                        raise InputError("Android Header shadows a shared/client interface: " + relative)
-                    files[path.relative_to(repo).as_posix()] = sha(path)
+                elif path.is_relative_to(repo / "src/ll") or path.is_relative_to(repo / "src-client/ll"):
+                    source = path.relative_to(repo).as_posix()
+                    if path.suffix == ".cpp" and source in config["sources"]:
+                        files[source] = sha(path)
+                        continue
+                    relative = source.split("/", 1)[1]
+                    selected = config["ll_headers"].get(relative)
+                    if selected and selected["source"] != source:
+                        raise InputError("source Header shadows a shared/client interface: " + relative)
+                    if source not in ("src-client/ll/core/mod/ElfModule.h", "src-client/ll/core/mod/ModuleFiles.h"):
+                        raise InputError("unapproved LL include outside controlled view: " + source)
+                    if not selected or selected["source"] != source or sha(path) != selected["sha256"]:
+                        raise InputError("source Header is not the configured shared/client interface: " + relative)
+                    files[source] = selected["sha256"]
                 elif path.name == "Version.h" and path.parent.name == "core" and "config" in path.parts:
                     files["generated/ll/core/Version.h"] = sha(path)
                 else:

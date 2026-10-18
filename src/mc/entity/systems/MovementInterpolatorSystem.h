@@ -1,0 +1,25 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+struct TickingSystemWithInfo;
+// clang-format on
+
+namespace MovementInterpolatorSystem {
+// functions
+// NOLINTBEGIN
+MCAPI ::TickingSystemWithInfo createCopyInterpolatorComponentSystem();
+
+MCAPI ::TickingSystemWithInfo createHandleQueuedMovementInterpolationSystem();
+
+MCAPI ::TickingSystemWithInfo createOnGroundPostTickSystem();
+
+MCAPI ::TickingSystemWithInfo createTickSystem(bool isClientSide);
+// NOLINTEND
+
+} // namespace MovementInterpolatorSystem
+#endif // @header-generator platform

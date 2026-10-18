@@ -1,0 +1,70 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/script_core/lifetime_registry/scripting/StrongTypedObjectHandle.h"
+#include "mc/deps/script_core/lifetime_registry/scripting/WeakHandleFromThis.h"
+#include "mc/deps/script_core/lifetime_registry/scripting/WeakLifetimeScope.h"
+
+// auto generated forward declare list
+// clang-format off
+class ServerLevel;
+#if defined(LL_PLAT_A) // @header-generator platform
+namespace ScriptModuleDebugUtilities { class ScriptDebugShape; }
+namespace ScriptModuleMinecraft { class ScriptDimension; }
+#else // @header-generator platform
+#endif // @header-generator platform
+namespace ScriptModuleMinecraft { struct ScriptPrimitiveShapesDataComponent; }
+namespace Scripting { struct ClassBinding; }
+// clang-format on
+
+namespace ScriptModuleDebugUtilities {
+
+#if defined(LL_PLAT_A) // @header-generator platform
+class ScriptDebugDrawer : public ::Scripting::WeakHandleFromThis<ScriptModuleDebugUtilities::ScriptDebugDrawer> {
+#else // @header-generator platform
+class ScriptDebugDrawer : public ::Scripting::WeakHandleFromThis<::ScriptModuleDebugUtilities::ScriptDebugDrawer> {
+#endif // @header-generator platform
+public:
+    // ScriptDebugDrawer inner types define
+#if defined(LL_PLAT_A) // @header-generator platform
+    using Key = long;
+#else // @header-generator platform
+    using Key = int64;
+#endif // @header-generator platform
+
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 16, ::Scripting::WeakLifetimeScope>                              mScope;
+    ::ll::TypedStorage<8, 8, ::ServerLevel&>                                               mLevel;
+    ::ll::TypedStorage<8, 8, ::ScriptModuleMinecraft::ScriptPrimitiveShapesDataComponent*> mDataComponent;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    ScriptDebugDrawer& operator=(ScriptDebugDrawer const&);
+    ScriptDebugDrawer(ScriptDebugDrawer const&);
+    ScriptDebugDrawer();
+
+public:
+    // static functions
+    // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    MCNAPI static ::Scripting::ClassBinding bind();
+#else // @header-generator platform
+    MCAPI static ::Scripting::ClassBinding bind();
+#endif // @header-generator platform
+
+#if defined(LL_PLAT_A) // @header-generator platform
+    MCNAPI static ::Scripting::StrongTypedObjectHandle<ScriptModuleDebugUtilities::ScriptDebugDrawer>
+    getHandle(::Scripting::WeakLifetimeScope&, ::ServerLevel&);
+#else // @header-generator platform
+    MCAPI static ::Scripting::StrongTypedObjectHandle<::ScriptModuleDebugUtilities::ScriptDebugDrawer>
+    getHandle(::Scripting::WeakLifetimeScope& scope, ::ServerLevel& level);
+#endif // @header-generator platform
+    // NOLINTEND
+};
+
+} // namespace ScriptModuleDebugUtilities

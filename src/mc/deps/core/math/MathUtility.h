@@ -1,0 +1,20 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+class Vec3;
+namespace mce::MathUtility { struct GramSchmidtResult; }
+// clang-format on
+
+namespace mce::MathUtility {
+// functions
+// NOLINTBEGIN
+MCNAPI ::mce::MathUtility::GramSchmidtResult computeGramSchmidtBasis(::Vec3 const& forward, ::Vec3 const& up);
+// NOLINTEND
+
+} // namespace mce::MathUtility
+#endif // @header-generator platform

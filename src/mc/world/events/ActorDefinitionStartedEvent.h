@@ -1,0 +1,34 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+class Actor;
+struct ActorDefinitionModifier;
+// clang-format on
+
+struct ActorDefinitionStartedEvent {
+public:
+    // member variables
+    // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    ::ll::TypedStorage<8, 8, ::Actor&>                              mActor;
+    ::ll::TypedStorage<8, 24, std::string const>                    mEvent;
+    ::ll::TypedStorage<8, 8, std::vector<ActorDefinitionModifier>&> mDefinitionModifiers;
+#else // @header-generator platform
+    ::ll::TypedStorage<8, 8, ::Actor&>                                  mActor;
+    ::ll::TypedStorage<8, 32, ::std::string const>                      mEvent;
+    ::ll::TypedStorage<8, 8, ::std::vector<::ActorDefinitionModifier>&> mDefinitionModifiers;
+#endif // @header-generator platform
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    ActorDefinitionStartedEvent& operator=(ActorDefinitionStartedEvent const&);
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+    ActorDefinitionStartedEvent(ActorDefinitionStartedEvent const&);
+#endif // @header-generator platform
+    ActorDefinitionStartedEvent();
+};

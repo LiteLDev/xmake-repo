@@ -1,0 +1,89 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+#if defined(LL_PLAT_A) // @header-generator platform
+// auto generated inclusion list
+#include "mc/client/renderer/block/tessellation_pipeline/helper/client_block_pipeline/ArrayCache.h"
+
+// auto generated forward declare list
+// clang-format off
+class Block;
+class BlockPos;
+class Matrix;
+namespace ClientBlockPipeline { struct BitsetCache; }
+namespace ClientBlockPipeline { struct BlockLookupData; }
+namespace ClientBlockPipeline { struct BlockVolumeArea; }
+namespace ClientBlockPipeline { struct CustomGeometryBlock; }
+namespace ClientBlockPipeline { struct CustomGeometryBox; }
+namespace ClientBlockPipeline { struct CustomGeometryFace; }
+// clang-format on
+
+#else // @header-generator platform
+#if defined(LL_PLAT_C) // @header-generator platform
+// auto generated inclusion list
+#include "mc/client/renderer/block/tessellation_pipeline/helper/client_block_pipeline/ArrayCache.h"
+
+// auto generated forward declare list
+// clang-format off
+class Block;
+class BlockPos;
+class Matrix;
+namespace ClientBlockPipeline { struct BitsetCache; }
+namespace ClientBlockPipeline { struct BlockLookupData; }
+namespace ClientBlockPipeline { struct BlockVolumeArea; }
+namespace ClientBlockPipeline { struct CustomGeometryBlock; }
+namespace ClientBlockPipeline { struct CustomGeometryBox; }
+namespace ClientBlockPipeline { struct CustomGeometryFace; }
+// clang-format on
+
+#else // @header-generator platform
+#endif // @header-generator platform
+#endif // @header-generator platform
+namespace ClientBlockPipeline {
+
+#if defined(LL_PLAT_A) // @header-generator platform
+struct ISchematicsMapper {
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    // clang-format off
+    virtual ~ISchematicsMapper();
+
+    virtual void execute(std::vector<ClientBlockPipeline::CustomGeometryBox>&, std::vector<ClientBlockPipeline::CustomGeometryFace>&, ::ClientBlockPipeline::BlockVolumeArea const&, ::ClientBlockPipeline::BitsetCache const&, ::ClientBlockPipeline::ArrayCache<const Block*> const*, ::ClientBlockPipeline::CustomGeometryBlock const&, ::ClientBlockPipeline::BlockLookupData const&, ::BlockPos const&, ::Matrix const&) const = 0;
+    // clang-format on
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+};
+#else // @header-generator platform
+#if defined(LL_PLAT_C) // @header-generator platform
+struct ISchematicsMapper {
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~ISchematicsMapper() = default;
+
+    virtual void execute(
+        ::std::vector<::ClientBlockPipeline::CustomGeometryBox>&  customBoxes,
+        ::std::vector<::ClientBlockPipeline::CustomGeometryFace>& customFaces,
+        ::ClientBlockPipeline::BlockVolumeArea const&             area,
+        ::ClientBlockPipeline::BitsetCache const&                 opaqueFullBlockCache,
+        ::ClientBlockPipeline::ArrayCache<::Block const*> const*  cullingBlocksCache,
+        ::ClientBlockPipeline::CustomGeometryBlock const&         customBlock,
+        ::ClientBlockPipeline::BlockLookupData const&             blockData,
+        ::BlockPos const&                                         relativePos,
+        ::Matrix const&                                           blockPosTransform
+    ) const = 0;
+    // NOLINTEND
+};
+#else // @header-generator platform
+struct ISchematicsMapper {};
+#endif // @header-generator platform
+#endif // @header-generator platform
+
+} // namespace ClientBlockPipeline

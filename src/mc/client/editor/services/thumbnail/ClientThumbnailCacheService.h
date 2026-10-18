@@ -1,0 +1,24 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+namespace Editor::Services {
+
+class ClientThumbnailCacheService {
+public:
+    // ClientThumbnailCacheService inner types declare
+    // clang-format off
+    class Hasher;
+    struct UUIDThumbnailHash;
+    // clang-format on
+
+    // ClientThumbnailCacheService inner types define
+    class Hasher {};
+
+    struct UUIDThumbnailHash {};
+};
+
+} // namespace Editor::Services
+#endif // @header-generator platform

@@ -14,6 +14,41 @@ from scripts import record_header_validation as recorder
 
 
 class HeaderSyncTests(unittest.TestCase):
+    def test_empty_include_files_keep_their_target_presence(self) -> None:
+        for views in (
+            {"client": {"mc/Empty.h": b""}, "server": {"mc/Empty.h": b""}, "android": {}},
+            {"client": {"mc/Empty.h": b""}, "server": {}, "android": {"mc/Empty.h": b"class Empty {};\n"}},
+        ):
+            layers = sync.repartition(views)
+            for platform in views:
+                self.assertEqual(sync.effective(layers, platform), views[platform])
+
+    def test_shared_client_type_uses_exclusive_platforms_and_one_definition(self) -> None:
+        common = b"class Client {\n    int shared;\n"
+        views = {"client": {"mc/Client.h": common + b"    int windows;\n};\n"},
+                 "android": {"mc/Client.h": common + b"    long android;\n};\n"},
+                 "server": {}}
+        result = sync.repartition(views)
+        data = result["src-client"]["mc/Client.h"]
+        self.assertEqual(data.count(b"class Client {"), 1)
+        self.assertEqual(data.count(b"int shared;"), 1)
+        self.assertIn(b"defined(LL_PLAT_C) || defined(LL_PLAT_A)", data)
+        for platform in views:
+            self.assertEqual(sync.effective(result, platform), views[platform])
+
+    def test_existing_preprocessor_groups_and_missing_final_newline_are_lossless(self) -> None:
+        windows = b"class Type {\n#if defined(FEATURE)\n int a;\n#else\n int b;\n#endif\n};"
+        android = b"class Type {\n long android;\n};"
+        data = sync.merge_declarations(windows, android, "defined(LL_PLAT_A)")
+        self.assertEqual(sync.project_declarations(data, "client"), windows)
+        self.assertEqual(sync.project_declarations(data, "android"), android)
+        self.assertIn(b"#if defined(FEATURE)\n int a;\n#else\n int b;\n#endif\n", data)
+
+    def test_unknown_or_unbalanced_generated_selectors_are_rejected(self) -> None:
+        for data in (b"#if UNKNOWN // @header-generator platform\n", b"#else // @header-generator platform\n"):
+            with self.assertRaises(sync.SyncError):
+                sync.project_declarations(data, "android")
+
     def test_staging_preserves_android_and_records_new_windows_sources(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary) / "repo"
@@ -24,7 +59,7 @@ class HeaderSyncTests(unittest.TestCase):
             git("config", "user.name", "Header fixture")
             git("config", "user.email", "header-fixture@example.invalid")
             (root / ".gitattributes").write_text("*.h text eol=crlf\n")
-            for layer in release.LAYERS:
+            for layer in sync.SOURCE_LAYERS:
                 file = root / layer / "mc" / ("Common.h" if layer == "src" else f"{layer}.h")
                 file.parent.mkdir(parents=True)
                 file.write_bytes(b"#pragma once\n")
@@ -55,11 +90,12 @@ class HeaderSyncTests(unittest.TestCase):
             self.assertNotIn("sha256", metadata["inputs"]["windows_client"])
             self.assertEqual(metadata["inputs"]["windows_client"]["commit"], header)
             self.assertEqual(len(metadata["provenance"]["infrastructure_adjustments"]), 2)
-            self.assertEqual((stage / "src-client/mc/_HeaderOutputPredefine.h").read_bytes(), b'#include "concurrentqueue.h"\r\n')
-            self.assertEqual((stage / "src-android/mc/src-android.h").read_bytes(), b"#pragma once\r\n")
+            self.assertEqual(sync.project_declarations((stage / "src/mc/_HeaderOutputPredefine.h").read_bytes().replace(b"\r\n", b"\n"), "client"), b'#include "concurrentqueue.h"\n')
+            self.assertEqual(sync.project_declarations((stage / "src-client/mc/src-android.h").read_bytes().replace(b"\r\n", b"\n"), "android"), b"#pragma once\n")
+            self.assertFalse((stage / "src-android").exists())
             git("checkout", "-qb", "codex/sync-upstream-header", base)
             git("merge", "--no-ff", "--no-commit", header)
-            unrelated = root / "src-android/mc/User.h"
+            unrelated = root / "src-client/mc/User.h"
             unrelated.write_bytes(b"// preserve untracked user work\n")
             with self.assertRaises(sync.SyncError):
                 sync.apply(root, base, header, stage)
@@ -83,8 +119,8 @@ class HeaderSyncTests(unittest.TestCase):
             "android": {"mc/Common.h": b"same\n", "mc/Old.h": b"android\n"},
         }
         layers = sync.repartition(views)
-        self.assertEqual(layers["src"], {"mc/Common.h": b"same\n"})
-        self.assertNotIn("mc/New.h", layers["src"])
+        self.assertEqual(layers["src"]["mc/Common.h"], b"same\n")
+        self.assertIn("mc/New.h", layers["src"])
         for platform in views:
             self.assertEqual(sync.effective(layers, platform), views[platform])
 
@@ -177,7 +213,7 @@ class SyncMetadataTests(unittest.TestCase):
             release.require_sync_validation(self.metadata)
 
     def test_content_change_cannot_be_hidden_by_recomputing_physical_manifest(self) -> None:
-        (self.root / "src-android/mc/src-android.h").write_bytes(b"changed\r\n")
+        (self.root / "src-client/mc/src-client.h").write_bytes(b"changed\r\n")
         _, self.metadata["manifest"]["sha256"] = release.compute_release_manifest(self.root, self.layers)
         with self.assertRaises(release.ValidationError):
             self.validate()

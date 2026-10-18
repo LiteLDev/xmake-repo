@@ -1,0 +1,29 @@
+#if defined(LL_PLAT_C) || defined(LL_PLAT_A) // @header-generator platform
+#if defined(LL_PLAT_A) // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+namespace PlayerTravelledEvent {
+
+enum class TravelMethod : uint {
+    Unknown   = 4294967295,
+    Walk      = 0,
+    SwimWater = 1,
+    Fall      = 2,
+    Climb     = 3,
+    SwimLava  = 4,
+    Fly       = 5,
+    Riding    = 6,
+    Sneak     = 7,
+    Sprint    = 8,
+    Bounce    = 9,
+    FrostWalk = 10,
+    Teleport  = 11,
+};
+
+}
+#else // @header-generator platform
+#endif // @header-generator platform
+#else // @header-generator platform
+#endif // @header-generator platform

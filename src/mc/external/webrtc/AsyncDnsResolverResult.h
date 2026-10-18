@@ -1,0 +1,27 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace webrtc { class SocketAddress; }
+// clang-format on
+
+namespace webrtc {
+
+class AsyncDnsResolverResult {
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~AsyncDnsResolverResult() = default;
+
+    virtual bool GetResolvedAddress(int family, ::webrtc::SocketAddress* addr) const = 0;
+
+    virtual int GetError() const = 0;
+    // NOLINTEND
+};
+
+} // namespace webrtc
+#endif // @header-generator platform

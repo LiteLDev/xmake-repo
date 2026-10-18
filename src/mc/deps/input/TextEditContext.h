@@ -1,0 +1,125 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+#if defined(LL_PLAT_A) // @header-generator platform
+// auto generated inclusion list
+#include "mc/deps/input/TextRange.h"
+
+// auto generated forward declare list
+// clang-format off
+class IKeyboardProxy;
+// clang-format on
+
+#else // @header-generator platform
+#if defined(LL_PLAT_C) // @header-generator platform
+// auto generated inclusion list
+#include "mc/deps/input/TextRange.h"
+
+// auto generated forward declare list
+// clang-format off
+class IKeyboardProxy;
+// clang-format on
+
+#else // @header-generator platform
+#endif // @header-generator platform
+#endif // @header-generator platform
+class TextEditContext {
+public:
+    // TextEditContext inner types define
+#if defined(LL_PLAT_A) // @header-generator platform
+    enum class CaretUpdate : uchar {
+        Left  = 0,
+        Right = 1,
+        Up    = 2,
+        Down  = 3,
+        Begin = 4,
+        End   = 5,
+    };
+#else // @header-generator platform
+#if defined(LL_PLAT_C) // @header-generator platform
+    enum class CaretUpdate : uchar {
+        Left  = 0,
+        Right = 1,
+        Up    = 2,
+        Down  = 3,
+        Begin = 4,
+        End   = 5,
+    };
+#else // @header-generator platform
+    enum class CaretUpdate : uchar {};
+#endif // @header-generator platform
+#endif // @header-generator platform
+
+#if defined(LL_PLAT_A) // @header-generator platform
+    enum class TextEditAction : uchar {
+        Backspace = 0,
+        Copy      = 1,
+        Cut       = 2,
+        Delete    = 3,
+        Newline   = 4,
+        Paste     = 5,
+        SelectAll = 6,
+    };
+
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<1, 1, bool>                            mIsEnabled;
+    ::ll::TypedStorage<1, 1, bool>                            mCtrlDown;
+    ::ll::TypedStorage<8, 24, std::string>                    mCurrentUtf8Text;
+    ::ll::TypedStorage<4, 4, int>                             mCaret;
+    ::ll::TypedStorage<1, 1, bool>                            mHighlightSelection;
+    ::ll::TypedStorage<4, 4, int>                             mMaxLength;
+    ::ll::TypedStorage<4, 8, ::TextRange>                     mSelection;
+    ::ll::TypedStorage<8, 8, ::IKeyboardProxy*>               mKeyboard;
+    ::ll::TypedStorage<8, 8, std::unique_ptr<IKeyboardProxy>> mKeyboardProxy;
+    // NOLINTEND
+#else // @header-generator platform
+#if defined(LL_PLAT_C) // @header-generator platform
+    enum class TextEditAction : uchar {
+        Backspace = 0,
+        Copy      = 1,
+        Cut       = 2,
+        Delete    = 3,
+        Newline   = 4,
+        Paste     = 5,
+        SelectAll = 6,
+    };
+
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<1, 1, bool>                                mIsEnabled;
+    ::ll::TypedStorage<1, 1, bool>                                mCtrlDown;
+    ::ll::TypedStorage<8, 32, ::std::string>                      mCurrentUtf8Text;
+    ::ll::TypedStorage<4, 4, int>                                 mCaret;
+    ::ll::TypedStorage<1, 1, bool>                                mHighlightSelection;
+    ::ll::TypedStorage<4, 4, int>                                 mMaxLength;
+    ::ll::TypedStorage<4, 8, ::TextRange>                         mSelection;
+    ::ll::TypedStorage<8, 8, ::IKeyboardProxy*>                   mKeyboard;
+    ::ll::TypedStorage<8, 8, ::std::unique_ptr<::IKeyboardProxy>> mKeyboardProxy;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCAPI void _onBackspace();
+
+    MCAPI void _onCopy();
+
+    MCAPI void _setText(::std::string_view newUtf8Text);
+
+    MCAPI void feedAction(::TextEditContext::TextEditAction action);
+
+    MCAPI void feedCaretUpdate(::TextEditContext::CaretUpdate caretMovement);
+
+    MCAPI void feedText(::std::string_view utf8Text);
+
+    MCFOLD ::std::string const getText() const;
+    // NOLINTEND
+#else // @header-generator platform
+    enum class TextEditAction : uchar {};
+#endif // @header-generator platform
+#endif // @header-generator platform
+};

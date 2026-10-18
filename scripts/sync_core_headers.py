@@ -69,6 +69,8 @@ def layers(files: dict[str, bytes]) -> dict[str, dict[str, bytes]]:
         if b"\r" in data:
             raise headers.SyncError(f"noncanonical source blob: {name}")
         result[layer][relative] = data
+    if not result["src-android"]:
+        del result["src-android"]
     return result
 
 

@@ -1,0 +1,33 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/comprehensive/ParticleType.h"
+#include "mc/deps/shared_types/shared_types/versionless/SoundEventName.h"
+#if defined(LL_PLAT_A) // @header-generator platform
+
+// auto generated forward declare list
+// clang-format off
+namespace cereal { struct ReflectionCtx; }
+// clang-format on
+#else // @header-generator platform
+#endif // @header-generator platform
+
+namespace SharedTypes::Beta {
+
+struct DurabilityThreshold {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<4, 4, int>                                         mDurability;
+    ::ll::TypedStorage<4, 4, ::ParticleType>                              mParticleType;
+#if defined(LL_PLAT_A) // @header-generator platform
+    ::ll::TypedStorage<8, 24, ::SharedTypes::Versionless::SoundEventName> mSoundEvent;
+#else // @header-generator platform
+    ::ll::TypedStorage<8, 32, ::SharedTypes::Versionless::SoundEventName> mSoundEvent;
+#endif // @header-generator platform
+    // NOLINTEND
+};
+
+} // namespace SharedTypes::Beta

@@ -1,3 +1,4 @@
+#if defined(LL_PLAT_C) || defined(LL_PLAT_A) // @header-generator platform
 #pragma once
 
 #include "mc/_HeaderOutputPredefine.h"
@@ -24,6 +25,24 @@ union InputEventData {
 public:
     // member variables
     // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    ::ll::UntypedStorage<4, 44> button;
+    ::ll::UntypedStorage<4, 44> pointerLocation;
+    ::ll::UntypedStorage<1, 44> textChar;
+    ::ll::UntypedStorage<4, 44> direction;
+    ::ll::UntypedStorage<4, 44> turn;
+    ::ll::UntypedStorage<4, 44> vector;
+    ::ll::UntypedStorage<4, 44> rawInput;
+    ::ll::UntypedStorage<1, 44> newConnectionState;
+    ::ll::UntypedStorage<1, 44> addClient;
+    ::ll::UntypedStorage<1, 44> changeUser;
+    ::ll::UntypedStorage<4, 44> pointerLocationWithId;
+    ::ll::UntypedStorage<4, 44> clearPointerLocationWithId;
+    ::ll::UntypedStorage<4, 44> touch;
+    ::ll::UntypedStorage<4, 44> controlOption;
+    ::ll::UntypedStorage<4, 44> numberOfEnabledControlOptions;
+    ::ll::UntypedStorage<1, 44> overlappingControls;
+#else // @header-generator platform
     ::ll::TypedStorage<4, 44, ::ButtonEventData>                        button;
     ::ll::TypedStorage<4, 44, ::PointerLocationEventData>               pointerLocation;
     ::ll::TypedStorage<1, 44, ::TextCharEventData>                      textChar;
@@ -40,5 +59,8 @@ public:
     ::ll::TypedStorage<4, 44, ::ControlOptionEventData>                 controlOption;
     ::ll::TypedStorage<4, 44, ::NumberOfEnabledControlOptionsEventData> numberOfEnabledControlOptions;
     ::ll::TypedStorage<1, 44, ::OverlappingControlsEventData>           overlappingControls;
+#endif // @header-generator platform
     // NOLINTEND
 };
+#else // @header-generator platform no-eol
+#endif // @header-generator platform

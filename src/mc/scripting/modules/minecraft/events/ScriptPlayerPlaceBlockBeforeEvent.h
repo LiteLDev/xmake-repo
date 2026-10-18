@@ -1,0 +1,110 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/core/math/Vec3.h"
+#include "mc/deps/script_core/lifetime_registry/scripting/StrongTypedObjectHandle.h"
+#include "mc/scripting/modules/minecraft/ScriptFacing.h"
+#include "mc/scripting/modules/minecraft/events/ScriptBlockEvent.h"
+
+// auto generated forward declare list
+// clang-format off
+class Block;
+class BlockPos;
+class Dimension;
+class Player;
+namespace ScriptModuleMinecraft { class ScriptBlockPermutation; }
+namespace ScriptModuleMinecraft { class ScriptPlayer; }
+namespace Scripting { class WeakLifetimeScope; }
+namespace Scripting { struct ClassBinding; }
+// clang-format on
+
+namespace ScriptModuleMinecraft {
+
+struct ScriptPlayerPlaceBlockBeforeEvent : public ::ScriptModuleMinecraft::ScriptBlockEvent {
+public:
+    // member variables
+    // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    ::ll::UntypedStorage<8, 32>                                     mPlayer;
+    ::ll::TypedStorage<4, 4, ::ScriptModuleMinecraft::ScriptFacing> mFace;
+    ::ll::TypedStorage<4, 12, ::Vec3>                               mFaceLocation;
+    ::ll::TypedStorage<1, 1, bool>                                  mCancel;
+    ::ll::UntypedStorage<8, 32>                                     mPermutation;
+#else // @header-generator platform
+    ::ll::TypedStorage<8, 32, ::Scripting::StrongTypedObjectHandle<::ScriptModuleMinecraft::ScriptPlayer>> mPlayer;
+    ::ll::TypedStorage<4, 4, ::ScriptModuleMinecraft::ScriptFacing>                                        mFace;
+    ::ll::TypedStorage<4, 12, ::Vec3> mFaceLocation;
+    ::ll::TypedStorage<1, 1, bool>    mCancel;
+    ::ll::TypedStorage<8, 32, ::Scripting::StrongTypedObjectHandle<::ScriptModuleMinecraft::ScriptBlockPermutation>>
+        mPermutation;
+#endif // @header-generator platform
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    ScriptPlayerPlaceBlockBeforeEvent();
+
+public:
+    // member functions
+    // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    MCNAPI ScriptPlayerPlaceBlockBeforeEvent(
+        ::Player const&,
+        ::Dimension&,
+        ::BlockPos const&,
+        uchar,
+        ::Vec3 const&,
+        ::Block const&,
+        ::Scripting::WeakLifetimeScope const&
+#else // @header-generator platform
+    MCAPI ScriptPlayerPlaceBlockBeforeEvent(
+        ::Player const&                       player,
+        ::Dimension&                          dimension,
+        ::BlockPos const&                     pos,
+        uchar                                 face,
+        ::Vec3 const&                         faceLocation,
+        ::Block const&                        permutationToPlace,
+        ::Scripting::WeakLifetimeScope const& scope
+#endif // @header-generator platform
+    );
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    MCNAPI static ::Scripting::ClassBinding bind();
+#else // @header-generator platform
+    MCAPI static ::Scripting::ClassBinding bind();
+#endif // @header-generator platform
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    MCNAPI void* $ctor(
+        ::Player const&,
+        ::Dimension&,
+        ::BlockPos const&,
+        uchar,
+        ::Vec3 const&,
+        ::Block const&,
+        ::Scripting::WeakLifetimeScope const&
+#else // @header-generator platform
+    MCAPI void* $ctor(
+        ::Player const&                       player,
+        ::Dimension&                          dimension,
+        ::BlockPos const&                     pos,
+        uchar                                 face,
+        ::Vec3 const&                         faceLocation,
+        ::Block const&                        permutationToPlace,
+        ::Scripting::WeakLifetimeScope const& scope
+#endif // @header-generator platform
+    );
+    // NOLINTEND
+};
+
+} // namespace ScriptModuleMinecraft

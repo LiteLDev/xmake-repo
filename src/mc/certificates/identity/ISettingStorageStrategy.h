@@ -1,0 +1,55 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+#if defined(LL_PLAT_A) // @header-generator platform
+// auto generated forward declare list
+// clang-format off
+namespace Json { class Value; }
+// clang-format on
+
+#else // @header-generator platform
+#endif // @header-generator platform
+namespace Identity {
+
+#if defined(LL_PLAT_A) // @header-generator platform
+struct ISettingStorageStrategy {
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~ISettingStorageStrategy() = default;
+
+    virtual ::Json::Value clientConfig() const = 0;
+
+    virtual void hasDemoSignedInEver(bool) const = 0;
+
+    virtual bool hasDemoSignedInEver() const = 0;
+
+    virtual void hasSignedInEver(bool) const = 0;
+
+    virtual bool hasSignedInEver() const = 0;
+
+    virtual long maxSignInExpiration() const = 0;
+
+    virtual long maxGraphExpiration() const = 0;
+
+    virtual void rememberMe(bool) const = 0;
+
+    virtual bool rememberMe() const = 0;
+
+    virtual void signedIn(bool) const = 0;
+
+    virtual bool signedIn() const = 0;
+
+    virtual long tokenRefreshThreshold() const = 0;
+
+    virtual void userHint(std::string const&) const = 0;
+
+    virtual std::string userHint() const = 0;
+    // NOLINTEND
+};
+#else // @header-generator platform
+struct ISettingStorageStrategy {};
+#endif // @header-generator platform
+
+} // namespace Identity

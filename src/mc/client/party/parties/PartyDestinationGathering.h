@@ -1,0 +1,30 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+#if defined(LL_PLAT_A) // @header-generator platform
+// auto generated inclusion list
+#include "mc/client/party/parties/PartyExperienceConnectionInfo.h"
+#include "mc/network/packet/PartyDestinationCookieIntent.h"
+
+#else // @header-generator platform
+#endif // @header-generator platform
+namespace Parties {
+
+#if defined(LL_PLAT_A) // @header-generator platform
+struct PartyDestinationGathering {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 152, ::Parties::PartyExperienceConnectionInfo>  experienceConnectionInfo;
+    ::ll::TypedStorage<8, 24, std::string>                                scanText;
+    ::ll::TypedStorage<8, 24, std::string>                                redactedText;
+    ::ll::TypedStorage<8, 32, std::optional<std::string>>                 mCookie;
+    ::ll::TypedStorage<1, 2, std::optional<PartyDestinationCookieIntent>> mIntent;
+    // NOLINTEND
+};
+#else // @header-generator platform
+struct PartyDestinationGathering {};
+#endif // @header-generator platform
+
+} // namespace Parties

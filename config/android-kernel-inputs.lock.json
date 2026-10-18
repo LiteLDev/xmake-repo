@@ -18,7 +18,7 @@
     "M": "c9a3b9cb0507cfb072f3d33be4324d1642c24889",
     "P5": "b46b8ee62f27c0f7337b0d454fd10999366c0107",
     "PL": "7cf14db14f13cf87a408ecaf09fc9dce9c6cc7ed",
-    "S": "2ae3e432d1e4b003e89194979c13e7e437685056"
+    "S": "84f07b53a3a7db6b611e70a95869690c49334661"
   },
   "dependency_header_api": 21,
   "dependency_manifest_sha256": "66DDEF1DB1B89D872EDAC888F3B07C0C19F052C325D43D1B8FB97CF3A6855262",
@@ -37,7 +37,7 @@
   "header": {
     "android_effective_sha256": "6EFB923DE86B31A8B3197C9C4201C3CEF579A7C91900897C63E37FF315D3125F",
     "count": 17367,
-    "manifest_sha256": "4A898A478ECF8D96D91AAB47BAAF20B7D40004A093486447E4984470488CDEB0"
+    "manifest_sha256": "1C77F1DB12840C6EDFE857F283569D703B7BC5F85F43971AB9C9E34E3BF900FE"
   },
   "ndk": {
     "files": {
@@ -92,28 +92,28 @@
     "runtime": "c++_shared",
     "sdkAbi": "p7-cxx23-exceptions-rtti-v1"
   },
-  "source_layout": "shared-v1",
+  "source_layout": "unified-client-v1",
   "sources": {
     "example": [
       "examples/android-p7-mod/src/main.cpp"
     ],
     "kernel": [
-      "src-android/ll/api/data/Nbt_android.cpp",
-      "src-android/ll/api/thread/ThreadName_android.cpp",
-      "src/ll/api/thread/GlobalThreadPauser_android.cpp",
-      "src-android/ll/api/utils/ErrorUtils_android.cpp",
-      "src-android/ll/api/utils/FromChars_android.cpp",
-      "src-android/ll/api/utils/StacktraceUtils_android.cpp",
-      "src-android/ll/api/utils/StringUtils_android.cpp",
-      "src-android/ll/api/utils/SystemUtils_android.cpp",
-      "src-android/ll/api/event/client/ClientEvent.cpp",
-      "src-android/ll/api/event/client/ClientExitLevelEvent.cpp",
-      "src-android/ll/api/event/client/ClientJoinLevelEvent.cpp",
-      "src-android/ll/core/io/DefaultOutput_android.cpp",
-      "src-android/ll/core/mod/ElfModule.cpp",
-      "src-android/ll/core/mod/ModuleFiles.cpp",
-      "src-android/ll/core/mod/NativeModPlatform.cpp",
-      "src-android/ll/core/tweak/MemoryOperators_android.cpp",
+      "src-client/ll/api/data/Nbt.cpp",
+      "src/ll/api/thread/ThreadName.cpp",
+      "src/ll/api/thread/GlobalThreadPauser.cpp",
+      "src/ll/api/utils/ErrorUtils.cpp",
+      "src/ll/api/utils/FromChars.cpp",
+      "src/ll/api/utils/StacktraceUtils.cpp",
+      "src/ll/api/utils/StringUtils.cpp",
+      "src/ll/api/utils/SystemUtils.cpp",
+      "src-client/ll/api/event/client/ClientEvent.cpp",
+      "src-client/ll/api/event/client/ClientExitLevelEvent.cpp",
+      "src-client/ll/api/event/client/ClientJoinLevelEvent.cpp",
+      "src-client/ll/core/io/Output.cpp",
+      "src-client/ll/core/mod/ElfModule.cpp",
+      "src-client/ll/core/mod/ModuleFiles.cpp",
+      "src-client/ll/core/mod/NativeModPlatform.cpp",
+      "src/ll/core/tweak/MemoryOperators.cpp",
       "src/ll/api/Expected.cpp",
       "src/ll/api/ExpectedOutput.cpp",
       "src/ll/api/Versions.cpp",
@@ -141,13 +141,12 @@
       "src/ll/api/service/GamingStatus.cpp",
       "src/ll/api/thread/ThreadPoolExecutor.cpp",
       "src/ll/api/utils/ErrorOutput.cpp",
-      "src/ll/api/utils/StringUtils.cpp",
       "src/ll/core/LeviLamina.cpp",
       "src/ll/core/io/Output.cpp",
       "src/ll/core/mod/ModLoadPlanner.cpp",
       "src/ll/core/mod/ModRegistrar.cpp",
       "src/ll/core/mod/NativeModManager.cpp",
-      "src-android/ll/core/main_android.cpp"
+      "src-client/ll/core/main.cpp"
     ]
   },
   "target": {

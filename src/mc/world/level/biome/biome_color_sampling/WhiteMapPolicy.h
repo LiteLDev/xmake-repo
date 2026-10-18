@@ -1,0 +1,57 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/world/level/biome/biome_color_sampling/MapPolicy.h"
+
+// auto generated forward declare list
+// clang-format off
+class BlockPos;
+class BlockSource;
+namespace mce { class Color; }
+// clang-format on
+
+namespace BiomeColorSampling {
+
+class WhiteMapPolicy : public ::BiomeColorSampling::MapPolicy {
+public:
+    // virtual functions
+    // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    virtual ~WhiteMapPolicy();
+
+    virtual ::mce::Color get(::BlockSource&, ::BlockPos const&) const;
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+#else // @header-generator platform
+    virtual ::mce::Color get(::BlockSource&, ::BlockPos const&) const /*override*/;
+#endif // @header-generator platform
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    MCNAPI ::mce::Color $get(::BlockSource&, ::BlockPos const&) const;
+    // NOLINTEND
+#else // @header-generator platform
+    MCFOLD ::mce::Color $get(::BlockSource&, ::BlockPos const&) const;
+#endif // @header-generator platform
+
+#if defined(LL_PLAT_A) // @header-generator platform
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+#else // @header-generator platform
+
+#endif // @header-generator platform
+    // NOLINTEND
+};
+
+} // namespace BiomeColorSampling

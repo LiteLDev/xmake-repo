@@ -1,0 +1,91 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+#if defined(LL_PLAT_A) // @header-generator platform
+struct ItemRendererData {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<4, 4, int>          itemIdAux;
+    ::ll::TypedStorage<1, 1, bool>         isEmptyStack;
+    ::ll::TypedStorage<4, 4, int>          chargedItem;
+    ::ll::TypedStorage<4, 4, int>          itemCustomColor;
+    ::ll::TypedStorage<4, 4, int>          itemPickupTime;
+    ::ll::TypedStorage<1, 1, bool>         showItemPickup;
+    ::ll::TypedStorage<8, 24, std::string> armorTrimMaterial;
+    ::ll::TypedStorage<8, 24, std::string> bannerPatterns;
+    ::ll::TypedStorage<8, 24, std::string> bannerColors;
+    ::ll::TypedStorage<4, 4, int>          bannerType;
+    ::ll::TypedStorage<8, 24, std::string> decoratedPotSherds;
+    ::ll::TypedStorage<4, 4, int>          serializedActorPose;
+    ::ll::TypedStorage<1, 1, bool>         shieldIsActive;
+    ::ll::TypedStorage<4, 4, int>          shieldBaseColor;
+    ::ll::TypedStorage<4, 4, int>          shieldBaseColorHovered;
+    ::ll::TypedStorage<4, 4, int>          itemLoadstoneTrackingHandle;
+    ::ll::TypedStorage<1, 1, bool>         showBundleOpenFront;
+    ::ll::TypedStorage<1, 1, bool>         showBundleOpenBack;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI ItemRendererData();
+
+    MCNAPI ~ItemRendererData();
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor();
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+};
+#else // @header-generator platform
+#if defined(LL_PLAT_C) // @header-generator platform
+struct ItemRendererData {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<4, 4, int>            itemIdAux;
+    ::ll::TypedStorage<1, 1, bool>           isEmptyStack;
+    ::ll::TypedStorage<4, 4, int>            chargedItem;
+    ::ll::TypedStorage<4, 4, int>            itemCustomColor;
+    ::ll::TypedStorage<4, 4, int>            itemPickupTime;
+    ::ll::TypedStorage<1, 1, bool>           showItemPickup;
+    ::ll::TypedStorage<8, 32, ::std::string> armorTrimMaterial;
+    ::ll::TypedStorage<8, 32, ::std::string> bannerPatterns;
+    ::ll::TypedStorage<8, 32, ::std::string> bannerColors;
+    ::ll::TypedStorage<4, 4, int>            bannerType;
+    ::ll::TypedStorage<8, 32, ::std::string> decoratedPotSherds;
+    ::ll::TypedStorage<4, 4, int>            serializedActorPose;
+    ::ll::TypedStorage<1, 1, bool>           shieldIsActive;
+    ::ll::TypedStorage<4, 4, int>            shieldBaseColor;
+    ::ll::TypedStorage<4, 4, int>            shieldBaseColorHovered;
+    ::ll::TypedStorage<4, 4, int>            itemLoadstoneTrackingHandle;
+    ::ll::TypedStorage<1, 1, bool>           showBundleOpenFront;
+    ::ll::TypedStorage<1, 1, bool>           showBundleOpenBack;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCAPI ~ItemRendererData();
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCAPI void $dtor();
+    // NOLINTEND
+};
+#else // @header-generator platform
+struct ItemRendererData {};
+#endif // @header-generator platform
+#endif // @header-generator platform

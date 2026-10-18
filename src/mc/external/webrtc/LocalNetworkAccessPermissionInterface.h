@@ -1,0 +1,34 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/external/absl/AnyInvocable.h"
+#include "mc/external/webrtc/LocalNetworkAccessPermissionStatus.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace webrtc { class SocketAddress; }
+// clang-format on
+
+namespace webrtc {
+
+class LocalNetworkAccessPermissionInterface {
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~LocalNetworkAccessPermissionInterface() = default;
+
+    virtual bool ShouldRequestPermission(::webrtc::SocketAddress const&);
+
+    virtual void RequestPermission(
+        ::webrtc::SocketAddress const&,
+        ::absl::AnyInvocable<void(::webrtc::LocalNetworkAccessPermissionStatus)>
+    ) = 0;
+    // NOLINTEND
+};
+
+} // namespace webrtc
+#endif // @header-generator platform

@@ -1,0 +1,49 @@
+#if defined(LL_PLAT_C) || defined(LL_PLAT_A) // @header-generator platform
+#if defined(LL_PLAT_A) // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/scripting/modules/minecraft/actor/ScriptActorData.h"
+#include "mc/world/item/ItemInstance.h"
+
+// auto generated forward declare list
+// clang-format off
+class Player;
+struct ItemStartUseEvent;
+// clang-format on
+
+namespace ScriptModuleMinecraft {
+
+struct ScriptItemStartUseIntermediateData {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 88, ::ScriptModuleMinecraft::ScriptActorData const> mPlayer;
+    ::ll::TypedStorage<8, 128, ::ItemInstance const>                          mItemInstance;
+    ::ll::TypedStorage<4, 4, int>                                             mUseDuration;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    ScriptItemStartUseIntermediateData();
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI ScriptItemStartUseIntermediateData(::Player const&, ::ItemStartUseEvent const&);
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor(::Player const&, ::ItemStartUseEvent const&);
+    // NOLINTEND
+};
+
+} // namespace ScriptModuleMinecraft
+#else // @header-generator platform
+#endif // @header-generator platform
+#else // @header-generator platform
+#endif // @header-generator platform

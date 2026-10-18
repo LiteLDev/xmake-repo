@@ -1,0 +1,48 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+namespace webrtc {
+
+struct FrameDependencyStructure {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::UntypedStorage<4, 4>  mUnk17d6b4;
+    ::ll::UntypedStorage<4, 4>  mUnkf7f0e5;
+    ::ll::UntypedStorage<4, 4>  mUnk227561;
+    ::ll::UntypedStorage<8, 48> mUnk44b88a;
+    ::ll::UntypedStorage<8, 40> mUnkf53829;
+    ::ll::UntypedStorage<8, 24> mUnk51f73e;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    FrameDependencyStructure& operator=(FrameDependencyStructure const&);
+    FrameDependencyStructure();
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI FrameDependencyStructure(::webrtc::FrameDependencyStructure const&);
+
+    MCNAPI ~FrameDependencyStructure();
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor(::webrtc::FrameDependencyStructure const&);
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+};
+
+} // namespace webrtc
+#endif // @header-generator platform

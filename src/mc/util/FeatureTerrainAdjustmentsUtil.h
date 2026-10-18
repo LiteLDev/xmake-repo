@@ -1,0 +1,20 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+class BlockPos;
+class ChunkPos;
+// clang-format on
+
+namespace FeatureTerrainAdjustmentsUtil {
+// functions
+// NOLINTBEGIN
+MCNAPI ::std::vector<::ChunkPos> _findIntersectingChunks(::BlockPos const& bbMin, ::BlockPos const& bbMax);
+// NOLINTEND
+
+} // namespace FeatureTerrainAdjustmentsUtil
+#endif // @header-generator platform

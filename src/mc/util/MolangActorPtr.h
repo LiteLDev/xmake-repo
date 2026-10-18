@@ -1,0 +1,23 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+class Actor;
+// clang-format on
+
+struct MolangActorPtr {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 8, ::Actor*> mActor;
+    // NOLINTEND
+#if defined(LL_PLAT_A) // @header-generator platform
+
+public:
+    // prevent constructor by default
+    MolangActorPtr();
+#else // @header-generator platform
+#endif // @header-generator platform
+};

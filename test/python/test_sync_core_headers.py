@@ -83,11 +83,13 @@ class CoreMergeTests(unittest.TestCase):
     def test_real_merge_preserves_extensions_add_delete_rename_and_android(self):
         result = self.run_sync()
         self.assertEqual(result["effective_headers"]["android"], core.headers.identity(self.android))
-        for layer in ("src-client", "src-server"):
-            self.assertIn(b"extension", (self.repo / layer / "mc/Thing.h").read_bytes())
-            self.assertFalse((self.repo / layer / "mc/Remove.h").exists())
-            self.assertFalse((self.repo / layer / "mc/OldName.h").exists())
-            self.assertTrue((self.repo / layer / "mc/NewName.h").exists())
+        common = (self.repo / "src/mc/Thing.h").read_bytes().replace(b"\r\n", b"\n")
+        for platform in ("client", "server"):
+            self.assertIn(b"extension", core.headers.project_declarations(common, platform))
+        self.assertEqual(core.headers.project_declarations(common, "android"), self.android["mc/Thing.h"])
+        self.assertFalse((self.repo / "src/mc/Remove.h").exists())
+        self.assertFalse((self.repo / "src/mc/OldName.h").exists())
+        self.assertTrue((self.repo / "src/mc/NewName.h").exists())
         self.assertEqual((self.repo / "src/ll/Core.cpp").read_text(), "int ll_core = 1;\n")
         self.assertEqual(self.git("diff", "--name-only", "--diff-filter=U"), b"")
         self.commit("real M + S integration")
@@ -106,14 +108,15 @@ class CoreMergeTests(unittest.TestCase):
         self.assertEqual(self.git("status", "--porcelain"), b"")
 
     def test_add_add_header_conflict_uses_actual_upstream_include_precedence(self):
-        self.assertTrue(self.git("ls-files", "--unmerged", "--", "src-client/mc/Clash.h"))
         self.run_sync()
-        self.assertEqual((self.repo / "src-client/mc/Clash.h").read_text(), "struct CommonPrecedence {};\n")
+        common = (self.repo / "src/mc/Clash.h").read_bytes().replace(b"\r\n", b"\n")
+        self.assertEqual(core.headers.project_declarations(common, "client"), b"struct CommonPrecedence {};\n")
+        self.assertFalse((self.repo / "src-client/mc/Clash.h").exists())
 
     def test_untracked_header_collision_is_preserved(self):
         # A new upstream-only file does not necessarily collide in this merge, so
         # deliberately remove its index entry and replace it with untracked work.
-        path = "src-client/mc/New.h"
+        path = "src/mc/New.h"
         self.git("update-index", "--force-remove", "--", path)
         self.write(path, "// user work\n")
         with self.assertRaisesRegex(core.headers.SyncError, "untracked"):
@@ -141,7 +144,7 @@ class CoreMergeTests(unittest.TestCase):
     def test_unverified_header_changes_are_not_silently_replaced(self):
         self.git("merge", "--abort")
         self.git("checkout", "header")
-        self.write("src-client/mc/Thing.h", "// newer header input\n")
+        self.write("src/mc/Thing.h", "// newer header input\n")
         self.commit("invalid S mutation")
         changed = self.rev()
         with self.assertRaisesRegex(core.headers.SyncError, "faithful H"):

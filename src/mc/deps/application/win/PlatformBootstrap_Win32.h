@@ -1,0 +1,121 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+#if defined(LL_PLAT_C) // @header-generator platform
+#else // @header-generator platform
+// auto generated inclusion list
+#include "mc/deps/application/PlatformBootstrap.h"
+
+#endif // @header-generator platform
+namespace Bedrock {
+
+#if defined(LL_PLAT_C) // @header-generator platform
+class PlatformBootstrap_Win32 {};
+#else // @header-generator platform
+class PlatformBootstrap_Win32 : public ::Bedrock::PlatformBootstrap {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::UntypedStorage<1, 1024> mUnkf4f4cd;
+    ::ll::UntypedStorage<1, 1024> mUnk13fc0c;
+    ::ll::UntypedStorage<1, 1024> mUnka54ae3;
+    ::ll::UntypedStorage<8, 8>    mUnk82acd3;
+    ::ll::UntypedStorage<8, 8>    mUnk3b1aee;
+    ::ll::UntypedStorage<8, 8>    mUnk60faae;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    PlatformBootstrap_Win32& operator=(PlatformBootstrap_Win32 const&);
+    PlatformBootstrap_Win32(PlatformBootstrap_Win32 const&);
+    PlatformBootstrap_Win32();
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual void initialize() /*override*/;
+
+    virtual ::std::string_view getAssetRoot() /*override*/;
+
+    virtual ::std::string_view getSaveDataRoot() /*override*/;
+
+    virtual ::Bedrock::PlatformBootstrap::LoadResult rawLoadAssetFile(
+        char*       buffer,
+        uint64      bufferSize,
+        char const* path,
+        char*       errorBuffer,
+        uint64      errorBufferSize
+    ) /*override*/;
+
+    virtual ::Bedrock::PlatformBootstrap::LoadResult rawLoadDataFile(
+        char*       buffer,
+        uint64      bufferSize,
+        char const* path,
+        char*       errorBuffer,
+        uint64      errorBufferSize
+    ) /*override*/;
+
+    virtual ::Bedrock::PlatformBootstrap::SaveResult rawSaveDataFile(
+        char const* buffer,
+        uint64      bufferSize,
+        char const* path,
+        bool,
+        char*  errorBuffer,
+        uint64 errorBufferSize
+    ) /*override*/;
+
+    virtual ::Bedrock::PlatformBootstrap::LoadResult rawLoadFromCustomRoot(
+        char*       buffer,
+        uint64      bufferSize,
+        char const* fullPath,
+        char*       errorBuffer,
+        uint64      errorBufferSize
+    ) /*override*/;
+
+    virtual ::Bedrock::PlatformBootstrap::CreateDirectoryResult
+    rawCreateDirectory(char const* path, char* errorBuffer, uint64 errorBufferSize) /*override*/;
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCNAPI void $initialize();
+
+    MCNAPI ::std::string_view $getAssetRoot();
+
+    MCNAPI ::std::string_view $getSaveDataRoot();
+
+    MCNAPI ::Bedrock::PlatformBootstrap::LoadResult
+    $rawLoadAssetFile(char* buffer, uint64 bufferSize, char const* path, char* errorBuffer, uint64 errorBufferSize);
+
+    MCNAPI ::Bedrock::PlatformBootstrap::LoadResult
+    $rawLoadDataFile(char* buffer, uint64 bufferSize, char const* path, char* errorBuffer, uint64 errorBufferSize);
+
+    MCNAPI ::Bedrock::PlatformBootstrap::SaveResult $rawSaveDataFile(
+        char const* buffer,
+        uint64      bufferSize,
+        char const* path,
+        bool,
+        char*  errorBuffer,
+        uint64 errorBufferSize
+    );
+
+    MCNAPI ::Bedrock::PlatformBootstrap::LoadResult $rawLoadFromCustomRoot(
+        char*       buffer,
+        uint64      bufferSize,
+        char const* fullPath,
+        char*       errorBuffer,
+        uint64      errorBufferSize
+    );
+
+    MCNAPI ::Bedrock::PlatformBootstrap::CreateDirectoryResult
+    $rawCreateDirectory(char const* path, char* errorBuffer, uint64 errorBufferSize);
+    // NOLINTEND
+};
+#endif // @header-generator platform
+
+} // namespace Bedrock
+#endif // @header-generator platform

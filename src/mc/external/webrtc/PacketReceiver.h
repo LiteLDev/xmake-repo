@@ -1,0 +1,36 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/external/absl/AnyInvocable.h"
+#include "mc/external/webrtc/MediaType.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace webrtc { class CopyOnWriteBuffer; }
+namespace webrtc { class RtpPacketReceived; }
+// clang-format on
+
+namespace webrtc {
+
+class PacketReceiver {
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual void DeliverRtcpPacket(::webrtc::CopyOnWriteBuffer) = 0;
+
+    virtual void DeliverRtpPacket(
+        ::webrtc::MediaType,
+        ::webrtc::RtpPacketReceived,
+        ::absl::AnyInvocable<bool(::webrtc::RtpPacketReceived const&)>
+    ) = 0;
+
+    virtual ~PacketReceiver() = default;
+    // NOLINTEND
+};
+
+} // namespace webrtc
+#endif // @header-generator platform

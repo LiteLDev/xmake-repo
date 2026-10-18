@@ -1,0 +1,30 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+namespace webrtc {
+
+class RandomGenerator {
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~RandomGenerator() = default;
+
+    virtual bool Init(void const* seed, uint64 len);
+
+    virtual bool Generate(void* buf, uint64 len) = 0;
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCNAPI bool $Init(void const* seed, uint64 len);
+
+
+    // NOLINTEND
+};
+
+} // namespace webrtc
+#endif // @header-generator platform

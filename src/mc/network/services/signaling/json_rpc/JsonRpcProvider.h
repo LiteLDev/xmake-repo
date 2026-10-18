@@ -1,0 +1,177 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#if defined(LL_PLAT_A) // @header-generator platform
+#include "mc/deps/cereal/ReflectionCtx.h"
+#include "mc/deps/core/threading/Async.h"
+#else // @header-generator platform
+#endif // @header-generator platform
+#include "mc/platform/Result.h"
+
+// auto generated forward declare list
+// clang-format off
+class IJsonRpcComponent;
+class ISignalingJsonRpcInterop;
+#if defined(LL_PLAT_A) // @header-generator platform
+class TaskGroup;
+#else // @header-generator platform
+#endif // @header-generator platform
+namespace Json { class Value; }
+namespace JsonRpc { class IResultHandler; }
+namespace JsonRpc { class JsonRpcError; }
+// clang-format on
+
+namespace JsonRpc {
+
+#if defined(LL_PLAT_A) // @header-generator platform
+class JsonRpcProvider : public ::std::enable_shared_from_this<JsonRpc::JsonRpcProvider> {
+#else // @header-generator platform
+class JsonRpcProvider : public ::std::enable_shared_from_this<::JsonRpc::JsonRpcProvider> {
+#endif // @header-generator platform
+public:
+    // JsonRpcProvider inner types declare
+    // clang-format off
+    struct JsonRpcPendingResult;
+    // clang-format on
+
+    // JsonRpcProvider inner types define
+    struct JsonRpcPendingResult {
+    public:
+        // member variables
+        // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+        ::ll::TypedStorage<8, 8, std::unique_ptr<JsonRpc::IResultHandler>> mHandler;
+        ::ll::UntypedStorage<8, 16>                                        mExpirationTask;
+#else // @header-generator platform
+        ::ll::UntypedStorage<8, 8>  mUnka3b5b8;
+        ::ll::UntypedStorage<8, 16> mUnk16e763;
+#endif // @header-generator platform
+        // NOLINTEND
+
+    public:
+        // prevent constructor by default
+        JsonRpcPendingResult& operator=(JsonRpcPendingResult const&);
+        JsonRpcPendingResult(JsonRpcPendingResult const&);
+        JsonRpcPendingResult();
+
+    public:
+        // member functions
+        // NOLINTBEGIN
+        MCNAPI ~JsonRpcPendingResult();
+        // NOLINTEND
+
+    public:
+        // destructor thunk
+        // NOLINTBEGIN
+        MCNAPI void $dtor();
+        // NOLINTEND
+    };
+
+public:
+    // member variables
+    // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    // clang-format off
+    ::ll::UntypedStorage<1, 144> mJsonRpcMethodsMutex;
+    ::ll::TypedStorage<8, 40, std::unordered_map<std::string, std::unique_ptr<JsonRpc::IResultHandler>>> mJsonRpcMethods;
+    ::ll::UntypedStorage<8, 40> mJsonRpcRequestMethods;
+    ::ll::TypedStorage<4, 40, std::mutex> mJsonRpcResultsMutex;
+    ::ll::TypedStorage<8, 40, std::unordered_map<std::string, JsonRpc::JsonRpcProvider::JsonRpcPendingResult>> mJsonRpcPendingResults;
+    ::ll::TypedStorage<8, 112, ::cereal::ReflectionCtx> mCerealCtx;
+    ::ll::TypedStorage<8, 8, std::unique_ptr<TaskGroup> const> mTaskGroup;
+    ::ll::TypedStorage<8, 24, std::vector<std::shared_ptr<IJsonRpcComponent>>> mComponents;
+    ::ll::TypedStorage<8, 8, std::chrono::duration<long long, std::ratio<1, 1000000000>>> mResultTimeout;
+    ::ll::TypedStorage<8, 16, std::shared_ptr<ISignalingJsonRpcInterop>> mSignalingServiceInterop;
+    // clang-format on
+#else // @header-generator platform
+    ::ll::UntypedStorage<8, 8>   mUnk5861b3;
+    ::ll::UntypedStorage<8, 64>  mUnk19d3ca;
+    ::ll::UntypedStorage<8, 64>  mUnkc85114;
+    ::ll::UntypedStorage<8, 80>  mUnk1a0d61;
+    ::ll::UntypedStorage<8, 64>  mUnk29ed83;
+    ::ll::UntypedStorage<8, 128> mUnk4502ec;
+    ::ll::UntypedStorage<8, 8>   mUnkcb9720;
+    ::ll::UntypedStorage<8, 24>  mUnkecd6dc;
+    ::ll::UntypedStorage<8, 8>   mUnkaeebe0;
+    ::ll::UntypedStorage<8, 16>  mUnk63ee1e;
+#endif // @header-generator platform
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+    JsonRpcProvider& operator=(JsonRpcProvider const&);
+    JsonRpcProvider(JsonRpcProvider const&);
+#endif // @header-generator platform
+    JsonRpcProvider();
+
+public:
+    // member functions
+    // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    MCNAPI JsonRpcProvider(std::shared_ptr<ISignalingJsonRpcInterop>, std::vector<std::shared_ptr<IJsonRpcComponent>>);
+#else // @header-generator platform
+    MCNAPI JsonRpcProvider(
+        ::std::shared_ptr<::ISignalingJsonRpcInterop>         signalingServiceInterop,
+        ::std::vector<::std::shared_ptr<::IJsonRpcComponent>> components
+    );
+#endif // @header-generator platform
+
+#if defined(LL_PLAT_A) // @header-generator platform
+    MCNAPI void _expirePendingResult(std::string const&);
+#else // @header-generator platform
+    MCNAPI void _expirePendingResult(::std::string const& id);
+#endif // @header-generator platform
+
+#if defined(LL_PLAT_A) // @header-generator platform
+    MCNAPI ::cereal::ReflectionCtx& getReflectionContext();
+#else // @header-generator platform
+    MCNAPI void
+    handleJsonRpcResult(::std::string const& id, ::Bedrock::Result<::Json::Value, ::JsonRpc::JsonRpcError>&& result);
+#endif // @header-generator platform
+
+#if defined(LL_PLAT_A) // @header-generator platform
+    MCNAPI void handleJsonRpcResult(std::string const&, ::Bedrock::Result<Json::Value, JsonRpc::JsonRpcError>&&);
+#else // @header-generator platform
+    MCNAPI void onMessage(::std::string_view incomingMessage);
+#endif // @header-generator platform
+
+#if defined(LL_PLAT_A) // @header-generator platform
+    MCNAPI void initialize();
+
+    MCNAPI void onMessage(std::string_view);
+
+    MCNAPI std::unique_ptr<std::string, std::function<void(std::string*)>>
+           registerJsonRpcMethod(std::string, std::unique_ptr<JsonRpc::IResultHandler>);
+#else // @header-generator platform
+    MCNAPI ::std::unique_ptr<::std::string, ::std::function<void(::std::string*)>>
+    registerJsonRpcMethod(::std::string method, ::std::unique_ptr<::JsonRpc::IResultHandler> handler);
+#endif // @header-generator platform
+
+    MCNAPI ~JsonRpcProvider();
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    MCNAPI void* $ctor(std::shared_ptr<ISignalingJsonRpcInterop>, std::vector<std::shared_ptr<IJsonRpcComponent>>);
+#else // @header-generator platform
+    MCNAPI void* $ctor(
+        ::std::shared_ptr<::ISignalingJsonRpcInterop>         signalingServiceInterop,
+        ::std::vector<::std::shared_ptr<::IJsonRpcComponent>> components
+    );
+#endif // @header-generator platform
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+};
+
+} // namespace JsonRpc

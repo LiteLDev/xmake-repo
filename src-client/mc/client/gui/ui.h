@@ -1,3 +1,6 @@
+#if defined(LL_PLAT_C) || defined(LL_PLAT_A) // @header-generator platform
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
 #pragma once
 
 #include "mc/_HeaderOutputPredefine.h"
@@ -22,3 +25,6 @@ parseLayoutAxis(::Json::Value const& val, int index, ::ui::LayoutAxisType defaul
 // NOLINTEND
 
 } // namespace ui
+#endif // @header-generator platform
+#else // @header-generator platform
+#endif // @header-generator platform

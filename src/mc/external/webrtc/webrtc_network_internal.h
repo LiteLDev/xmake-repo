@@ -1,0 +1,20 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace webrtc { class Network; }
+// clang-format on
+
+namespace webrtc::webrtc_network_internal {
+// functions
+// NOLINTBEGIN
+MCNAPI bool
+CompareNetworks(::std::unique_ptr<::webrtc::Network> const& a, ::std::unique_ptr<::webrtc::Network> const& b);
+// NOLINTEND
+
+} // namespace webrtc::webrtc_network_internal
+#endif // @header-generator platform

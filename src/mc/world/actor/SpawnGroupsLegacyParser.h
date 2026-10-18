@@ -1,0 +1,21 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+struct ActorSpawnRuleData;
+namespace Puv { class Input; }
+namespace Puv { class Logger; }
+// clang-format on
+
+namespace SpawnGroupsLegacyParser {
+// functions
+// NOLINTBEGIN
+MCAPI ::ActorSpawnRuleData parseSpawnRulesData(::Puv::Input const& input, ::Puv::Logger& logger);
+// NOLINTEND
+
+} // namespace SpawnGroupsLegacyParser
+#endif // @header-generator platform

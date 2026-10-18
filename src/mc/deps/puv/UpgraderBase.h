@@ -1,0 +1,70 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+#if defined(LL_PLAT_A) // @header-generator platform
+// auto generated inclusion list
+#include "mc/deps/core/sem_ver/SemVersion.h"
+#else // @header-generator platform
+// auto generated forward declare list
+// clang-format off
+class SemVersion;
+namespace Puv { class LoadResultAny; }
+// clang-format on
+#endif // @header-generator platform
+
+namespace Puv {
+
+class UpgraderBase {
+public:
+    // member variables
+    // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    ::ll::UntypedStorage<8, 24> mSourceVersion;
+    ::ll::UntypedStorage<8, 24> mTargetVersion;
+#else // @header-generator platform
+    ::ll::UntypedStorage<8, 24> mUnk71ed8e;
+    ::ll::UntypedStorage<8, 24> mUnkb85c5a;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    UpgraderBase& operator=(UpgraderBase const&);
+    UpgraderBase(UpgraderBase const&);
+    UpgraderBase();
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~UpgraderBase();
+
+    virtual ::Puv::LoadResultAny doUpgrade(::Puv::LoadResultAny source) const = 0;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI UpgraderBase(::SemVersion const& from, ::SemVersion const& to);
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCNAPI void* $ctor(::SemVersion const& from, ::SemVersion const& to);
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+#endif // @header-generator platform
+    // NOLINTEND
+};
+
+} // namespace Puv

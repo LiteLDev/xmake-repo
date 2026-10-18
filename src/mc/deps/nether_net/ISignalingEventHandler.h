@@ -1,0 +1,26 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace NetherNet::SignalingEvents { struct MessageReceived; }
+// clang-format on
+
+namespace NetherNet {
+
+struct ISignalingEventHandler {
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~ISignalingEventHandler() = default;
+
+#if defined(LL_PLAT_A) // @header-generator platform
+    virtual void OnSignalingEvent(::NetherNet::SignalingEvents::MessageReceived const&);
+#else // @header-generator platform
+    virtual void OnSignalingEvent(::NetherNet::SignalingEvents::MessageReceived const& event);
+#endif // @header-generator platform
+    // NOLINTEND
+};
+
+} // namespace NetherNet

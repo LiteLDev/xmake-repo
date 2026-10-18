@@ -1,0 +1,24 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+class Mob;
+class Vec3;
+struct TeleportToOwnerParameters;
+// clang-format on
+
+namespace TeleportToOwnerUtils {
+// functions
+// NOLINTBEGIN
+MCNAPI void teleport(::Mob& mob, ::Vec3 position);
+
+MCNAPI ::std::optional<::Vec3>
+tryToGetTeleportPosition(::Mob const& mob, ::Mob const& owner, ::TeleportToOwnerParameters const& teleportParameters);
+// NOLINTEND
+
+} // namespace TeleportToOwnerUtils
+#endif // @header-generator platform

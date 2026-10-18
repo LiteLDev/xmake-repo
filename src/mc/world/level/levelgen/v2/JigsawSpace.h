@@ -1,0 +1,35 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/world/level/levelgen/structure/BoundingBox.h"
+
+namespace br::worldgen {
+
+struct JigsawSpace {
+public:
+    // member variables
+    // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    ::ll::TypedStorage<4, 24, ::BoundingBox>            mMySpace;
+    ::ll::TypedStorage<8, 24, std::vector<BoundingBox>> mChildrensSpace;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    JigsawSpace& operator=(JigsawSpace const&);
+    JigsawSpace();
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI void addChild(::BoundingBox);
+#else // @header-generator platform
+    ::ll::TypedStorage<4, 24, ::BoundingBox>                mMySpace;
+    ::ll::TypedStorage<8, 24, ::std::vector<::BoundingBox>> mChildrensSpace;
+#endif // @header-generator platform
+    // NOLINTEND
+};
+
+} // namespace br::worldgen

@@ -1,0 +1,56 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+#if defined(LL_PLAT_A) // @header-generator platform
+enum BlockRenderLayer : uchar {
+    RENDERLAYER_DOUBLE_SIDED                                        = 0,
+    RENDERLAYER_RAY_TRACED_WATER                                    = 1,
+    RENDERLAYER_DEFERRED_WATER                                      = 2,
+    RENDERLAYER_BLEND                                               = 3,
+    RENDERLAYER_BLEND_TO_OPAQUE                                     = 4,
+    RENDERLAYER_OPAQUE                                              = 5,
+    RENDERLAYER_LIGHT_SOURCE                                        = 6,
+    RENDERLAYER_ALPHATEST_TO_OPAQUE                                 = 7,
+    RENDERLAYER_ALPHATEST                                           = 8,
+    RENDERLAYER_SEASONS_OPAQUE                                      = 9,
+    RENDERLAYER_SEASONS_ALPHATEST_TO_OPAQUE                         = 10,
+    RENDERLAYER_ALPHATEST_SINGLE_SIDE                               = 11,
+    RENDERLAYER_ALPHATEST_SINGLE_SIDE_TO_OPAQUE                     = 12,
+    RENDERLAYER_ENDPORTAL                                           = 13,
+    RENDERLAYER_BARRIER                                             = 14,
+    RENDERLAYER_LIGHT                                               = 15,
+    RENDERLAYER_STRUCTURE_VOID                                      = 16,
+    RENDERLAYER_SHIFT_OPAQUE_INTERNAL_ONLY                          = 17,
+    RENDERLAYER_SHIFT_ALPHATEST_TO_OPAQUE_INTERNAL_ONLY             = 18,
+    RENDERLAYER_SHIFT_ALPHATEST_INTERNAL_ONLY                       = 19,
+    RENDERLAYER_SHIFT_ALPHATEST_SINGLE_SIDE_INTERNAL_ONLY           = 20,
+    RENDERLAYER_SHIFT_ALPHATEST_SINGLE_SIDE_TO_OPAQUE_INTERNAL_ONLY = 21,
+    _RENDERLAYER_COUNT                                              = 22,
+#else // @header-generator platform
+enum class BlockRenderLayer : uchar {
+    RenderlayerDoubleSided                                  = 0,
+    RenderlayerRayTracedWater                               = 1,
+    RenderlayerDeferredWater                                = 2,
+    RenderlayerBlend                                        = 3,
+    RenderlayerBlendToOpaque                                = 4,
+    RenderlayerOpaque                                       = 5,
+    RenderlayerLightSource                                  = 6,
+    RenderlayerAlphatestToOpaque                            = 7,
+    RenderlayerAlphatest                                    = 8,
+    RenderlayerSeasonsOpaque                                = 9,
+    RenderlayerSeasonsAlphatestToOpaque                     = 10,
+    RenderlayerAlphatestSingleSide                          = 11,
+    RenderlayerAlphatestSingleSideToOpaque                  = 12,
+    RenderlayerEndportal                                    = 13,
+    RenderlayerBarrier                                      = 14,
+    RenderlayerLight                                        = 15,
+    RenderlayerStructureVoid                                = 16,
+    RenderlayerShiftOpaqueInternalOnly                      = 17,
+    RenderlayerShiftAlphatestToOpaqueInternalOnly           = 18,
+    RenderlayerShiftAlphatestInternalOnly                   = 19,
+    RenderlayerShiftAlphatestSingleSideInternalOnly         = 20,
+    RenderlayerShiftAlphatestSingleSideToOpaqueInternalOnly = 21,
+    RenderlayerCount                                        = 22,
+#endif // @header-generator platform
+};

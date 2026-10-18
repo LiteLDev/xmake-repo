@@ -1,0 +1,24 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+namespace webrtc {
+
+class StreamId {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::UntypedStorage<2, 2> mUnka677ad;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    StreamId& operator=(StreamId const&);
+    StreamId(StreamId const&);
+    StreamId();
+};
+
+} // namespace webrtc
+#endif // @header-generator platform

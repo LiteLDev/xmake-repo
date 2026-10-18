@@ -1,0 +1,37 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/core/math/Vec3.h"
+#include "mc/deps/vanilla_components/utilities/CollisionShapes.h"
+#include "mc/world/phys/AABB.h"
+
+struct RewindCollisionShapesComponent {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<4, 12, ::Vec3>            mFetchedPosition;
+    ::ll::TypedStorage<8, 56, ::CollisionShapes> mCollisionShapes;
+    ::ll::TypedStorage<4, 24, ::AABB>            mMoveCollisionLastFetchedBox;
+    // NOLINTEND
+#if defined(LL_PLAT_A) // @header-generator platform
+
+public:
+    // prevent constructor by default
+    RewindCollisionShapesComponent& operator=(RewindCollisionShapesComponent const&);
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI ~RewindCollisionShapesComponent();
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+#else // @header-generator platform
+#endif // @header-generator platform
+};

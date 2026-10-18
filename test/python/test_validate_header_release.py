@@ -48,7 +48,7 @@ class ReleaseValidatorTests(unittest.TestCase):
             validator.validate_release(self.root)
 
     def test_non_identical_overlap_is_rejected(self) -> None:
-        (self.root / "src-android" / "mc" / "Common.h").write_text("different\n", encoding="utf-8")
+        (self.root / "src-client" / "mc" / "Common.h").write_text("different\n", encoding="utf-8")
         with self.assertRaises(validator.ValidationError):
             validator.validate_release(self.root)
 
@@ -60,14 +60,14 @@ class ReleaseValidatorTests(unittest.TestCase):
             validator.validate_release(self.root)
 
     def test_hard_deny_and_synthetic_paths_are_rejected(self) -> None:
-        denied = self.root / "src-android" / "mc" / "Xal" / "Type.h"
+        denied = self.root / "src-client" / "mc" / "Xal" / "Type.h"
         denied.parent.mkdir()
         denied.write_text("#pragma once\n", encoding="utf-8")
         with self.assertRaises(validator.ValidationError):
             validator.validate_release(self.root)
 
     def test_legitimate_lambda_word_is_not_treated_as_a_synthetic_type(self) -> None:
-        header = self.root / "src-android" / "mc" / "WrappedLambdaDensityCalculator.h"
+        header = self.root / "src-client" / "mc" / "WrappedLambdaDensityCalculator.h"
         header.write_text("#pragma once\n", encoding="utf-8")
         self.write_metadata()
         validator.validate_release(self.root)

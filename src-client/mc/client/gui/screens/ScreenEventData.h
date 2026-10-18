@@ -1,3 +1,4 @@
+#if defined(LL_PLAT_C) || defined(LL_PLAT_A) // @header-generator platform
 #pragma once
 
 #include "mc/_HeaderOutputPredefine.h"
@@ -27,6 +28,27 @@ union ScreenEventData {
 public:
     // member variables
     // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    ::ll::UntypedStorage<8, 40> button;
+    ::ll::UntypedStorage<8, 40> textEdit;
+    ::ll::UntypedStorage<8, 40> hover;
+    ::ll::UntypedStorage<4, 40> pointerMove;
+    ::ll::UntypedStorage<4, 40> pointerHeld;
+    ::ll::UntypedStorage<4, 40> focusMove;
+    ::ll::UntypedStorage<4, 40> inputMode;
+    ::ll::UntypedStorage<4, 40> scrollRequest;
+    ::ll::UntypedStorage<4, 40> scrollDirectionRequest;
+    ::ll::UntypedStorage<8, 40> toggle;
+    ::ll::UntypedStorage<4, 40> controllerDirectionEventData;
+    ::ll::UntypedStorage<4, 40> rawInput;
+    ::ll::UntypedStorage<8, 40> slider;
+    ::ll::UntypedStorage<4, 40> animEventData;
+    ::ll::UntypedStorage<1, 40> locked;
+    ::ll::UntypedStorage<8, 40> clippedCollection;
+    ::ll::UntypedStorage<8, 40> clipStateChangeEventData;
+    ::ll::UntypedStorage<4, 40> textEditSelectedStateChangeEventData;
+    ::ll::UntypedStorage<4, 40> customRendererEventData;
+#else // @header-generator platform
     ::ll::TypedStorage<8, 40, ::ButtonScreenEventData>                button;
     ::ll::TypedStorage<8, 40, ::TextEditScreenEventData>              textEdit;
     ::ll::TypedStorage<8, 40, ::HoverScreenEventData>                 hover;
@@ -46,5 +68,8 @@ public:
     ::ll::TypedStorage<8, 40, ::ClipStateChangeEventData>             clipStateChangeEventData;
     ::ll::TypedStorage<4, 40, ::TextEditSelectedStateChangeEventData> textEditSelectedStateChangeEventData;
     ::ll::TypedStorage<4, 40, ::CustomRendererEventData>              customRendererEventData;
+#endif // @header-generator platform
     // NOLINTEND
 };
+#else // @header-generator platform no-eol
+#endif // @header-generator platform

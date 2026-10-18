@@ -57,7 +57,7 @@ def record(root: Path, results: list[dict[str, Any]]) -> list[str]:
             "summary": result.get("summary", {}),
         }
         validator.reject_absolute_paths(receipt)
-        relative = f"docs/validation/p6-header-{gate}.json"
+        relative = f"docs/validation/client-header-{gate}.json"
         if not (root / relative).resolve().is_relative_to(root / "docs" / "validation"):
             raise validator.ValidationError("receipt destination escapes the candidate")
         prepared.append((gate, relative, receipt))

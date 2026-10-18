@@ -1,0 +1,14 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+namespace Core::GzipUtil {
+// functions
+// NOLINTBEGIN
+MCNAPI bool decompress(::std::string const& compressedData, ::std::string& uncompressedData);
+// NOLINTEND
+
+} // namespace Core::GzipUtil
+#endif // @header-generator platform

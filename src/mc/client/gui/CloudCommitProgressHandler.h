@@ -1,0 +1,167 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+#if defined(LL_PLAT_A) // @header-generator platform
+// auto generated inclusion list
+#include "mc/client/gui/EmptyProgressHandler.h"
+#include "mc/client/gui/ProgressAnimation.h"
+#include "mc/deps/core/file/StorageResult.h"
+#include "mc/world/actor/player/LoadingState.h"
+
+// auto generated forward declare list
+// clang-format off
+class MinecraftScreenModel;
+// clang-format on
+
+class CloudCommitProgressHandler : public ::EmptyProgressHandler {
+public:
+    // member variables
+    // NOLINTBEGIN
+    // clang-format off
+    ::ll::TypedStorage<8, 8, std::chrono::time_point<std::chrono::steady_clock, std::chrono::duration<long long, std::ratio<1, 1000000000>>>> mStartTime;
+    ::ll::TypedStorage<8, 24, std::string> mProgressMessage;
+    ::ll::TypedStorage<4, 4, ::LoadingState> mLoadingState;
+    ::ll::TypedStorage<4, 4, float> mTimeProgress;
+    ::ll::TypedStorage<8, 24, std::string> mLevelId;
+    ::ll::TypedStorage<4, 4, float> mProgress;
+    ::ll::TypedStorage<4, 4, ::Core::StorageResult> mStorageResult;
+    ::ll::TypedStorage<1, 1, bool> mCanceled;
+    // clang-format on
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    CloudCommitProgressHandler();
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual void onStart(::MinecraftScreenModel&);
+
+    virtual void tick(::MinecraftScreenModel&);
+
+    virtual void onCancel(::MinecraftScreenModel&);
+
+    virtual void onRetry(::MinecraftScreenModel&);
+
+    virtual void onExit(::MinecraftScreenModel&);
+
+    virtual ::LoadingState getLoadingState(::MinecraftScreenModel&) const;
+
+    virtual float getLoadingProgress(::MinecraftScreenModel&) const;
+
+    virtual std::string getProgressMessage(::MinecraftScreenModel&) const;
+
+    virtual std::string getName() const;
+
+    virtual std::string getTitleText() const;
+
+    virtual ::ProgressAnimation showLoadingBar() const;
+    // NOLINTEND
+};
+#else // @header-generator platform
+#if defined(LL_PLAT_C) // @header-generator platform
+// auto generated inclusion list
+#include "mc/client/gui/EmptyProgressHandler.h"
+#include "mc/client/gui/ProgressAnimation.h"
+#include "mc/deps/core/file/StorageResult.h"
+#include "mc/world/actor/player/LoadingState.h"
+
+// auto generated forward declare list
+// clang-format off
+class MinecraftScreenModel;
+// clang-format on
+
+class CloudCommitProgressHandler : public ::EmptyProgressHandler {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 8, ::std::chrono::steady_clock::time_point> mStartTime;
+    ::ll::TypedStorage<8, 32, ::std::string>                          mProgressMessage;
+    ::ll::TypedStorage<4, 4, ::LoadingState>                          mLoadingState;
+    ::ll::TypedStorage<4, 4, float>                                   mTimeProgress;
+    ::ll::TypedStorage<8, 32, ::std::string>                          mLevelId;
+    ::ll::TypedStorage<4, 4, float>                                   mProgress;
+    ::ll::TypedStorage<4, 4, ::Core::StorageResult>                   mStorageResult;
+    ::ll::TypedStorage<1, 1, bool>                                    mCanceled;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    CloudCommitProgressHandler();
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual void onStart(::MinecraftScreenModel& minecraftScreenModel) /*override*/;
+
+    virtual void tick(::MinecraftScreenModel& minecraftScreenModel) /*override*/;
+
+    virtual void onRetry(::MinecraftScreenModel& minecraftScreenModel) /*override*/;
+
+    virtual void onCancel(::MinecraftScreenModel& minecraftScreenModel) /*override*/;
+
+    virtual void onExit(::MinecraftScreenModel& minecraftScreenModel) /*override*/;
+
+    virtual ::LoadingState getLoadingState(::MinecraftScreenModel& minecraftScreenModel) const /*override*/;
+
+    virtual ::std::string getProgressMessage(::MinecraftScreenModel& minecraftScreenModel) const /*override*/;
+
+    virtual float getLoadingProgress(::MinecraftScreenModel& minecraftScreenModel) const /*override*/;
+
+    virtual ::ProgressAnimation showLoadingBar() const /*override*/;
+
+    virtual ::std::string getTitleText() const /*override*/;
+
+    virtual ::std::string getName() const /*override*/;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCAPI explicit CloudCommitProgressHandler(::std::string const& levelId);
+    // NOLINTEND
+
+public:
+    // constructor thunks
+    // NOLINTBEGIN
+    MCAPI void* $ctor(::std::string const& levelId);
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCFOLD void $onStart(::MinecraftScreenModel& minecraftScreenModel);
+
+    MCAPI void $tick(::MinecraftScreenModel& minecraftScreenModel);
+
+    MCAPI void $onRetry(::MinecraftScreenModel& minecraftScreenModel);
+
+    MCAPI void $onCancel(::MinecraftScreenModel& minecraftScreenModel);
+
+    MCAPI void $onExit(::MinecraftScreenModel& minecraftScreenModel);
+
+    MCFOLD ::LoadingState $getLoadingState(::MinecraftScreenModel& minecraftScreenModel) const;
+
+    MCAPI ::std::string $getProgressMessage(::MinecraftScreenModel& minecraftScreenModel) const;
+
+    MCAPI float $getLoadingProgress(::MinecraftScreenModel& minecraftScreenModel) const;
+
+    MCFOLD ::ProgressAnimation $showLoadingBar() const;
+
+    MCAPI ::std::string $getTitleText() const;
+
+    MCAPI ::std::string $getName() const;
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCNAPI static void** $vftable();
+    // NOLINTEND
+};
+#else // @header-generator platform
+class CloudCommitProgressHandler {};
+#endif // @header-generator platform
+#endif // @header-generator platform

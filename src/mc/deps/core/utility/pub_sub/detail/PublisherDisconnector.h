@@ -1,0 +1,26 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace Bedrock::PubSub::Detail { class SubscriptionBodyBase; }
+// clang-format on
+
+namespace Bedrock::PubSub::Detail {
+
+class PublisherDisconnector {
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~PublisherDisconnector() = default;
+
+#if defined(LL_PLAT_A) // @header-generator platform
+    virtual void _disconnect(::Bedrock::PubSub::Detail::SubscriptionBodyBase&) = 0;
+#else // @header-generator platform
+    virtual void _disconnect(::Bedrock::PubSub::Detail::SubscriptionBodyBase& body) = 0;
+#endif // @header-generator platform
+    // NOLINTEND
+};
+
+} // namespace Bedrock::PubSub::Detail

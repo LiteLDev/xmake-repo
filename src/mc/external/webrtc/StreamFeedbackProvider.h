@@ -1,0 +1,28 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace webrtc { class StreamFeedbackObserver; }
+// clang-format on
+
+namespace webrtc {
+
+class StreamFeedbackProvider {
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual void
+    RegisterStreamFeedbackObserver(::std::vector<uint> ssrcs, ::webrtc::StreamFeedbackObserver* observer) = 0;
+
+    virtual void DeRegisterStreamFeedbackObserver(::webrtc::StreamFeedbackObserver* observer) = 0;
+
+    virtual ~StreamFeedbackProvider() = default;
+    // NOLINTEND
+};
+
+} // namespace webrtc
+#endif // @header-generator platform

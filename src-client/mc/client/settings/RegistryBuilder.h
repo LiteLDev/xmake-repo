@@ -1,3 +1,6 @@
+#if defined(LL_PLAT_C) || defined(LL_PLAT_A) // @header-generator platform
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
 #pragma once
 
 #include "mc/_HeaderOutputPredefine.h"
@@ -16,3 +19,6 @@ buildDefaultSettingsRegistry(::std::shared_ptr<::Settings::RegistryBuilder::IBui
 // NOLINTEND
 
 } // namespace Settings::RegistryBuilder
+#endif // @header-generator platform
+#else // @header-generator platform
+#endif // @header-generator platform

@@ -1,0 +1,24 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+struct TerrainLayer {
+public:
+    // TerrainLayer inner types define
+#if defined(LL_PLAT_A) // @header-generator platform
+    enum class Transparency : uchar {
+        None   = 0,
+        Sorted = 1,
+    };
+
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 8, ulong const>                        id;
+    ::ll::TypedStorage<8, 16, std::string_view const>            name;
+    ::ll::TypedStorage<1, 1, ::TerrainLayer::Transparency const> transparency;
+    // NOLINTEND
+#else // @header-generator platform
+    enum class Transparency : uchar {};
+#endif // @header-generator platform
+};

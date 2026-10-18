@@ -1,0 +1,25 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+class InventoryAction;
+class InventoryTransactionPacket;
+class ItemStack;
+// clang-format on
+
+namespace ItemTransactionLogger {
+// functions
+// NOLINTBEGIN
+MCNAPI void log(::InventoryAction const& action, ::std::string const& message);
+
+MCNAPI void log(::ItemStack const& item, ::std::string const& message);
+
+MCNAPI void log(::InventoryTransactionPacket const& packet, ::std::string const& message);
+// NOLINTEND
+
+} // namespace ItemTransactionLogger
+#endif // @header-generator platform

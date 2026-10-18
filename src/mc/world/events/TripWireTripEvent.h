@@ -1,0 +1,54 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#if defined(LL_PLAT_A) // @header-generator platform
+#include "mc/deps/ecs/WeakEntityRef.h"
+#else // @header-generator platform
+#endif // @header-generator platform
+#include "mc/world/level/BlockPos.h"
+
+// auto generated forward declare list
+// clang-format off
+class BlockSourceHandle;
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+class WeakEntityRef;
+#endif // @header-generator platform
+// clang-format on
+
+struct TripWireTripEvent {
+public:
+    // member variables
+    // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    ::ll::TypedStorage<8, 16, std::shared_ptr<BlockSourceHandle> const> mBlockSourceHandle;
+    ::ll::TypedStorage<4, 12, ::BlockPos const>                         mTripWireBlockPos;
+    ::ll::TypedStorage<1, 1, bool const>                                mIsPowered;
+    ::ll::TypedStorage<8, 24, std::vector<WeakEntityRef> const>         mSources;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    TripWireTripEvent& operator=(TripWireTripEvent const&);
+    TripWireTripEvent();
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI ~TripWireTripEvent();
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+#else // @header-generator platform
+    ::ll::TypedStorage<8, 16, ::std::shared_ptr<::BlockSourceHandle> const> mBlockSourceHandle;
+    ::ll::TypedStorage<4, 12, ::BlockPos const>                             mTripWireBlockPos;
+    ::ll::TypedStorage<1, 1, bool const>                                    mIsPowered;
+    ::ll::TypedStorage<8, 24, ::std::vector<::WeakEntityRef> const>         mSources;
+#endif // @header-generator platform
+    // NOLINTEND
+};

@@ -1,0 +1,85 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+#if defined(LL_PLAT_A) // @header-generator platform
+// auto generated inclusion list
+#include "mc/deps/core/resource/PackIdVersion.h"
+#include "mc/deps/core/utility/NonOwnerPointer.h"
+
+// auto generated forward declare list
+// clang-format off
+class ContentView;
+// clang-format on
+
+struct ContentViews {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::UntypedStorage<8, 24>                           mSelectedContentView;
+    ::ll::UntypedStorage<8, 24>                           mGlobalContentView;
+    ::ll::UntypedStorage<8, 24>                           mAvailableContentView;
+    ::ll::UntypedStorage<8, 24>                           mRealmsContentView;
+    ::ll::UntypedStorage<8, 24>                           mInvalidContentView;
+    ::ll::UntypedStorage<8, 24>                           mUnownedContentView;
+    ::ll::TypedStorage<8, 24, std::vector<PackIdVersion>> mInitialSelectedPacks;
+    ::ll::TypedStorage<1, 1, bool>                        mRepopulateReports;
+    ::ll::TypedStorage<1, 1, bool>                        mSelectedContentUpdated;
+    ::ll::TypedStorage<1, 1, bool>                        mGetInitialSelectedPacks;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI ~ContentViews();
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+};
+#else // @header-generator platform
+#if defined(LL_PLAT_C) // @header-generator platform
+// auto generated inclusion list
+#include "mc/deps/core/utility/NonOwnerPointer.h"
+
+// auto generated forward declare list
+// clang-format off
+class ContentView;
+struct PackIdVersion;
+// clang-format on
+
+struct ContentViews {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 24, ::Bedrock::NonOwnerPointer<::ContentView>> mSelectedContentView;
+    ::ll::TypedStorage<8, 24, ::Bedrock::NonOwnerPointer<::ContentView>> mGlobalContentView;
+    ::ll::TypedStorage<8, 24, ::Bedrock::NonOwnerPointer<::ContentView>> mAvailableContentView;
+    ::ll::TypedStorage<8, 24, ::Bedrock::NonOwnerPointer<::ContentView>> mRealmsContentView;
+    ::ll::TypedStorage<8, 24, ::Bedrock::NonOwnerPointer<::ContentView>> mInvalidContentView;
+    ::ll::TypedStorage<8, 24, ::Bedrock::NonOwnerPointer<::ContentView>> mUnownedContentView;
+    ::ll::TypedStorage<8, 24, ::std::vector<::PackIdVersion>>            mInitialSelectedPacks;
+    ::ll::TypedStorage<1, 1, bool>                                       mRepopulateReports;
+    ::ll::TypedStorage<1, 1, bool>                                       mSelectedContentUpdated;
+    ::ll::TypedStorage<1, 1, bool>                                       mGetInitialSelectedPacks;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCAPI ~ContentViews();
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCAPI void $dtor();
+    // NOLINTEND
+};
+#else // @header-generator platform
+struct ContentViews {};
+#endif // @header-generator platform
+#endif // @header-generator platform

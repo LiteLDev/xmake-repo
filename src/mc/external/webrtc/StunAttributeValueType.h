@@ -1,0 +1,21 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+namespace webrtc {
+
+enum class StunAttributeValueType : int {
+    Unknown    = 0,
+    Address    = 1,
+    XorAddress = 2,
+    Uint32     = 3,
+    Uint64     = 4,
+    ByteString = 5,
+    ErrorCode  = 6,
+    Uint16List = 7,
+};
+
+}
+#endif // @header-generator platform

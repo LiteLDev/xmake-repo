@@ -1,0 +1,29 @@
+#if defined(LL_PLAT_C) || defined(LL_PLAT_A) // @header-generator platform
+#if defined(LL_PLAT_A) // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace cereal { struct ReflectionCtx; }
+// clang-format on
+
+namespace SharedTypes::v1_26_40 {
+
+struct JumpDataDefinition {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<4, 4, float> mDistanceScale;
+    ::ll::TypedStorage<4, 4, float> mHeight;
+    ::ll::TypedStorage<4, 4, int>   mJumpDelay;
+    ::ll::TypedStorage<4, 4, int>   mAnimationDuration;
+    // NOLINTEND
+};
+
+} // namespace SharedTypes::v1_26_40
+#else // @header-generator platform
+#endif // @header-generator platform
+#else // @header-generator platform
+#endif // @header-generator platform

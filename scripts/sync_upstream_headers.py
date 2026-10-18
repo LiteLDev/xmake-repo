@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import difflib
 import hashlib
 import io
 import json
@@ -20,6 +21,98 @@ except ImportError:
 
 FULL_SHA = re.compile(r"[0-9a-f]{40}\Z")
 GATES = release.SYNC_GATES
+SOURCE_LAYERS = ("src", "src-client", "src-server", "src-android")
+PLATFORM_MARKER = " // @header-generator platform"
+EMPTY_HEADER_MARKER = b"// @header-generator empty header: "
+
+
+def header_is_present(data: bytes, platform: str) -> bool:
+    if data == b"":
+        return True
+    if data.startswith(EMPTY_HEADER_MARKER):
+        names = data.split(b"\n", 1)[0][len(EMPTY_HEADER_MARKER):].decode().strip().split(",")
+        if platform in names:
+            return True
+    return bool(project_declarations(data, platform))
+
+
+def declaration_units(data: bytes) -> list[bytes]:
+    units, pending = [], []
+    depth = 0
+    for line in data.splitlines(keepends=True):
+        pending.append(line)
+        directive = line.lstrip()
+        if directive.startswith(b"#"):
+            words = directive[1:].lstrip().split(maxsplit=1)
+            keyword = words[0] if words else b""
+            if keyword in (b"if", b"ifdef", b"ifndef"):
+                depth += 1
+            elif keyword == b"endif":
+                depth -= 1
+                if depth < 0:
+                    raise SyncError("unbalanced source preprocessor group")
+        if depth == 0 and not line.rstrip().endswith(b"\\"):
+            units.append(b"".join(pending))
+            pending = []
+    if depth or pending:
+        raise SyncError("unterminated source preprocessor group or continuation")
+    return units
+
+
+def merge_declarations(left: bytes, right: bytes, condition: str) -> bytes:
+    left_units, right_units = declaration_units(left), declaration_units(right)
+    matcher = difflib.SequenceMatcher(None, left_units, right_units, autojunk=False)
+    result = []
+    for tag, a, b, c, d in matcher.get_opcodes():
+        if tag == "equal":
+            result.extend(left_units[a:b])
+        else:
+            result.append(f"#if {condition}{PLATFORM_MARKER}\n".encode())
+            result.extend(right_units[c:d])
+            no_eol = bool(d > c and not right_units[d-1].endswith(b"\n"))
+            if no_eol:
+                result.append(b"\n")
+            result.append(f"#else{PLATFORM_MARKER}{' no-eol' if no_eol else ''}\n".encode())
+            result.extend(left_units[a:b])
+            no_eol = bool(b > a and not left_units[b-1].endswith(b"\n"))
+            if no_eol:
+                result.append(b"\n")
+            result.append(f"#endif{PLATFORM_MARKER}{' no-eol' if no_eol else ''}\n".encode())
+    return b"".join(result)
+
+
+def project_declarations(data: bytes, platform: str) -> bytes:
+    conditions = {"defined(LL_PLAT_A)": platform == "android",
+                  "defined(LL_PLAT_C)": platform == "client",
+                  "defined(LL_PLAT_C) || defined(LL_PLAT_A)": platform != "server",
+                  "defined(LL_PLAT_S)": platform == "server"}
+    stack, result = [], []
+    for line in data.splitlines(keepends=True):
+        if line.startswith(EMPTY_HEADER_MARKER):
+            continue
+        text = line.decode("utf-8").rstrip("\r\n")
+        if text.endswith(PLATFORM_MARKER + " no-eol"):
+            if all(stack) and result:
+                result[-1] = result[-1].removesuffix(b"\n")
+            text = text.removesuffix(" no-eol")
+        if text.endswith(PLATFORM_MARKER):
+            directive = text[:-len(PLATFORM_MARKER)]
+            if directive.startswith("#if "):
+                expression = directive[4:]
+                if expression not in conditions:
+                    raise SyncError(f"unknown generated platform condition: {expression}")
+                stack.append(conditions[expression])
+            elif directive == "#else" and stack:
+                stack[-1] = not stack[-1]
+            elif directive == "#endif" and stack:
+                stack.pop()
+            else:
+                raise SyncError("unbalanced generated platform condition")
+        elif all(stack):
+            result.append(line)
+    if stack:
+        raise SyncError("unterminated generated platform condition")
+    return b"".join(result)
 
 
 class SyncError(RuntimeError):
@@ -44,7 +137,7 @@ def safe_header(name: str) -> tuple[str, str]:
     path = PurePosixPath(name)
     if path.as_posix() != name or path.is_absolute() or "\\" in name or ":" in name or any(p in (".", "..") for p in path.parts):
         raise SyncError(f"unsafe Header path: {name}")
-    if len(path.parts) < 3 or path.parts[0] not in release.LAYERS or path.parts[1] != "mc":
+    if len(path.parts) < 3 or path.parts[0] not in SOURCE_LAYERS or path.parts[1] != "mc":
         raise SyncError(f"unexpected Header path: {name}")
     if path.suffix != ".h":
         raise SyncError(f"unexpected Header extension: {name}")
@@ -52,9 +145,9 @@ def safe_header(name: str) -> tuple[str, str]:
 
 
 def read_layers(repo: Path, commit: str) -> dict[str, dict[str, bytes]]:
-    layers: dict[str, dict[str, bytes]] = {name: {} for name in release.LAYERS}
+    layers: dict[str, dict[str, bytes]] = {name: {} for name in SOURCE_LAYERS}
     records: list[tuple[str, str, bytes]] = []
-    for record in git(repo, "ls-tree", "-r", "-z", commit, "--", *release.LAYERS).split(b"\0"):
+    for record in git(repo, "ls-tree", "-r", "-z", commit, "--", *SOURCE_LAYERS).split(b"\0"):
         if not record:
             continue
         info, path_bytes = record.split(b"\t", 1)
@@ -85,6 +178,8 @@ def read_layers(repo: Path, commit: str) -> dict[str, dict[str, bytes]]:
         objects[oid] = data
     for layer, name, oid in records:
         layers[layer][name] = objects[oid]
+    if not layers["src-android"]:
+        del layers["src-android"]
     return layers
 
 
@@ -92,7 +187,8 @@ def effective(
     layers: dict[str, dict[str, bytes]], platform: str, *, common_first: bool = False,
 ) -> dict[str, bytes]:
     result = dict(layers["src"])
-    for name, data in layers[release.PLATFORM_LAYERS[platform]].items():
+    layer = "src-android" if platform == "android" and "src-android" in layers else release.PLATFORM_LAYERS[platform]
+    for name, data in layers[layer].items():
         if name in result and result[name] != data:
             if common_first:
                 continue
@@ -103,7 +199,8 @@ def effective(
         previous = folded.setdefault(name.casefold(), name)
         if previous != name:
             raise SyncError(f"case collision: {previous} vs {name}")
-    return result
+    return {name: project_declarations(data, platform) for name, data in result.items()
+            if header_is_present(data, platform)}
 
 
 def identity(view: dict[str, bytes]) -> dict[str, Any]:
@@ -121,13 +218,25 @@ def repartition(views: dict[str, dict[str, bytes]]) -> dict[str, dict[str, bytes
         previous = folded.setdefault(name.casefold(), name)
         if previous != name:
             raise SyncError(f"cross-platform case collision: {previous} vs {name}")
-        values = [views[platform].get(name) for platform in release.PLATFORM_LAYERS]
-        if values[0] is not None and values[0] == values[1] == values[2]:
-            result["src"][name] = values[0]
-        else:
-            for platform, layer in release.PLATFORM_LAYERS.items():
-                if name in views[platform]:
-                    result[layer][name] = views[platform][name]
+        client, server, android = (views[p].get(name, b"") for p in ("client", "server", "android"))
+        # Existing generated member strategies use the same ordered declaration
+        # diff. Complete preprocessor groups remain atomic in this merge.
+        windows = merge_declarations(server, client, "defined(LL_PLAT_C)") if server else client
+        data = merge_declarations(windows, android, "defined(LL_PLAT_A)")
+        present = {platform for platform, view in views.items() if name in view}
+        layer = "src" if "server" in present and present != {"server"} else "src-server" if "server" in present else "src-client"
+        if layer == "src-client":
+            data = merge_declarations(b"", data, "defined(LL_PLAT_C) || defined(LL_PLAT_A)")
+        elif layer == "src-server":
+            data = merge_declarations(b"", data, "defined(LL_PLAT_S)")
+        empty = sorted(platform for platform in present if views[platform][name] == b"")
+        if empty:
+            data = EMPTY_HEADER_MARKER + ",".join(empty).encode() + b"\n" + data
+        result[layer][name] = data
+        for platform in views:
+            expected = views[platform].get(name, b"")
+            if project_declarations(data, platform) != expected:
+                raise SyncError(f"platform projection changed {platform}/{name}")
     return result
 
 
@@ -177,6 +286,7 @@ def inputs(repo: Path, base: str, header: str) -> tuple[dict[str, Any], dict[str
         }
     metadata["provenance"] = {
         "kind": "upstream-header-sync", "base_release_commit": base, "upstream_header_commit": header,
+        "physical_layout": "common-client-server",
         "upstream_include_precedence": "common-before-platform (upstream xmake Header harness)",
         "content_algorithm": "sha256(path-utf8 + NUL + Git-LF-bytes + NUL), ordinal path order",
         "effective_views": {platform: identity(view) for platform, view in views.items()},
@@ -192,9 +302,23 @@ def inputs(repo: Path, base: str, header: str) -> tuple[dict[str, Any], dict[str
 
 
 def stage(repo: Path, base: str, header: str, destination: Path) -> dict[str, Any]:
+    return write_stage(repo, base, header, destination, *inputs(repo, base, header))
+
+
+def unified_inputs(repo: Path, base: str) -> tuple[dict[str, Any], dict[str, dict[str, bytes]]]:
+    source = read_layers(repo, base)
+    views = {platform: effective(source, platform) for platform in release.PLATFORM_LAYERS}
+    metadata = json.loads(git(repo, "show", f"{base}:header-release.json"))
+    metadata["provenance"]["unification_base_commit"] = base
+    metadata["provenance"]["physical_layout"] = "common-client-server"
+    metadata["validation"] = {gate: {"status": "pending"} for gate in GATES}
+    return metadata, repartition(views)
+
+
+def write_stage(repo: Path, base: str, header: str, destination: Path,
+                metadata: dict[str, Any], layers: dict[str, dict[str, bytes]]) -> dict[str, Any]:
     if destination.exists():
         raise SyncError("staging destination already exists; inspect it or choose a new isolated path")
-    metadata, layers = inputs(repo, base, header)
     destination.mkdir(parents=True)
     rows: list[dict[str, str]] = []
     for layer, headers in layers.items():
@@ -209,7 +333,7 @@ def stage(repo: Path, base: str, header: str, destination: Path) -> dict[str, An
     metadata["layers"] = {layer: len(headers) for layer, headers in layers.items()}
     metadata["manifest"] = {
         "algorithm": "sha256(path-utf8 + NUL + raw-bytes + NUL), ordinal path order",
-        "scope": "four Header layers", "rows": count, "sha256": digest,
+        "scope": "three Header layers", "rows": count, "sha256": digest,
     }
     write_json(destination / "header-release.json", metadata)
     (destination / "android-dependencies.lock.json").write_bytes(
@@ -220,8 +344,9 @@ def stage(repo: Path, base: str, header: str, destination: Path) -> dict[str, An
 
 
 def verify_fidelity(repo: Path, base: str, header: str, candidate: Path) -> dict[str, Any]:
-    expected_metadata, expected = inputs(repo, base, header)
     metadata = json.loads((candidate / "header-release.json").read_text(encoding="utf-8"))
+    unified_base = metadata.get("provenance", {}).get("unification_base_commit")
+    expected_metadata, expected = unified_inputs(repo, unified_base) if unified_base else inputs(repo, base, header)
     for field in ("inputs", "provenance", "android_toolchain", "historical_baseline"):
         if metadata.get(field) != expected_metadata.get(field):
             raise SyncError(f"candidate {field} does not match frozen Git inputs")
@@ -244,19 +369,26 @@ def apply(repo: Path, base: str, header: str, staging: Path) -> dict[str, Any]:
     verify_fidelity(repo, base, header, staging)
     root = repo.resolve()
     tracked = {
-        name.decode("utf-8") for name in git(repo, "ls-files", "--cached", "-z", "--", *release.LAYERS).split(b"\0") if name
+        name.decode("utf-8") for name in git(repo, "ls-files", "--cached", "-z", "--", *SOURCE_LAYERS).split(b"\0") if name
     }
     sources = {layer: release.collect_layer(staging, layer) for layer in release.LAYERS}
-    currents = {layer: release.collect_layer(repo, layer) for layer in release.LAYERS}
+    currents = {layer: release.collect_layer(repo, layer) for layer in SOURCE_LAYERS
+                if (repo / layer / "mc").is_dir()}
+    retired = repo / "src-android"
+    if retired.is_symlink():
+        raise SyncError("retired Header root must not be a symbolic link")
+    for path in retired.rglob("*"):
+        if path.is_file() and path.relative_to(repo).as_posix() not in tracked:
+            raise SyncError(f"untracked retired Header source would be removed: {path.relative_to(repo)}")
     for layer, headers in currents.items():
         for name, path in headers.items():
             if f"{layer}/{name}" not in tracked:
-                expected = sources[layer].get(name)
+                expected = sources.get(layer, {}).get(name)
                 if expected is None or path.read_bytes() != expected.read_bytes():
                     raise SyncError(f"untracked Header would be overwritten or deleted: {layer}/{name}")
     changed = removed = 0
-    for layer in release.LAYERS:
-        source, current = sources[layer], currents[layer]
+    for layer in SOURCE_LAYERS:
+        source, current = sources.get(layer, {}), currents.get(layer, {})
         for name in sorted(source.keys() | current.keys()):
             target = root / layer / name
             safe_header(f"{layer}/{name}")
@@ -271,6 +403,11 @@ def apply(repo: Path, base: str, header: str, staging: Path) -> dict[str, Any]:
                     target.parent.mkdir(parents=True, exist_ok=True)
                     target.write_bytes(data)
                     changed += 1
+    for directory in sorted((p for p in retired.rglob("*") if p.is_dir()), key=lambda p: len(p.parts), reverse=True):
+        if not any(directory.iterdir()):
+            directory.rmdir()
+    if retired.is_dir() and not any(retired.iterdir()):
+        retired.rmdir()
     staged_metadata = json.loads((staging / "header-release.json").read_text(encoding="utf-8"))
     metadata_path = repo / "header-release.json"
     try:

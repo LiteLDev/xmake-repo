@@ -1,0 +1,96 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#include "mc/deps/shared_types/legacy/actor/ActorDamageCause.h"
+#endif // @header-generator platform
+#include "mc/world/actor/ai/util/ExpiringTick.h"
+#include "mc/world/actor/monster/Monster.h"
+#include "mc/world/level/Tick.h"
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+
+// auto generated forward declare list
+// clang-format off
+class Actor;
+class ActorDamageSource;
+class ActorHurtResult;
+struct HurtParameters;
+// clang-format on
+#endif // @header-generator platform
+
+class Warden : public ::Monster {
+public:
+    // member variables
+    // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    ::ll::TypedStorage<8, 8, ::Tick>                       mTouchAngerCooldownExpiryTick;
+    ::ll::TypedStorage<8, 24, std::optional<ExpiringTick>> mSonicBoomCooldown;
+#else // @header-generator platform
+    ::ll::TypedStorage<8, 8, ::Tick>                           mTouchAngerCooldownExpiryTick;
+    ::ll::TypedStorage<8, 24, ::std::optional<::ExpiringTick>> mSonicBoomCooldown;
+    // NOLINTEND
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual bool canDisableShield() /*override*/;
+
+    virtual bool isInvulnerableTo(::ActorDamageSource const& source) const /*override*/;
+
+    virtual void onSynchedDataUpdate(int dataId) /*override*/;
+
+    virtual void onPush(::Actor& source) /*override*/;
+
+    virtual void normalTick() /*override*/;
+
+    virtual void setTarget(::Actor* target) /*override*/;
+
+    virtual bool checkSpawnRules(bool fromSpawner) /*override*/;
+
+    virtual bool checkSpawnObstruction() const /*override*/;
+
+    virtual ::ActorHurtResult
+    _hurt(::ActorDamageSource const& source, float damage, ::HurtParameters const& hurtParameters) /*override*/;
+
+    virtual ::ActorHurtResult
+    doHurtTarget(::Actor* target, ::SharedTypes::Legacy::ActorDamageCause const& cause) /*override*/;
+    // NOLINTEND
+
+public:
+    // virtual function thunks
+    // NOLINTBEGIN
+    MCFOLD bool $canDisableShield();
+
+    MCAPI bool $isInvulnerableTo(::ActorDamageSource const& source) const;
+
+    MCFOLD void $onSynchedDataUpdate(int dataId);
+
+    MCAPI void $onPush(::Actor& source);
+
+    MCAPI void $normalTick();
+
+    MCAPI void $setTarget(::Actor* target);
+
+    MCFOLD bool $checkSpawnRules(bool fromSpawner);
+
+    MCAPI bool $checkSpawnObstruction() const;
+
+    MCAPI ::ActorHurtResult
+    $_hurt(::ActorDamageSource const& source, float damage, ::HurtParameters const& hurtParameters);
+
+    MCAPI ::ActorHurtResult $doHurtTarget(::Actor* target, ::SharedTypes::Legacy::ActorDamageCause const& cause);
+
+
+    // NOLINTEND
+
+public:
+    // vftables
+    // NOLINTBEGIN
+    MCAPI static void** $vftable();
+#endif // @header-generator platform
+    // NOLINTEND
+};

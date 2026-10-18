@@ -1,3 +1,6 @@
+#if defined(LL_PLAT_C) || defined(LL_PLAT_A) // @header-generator platform
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
 #pragma once
 
 #include "mc/_HeaderOutputPredefine.h"
@@ -58,3 +61,6 @@ MCAPI ::std::array<::std::pair<::std::string_view, ::std::string_view>, 7> const
 // NOLINTEND
 
 } // namespace RealmsScreenUtils
+#endif // @header-generator platform
+#else // @header-generator platform
+#endif // @header-generator platform

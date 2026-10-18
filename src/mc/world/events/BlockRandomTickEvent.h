@@ -1,0 +1,42 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/world/level/BlockPos.h"
+
+// auto generated forward declare list
+// clang-format off
+class BlockSourceHandle;
+// clang-format on
+
+struct BlockRandomTickEvent {
+public:
+    // member variables
+    // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    ::ll::TypedStorage<4, 12, ::BlockPos const>                         mBlockPos;
+    ::ll::TypedStorage<8, 16, std::shared_ptr<BlockSourceHandle> const> mBlockSourceHandle;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    BlockRandomTickEvent& operator=(BlockRandomTickEvent const&);
+    BlockRandomTickEvent();
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCNAPI ~BlockRandomTickEvent();
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+#else // @header-generator platform
+    ::ll::TypedStorage<4, 12, ::BlockPos const>                             mBlockPos;
+    ::ll::TypedStorage<8, 16, ::std::shared_ptr<::BlockSourceHandle> const> mBlockSourceHandle;
+#endif // @header-generator platform
+    // NOLINTEND
+};

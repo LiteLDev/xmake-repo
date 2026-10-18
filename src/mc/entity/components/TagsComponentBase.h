@@ -1,0 +1,39 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+#if defined(LL_PLAT_A) // @header-generator platform
+
+// auto generated inclusion list
+#include "mc/util/IDType.h"
+#include "mc/util/TagRegistry.h"
+#else // @header-generator platform
+#endif // @header-generator platform
+
+// auto generated forward declare list
+// clang-format off
+class Actor;
+class CompoundTag;
+class DataLoadHelper;
+// clang-format on
+
+class TagsComponentBase {
+public:
+    // member functions
+    // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    MCNAPI void readAdditionalSaveData(::Actor&, ::CompoundTag const&, ::DataLoadHelper&);
+#else // @header-generator platform
+    MCAPI void readAdditionalSaveData(::Actor& owner, ::CompoundTag const& tag, ::DataLoadHelper& dataLoadhelper);
+#endif // @header-generator platform
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    MCNAPI static void _writeAdditionalSaveData(::CompoundTag&, std::vector<std::string> const&);
+#else // @header-generator platform
+    MCAPI static void _writeAdditionalSaveData(::CompoundTag& tag, ::std::vector<::std::string> const& componentTags);
+#endif // @header-generator platform
+    // NOLINTEND
+};

@@ -1,0 +1,25 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/application/signals/Signal.h"
+#if defined(LL_PLAT_A) // @header-generator platform
+#include "mc/deps/application/signals/player_reporting_signal/JsonData.h"
+#else // @header-generator platform
+
+// auto generated forward declare list
+// clang-format off
+namespace PlayerReportingSignal { struct JsonData; }
+// clang-format on
+#endif // @header-generator platform
+
+namespace PlayerReportingSignal {
+
+#if defined(LL_PLAT_A) // @header-generator platform
+class SetJson : public ::Bedrock::Signal<PlayerReportingSignal::SetJson, PlayerReportingSignal::JsonData> {};
+#else // @header-generator platform
+class SetJson : public ::Bedrock::Signal<::PlayerReportingSignal::SetJson, ::PlayerReportingSignal::JsonData> {};
+#endif // @header-generator platform
+
+} // namespace PlayerReportingSignal

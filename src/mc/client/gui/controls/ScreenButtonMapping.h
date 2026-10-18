@@ -1,0 +1,63 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+#if defined(LL_PLAT_A) // @header-generator platform
+// auto generated inclusion list
+#include "mc/client/gui/controls/ButtonMappingInputModeCondition.h"
+#include "mc/client/gui/controls/ButtonMappingType.h"
+#include "mc/client/gui/screens/ScreenEventScope.h"
+#include "mc/deps/input/enums/ButtonState.h"
+
+struct ScreenButtonMapping {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<4, 4, uint>                              fromButtonId;
+    ::ll::TypedStorage<4, 4, uint>                              toButtonId;
+    ::ll::TypedStorage<4, 4, ::ButtonMappingType>               type;
+    ::ll::TypedStorage<1, 1, ::ScreenEventScope>                scope;
+    ::ll::TypedStorage<1, 1, ::ButtonState>                     lastButtonState;
+    ::ll::TypedStorage<1, 1, bool>                              buttonUpRightOfFirstRefusal;
+    ::ll::TypedStorage<1, 1, bool>                              handleSelection;
+    ::ll::TypedStorage<1, 1, bool>                              handleDeselection;
+    ::ll::TypedStorage<1, 1, bool>                              alternateInputScope;
+    ::ll::TypedStorage<1, 1, bool>                              consumeEvent;
+    ::ll::TypedStorage<4, 4, ::ButtonMappingInputModeCondition> inputModeCondition;
+    ::ll::TypedStorage<1, 1, bool>                              ignoreInputScope;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    ScreenButtonMapping();
+};
+#else // @header-generator platform
+#if defined(LL_PLAT_C) // @header-generator platform
+// auto generated inclusion list
+#include "mc/client/gui/controls/ButtonMappingInputModeCondition.h"
+#include "mc/client/gui/controls/ButtonMappingType.h"
+#include "mc/client/gui/screens/ScreenEventScope.h"
+#include "mc/deps/input/enums/ButtonState.h"
+
+struct ScreenButtonMapping {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<4, 4, uint>                              fromButtonId;
+    ::ll::TypedStorage<4, 4, uint>                              toButtonId;
+    ::ll::TypedStorage<4, 4, ::ButtonMappingType>               type;
+    ::ll::TypedStorage<1, 1, ::ScreenEventScope>                scope;
+    ::ll::TypedStorage<1, 1, ::ButtonState>                     lastButtonState;
+    ::ll::TypedStorage<1, 1, bool>                              buttonUpRightOfFirstRefusal;
+    ::ll::TypedStorage<1, 1, bool>                              handleSelection;
+    ::ll::TypedStorage<1, 1, bool>                              handleDeselection;
+    ::ll::TypedStorage<1, 1, bool>                              alternateInputScope;
+    ::ll::TypedStorage<1, 1, bool>                              consumeEvent;
+    ::ll::TypedStorage<4, 4, ::ButtonMappingInputModeCondition> inputModeCondition;
+    ::ll::TypedStorage<1, 1, bool>                              ignoreInputScope;
+    // NOLINTEND
+};
+#else // @header-generator platform
+struct ScreenButtonMapping {};
+#endif // @header-generator platform
+#endif // @header-generator platform

@@ -1,0 +1,51 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/shared_types/shared_types/FloatRange.h"
+#include "mc/world/actor/ai/goal/BaseGoal.h"
+
+// auto generated forward declare list
+// clang-format off
+class EnderDragon;
+#if defined(LL_PLAT_A) // @header-generator platform
+class Mob;
+struct GoalId;
+#else // @header-generator platform
+#endif // @header-generator platform
+// clang-format on
+
+class DragonBaseGoal : public ::BaseGoal {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<8, 8, ::EnderDragon&>            mDragon;
+    ::ll::TypedStorage<4, 4, float>                     mActiveSpeed;
+    ::ll::TypedStorage<4, 4, float>                     mFlightSpeed;
+    ::ll::TypedStorage<4, 4, float>                     mTurnSpeed;
+    ::ll::TypedStorage<4, 8, ::SharedTypes::FloatRange> mTargetZone;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    DragonBaseGoal& operator=(DragonBaseGoal const&);
+    DragonBaseGoal(DragonBaseGoal const&);
+    DragonBaseGoal();
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    virtual ~DragonBaseGoal();
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+#else // @header-generator platform
+    virtual ~DragonBaseGoal() /*override*/ = default;
+#endif // @header-generator platform
+    // NOLINTEND
+};

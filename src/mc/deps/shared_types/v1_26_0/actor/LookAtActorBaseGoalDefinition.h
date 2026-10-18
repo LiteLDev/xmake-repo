@@ -1,0 +1,46 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/shared_types/actor/BaseGoalDefinition.h"
+#include "mc/deps/shared_types/shared_types/FloatRange.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace cereal { struct ReflectionCtx; }
+// clang-format on
+
+namespace SharedTypes::v1_26_0 {
+
+struct LookAtActorBaseGoalDefinition : public ::SharedTypes::BaseGoalDefinition {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<4, 8, ::SharedTypes::FloatRange> mLookTime;
+    ::ll::TypedStorage<4, 4, float>                     mLookDistance;
+    ::ll::TypedStorage<4, 4, float>                     mProbability;
+    ::ll::TypedStorage<4, 4, int>                       mAngleOfViewX;
+    ::ll::TypedStorage<4, 4, int>                       mAngleOfViewY;
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    MCNAPI static void bindType(::cereal::ReflectionCtx&, std::string_view);
+    // NOLINTEND
+
+public:
+    // static variables
+    // NOLINTBEGIN
+    MCNAPI static ::SharedTypes::FloatRange const& LOOK_TIME();
+
+    MCNAPI static std::string_view const& NAME();
+#else // @header-generator platform
+    MCAPI static void bindType(::cereal::ReflectionCtx& ctx, ::std::string_view filterEnding);
+#endif // @header-generator platform
+    // NOLINTEND
+};
+
+} // namespace SharedTypes::v1_26_0

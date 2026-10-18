@@ -1,0 +1,16 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+namespace SharedTypes::v1_21_40::GrassAppearanceComponentInternals {
+// static variables
+// NOLINTBEGIN
+MCAPI ::std::add_lvalue_reference_t<char const[]> COLOR();
+
+MCAPI ::std::add_lvalue_reference_t<char const[]> COLOR_MAP();
+// NOLINTEND
+
+} // namespace SharedTypes::v1_21_40::GrassAppearanceComponentInternals
+#endif // @header-generator platform

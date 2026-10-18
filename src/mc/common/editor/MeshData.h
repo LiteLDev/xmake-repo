@@ -1,0 +1,25 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+namespace Editor::Mesh {
+
+struct MeshData {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::UntypedStorage<8, 24> mUnk447fcc;
+    ::ll::UntypedStorage<8, 24> mUnk167686;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    MeshData& operator=(MeshData const&);
+    MeshData(MeshData const&);
+    MeshData();
+};
+
+} // namespace Editor::Mesh
+#endif // @header-generator platform

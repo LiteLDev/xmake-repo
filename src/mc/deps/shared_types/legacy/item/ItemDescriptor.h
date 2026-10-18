@@ -1,0 +1,51 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/molang/MolangVersion.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace cereal { struct ReflectionCtx; }
+// clang-format on
+
+namespace SharedTypes::Legacy {
+
+struct ItemDescriptor {
+public:
+    // member variables
+    // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    ::ll::TypedStorage<8, 24, std::map<std::string, std::string>> mMap;
+    ::ll::TypedStorage<2, 2, ::MolangVersion>                     mMolangVersion;
+#else // @header-generator platform
+    ::ll::TypedStorage<8, 16, ::std::map<::std::string, ::std::string>> mMap;
+    ::ll::TypedStorage<2, 2, ::MolangVersion>                           mMolangVersion;
+    // NOLINTEND
+
+public:
+    // member functions
+    // NOLINTBEGIN
+    MCAPI ~ItemDescriptor();
+#endif // @header-generator platform
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+#if defined(LL_PLAT_A) // @header-generator platform
+    MCNAPI static void bindType(::cereal::ReflectionCtx&);
+#else // @header-generator platform
+    MCAPI static void bindType(::cereal::ReflectionCtx& ctx);
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCFOLD void $dtor();
+#endif // @header-generator platform
+    // NOLINTEND
+};
+
+} // namespace SharedTypes::Legacy

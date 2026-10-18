@@ -1,5 +1,12 @@
 # Android P7 validation
 
+October 18 client unification is in progress. LL and published MC headers now
+use src/src-client/src-server; LL_PLAT_C still means Windows client and
+LL_PLAT_A still means Android client. The prior October 17 device receipts below
+remain tied to their original binaries. The current batch must obtain a new
+frozen Header input, LL build/strip/determinism receipts and loaded-hash device
+matrix before acceptance. No preloader or runtime data format changes are made.
+
 Current October 17 candidate: see android-p7-g0-reconvergence.md. The sections
 below retain their historical source/input boundaries; the former PL lifecycle
 adapter, guarded Hook layer and unload/drain candidate are absent from current

@@ -1,3 +1,6 @@
+#if defined(LL_PLAT_C) || defined(LL_PLAT_A) // @header-generator platform
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
 #pragma once
 
 #include "mc/_HeaderOutputPredefine.h"
@@ -23,3 +26,6 @@ MCAPI ::std::add_lvalue_reference_t<char const[]> SOCIAL_DRAWER_TAB_QUERY();
 // NOLINTEND
 
 } // namespace OreUI::EntryPoints::FriendsDrawer
+#endif // @header-generator platform
+#else // @header-generator platform
+#endif // @header-generator platform

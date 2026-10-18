@@ -1,0 +1,89 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+#if defined(LL_PLAT_A) // @header-generator platform
+// auto generated forward declare list
+// clang-format off
+class IClientInstance;
+class MinecraftScreenModel;
+// clang-format on
+
+class PlatformMultiplayerRestrictions {
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~PlatformMultiplayerRestrictions();
+
+    virtual bool platformRestrictsMultiplayer() const = 0;
+
+    virtual void displayPlatformRestrictsMultiplayerModal(std::function<void()>&&) = 0;
+
+    virtual void displayPlatformRestrictsUserGeneratedContentModal(std::function<void()>&&) = 0;
+
+    virtual void displayPlatformRestrictsChatModal(std::function<void()>&&) = 0;
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCNAPI static std::unique_ptr<PlatformMultiplayerRestrictions>
+    create(std::shared_ptr<MinecraftScreenModel>, ::IClientInstance&);
+    // NOLINTEND
+
+public:
+    // static variables
+    // NOLINTBEGIN
+    MCNAPI static std::function<
+        std::unique_ptr<PlatformMultiplayerRestrictions>(std::shared_ptr<MinecraftScreenModel>, IClientInstance&)>&
+    sFactory();
+    // NOLINTEND
+
+public:
+    // destructor thunk
+    // NOLINTBEGIN
+    MCNAPI void $dtor();
+    // NOLINTEND
+};
+#else // @header-generator platform
+#if defined(LL_PLAT_C) // @header-generator platform
+// auto generated forward declare list
+// clang-format off
+class IClientInstance;
+class MinecraftScreenModel;
+// clang-format on
+
+class PlatformMultiplayerRestrictions {
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~PlatformMultiplayerRestrictions() = default;
+
+    virtual bool platformRestrictsMultiplayer() const = 0;
+
+    virtual void displayPlatformRestrictsMultiplayerModal(::std::function<void()>&& onCompleteCallback) = 0;
+
+    virtual void displayPlatformRestrictsUserGeneratedContentModal(::std::function<void()>&& onCompleteCallback) = 0;
+
+    virtual void displayPlatformRestrictsChatModal(::std::function<void()>&& onCompleteCallback) = 0;
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCAPI static ::std::unique_ptr<::PlatformMultiplayerRestrictions>
+    create(::std::shared_ptr<::MinecraftScreenModel> model, ::IClientInstance& client);
+    // NOLINTEND
+
+public:
+    // static variables
+    // NOLINTBEGIN
+    MCAPI static ::std::function<::std::unique_ptr<
+        ::PlatformMultiplayerRestrictions>(::std::shared_ptr<::MinecraftScreenModel>, ::IClientInstance&)>&
+    sFactory();
+    // NOLINTEND
+};
+#else // @header-generator platform
+class PlatformMultiplayerRestrictions {};
+#endif // @header-generator platform
+#endif // @header-generator platform

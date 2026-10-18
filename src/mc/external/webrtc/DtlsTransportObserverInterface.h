@@ -1,0 +1,28 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+namespace webrtc { class DtlsTransportInformation; }
+namespace webrtc { class RTCError; }
+// clang-format on
+
+namespace webrtc {
+
+class DtlsTransportObserverInterface {
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual void OnStateChange(::webrtc::DtlsTransportInformation) = 0;
+
+    virtual void OnError(::webrtc::RTCError) = 0;
+
+    virtual ~DtlsTransportObserverInterface() = default;
+    // NOLINTEND
+};
+
+} // namespace webrtc
+#endif // @header-generator platform

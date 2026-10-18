@@ -1,0 +1,21 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+class ItemStack;
+class Mob;
+struct Tick;
+// clang-format on
+
+namespace UseItemGoalUtility {
+// functions
+// NOLINTBEGIN
+MCNAPI bool startUsingItem(::Mob& mob, ::ItemStack const& item, ::Tick& finishUsingItemTick);
+// NOLINTEND
+
+} // namespace UseItemGoalUtility
+#endif // @header-generator platform

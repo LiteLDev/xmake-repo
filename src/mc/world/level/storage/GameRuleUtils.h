@@ -1,0 +1,29 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/world/level/storage/GameRule.h"
+
+// auto generated forward declare list
+// clang-format off
+class Level;
+struct GameRuleId;
+// clang-format on
+
+namespace GameRuleUtils {
+// functions
+// NOLINTBEGIN
+MCNAPI void setGameRule(
+    ::Level&                         level,
+    ::GameRuleId const&              ruleId,
+    ::std::variant<int, float, bool> value,
+    ::GameRule::ValidationError*     validationError,
+    bool                             sendTelemetry
+);
+// NOLINTEND
+
+} // namespace GameRuleUtils
+#endif // @header-generator platform

@@ -1,0 +1,24 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated forward declare list
+// clang-format off
+class ServerPlayer;
+// clang-format on
+
+struct IServerNetworkController {
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual ~IServerNetworkController() = default;
+
+    virtual bool isDedicatedServer() const = 0;
+
+#if defined(LL_PLAT_A) // @header-generator platform
+    virtual bool canChangePermission(::ServerPlayer const&) const = 0;
+#else // @header-generator platform
+    virtual bool canChangePermission(::ServerPlayer const& player) const = 0;
+#endif // @header-generator platform
+    // NOLINTEND
+};

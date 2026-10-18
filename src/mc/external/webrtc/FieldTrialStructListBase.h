@@ -1,0 +1,35 @@
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/external/webrtc/FieldTrialParameterInterface.h"
+
+namespace webrtc {
+
+class FieldTrialStructListBase : public ::webrtc::FieldTrialParameterInterface {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::UntypedStorage<8, 24> mUnk862398;
+    // NOLINTEND
+
+public:
+    // prevent constructor by default
+    FieldTrialStructListBase& operator=(FieldTrialStructListBase const&);
+    FieldTrialStructListBase(FieldTrialStructListBase const&);
+    FieldTrialStructListBase();
+
+public:
+    // virtual functions
+    // NOLINTBEGIN
+    virtual bool Parse(::std::optional<::std::string>) /*override*/;
+
+    virtual ~FieldTrialStructListBase() /*override*/ = default;
+    // NOLINTEND
+};
+
+} // namespace webrtc
+#endif // @header-generator platform

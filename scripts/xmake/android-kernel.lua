@@ -17,6 +17,7 @@ local input_options = {
     {"android_runtime_manifest", "runtime-manifest"}, {"android_bmb", "bmb"},
     {"android_provider_elf", "provider"}, {"android_target_elf", "target"}, {"ndk", "ndk"}
 }
+local prepared_inputs = {}
 
 local function shared_options(role)
     set_default(false)
@@ -48,8 +49,12 @@ local function shared_options(role)
                 table.insert(args, assert(get_config(entry[1]), "Missing fixture input: " .. entry[1]))
             end
         end
-        os.vrunv("python", args)
-        local inputs = json.loadfile(receipt)
+        local input_key = role or "fixtures"
+        if not prepared_inputs[input_key] then
+            os.vrunv("python", args)
+            prepared_inputs[input_key] = json.loadfile(receipt)
+        end
+        local inputs = prepared_inputs[input_key]
         for _, root in ipairs(inputs.include_roots) do target:add("includedirs", root) end
         for _, root in ipairs(inputs.system_include_roots or inputs.dependency_roots) do target:add("sysincludedirs", root) end
         target:add("syslinks", "dl")
@@ -65,9 +70,24 @@ local function shared_options(role)
             target:data_set("p7.prelink", path.join(evidence, "prelink"))
             for _, source in ipairs(inputs.sources) do
                 local name = source:gsub("/", "_"):gsub("%.", "_")
-                local flags = {"-H", "-Xclang=-header-include-file", "-Xclang=" .. path.join(traces, name .. ".txt")}
-                if source:endswith("MemoryOperators_android.cpp") then table.insert(flags, "-fno-rtti") end
+                local trace = path.relative(path.join(traces, name .. ".txt"), os.projectdir())
+                local flags = {"-H", "-Xclang=-header-include-file", "-Xclang=" .. trace}
+                if source:endswith("ll/core/tweak/MemoryOperators.cpp") then table.insert(flags, "-fno-rtti") end
                 target:add("files", path.join(os.projectdir(), source), {cxxflags = flags})
+            end
+            if role == "kernel" then
+                target:add("headerfiles", path.join(os.projectdir(), "src/(ll/api/**.h)"),
+                           path.join(os.projectdir(), "src-client/(ll/api/**.h)"))
+                local helpers = { ["mc/deps/nbt/Tag.h"] = true, ["mc/deps/nbt/EndTag.h"] = true,
+                    ["mc/deps/nbt/CompoundTag.h"] = true, ["mc/deps/nbt/CompoundTagVariant.h"] = true }
+                for _, layer in ipairs({"src", "src-client"}) do
+                    local root = path.join(inputs.inputs.header_root, layer)
+                    target:add("headerfiles", path.join(root, "(mc/**.h)") ..
+                        "|mc/deps/nbt/Tag.h|mc/deps/nbt/EndTag.h|mc/deps/nbt/CompoundTag.h|mc/deps/nbt/CompoundTagVariant.h")
+                end
+                for relative, _ in pairs(helpers) do
+                    target:add("headerfiles", path.join(os.projectdir(), "src/(" .. relative .. ")"))
+                end
             end
             local tag = os.iorunv("git", {"describe", "--tags", "--abbrev=0", "--always"}):trim()
             local major, minor, patch, suffix = tag:match("v(%d+)%.(%d+)%.(%d+)(.*)")
@@ -128,8 +148,8 @@ for _, role in ipairs({"kernel", "example"}) do
             target:add("linkdirs", path.directory(inputs.inputs.provider))
             target:add("shflags", "-Wl,-z,defs", "-Wl,-z,max-page-size=16384",
                 "-Wl,-z,common-page-size=16384", "-Wl,--build-id=sha1",
-                "-Wl,-soname," .. inputs.package.entry, "-Wl,--version-script=" .. exports,
-                "-Wl,--whole-archive", path.join(generated, "libbedrock_runtime_thunks.a"),
+                "-Wl,-soname," .. inputs.package.entry, "-Wl,--version-script=" .. path.relative(exports, os.projectdir()),
+                "-Wl,--whole-archive", path.relative(path.join(generated, "libbedrock_runtime_thunks.a"), os.projectdir()),
                 "-Wl,--no-whole-archive", "-Wl,--no-as-needed", {force = true})
         end)
         after_link(function(target)
@@ -147,8 +167,8 @@ target("LeviLaminaAndroidFoundation")
     add_defines("LL_EXPORT")
     for _, source in ipairs({"src/ll/core/mod/ModLoadPlanner.cpp", "src/ll/api/service/GamingStatus.cpp",
         "src/ll/api/Expected.cpp", "src/ll/api/i18n/I18n.cpp", "src/ll/api/reflection/ReflectionError.cpp",
-        "src-android/ll/api/utils/ErrorUtils_android.cpp", "src-android/ll/api/utils/SystemUtils_android.cpp",
-        "src-android/ll/api/utils/FromChars_android.cpp"}) do
+        "src/ll/api/utils/ErrorUtils.cpp", "src/ll/api/utils/SystemUtils.cpp",
+        "src/ll/api/utils/FromChars.cpp"}) do
         add_files(path.join(os.projectdir(), source))
     end
 target_end()
@@ -175,9 +195,9 @@ target("P7ModuleFileTests")
     set_kind("binary")
     set_languages("c++23")
     set_exceptions("cxx")
-    add_includedirs(path.join(os.projectdir(), "src-android"))
+    add_includedirs(path.join(os.projectdir(), "src-client"))
     add_files(path.join(os.projectdir(), "test/android/shared_core/module_files_io_tests.cpp"),
-              path.join(os.projectdir(), "src-android/ll/core/mod/ModuleFiles.cpp"))
+              path.join(os.projectdir(), "src-client/ll/core/mod/ModuleFiles.cpp"))
     add_syslinks("dl")
     add_ldflags("-Wl,-z,defs", "-Wl,-z,max-page-size=16384",
                 "-Wl,--wrap=read,--wrap=pread,--wrap=fstat,--wrap=fsync", {force = true})
@@ -187,7 +207,7 @@ target("P7ElfModuleTests")
     set_kind("binary")
     shared_options()
     add_files(path.join(os.projectdir(), "test/android/shared_core/elf_module_tests.cpp"),
-              path.join(os.projectdir(), "src-android/ll/core/mod/ElfModule.cpp"))
+              path.join(os.projectdir(), "src-client/ll/core/mod/ElfModule.cpp"))
 target_end()
 
 target("P7ModuleTests")

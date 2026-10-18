@@ -1,0 +1,46 @@
+#pragma once
+
+#include "mc/_HeaderOutputPredefine.h"
+
+// auto generated inclusion list
+#include "mc/deps/shared_types/actor/BaseGoalDefinition.h"
+#include "mc/deps/shared_types/shared_types/FloatRange.h"
+#include "mc/deps/shared_types/v1_21_120/actor/ActorDefinitionTrigger.h"
+
+#if defined(LL_PLAT_A) // @header-generator platform
+#else // @header-generator platform
+// auto generated forward declare list
+// clang-format off
+namespace cereal { struct ReflectionCtx; }
+// clang-format on
+
+#endif // @header-generator platform
+namespace SharedTypes::v1_26_10 {
+
+struct VillagerCelebrationGoalDefinition : public ::SharedTypes::BaseGoalDefinition {
+public:
+    // member variables
+    // NOLINTBEGIN
+    ::ll::TypedStorage<4, 4, float>                                              mDuration;
+    ::ll::TypedStorage<4, 8, ::SharedTypes::FloatRange>                          mFireworksInterval;
+#if defined(LL_PLAT_A) // @header-generator platform
+    ::ll::TypedStorage<8, 224, ::SharedTypes::v1_21_120::ActorDefinitionTrigger> mCelebrationEndEvent;
+#else // @header-generator platform
+    ::ll::TypedStorage<8, 272, ::SharedTypes::v1_21_120::ActorDefinitionTrigger> mCelebrationEndEvent;
+    // NOLINTEND
+
+public:
+    // static functions
+    // NOLINTBEGIN
+    MCAPI static void bindType(::cereal::ReflectionCtx& ctx);
+    // NOLINTEND
+
+public:
+    // static variables
+    // NOLINTBEGIN
+    MCAPI static ::std::string_view const& NAME();
+#endif // @header-generator platform
+    // NOLINTEND
+};
+
+} // namespace SharedTypes::v1_26_10
