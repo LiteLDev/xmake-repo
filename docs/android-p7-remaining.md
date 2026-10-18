@@ -177,9 +177,11 @@ The first implementation batch keeps the Android physical-hook boundary fail-clo
 because the current GlobalThreadPauser/GlossHook backend still has no concurrent
 patch and trampoline reclamation proof. It does not advertise runtime hook safety.
 The LL hook entry points now return `ENOTSUP` (or reject unhook/options) when an
-Android operation requests thread suspension after the game has started; automatic
-registrars likewise refuse new runtime operations in that state. Startup-time
-registration remains unchanged.
+Android operation requests thread suspension after the game has started. The
+`HookRegistrar` records whether construction actually activated it and returns a
+boolean failure from its static registration helpers, so rejected runtime
+registrars are not silently destroyed as if they owned an installed Hook.
+Startup-time registration remains unchanged.
 
 The original ModManagerRegistry lifecycle callbacks now copy callback functions under
 `fnMtx` and invoke the snapshot after releasing the mutex. This preserves callback
