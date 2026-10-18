@@ -10,7 +10,7 @@ import re
 import struct
 import subprocess
 
-from android_kernel_inputs import InputError, git, read_json, sha
+from android_kernel_inputs import InputError, LL_MC_HELPERS, git, read_json, sha
 
 def source_names(config: dict) -> set[str]:
     if config.get("phase") != "P7-G3" or config.get("source_layout") != "unified-client-v1":
@@ -68,13 +68,12 @@ def verify_traces(config: dict, directory: Path) -> dict:
                 if path.is_relative_to(view):
                     relative = path.relative_to(view).as_posix()
                     selected = config["ll_headers"].get(relative)
-                    if relative not in ("mc/deps/nbt/Tag.h", "mc/deps/nbt/EndTag.h",
-                                        "mc/deps/nbt/CompoundTag.h", "mc/deps/nbt/CompoundTagVariant.h"):
+                    if relative not in LL_MC_HELPERS:
                         raise InputError("Minecraft include is outside Header S: " + str(path))
                     if (not selected or selected["source"] != "src/" + relative
                             or sha(path) != selected["sha256"]
                             or sha(repo / selected["source"]) != selected["sha256"]):
-                        raise InputError("LL NBT helper changed after configuration: " + relative)
+                        raise InputError("LL MC helper changed after configuration: " + relative)
                     files[selected["source"]] = selected["sha256"]
                     all_mc.add(relative)
                     ll_mc_helpers.add(relative)

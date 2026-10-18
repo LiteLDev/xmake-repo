@@ -1,5 +1,3 @@
-#if defined(LL_PLAT_A) // @header-generator platform
-#else // @header-generator platform
 #pragma once
 
 #include <functional>
@@ -9,6 +7,11 @@
 namespace brstd::detail::function {
 
 constexpr size_t embedded_target_size = sizeof(void*) * 8 - sizeof(void*);
+#if defined(LL_PLAT_A)
+constexpr size_t storage_alignment = alignof(void*);
+#else
+constexpr size_t storage_alignment = alignof(max_align_t);
+#endif
 
 template <DerivedType Type, class Return, bool Noexcept, class... Xs>
 class function_base_impl {
@@ -36,7 +39,7 @@ class function_base_impl {
     static constexpr size_t embedded_target_available_size = embedded_target_size - embedded_target_offset<Fn>;
 
     template <class Fn>
-    static constexpr bool is_heap_target = alignof(Fn) > alignof(std::max_align_t)
+    static constexpr bool is_heap_target = alignof(Fn) > storage_alignment
                                         || sizeof(Fn) > embedded_target_available_size<Fn>
                                         || !std::is_nothrow_move_constructible_v<Fn>;
 
@@ -45,7 +48,7 @@ class function_base_impl {
         vtable const* vfptr;
 
     private:
-        union alignas(max_align_t) {
+        union alignas(storage_alignment) {
             void* heap_target;
             char  embedded_target[embedded_target_size];
         };
@@ -164,4 +167,3 @@ public:
 };
 
 } // namespace brstd::detail::function
-#endif // @header-generator platform

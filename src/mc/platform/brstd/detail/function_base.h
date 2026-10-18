@@ -1,5 +1,3 @@
-#if defined(LL_PLAT_A) // @header-generator platform
-#else // @header-generator platform
 #pragma once
 
 #include <functional>
@@ -86,4 +84,3 @@ protected:
 };
 
 } // namespace brstd::detail::function
-#endif // @header-generator platform

@@ -177,7 +177,22 @@ class IncludeTraceTests(unittest.TestCase):
         self.assertFalse(result["all_mc_from_S"])
         self.assertEqual(result["ll_mc_helpers"], [relative])
         self.write(source, "// changed implementation\n")
-        with self.assertRaisesRegex(inputs.InputError, "NBT helper changed"):
+        with self.assertRaisesRegex(inputs.InputError, "MC helper changed"):
+            binary.verify_traces(self.config, self.traces)
+
+    def test_ll_callback_helpers_are_authenticated(self):
+        for relative in inputs.LL_MC_HELPERS:
+            with self.subTest(relative=relative):
+                source = self.repo / "src" / relative
+                target = self.view / relative
+                self.write(source, "// LL native helper\n")
+                self.write(target, source.read_text(encoding="utf-8"))
+                self.config["ll_headers"][relative] = {"source": "src/" + relative, "sha256": inputs.sha(source)}
+                self.append(target)
+        result = binary.verify_traces(self.config, self.traces)
+        self.assertEqual(result["ll_mc_helpers"], sorted(inputs.LL_MC_HELPERS))
+        self.write(source, "// changed implementation\n")
+        with self.assertRaisesRegex(inputs.InputError, "MC helper changed"):
             binary.verify_traces(self.config, self.traces)
 
     def test_ll_mc_view_cannot_replace_other_minecraft_headers(self):

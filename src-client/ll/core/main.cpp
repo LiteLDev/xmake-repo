@@ -1,11 +1,14 @@
 #include "ll/core/LeviLamina.h"
 
+#include "ll/api/Versions.h"
 #include "ll/api/i18n/I18n.h"
 #include "ll/api/memory/Hook.h"
 #include "ll/api/service/GamingStatus.h"
 #include "ll/api/utils/ErrorUtils.h"
 #include "ll/core/mod/ModRegistrar.h"
 #include "mc/client/game/MinecraftGame.h"
+#include "mc/client/gui/screens/ScreenController.h"
+#include "mc/deps/core/string/StringHash.h"
 
 #if defined(LL_PLAT_A)
 #include "mc/client/game/IMinecraftGame.h"
@@ -14,7 +17,6 @@
 #include "mc/deps/application/AppPlatform.h"
 #include <memory>
 #else
-#include "ll/api/Versions.h"
 #include "ll/api/command/CommandRegistrar.h"
 #include "ll/api/io/FileUtils.h"
 #include "ll/api/utils/StringUtils.h"
@@ -23,11 +25,9 @@
 #include "ll/core/command/BuiltinCommands.h"
 #include "ll/core/tweak/VulnerabilityFixes.h"
 #include "mc/client/game/ClientInstance.h"
-#include "mc/client/gui/screens/ScreenController.h"
 #include "mc/deps/core/file/Path.h"
 #include "mc/deps/core/resource/PackOrigin.h"
 #include "mc/deps/core/resource/PackType.h"
-#include "mc/deps/core/string/StringHash.h"
 #include "mc/deps/entry/src_gamecore_pc/pc/WndProc_PC.h"
 #include "mc/module/VanillaGameModuleClient.h"
 #include "mc/resources/CompositePackSource.h"
@@ -261,6 +261,7 @@ LL_AUTO_TYPE_INSTANCE_HOOK(
     setGamingStatus(GamingStatus::Default);
     return origin(params);
 }
+#endif
 
 LL_AUTO_TYPE_INSTANCE_HOOK(
     PatchVersionBinding,
@@ -276,13 +277,17 @@ LL_AUTO_TYPE_INSTANCE_HOOK(
     if (bindingName == hash) {
         origin(
             bindingName,
-            []() -> auto {
-                auto gameVer   = getGameVersion();
+            [callback = std::move(callback)]() -> auto {
+#if defined(LL_PLAT_A)
+                auto gameVersion = callback();
+#else
+                auto gameVer     = getGameVersion();
+                auto gameVersion = fmt::format("v{}.{}", gameVer.minor, gameVer.patch);
+#endif
                 auto loaderVer = getLoaderVersion();
                 return fmt::format(
-                    "v{}.{}/LeviLamina-{}.{}.{}",
-                    gameVer.minor,
-                    gameVer.patch,
+                    "{}/LeviLamina-{}.{}.{}",
+                    gameVersion,
                     loaderVer.major,
                     loaderVer.minor,
                     loaderVer.patch
@@ -294,7 +299,6 @@ LL_AUTO_TYPE_INSTANCE_HOOK(
         origin(bindingName, std::move(callback), std::move(condition));
     }
 }
-#endif
 } // namespace ll
 
 #if defined(LL_PLAT_A)

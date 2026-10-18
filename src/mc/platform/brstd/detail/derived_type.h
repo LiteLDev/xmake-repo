@@ -1,5 +1,3 @@
-#if defined(LL_PLAT_A) // @header-generator platform
-#else // @header-generator platform
 #pragma once
 
 namespace brstd::detail::function {
@@ -11,4 +9,3 @@ enum class DerivedType : int {
 };
 
 }
-#endif // @header-generator platform

@@ -78,12 +78,17 @@ local function shared_options(role)
             if role == "kernel" then
                 target:add("headerfiles", path.join(os.projectdir(), "src/(ll/api/**.h)"),
                            path.join(os.projectdir(), "src-client/(ll/api/**.h)"))
-                local helpers = { ["mc/deps/nbt/Tag.h"] = true, ["mc/deps/nbt/EndTag.h"] = true,
-                    ["mc/deps/nbt/CompoundTag.h"] = true, ["mc/deps/nbt/CompoundTagVariant.h"] = true }
+                local helpers, exclusions = {}, {}
+                for relative, _ in pairs(inputs.ll_headers) do
+                    if relative:startswith("mc/") then
+                        helpers[relative] = true
+                        table.insert(exclusions, "|" .. relative)
+                    end
+                end
+                table.sort(exclusions)
                 for _, layer in ipairs({"src", "src-client"}) do
                     local root = path.join(inputs.inputs.header_root, layer)
-                    target:add("headerfiles", path.join(root, "(mc/**.h)") ..
-                        "|mc/deps/nbt/Tag.h|mc/deps/nbt/EndTag.h|mc/deps/nbt/CompoundTag.h|mc/deps/nbt/CompoundTagVariant.h")
+                    target:add("headerfiles", path.join(root, "(mc/**.h)") .. table.concat(exclusions))
                 end
                 for relative, _ in pairs(helpers) do
                     target:add("headerfiles", path.join(os.projectdir(), "src/(" .. relative .. ")"))
@@ -188,6 +193,13 @@ target("P7StringTests")
     add_deps("LeviLaminaAndroidFoundation")
     add_packages("gtest")
     add_files(path.join(os.projectdir(), "test/android/shared_core/string_tests.cpp"))
+target_end()
+
+target("P7CallbackTests")
+    set_kind("binary")
+    shared_options()
+    add_files(path.join(os.projectdir(), "test/android/shared_core/callback_tests.cpp"))
+    add_undefines("NDEBUG")
 target_end()
 
 target("P7ModuleFileTests")

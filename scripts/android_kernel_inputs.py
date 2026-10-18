@@ -13,6 +13,18 @@ from typing import Any
 import materialize_android_dependencies as dependencies
 import validate_header_release as headers
 
+LL_MC_HELPERS = (
+    "mc/deps/nbt/Tag.h", "mc/deps/nbt/EndTag.h",
+    "mc/deps/nbt/CompoundTag.h", "mc/deps/nbt/CompoundTagVariant.h",
+    "mc/deps/core/string/StringHash.h",
+    "mc/platform/brstd/move_only_function.h",
+    "mc/platform/brstd/detail/derived_type.h",
+    "mc/platform/brstd/detail/function_base.h",
+    "mc/platform/brstd/detail/function_base_impl.h",
+    "mc/platform/brstd/detail/function_invoke.h",
+    "mc/platform/brstd/detail/function_invoke_base.h",
+)
+
 
 class InputError(RuntimeError):
     pass
@@ -258,9 +270,8 @@ def prepare_shared_view(repo: Path, header: Path, dependency_lock: Path, ndk: Pa
             if source.is_file() and source.suffix in (".h", ".hpp", ".inl"):
                 relative = source.relative_to(repo / layer).as_posix()
                 selected[relative] = source
-    # LL owns these value helpers, just as it owns its Windows NBT extensions.
-    for name in ("Tag.h", "EndTag.h", "CompoundTag.h", "CompoundTagVariant.h"):
-        relative = "mc/deps/nbt/" + name
+    # LL owns these inline helpers and native API supplements on both platforms.
+    for relative in LL_MC_HELPERS:
         selected[relative] = repo / "src" / relative
     destination.mkdir(parents=True, exist_ok=True)
     # Only this generated view is pruned; never alter a source or Header tree.

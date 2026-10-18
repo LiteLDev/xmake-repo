@@ -12,18 +12,29 @@ public:
 #if defined(LL_PLAT_A) // @header-generator platform
     // member variables
     // NOLINTBEGIN
-    ::ll::TypedStorage<4, 4, uint> m_hash;
+    ::ll::TypedStorage<4, 4, uint> m_hash{2166136261u};
     // NOLINTEND
-#else // @header-generator platform
+#endif // @header-generator platform
     template <size_t N>
     consteval StringHash(char const (&str)[N]) : StringHash(std::string_view{str}) {}
     constexpr StringHash(std::string_view str) {
+        uint value{2166136261u};
         for (auto c : str) {
-            mHash ^= c;
-            mHash *= 16777619u;
+            value ^= c;
+            value *= 16777619u;
         }
+#if defined(LL_PLAT_A)
+        m_hash = value;
+#else
+        mHash = value;
+#endif
     }
-    [[nodiscard]] uint hash() const { return mHash; }
-    operator uint() const { return mHash; }
-#endif // @header-generator platform
+    [[nodiscard]] uint hash() const {
+#if defined(LL_PLAT_A)
+        return m_hash;
+#else
+        return mHash;
+#endif
+    }
+    operator uint() const { return hash(); }
 };
