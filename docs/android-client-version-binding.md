@@ -54,3 +54,25 @@ Android workspace under `WORK-TEMP/validation/client-unified-20261018`, using
 `version-hook-*` logs and `device-version-hook-*` captures. Earlier P7.24 receipts
 retain their original source and binary identities. This change does not close
 other P7 gates.
+
+## October 18 Closeout
+
+The implementation is committed as `d9470caf0d232b54446547adcb13a9bd38523378`.
+Windows client and Android kernel/example debug/release builds passed, including
+Android prelink and verification before and after stripping. The 61-test Python
+suite and final 21-test authentication run passed. `P7CallbackTests` passed on
+vivo, and all 11 LL MC helper headers installed in the SDK matched their sources.
+
+The final stripped kernel SHA-256 is
+`CC28397E3EE0A95E3BE3185EAEE3680259F9992F6D8E3263F87A84DED5393260`;
+the example remains
+`618F57FA2DBF660947A854544AF47FDF252DEF2AC6E60B0A5837D78E5C4E7D3F`.
+Actual mapped hashes matched. Process 26395 displayed
+`v26.40/LeviLamina-26.40.0` and quit normally. Process 911 passed load/NBT/Ready
+and world join/reference serialization before ADB disconnected.
+
+The user requested task completion without further checks. The last run's
+world exit, normal close and restart are waived, not measured passes. The task
+is closed; P7 overall remains open. Temporary USB stay-awake was changed from
+0 to 2; the disconnected device prevented restoration at closeout. No push,
+main merge, data clearing or force-stop was performed.
