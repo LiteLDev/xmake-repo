@@ -51,20 +51,13 @@ logs are outside the repository under
 `C:/Users/ROG/levilamina-p7-validation-20260910` (historical device evidence) and
 `C:/Users/ROG/levilamina-p7-validation-20260913` (reviewed candidate and host/device evidence).
 
-The current clean staging retry did not produce a new package: the isolated
-xmake configuration first rejected an invalid local recipe path, and the
-authenticated LevelDB checkout then failed its fresh NDK r28c build on
-deprecated aligned_storage treated as an error. The earlier candidate's
-SDK install and SDK-only compile remain valid for that candidate; they do not
-close G6 for the current source commit. No LevelDB source, warning policy or
-fallback package was changed.
-
-For delivery review, a reference staging receipt was produced from the already
-verified stripped ELF pair bound to source commit d632211a98. It records the
-SDK installation by reference and the exact kernel/example hashes under
-WORK-TEMP/validation/p7-remaining-20261018/android-package-d632-20261018-v3.
-This is a candidate receipt, not a claim that the failed clean rebuild or
-device deployment has passed.
+The fresh isolated G6 retry now passes after adding the LevelDB
+deprecated-warning suppression to the package CMake flags and using the
+space-free local recipe path. The current Android Release kernel/example
+completed compile, prelink, link, ELF verification and SDK installation.
+The delivery receipt is under
+WORK-TEMP/validation/p7-final-clean-20261018/android-package-ab1cd3859a and
+binds both stripped ELF hashes to source commit ab1cd3859a.
 
 ## Fixed inputs and decisions
 
