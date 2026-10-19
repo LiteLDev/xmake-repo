@@ -1,0 +1,56 @@
+{
+  "status": "blocked",
+  "target": {
+    "path": "I:/Data/Minecraft/Client/1.26.40.5/libminecraftpe.so",
+    "bytes": 1583570128,
+    "sha256": "1CCBC128196E1A522B0000E81CBDCCF6CA3E7025F2D99E1640877D35B860665F",
+    "build_id": "5893edc8d56c93cbdb50e0f9436320236b78c89d"
+  },
+  "staging": {
+    "root": "WORK-TEMP/g5-staging",
+    "runtime_symbols": {
+      "path": "dump_android.runtime-symbols.json",
+      "bytes": 285295385,
+      "sha256": "9FEDB9815C415F6E1CFD2B3D3D0CB87B5B8AF3F717EBFFFBF072EA027320F4AB"
+    },
+    "dwarf_report_bytes": 1615010435,
+    "dump_bytes": 8361135357
+  },
+  "verified_symbols": [
+    {
+      "symbol": "_ZN11ClientLevel8_subTickEv",
+      "address": "0x09AD8E84",
+      "kind": "function",
+      "resolution": "unique_symbol"
+    },
+    {
+      "symbol": "_ZN15DBStorageConfigD2Ev",
+      "address": "0x0A9176BC",
+      "kind": "function",
+      "resolution": "unique_symbol"
+    }
+  ],
+  "formal_inputs": {
+    "symbol_allowlist_android": {
+      "path": "WORK-KEEP/evidence/header-generator-windows-compat/current/symbol_allowlist_android.txt",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    "bypass_android": {
+      "path": "WORK-KEEP/evidence/header-generator-windows-compat/current/bypass_android.txt",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    }
+  },
+  "bmb_generation": {
+    "status": "rejected",
+    "reason": "runtime-symbols identity does not match the target ELF",
+    "generator_expected_runtime_sha256": "23688C8E87CEE54A2D9C00A34C9908B01289EB7E5C05E3B96A8239D7AF44DEE1",
+    "output_preserved": true
+  },
+  "next_required": [
+    "Regenerate the formal Android symbol allowlist and bypass from the current header-generator inputs.",
+    "Update the BMB generator identity/count gate for the current sidecar.",
+    "Regenerate BMB and rerun one Android Release build before changing runtime manifests."
+  ]
+}
