@@ -205,3 +205,10 @@ serialization/typeinfo. Bedrock service integration similarly lacks the
 DBStorageConfig copy/destructor and DBStorage constructor records. These
 sources remain outside the authenticated table until a matching runtime-data
 input exists.
+
+The target ELF itself retains local .symtab records for ClientLevel::$_subTick
+(0x09ad8e84) and DBStorageConfig::~DBStorageConfig (0x0a9176bc). The missing
+layer is the published runtime-symbols/Android whitelist/BMB input: the formal
+allowlist is not present in the workspace and the current BMB generator is
+bound to the previous record counts. P7 does not hand-edit BMB payloads or
+introduce hidden-address fallbacks.
