@@ -49,6 +49,8 @@ namespace ll::inline literals::inline chrono_literals {
 
 using namespace std::literals::chrono_literals;
 
-constexpr ll::chrono::ticks operator""_tick(::uint64 val) noexcept { return ll::chrono::ticks{val}; }
+constexpr ll::chrono::ticks operator""_tick(unsigned long long val) noexcept {
+    return ll::chrono::ticks{static_cast<ll::chrono::ticks::rep>(val)};
+}
 
 } // namespace ll::inline literals::inline chrono_literals
