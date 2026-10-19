@@ -38,14 +38,22 @@
       "verify_unstripped": "android verify ok",
       "verify_stripped": "android verify ok",
       "unstripped_bytes": 20702888,
-      "stripped_bytes": 1147072
+      "stripped_bytes": 1147072,
+      "unstripped_sha256": "9704B91CA5ECAEC3A6362299446836EC59A67FCFD9E5280F7A94A8846EBA756F",
+      "stripped_sha256": "FC96191F0CB14B680D59671637CE39005EC67988F4C1BAEA46B6CACDCBE56743",
+      "soname": "libLeviLamina.so",
+      "page_alignment": 16384
     },
     "example": {
       "generate": "android generate ok: inputs=2 functions=26 external=171",
       "verify_unstripped": "android verify ok",
       "verify_stripped": "android verify ok",
       "unstripped_bytes": 3019544,
-      "stripped_bytes": 275920
+      "stripped_bytes": 275920,
+      "unstripped_sha256": "E287EEE92E813D0DF69138BE2D4633460880E0FD1EBF672CE2D489A66007CC40",
+      "stripped_sha256": "61636A1EE83AFCC0EB9FF19F8CBAABF3E2ACF9E7462C3D1ACF8CF3FD14D0DA36",
+      "soname": "libLeviLaminaP7Example.so",
+      "page_alignment": 16384
     }
   },
   "device": "not_run: no ADB device was available"
