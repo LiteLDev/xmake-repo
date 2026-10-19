@@ -56,8 +56,10 @@ deprecated-warning suppression to the package CMake flags and using the
 space-free local recipe path. The current Android Release kernel/example
 completed compile, prelink, link, ELF verification and SDK installation.
 The delivery receipt is under
-WORK-TEMP/validation/p7-final-clean-20261018/android-package-ab1cd3859a and
-binds both stripped ELF hashes to source commit ab1cd3859a.
+WORK-TEMP/validation/p7-final-clean-20261018/android-package-47f0671dff and
+binds both stripped ELF hashes to the G3 source commit 47f0671dff; the later
+chrono header-only correction does not enter the authenticated kernel source
+table.
 
 G3 drain implementation is now in the current candidate: EventBus tracks
 in-flight publications while clearing Mod-owned listeners, and Logger::flush
