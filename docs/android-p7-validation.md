@@ -59,6 +59,12 @@ The delivery receipt is under
 WORK-TEMP/validation/p7-final-clean-20261018/android-package-ab1cd3859a and
 binds both stripped ELF hashes to source commit ab1cd3859a.
 
+G3 drain implementation is now in the current candidate: EventBus tracks
+in-flight publications while clearing Mod-owned listeners, and Logger::flush
+waits for the logger executor barrier before flushing sinks. The same shared
+sources compile in Windows client/server Debug/Release. The G3 runtime receipt
+and G4 device lifecycle remain separate gates.
+
 ## Fixed inputs and decisions
 
 - LL base: `5bcf0f4a1907f75bf02691fe15993d00f8fefa5e`, branch
