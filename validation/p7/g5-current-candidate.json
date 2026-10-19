@@ -1,0 +1,52 @@
+{
+  "status": "passed_offline",
+  "target": {
+    "path": "I:/Data/Minecraft/Client/1.26.40.5/libminecraftpe.so",
+    "bytes": 1583570128,
+    "sha256": "1CCBC128196E1A522B0000E81CBDCCF6CA3E7025F2D99E1640877D35B860665F",
+    "build_id": "5893edc8d56c93cbdb50e0f9436320236b78c89d",
+    "text_sha256": "f17aa60a840a88fc1212abfa92e362fec86b871126f30ae03000de8d90f3b0aa"
+  },
+  "runtime_symbols": {
+    "bytes": 285295385,
+    "sha256": "9FEDB9815C415F6E1CFDB2D3D3D0CB87B5B8AF3F717EBFFFBF072EA027320F4AB",
+    "source_records": 528177,
+    "verified_symbols": [
+      {"symbol": "_ZN11ClientLevel8_subTickEv", "address": "0x09AD8E84"},
+      {"symbol": "_ZN15DBStorageConfigD2Ev", "address": "0x0A9176BC"}
+    ]
+  },
+  "bmb": {
+    "bytes": 17634332,
+    "sha256": "0419E4BB6957CFA0394D3B06F98592AF75A6FBF035BA511E9408C03B87E400EB",
+    "semantic_sha256": "bb89055fcb670d5369f7de7705427b54fa12ac06fc867d27ba4106ec7db309dc",
+    "membership_count": 540484,
+    "whitelist_value_count": 48050,
+    "function_reverse_index_count": 47069,
+    "whitelist_sha256": "0AC5597E76F46DD5C321DF20B9238AB5AFB07D6C61A9927439F56F6E358D7440",
+    "bypass_sha256": "D029C40A7A0582DCF5EAEC0B6B29B8F31FCF43F0C55876568CBD395C7EC742C0",
+    "bypass_count": 4216
+  },
+  "explicit_runtime_aliases": [
+    {"symbol": "_ZN14ClientInstance12$onLevelExitEv", "target_address": "0x09447C3C"},
+    {"symbol": "_ZN14ClientInstance15$onPlayerLoadedER6Player", "target_address": "0x0945AF58"}
+  ],
+  "android_release": {
+    "build_root": "WORK-TEMP/builds/g5-current",
+    "kernel": {
+      "generate": "android generate ok: inputs=55 functions=26 external=371",
+      "verify_unstripped": "android verify ok",
+      "verify_stripped": "android verify ok",
+      "unstripped_bytes": 20702888,
+      "stripped_bytes": 1147072
+    },
+    "example": {
+      "generate": "android generate ok: inputs=2 functions=26 external=171",
+      "verify_unstripped": "android verify ok",
+      "verify_stripped": "android verify ok",
+      "unstripped_bytes": 3019544,
+      "stripped_bytes": 275920
+    }
+  },
+  "device": "not_run: no ADB device was available"
+}

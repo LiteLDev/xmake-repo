@@ -11,7 +11,7 @@
   },
   "bmb": {
     "bytes": 17634332,
-    "sha256": "5F9D38DDD10DC7E34875240F69534D3B65BB0C08A8CD272B7A97DCC30C69DC92"
+    "sha256": "0419E4BB6957CFA0394D3B06F98592AF75A6FBF035BA511E9408C03B87E400EB"
   },
   "commits": {
     "H": "48f5fbfc2cbd539c08316d855555ce084478a678",
@@ -68,20 +68,20 @@
   },
   "runtime_manifest": {
     "bmbBytes": "17634332",
-    "bmbSha256": "5f9d38ddd10dc7e34875240f69534d3b65bb0c08a8cd272b7a97dcc30c69dc92",
-    "functionReverseIndexCount": 465190,
-    "membershipCount": 540453,
+    "bmbSha256": "0419e4bb6957cfa0394d3b06f98592af75a6fbf035ba511e9408c03b87e400eb",
+    "functionReverseIndexCount": 47069,
+    "membershipCount": 540484,
     "minecraftVersion": "1.26.40.5",
     "providerBuildId": "0b53c8fb7321d344f86d8a5d6e1e69ee5c63ad90",
     "providerFileSha256": "ff24f8357022a3f29b88516d120860b7fdb2682d8ec28e05864b78819a5f99e0",
     "providerTextSha256": "cffb52c428e36a5b8b14d913f8c564486b40292490d6c2369138bb9de0328a5d",
     "schemaVersion": 1,
-    "semanticSha256": "24de49e07d047470edbf642578a9d4b448465cadde3569d11040a31e634929be",
+    "semanticSha256": "bb89055fcb670d5369f7de7705427b54fa12ac06fc867d27ba4106ec7db309dc",
     "targetBuildId": "5893edc8d56c93cbdb50e0f9436320236b78c89d",
     "targetTextSha256": "f17aa60a840a88fc1212abfa92e362fec86b871126f30ae03000de8d90f3b0aa",
-    "whitelistValueCount": 528148
+    "whitelistValueCount": 48050
   },
-  "runtime_manifest_sha256": "7B11A536961BA8476B16C9522A4CF321F17600A8D540762629E9351784A35C8A",
+  "runtime_manifest_sha256": "DD43C49908BEC52F71EB758EC451837BE7963DACDE4408ADBE6F48EB06FD7696",
   "schema_version": 1,
   "sdk": {
     "cxx": "c++23",
