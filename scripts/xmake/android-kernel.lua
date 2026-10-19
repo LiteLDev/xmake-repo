@@ -38,7 +38,7 @@ package("levilamina-leveldb")
             "-DLEVELDB_BUILD_TESTS=OFF", "-DLEVELDB_BUILD_BENCHMARKS=OFF",
             "-DLEVELDB_DISABLE_RTTI=OFF", "-DBUILD_SHARED_LIBS=OFF",
             "-DCMAKE_POSITION_INDEPENDENT_CODE=ON", "-DCMAKE_CXX_STANDARD=23",
-            "-DCMAKE_CXX_FLAGS=-fvisibility=hidden -fvisibility-inlines-hidden -Wno-error=deprecated-declarations"
+            "-DCMAKE_CXX_FLAGS=-fvisibility=hidden -fvisibility-inlines-hidden -Wno-deprecated-declarations -Wno-error=deprecated-declarations"
         })
     end)
 package_end()
