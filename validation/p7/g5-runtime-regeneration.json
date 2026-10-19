@@ -1,5 +1,6 @@
 {
-  "status": "blocked",
+  "status": "superseded",
+  "superseded_by": "validation/p7/g5-current-candidate.json",
   "target": {
     "path": "I:/Data/Minecraft/Client/1.26.40.5/libminecraftpe.so",
     "bytes": 1583570128,
