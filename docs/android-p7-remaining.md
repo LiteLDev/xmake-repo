@@ -198,3 +198,10 @@ table. Its Dispatcher instantiates ForceEnableCheatCommands, whose original
 CommandRegistry hooks fail the current Android compile contract with two real
 errors. The source was removed from the candidate after the failed build; no
 stub, signature change or fallback was added.
+
+G5 symbol probes remain fail-closed. Client tick integration cannot link because
+the current BMB/ELF lacks ClientLevel::$_subTick and LevelEvent out-of-line
+serialization/typeinfo. Bedrock service integration similarly lacks the
+DBStorageConfig copy/destructor and DBStorage constructor records. These
+sources remain outside the authenticated table until a matching runtime-data
+input exists.
