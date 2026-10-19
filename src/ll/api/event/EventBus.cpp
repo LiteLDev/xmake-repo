@@ -1,6 +1,8 @@
 #include "ll/api/event/EventBus.h"
 
+#include <condition_variable>
 #include <mutex>
+#include <thread>
 
 #include "ll/api/event/EmitterBase.h"
 #include "ll/api/io/Logger.h"
@@ -16,7 +18,11 @@ class CallbackStream {
         bool operator()(ListenerPtr const& lhs, ListenerPtr const& rhs) const { return *lhs < *rhs; }
     };
     std::mutex                                  mutex;
+    std::condition_variable                     idle;
     OrderedSet<ListenerPtr, ListenerComparator> listeners;
+    size_t                                       inFlight{0};
+
+    static thread_local CallbackStream* current;
 
 public:
     std::unique_ptr<EmitterBase> emitter;
@@ -29,7 +35,16 @@ public:
             std::lock_guard lock(mutex);
             tempList.reserve(listeners.size());
             tempList.assign_range(listeners);
+            ++inFlight;
         }
+        auto guard = std::unique_ptr<void, void (*)(void*)>{this, [](void* ptr) {
+            auto& stream = *static_cast<CallbackStream*>(ptr);
+            std::lock_guard lock(stream.mutex);
+            --stream.inFlight;
+            stream.idle.notify_all();
+        }};
+        auto* previous = current;
+        current = this;
         for (auto& l : tempList) {
             try {
                 l->call(event);
@@ -48,6 +63,7 @@ public:
                 break;
             }
         }
+        current = previous;
     }
     void publish(std::string_view modName, Event& event) {
         std::vector<ListenerPtr> tempList;
@@ -55,7 +71,16 @@ public:
             std::lock_guard lock(mutex);
             tempList.reserve(listeners.size());
             tempList.assign_range(listeners);
+            ++inFlight;
         }
+        auto guard = std::unique_ptr<void, void (*)(void*)>{this, [](void* ptr) {
+            auto& stream = *static_cast<CallbackStream*>(ptr);
+            std::lock_guard lock(stream.mutex);
+            --stream.inFlight;
+            stream.idle.notify_all();
+        }};
+        auto* previous = current;
+        current = this;
         for (auto& l : tempList) {
             if (l->modPtr.expired()) {
                 continue;
@@ -76,6 +101,7 @@ public:
                 break;
             }
         }
+        current = previous;
     }
     bool addListener(ListenerPtr const& listener) {
         std::lock_guard lock(mutex);
@@ -89,9 +115,19 @@ public:
         std::lock_guard lock(mutex);
         return std::move(listeners);
     }
+    bool waitForIdle() {
+        std::unique_lock lock(mutex);
+        if (current == this) {
+            return false;
+        }
+        idle.wait(lock, [&] { return inFlight == 0; });
+        return true;
+    }
     [[nodiscard]] size_t count() const { return listeners.size(); }
     [[nodiscard]] bool   empty() const { return listeners.empty(); }
 };
+
+thread_local CallbackStream* CallbackStream::current = nullptr;
 
 class EventStorage {
     EventBus::FactoryFn             factory;
@@ -302,24 +338,31 @@ void EventBus::removeModListeners(std::string_view modName) {
     });
 }
 void EventBus::clearMod(std::string_view modName) {
-    std::lock_guard lock(impl->infoMutex);
-    impl->modInfos.erase_if(modName, [&](auto& pair) {
-        removeModListeners(modName);
-        for (auto& eventId : pair.second.ownedEvents) {
-            impl->events.erase_if(eventId, [&](auto& epair) {
-                epair.second.getStream().transform([&](auto& stream) {
-                    for (auto& listener : stream.removeAllListeners()) {
-                        impl->listenerInfos.erase_if(listener->getId(), [&](auto& lpair) {
-                            lpair.second.attachedEvents.erase(eventId);
-                            return lpair.second.attachedEvents.empty();
-                        });
-                    }
+    std::vector<std::shared_ptr<CallbackStream>> draining;
+    {
+        std::lock_guard lock(impl->infoMutex);
+        impl->modInfos.erase_if(modName, [&](auto& pair) {
+            removeModListeners(modName);
+            for (auto& eventId : pair.second.ownedEvents) {
+                impl->events.erase_if(eventId, [&](auto& epair) {
+                    epair.second.getStream().transform([&](auto& stream) {
+                        draining.emplace_back(epair.second.getSharedStream());
+                        for (auto& listener : stream.removeAllListeners()) {
+                            impl->listenerInfos.erase_if(listener->getId(), [&](auto& lpair) {
+                                lpair.second.attachedEvents.erase(eventId);
+                                return lpair.second.attachedEvents.empty();
+                            });
+                        }
+                        return true;
+                    });
                     return true;
                 });
-                return true;
-            });
-        }
-        return true;
-    });
+            }
+            return true;
+        });
+    }
+    for (auto& stream : draining) {
+        stream->waitForIdle();
+    }
 }
 } // namespace ll::event
