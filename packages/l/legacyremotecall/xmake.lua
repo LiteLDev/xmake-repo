@@ -20,6 +20,7 @@ package("legacyremotecall")
     add_versions("git:0.21.0", "452a0edaa09402878689c31371f2ed880098227f")
     add_versions("git:0.21.1", "207c89f57bc0cd7c5e487bca60b38784578991a1")
     add_versions("git:0.22.0", "498a55824a43941cacb2dc6aa672bc24f1f65c63")
+    add_versions("git:0.23.0", "bfd22deab4c1e727bae46dda371eeb391e590541")
 
     add_configs("target_type", {default = "server", values = {"server", "client"}})
     
